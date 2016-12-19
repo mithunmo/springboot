@@ -1,0 +1,189 @@
+package com.f9g4.dao;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.validation.constraints.AssertTrue;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.f9g4.domain.AdUsers;
+import com.f9g4.domain.TrBoardSearch;
+
+/**
+ * Class used to test the basic Data Store Functionality
+ *
+ */
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@TestExecutionListeners({
+		DependencyInjectionTestExecutionListener.class,
+		DirtiesContextTestExecutionListener.class,
+		TransactionalTestExecutionListener.class })
+@Transactional
+@ContextConfiguration(locations = {
+		"classpath:com/f9g4/f9g4serviceswebapp/config/f9g4-dao-context.xml"
+		/*"file:./src/main/resources/f9g4-security-context.xml",
+		"file:./src/main/resources/f9g4-service-context.xml",
+		"file:./src/main/resources/f9g4-dao-context.xml",
+		"file:./src/main/resources/f9g4-web-context.xml" */})
+public class AdUsersDAOTest {
+	/**
+	 * The DAO being tested, injected by Spring
+	 *
+	 */
+	private AdUsersDAO dataStore;
+
+	/**
+	 * Instantiates a new AdUsersDAOTest.
+	 *
+	 */
+	public AdUsersDAOTest() {
+	}
+
+	/**
+	 * Method to test AdUsers domain object.
+	 *
+	 */
+	@Rollback(false)
+	@Test
+	public void AdUsers() {
+		AdUsers instance = new AdUsers();
+
+		// Test create				
+		// TODO: Populate instance for create.  The store will fail if the primary key fields are blank.				
+
+		// store the object
+		dataStore.store(instance);
+
+		// Test update
+		// TODO: Modify non-key domain object values for update
+
+		// update the object
+		dataStore.store(instance);
+
+		// Test delete
+		dataStore.remove(instance);
+
+	}
+
+	/**
+	 * Method to allow Spring to inject the DAO that will be tested
+	 *
+	 */
+	@Autowired
+	public void setDataStore(AdUsersDAO dataStore) {
+		this.dataStore = dataStore;
+	}
+	
+	//checking whether the username is present or not
+	//
+	@Test
+	public void testfindAdUsersByUserName1()
+	{
+		Set<AdUsers> users = dataStore.findAdUsersByUserName("121321asdfsa@plmtechnology.com");
+		System.out.println("no of users "+users.size());
+		assertNotNull(users);
+	}
+	
+	@Test
+	public void testfindAdUsersByUserName2()
+	{
+		Set<AdUsers> users = dataStore.findAdUsersByUserName("1@plmtechnology.com");
+		System.out.println("no of users "+users.size());
+		assertNotNull(users);
+	}
+	
+	@Test
+	public void testfindAdUsersByUserName3()
+	{
+		Set<AdUsers> users = dataStore.findAdUsersByUserName("simione@plmtechnology.com");
+		System.out.println("no of users "+users.size());
+		assertNotNull(users);
+	}
+	
+	@Test
+	public void findAdUsersByRegStatusAndUserType()
+	{
+		List<Integer> RegStatus=new ArrayList<Integer>();
+		List<Integer> UserType=new ArrayList<Integer>();
+		RegStatus.add(431);
+		RegStatus.add(433);
+		RegStatus.add(548);
+		UserType.add(437);
+		Set<AdUsers> users = dataStore.findAdUsersByRegStatusAndUserType(RegStatus,UserType,4,0,20);
+		System.out.println("no of users "+users.size());
+		assertNotNull(users);
+	}
+	
+	@Test
+	public void testFindAdUsersByPrimaryKey()
+	{
+		AdUsers user = dataStore.findAdUsersByPrimaryKey(16);
+		assertNotNull(user);
+	}
+	
+	@Test
+	public void testAdminRatings(){
+		AdUsers user= dataStore.findAdUsersByPrimaryKey(6);
+		assertNotNull(user);
+		user.setAdminRating(new BigDecimal(3.5));
+		dataStore.merge(user);
+		AdUsers user1= dataStore.findAdUsersByPrimaryKey(6);
+		assertNotNull(user1);
+		System.out.println(user1.getAdminRating());
+		
+		
+		
+	}
+	
+	@Test
+	public void testUserSearch(){
+		String designerName = "c";
+		//Integer ratingStart = 0;
+		//Integer ratingEnd = 5;
+		Integer[] countryIds =  new Integer[] {238};
+		//Integer[] langIds  = new Integer[] {277}; //English as default 
+		Integer[] langIds  = null; 
+
+		Integer[] skillIds = new Integer[] {393}; 
+		String schoolAwards = null;
+		Integer[] expertiseIds = new Integer[] {};
+		Integer[] specialtyIds = new Integer[] {};
+		Integer[] educationIds = new Integer[] {};
+	
+		int limt = 500;
+				
+		Set<AdUsers> list = dataStore.findAdUsersBySearchCriteria(designerName, countryIds, langIds, skillIds, schoolAwards, limt, expertiseIds, specialtyIds, educationIds, -1, 5);
+		
+		System.out.println(list.size());
+		
+		for ( AdUsers item : list){
+			System.out.println(item.getFirstname());
+			System.out.println(item.getUserId());
+		}
+		
+	}
+	
+	
+	public void testNewUser(){
+		AdUsers instance = new AdUsers();
+		dataStore.store(instance);
+	}
+	
+}

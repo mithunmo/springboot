@@ -1,0 +1,514 @@
+package com.f9g4.services;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Set;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.f9g4.businessobjects.common.Status;
+import com.f9g4.businessobjects.domain.AdLookupValuesDomain;
+import com.f9g4.businessobjects.domain.AdUserMembershipDomain;
+import com.f9g4.businessobjects.domain.AdUsersDomain;
+import com.f9g4.businessobjects.domain.StMemPricingOptionsDomain;
+import com.f9g4.businessobjects.domain.TrMembershipAuthSubmitDomain;
+import com.f9g4.businessobjects.services.CheckPayKeyProcessedResponse;
+import com.f9g4.businessobjects.services.CreateMembershipAuthSbmitRequest;
+import com.f9g4.businessobjects.services.CreateMembershipAuthSbmitResponse;
+import com.f9g4.businessobjects.services.CreateMembershipRequest;
+import com.f9g4.businessobjects.services.CreateMembershipResponse;
+import com.f9g4.businessobjects.services.CreateReceiveMembershipPaymentsRequest;
+import com.f9g4.businessobjects.services.CreateReceiveMembershipPaymentsResponse;
+import com.f9g4.businessobjects.services.GetMemPricingOptionsResponse;
+import com.f9g4.businessobjects.services.GetMembershipCommissionRequest;
+import com.f9g4.businessobjects.services.GetMembershipCommissionResponse;
+import com.f9g4.businessobjects.services.GetMembershipdetailsResponse;
+import com.f9g4.businessobjects.services.GetPaymentInfoResponse;
+import com.f9g4.businessobjects.services.OrderItem;
+import com.f9g4.businessobjects.services.SetupPaymentRequest;
+import com.f9g4.businessobjects.services.SetupPaymentResponse;
+import com.f9g4.businessobjects.services.UpdateMembershipPaymentStatusRequest;
+import com.f9g4.businessobjects.services.UpdateMembershipPaymentStatusResponse;
+import com.f9g4.businessobjects.services.UpdateMembershipRequest;
+import com.f9g4.businessobjects.services.UpdateMembershipResponse;
+import com.f9g4.businessobjects.services.UpdateUserMembershipRequest;
+import com.f9g4.businessobjects.services.UpdateUserMembershipResponse;
+import com.f9g4.businessobjects.services.UpdateUserRequest;
+import com.f9g4.common.errors.StatusCodesEnum;
+import com.f9g4.common.util.DateConverter;
+import com.f9g4.common.util.LookupTypeValueEnum;
+import com.f9g4.common.util.PaypalConstants;
+import com.f9g4.common.util.XMLGregorianCalendarConverter;
+import com.f9g4.dao.AdLookupValuesDAO;
+import com.f9g4.dao.AdUserMembershipsDAO;
+import com.f9g4.dao.AdUsersDAO;
+import com.f9g4.dao.StMemPricingOptionsDAO;
+import com.f9g4.dao.TrMembershipAuthSubmitDAO;
+import com.f9g4.dao.TrReceiveMembershipPaymentsDAO;
+import com.f9g4.domain.AdLookupValues;
+import com.f9g4.domain.AdUserMemberships;
+import com.f9g4.domain.AdUsers;
+import com.f9g4.domain.StMemPricingOptions;
+import com.f9g4.domain.TrMembershipAuthSubmit;
+import com.f9g4.domain.TrReceiveMembershipPayments;
+import com.f9g4.services.rest.IMembershipService;
+import com.f9g4.services.rest.IPaypalPaymentService;
+import com.f9g4.util.ModelConverter;
+
+@Service("membershipService")
+@Transactional(propagation=Propagation.REQUIRED, rollbackFor=RuntimeException.class)
+public class MembershipServiceImpl implements IMembershipService {
+	
+	private static Logger logger = LoggerFactory.getLogger(MembershipServiceImpl.class);
+	
+	@Autowired
+	private TrMembershipAuthSubmitDAO trMembershipAuthSubmitDAO;
+
+	@Autowired
+	private TrReceiveMembershipPaymentsDAO trReceiveMembershipPaymentsDAO;
+
+	@Autowired
+	private AdUserMembershipsDAO adUserMembershipsDAO;
+	
+	@Autowired
+    @Qualifier(value="paypalAdaptivePayService")
+	private IPaypalPaymentService paypalPaymentService;
+
+	@Autowired
+	private AdLookupValuesDAO adLookupValuesDAO;
+	
+	@Autowired
+	private StMemPricingOptionsDAO stMemPricingOptionsDAO;
+	
+	@Autowired
+	private AdUsersDAO adUsersDAO;
+	
+	@Autowired
+	private TrReceiveMembershipPaymentsDAO membershipPayment;
+	
+	@Autowired
+	private ModelConverter modelConverter;
+	
+	/*
+	 * This code Segment is executed once the paypal Transaction is complete
+	 * */
+	public CreateReceiveMembershipPaymentsResponse createReceiveMembershipPayments(CreateReceiveMembershipPaymentsRequest request){
+ 
+		CreateReceiveMembershipPaymentsResponse response = new CreateReceiveMembershipPaymentsResponse();
+		Status status = new Status();
+		status.setStatuscode(StatusCodesEnum.STATUS_SUCCESS.getCode());
+		response.setStatus(status);
+		Calendar today = Calendar.getInstance();
+		try{
+			
+			String paymentError = null;
+			TrMembershipAuthSubmit trMembershipAuthSubmit = trMembershipAuthSubmitDAO.findTrMembershipAuthSubmitBySecurityToken(request.getSecureToken());
+			AdUserMemberships adUsersMemberships = trMembershipAuthSubmit.getAdUserMemberships();
+			Integer userId = adUsersMemberships.getAdUsers().getUserId();
+			AdLookupValues adLookupValuesPaymentStatus = null;
+			AdLookupValues adLookupValuesByRegStatusId = null;
+			
+			GetPaymentInfoResponse getPayResponse = paypalPaymentService.getPaymentInfo(request.getSecureToken());
+			
+			if(StatusCodesEnum.STATUS_SUCCESS.getCode().equals(getPayResponse.getStatus().getStatuscode())){
+				if(PaypalConstants.STATUS_COMPLETED.equals(getPayResponse.getPayStatus())){
+					adLookupValuesPaymentStatus = adLookupValuesDAO.findAdLookupValuesByLookupCodeSingleResult(LookupTypeValueEnum.MEM_PAYMENT_STATUS_PAID.getTypeCode());;
+					adLookupValuesByRegStatusId = adLookupValuesDAO.findAdLookupValuesByLookupCodeSingleResult(LookupTypeValueEnum.REG_STATUS_WAITING_FOR_COFIRMATION.getTypeCode());
+				}else if(PaypalConstants.STATUS_PENDING.equals(getPayResponse.getPayStatus()) || 
+						PaypalConstants.STATUS_PROCESSING.equals(getPayResponse.getPayStatus()) ){
+					adLookupValuesPaymentStatus = adLookupValuesDAO.findAdLookupValuesByLookupCodeSingleResult(LookupTypeValueEnum.MEM_PAYMENT_STATUS_PAYMENT_PENDING.getTypeCode());
+				}else{
+					paymentError =  "Paypal payment Service Status : " + getPayResponse.getPayStatus();
+					adLookupValuesPaymentStatus = adLookupValuesDAO.findAdLookupValuesByLookupCodeSingleResult(LookupTypeValueEnum.MEM_PAYMENT_STATUS_REJECTED.getTypeCode());
+				}				
+			}else{
+				paymentError = "Paypal payment Service Status : " +   getPayResponse.getStatus().getDescription();
+				adLookupValuesPaymentStatus = adLookupValuesDAO.findAdLookupValuesByLookupCodeSingleResult(LookupTypeValueEnum.MEM_PAYMENT_STATUS_REJECTED.getTypeCode());
+			}
+
+			TrReceiveMembershipPayments trReceiveMembershipPayments = new TrReceiveMembershipPayments();
+			trReceiveMembershipPayments.setAuthcode(request.getSecureToken());
+			trReceiveMembershipPayments.setAdLookupValuesByAuthStatusId(adLookupValuesPaymentStatus);
+			trReceiveMembershipPayments.setCreatedBy(""+userId);
+			trReceiveMembershipPayments.setCreationDate(today);
+			trReceiveMembershipPayments.setLastUpdateDate(today);
+			trReceiveMembershipPayments.setLastUpdatedBy(userId);
+//			trReceiveMembershipPayments.setMemPaymentId(memPaymentId); -- PK
+			trReceiveMembershipPayments.setPaymentAmount(trMembershipAuthSubmit.getChargeAmount());
+			trReceiveMembershipPayments.setPaymentError(paymentError);
+			trReceiveMembershipPayments.setReceivedTimestamp(today);
+			trReceiveMembershipPayments.setSecureToken(request.getSecureToken());
+			trReceiveMembershipPayments.setTrMembershipAuthSubmit(trMembershipAuthSubmit);
+			
+			trReceiveMembershipPaymentsDAO.merge(trReceiveMembershipPayments);
+			if(LookupTypeValueEnum.MEM_PAYMENT_STATUS_PAID.getTypeCode().equals(adLookupValuesPaymentStatus.getLookupCode())){
+				Calendar ExpirationDate  = (Calendar)adUsersMemberships.getExpirationDate();
+				Calendar curDate = Calendar.getInstance();
+				
+				int months;
+				if(ExpirationDate.after(curDate))
+					ExpirationDate.add(Calendar.MONTH,1);
+				else
+				{
+					//if the expiration date is before today, we have to count how many months till the expiration date become after today and then add to it. 
+					months = DateConverter.GetExpiredMonths(ExpirationDate);
+					ExpirationDate.add(Calendar.MONTH, months);
+				}
+				//newExpDate.add(Calendar.DATE, stMemPricingOptions.getDurationInMonths()*30);//Updated as per Ashok..
+				adUsersMemberships.setExpirationDate(ExpirationDate);
+				adUsersMemberships.setLastUpdateDate(today);
+				adUsersMemberships.setLastUpdatedBy(userId);
+				
+				adUsersMemberships.setAdLookupValues(adLookupValuesPaymentStatus);
+				adUserMembershipsDAO.merge(adUsersMemberships);
+			}
+			
+			AdUsers aduser = adUsersMemberships.getAdUsers();
+			if(!LookupTypeValueEnum.REG_STATUS_CONFIRMED.getTypeCode().equals(aduser.getAdLookupValuesByRegStatusId().getLookupCode())){
+				//New member, we need to update the registration status. 
+				if(null != adLookupValuesByRegStatusId){
+					aduser.setAdLookupValuesByRegStatusId(adLookupValuesByRegStatusId);
+					adUsersDAO.merge(aduser);	
+				}
+			}
+			
+		}catch(Throwable th){
+			logger.error("Error occured", th);
+			status.setStatuscode(StatusCodesEnum.STATUS_ERR_UNKNOWN.getCode());
+		}
+		return response;
+	}
+
+
+	public CreateMembershipResponse createMembership(CreateMembershipRequest request) {
+		
+		CreateMembershipResponse response = new CreateMembershipResponse();
+		Status status = new Status();
+		status.setStatuscode(StatusCodesEnum.STATUS_SUCCESS.getCode());
+		response.setStatus(status);
+		Calendar today = Calendar.getInstance();
+		
+		try{
+		
+			AdUserMembershipDomain adUserMembershipsDomain = request.getAdUserMembershipDomain();
+			
+			AdUsers adUsers = adUsersDAO.findAdUsersByUserId(adUserMembershipsDomain.getUserId());
+			AdLookupValues userType  = adUsers.getAdLookupValuesByUserTypeId();
+			
+			//right now we have only standerd
+			StMemPricingOptions stMemPricingOptions  = stMemPricingOptionsDAO.findStMemPricingOptionsByUserTypeAndMembershipType(userType.getLookupCode()
+										, LookupTypeValueEnum.MEMEBERSHIP_TYPE_STANDARD.getTypeCode());
+			
+			//membership 
+			AdUserMemberships adUserMemberships = new AdUserMemberships();
+			
+			adUserMemberships.setAdLookupValues(adLookupValuesDAO.findAdLookupValuesByLookupCodeSingleResult(adUserMembershipsDomain.getPaymentStatus()));
+			adUserMemberships.setAdUsers(adUsers);
+			adUserMemberships.setAutopay(adUserMembershipsDomain.getAutopay());
+			adUserMemberships.setAutopayWithdrawDay(adUserMembershipsDomain.getAutopayWithdrawDate());
+			adUserMemberships.setCreatedBy(adUserMembershipsDomain.getCreatedby());
+			adUserMemberships.setCreationDate(today);
+			adUserMemberships.setEffectiveDate(today);
+			Calendar month = Calendar.getInstance();
+			month.add(Calendar.DAY_OF_MONTH, stMemPricingOptions.getDurationInMonths()*30);
+			adUserMemberships.setExpirationDate(month);
+			adUserMemberships.setLastUpdateDate(today);
+			adUserMemberships.setLastUpdatedBy(adUserMembershipsDomain.getLastupdateby());
+			//stMemPricingOptions
+			adUserMemberships.setStMemPricingOptions(stMemPricingOptions);
+			adUserMembershipsDAO.merge(adUserMemberships);
+						
+		}catch(Throwable th){
+			status.setStatuscode(StatusCodesEnum.STATUS_ERR_UNKNOWN.getCode());
+			logger.error("Exception occured", th);
+		}
+		
+		return response;
+	}
+
+	//not used not sure why its here !!
+	public UpdateMembershipResponse updateMembership(UpdateMembershipRequest request) {
+		/*
+		UpdateMembershipResponse response = new UpdateMembershipResponse();
+		Status status = new Status();
+		status.setStatuscode(StatusCodesEnum.STATUS_SUCCESS.getCode());
+		response.setStatus(status);
+		Calendar today = Calendar.getInstance();
+		
+		try{
+			
+			AdUserMembershipDomain adUserMembershipsDomain = request.getAdUserMembership();
+	
+//			AdUsers adUsers = adUsersDAO.findAdUsersByUserId(adUserMembershipsDomain.getUserId());
+			//AdLookupValues userType  = adUsers.getAdLookupValuesByUserTypeId();
+			
+//			//right now we have only standerd
+//			StMemPricingOptions stMemPricingOptions  = stMemPricingOptionsDAO.findStMemPricingOptionsByUserTypeAndMembershipType(userType.getLookupCode()
+//										, LookupTypeValueEnum.MEMEBERSHIP_TYPE_STANDARD.getTypeCode());
+			
+			//membership 
+			AdUserMemberships adUserMemberships = adUserMembershipsDAO.findAdUserMembershipsByMembershipId(request.getAdUserMembership().getMembershipid());
+	
+			adUserMemberships.setAdLookupValues(adLookupValuesDAO.findAdLookupValuesByLookupCodeSingleResult(adUserMembershipsDomain.getPaymentStatus()));
+	
+			StMemPricingOptions stMemPricingOptions = adUserMemberships.getStMemPricingOptions();
+			
+			Calendar effectiveDate =  adUserMemberships.getEffectiveDate();
+			Calendar newEffectiveDate = (Calendar) effectiveDate.clone();
+		//	newEffectiveDate.add(Calendar.DATE, 1);
+			//adUserMemberships.setEffectiveDate(newEffectiveDate);
+			
+			Calendar newExpDate = (Calendar) newEffectiveDate.clone();
+			newExpDate.add(Calendar.DATE, stMemPricingOptions.getDurationInMonths()*30);//Updated as per Ashok..
+			adUserMemberships.setExpirationDate(newExpDate);
+			adUserMemberships.setLastUpdateDate(today);			
+			adUserMemberships.setLastUpdatedBy(adUserMembershipsDomain.getLastupdateby());
+			
+			adUserMembershipsDAO.merge(adUserMemberships);
+			
+		}catch(Throwable th){
+			status.setStatuscode(StatusCodesEnum.STATUS_ERR_UNKNOWN.getCode());
+			logger.error("Exception occured", th);
+		}
+		return response;*/
+		return null;
+	}
+	
+	/*
+	 * Setting up the paypal Request is done here */
+	public CreateMembershipAuthSbmitResponse createMembershipAuthSbmit(CreateMembershipAuthSbmitRequest request) {
+
+		CreateMembershipAuthSbmitResponse response = new CreateMembershipAuthSbmitResponse();
+		Status status = new Status();
+		status.setStatuscode(StatusCodesEnum.STATUS_SUCCESS.getCode());
+		response.setStatus(status);
+		Calendar today = Calendar.getInstance();
+		try{
+			TrMembershipAuthSubmitDomain membershipAuthSubmitDomain =  request.getTrMembershipAuthSubmitDomain();
+			AdUserMemberships adUserMemberships = adUserMembershipsDAO.findAdUserMembershipsByUserId(request.getUserID());
+			StMemPricingOptions stMemPricingOptions = adUserMemberships.getStMemPricingOptions();
+			
+			SetupPaymentRequest setupPayrequest = new SetupPaymentRequest();
+			List<OrderItem> orderItemsList = setupPayrequest.getOrderItem();
+			BigDecimal orderTotal = new BigDecimal("0.00");
+			BigDecimal membershipMonthlyAmount = stMemPricingOptions.getPrice().setScale(2, RoundingMode.UNNECESSARY);
+			Calendar curDate = Calendar.getInstance();
+			int noofMonths = 0;
+			if(adUserMemberships.getExpirationDate().after(curDate))
+				noofMonths = 1;
+			else 
+				noofMonths = DateConverter.GetExpiredMonths((Calendar)adUserMemberships.getExpirationDate().clone());
+			orderTotal = orderTotal.add(membershipMonthlyAmount.multiply(new BigDecimal(noofMonths)));
+			OrderItem item = new OrderItem();
+			item.setPrice(orderTotal);
+			item.setQuantity(1); 
+			orderItemsList.add(item);
+			
+			setupPayrequest.setCancelUrl(request.getCancelUrl());
+			setupPayrequest.setReturnUrl(request.getReturnUrl());
+			setupPayrequest.setIpnUrl(request.getPaymentMembershipListenerUrl());
+			
+			//setup a payment request with Paypal..
+			SetupPaymentResponse setupPayResponse = paypalPaymentService.setupPayment(setupPayrequest);
+			if(StatusCodesEnum.STATUS_SUCCESS.getCode().equals(setupPayResponse.getStatus().getStatuscode())){
+				TrMembershipAuthSubmit trMembershipAuthSubmitEntity = new TrMembershipAuthSubmit();
+				//trMembershipAuthSubmitEntity.setMemAuthSubmitId(memAuthSubmitId); -new
+				trMembershipAuthSubmitEntity.setAdUserMemberships(adUserMemberships);
+				trMembershipAuthSubmitEntity.setChargeAmount(orderTotal);
+				trMembershipAuthSubmitEntity.setCreatedBy(membershipAuthSubmitDomain.getCreatedby());
+				trMembershipAuthSubmitEntity.setCreationDate(today);
+				trMembershipAuthSubmitEntity.setInitTimestamp(today);
+				trMembershipAuthSubmitEntity.setLastUpdateDate(today);
+				trMembershipAuthSubmitEntity.setSecureToken(setupPayResponse.getPaymentToken());
+				trMembershipAuthSubmitDAO.merge(trMembershipAuthSubmitEntity);
+				response.setPayKey(setupPayResponse.getPaymentToken());
+			}else{
+				status.setStatuscode(setupPayResponse.getStatus().getStatuscode());
+				status.setDescription(setupPayResponse.getStatus().getDescription());				
+			}
+		}catch(Throwable th){
+			logger.error("Exception Occurred", th);
+			status.setStatuscode(StatusCodesEnum.STATUS_ERR_UNKNOWN.getCode());
+			status.setDescription("Error occured");
+		}
+		return response;
+	}
+
+
+	//not used am not sure why its here !!
+	public UpdateMembershipPaymentStatusResponse updateMembershipPaymentStatus(UpdateMembershipPaymentStatusRequest request) {
+		/*
+
+		UpdateMembershipPaymentStatusResponse response = new UpdateMembershipPaymentStatusResponse();
+		Status status = new Status();
+		status.setStatuscode(StatusCodesEnum.STATUS_SUCCESS.getCode());
+		response.setStatus(status);
+		Calendar today = Calendar.getInstance();
+		try{
+			AdUserMemberships adUserMemberships = adUserMembershipsDAO.findAdUserMembershipsByMembershipId(request.getMembershipId());
+			adUserMemberships.setAdLookupValues(adLookupValuesDAO.findAdLookupValuesByLookupCodeSingleResult(request.getPaymentStatus()));
+			adUserMemberships.setLastUpdateDate(today);
+			adUserMemberships.setLastUpdatedBy(request.getUserId());
+			adUserMembershipsDAO.merge(adUserMemberships);
+		}catch(Throwable th){
+			status.setStatuscode(StatusCodesEnum.STATUS_ERR_UNKNOWN.getCode());
+			logger.error("Exception occured", th);
+		}
+		return response;*/
+		return null;
+	}
+
+	//Getter for the membership details
+	public GetMembershipdetailsResponse getMembershipdetails(int userId) {
+		GetMembershipdetailsResponse response = new GetMembershipdetailsResponse();
+		Status status = new Status();
+		status.setStatuscode(StatusCodesEnum.STATUS_SUCCESS.getCode());
+		response.setStatus(status);
+		try{
+			AdUserMemberships adUserMemberships = adUserMembershipsDAO.findAdUserMembershipsByUserId(userId);
+			AdUserMembershipDomain domain = new AdUserMembershipDomain();
+			domain.setAutopay(adUserMemberships.getAutopay());
+			if(null != adUserMemberships.getAutopayWithdrawDay())
+				domain.setAutopayWithdrawDate(adUserMemberships.getAutopayWithdrawDay());
+			
+			domain.setCreatedby(adUserMemberships.getCreatedBy());
+			domain.setEffectiveDate(XMLGregorianCalendarConverter.convertCalendarToXMLGregorianCalendar(adUserMemberships.getEffectiveDate()));
+			domain.setExperiationDate(XMLGregorianCalendarConverter.convertCalendarToXMLGregorianCalendar(adUserMemberships.getExpirationDate()));
+			domain.setLastupdateby(adUserMemberships.getLastUpdatedBy());
+			domain.setMembershipid(adUserMemberships.getMembershipId());
+			domain.setMembershipPricingId(adUserMemberships.getStMemPricingOptions().getMemPricingId());
+			domain.setMembershipPrice(adUserMemberships.getStMemPricingOptions().getPrice());
+			domain.setPaymentStatus(adUserMemberships.getAdLookupValues().getLookupCode());
+			domain.setPaymentStatusId(adUserMemberships.getAdLookupValues().getLookupValueId());
+			domain.setUserId(userId);
+			response.setAdUserMembership(domain);
+		}catch(Throwable th){
+			status.setStatuscode(StatusCodesEnum.STATUS_ERR_UNKNOWN.getCode());
+			logger.error("Exception occured", th);
+		}
+		return response;
+
+	}
+
+
+	public GetMembershipCommissionResponse getMembershipCommissiondetails(
+			GetMembershipCommissionRequest request) {
+			
+		AdUsers adUsers = adUsersDAO.findAdUsersByUserId(request.getUserId());
+		ArrayList<AdUserMemberships> membershipList=new ArrayList<AdUserMemberships>();
+		for(AdUserMemberships mem: adUsers.getAdUserMembershipset())
+		{
+			membershipList.add(mem);
+		}
+
+		/*//right now we have only standerd
+		StMemPricingOptions stMemPricingOptions  = stMemPricingOptionsDAO.findStMemPricingOptionsByUserTypeAndMembershipType(userType.getLookupCode()
+									, LookupTypeValueEnum.MEMEBERSHIP_TYPE_STANDARD.getTypeCode());
+		*/
+		
+		GetMembershipCommissionResponse response = new GetMembershipCommissionResponse();
+		//We can retrieve the commission rate form AdUser entity, no need to query again
+		StMemPricingOptionsDomain domain = new StMemPricingOptionsDomain();
+		/*domain.setCommission(stMemPricingOptions.getCommission());*/
+		if(membershipList.size()>0)
+			domain.setCommission(membershipList.get(0).getStMemPricingOptions().getCommission());
+		response.setStPricingOptions(domain);
+
+		return response;
+	}
+
+
+	public CheckPayKeyProcessedResponse checkPayKeyProcessed(String paykey) {
+		// TODO Auto-generated method stub
+		CheckPayKeyProcessedResponse response= new CheckPayKeyProcessedResponse();
+		Status status= new Status();
+		status.setStatuscode("1");
+		status.setDescription("PAYMENT_PROCEEESED");
+		Set<TrReceiveMembershipPayments> payments= membershipPayment.findTrReceiveMembershipPaymentsByAuthcode(paykey);
+		if(!(null==payments)){
+			status.setStatuscode("0");
+			status.setDescription("PAYMENT_NOT_PROCEEESED");
+		}
+		response.setStatus(status);
+		return response;
+	}
+	
+	public GetMemPricingOptionsResponse getMemPricingOptions()
+	{
+		GetMemPricingOptionsResponse response = new GetMemPricingOptionsResponse();
+		Status status=new Status();
+		response.setStatus(status);
+		Set<StMemPricingOptions> options=stMemPricingOptionsDAO.findAllStMemPricingOptionss();
+		try {
+			modelConverter.convertStMemPricingOptionsEntityToDomain(options,response.getOptions());
+			status.setStatuscode(StatusCodesEnum.STATUS_SUCCESS.getCode());
+		} catch (DatatypeConfigurationException e) {
+			// TODO Auto-generated catch block
+			status.setStatuscode(StatusCodesEnum.STATUS_ERR_UNKNOWN.getCode());
+		}
+		return response;
+	}
+	
+	public UpdateUserMembershipResponse updateUserMembership(UpdateUserMembershipRequest request)
+	{
+		UpdateUserMembershipResponse response = new UpdateUserMembershipResponse();
+		Status status=new Status();
+		response.setStatus(status);
+		AdUsersDomain userDomain=request.getUser();
+		AdUsers userEntity = adUsersDAO.findAdUsersByPrimaryKey(userDomain.getUserId());
+		//Check if we approve user from 431(Company) or 548(Designer). Change to 433 first. So it will send the email.
+		AdLookupValues waitForConfirmRegStatus = adLookupValuesDAO.findAdLookupValuesByLookupCode(LookupTypeValueEnum.REG_STATUS_WAITING_FOR_COFIRMATION.getTypeCode()).iterator().next();
+		AdLookupValues updateRegStatus = adLookupValuesDAO.findAdLookupValuesByLookupValueId(userDomain.getRegisterStatusId());
+		if( ( LookupTypeValueEnum.REG_STATUS_COMPLETED_FORM.getTypeCode().equals(userEntity.getAdLookupValuesByRegStatusId().getLookupCode()) || LookupTypeValueEnum.SAMPLES_SUBMIT_COMPLETED.getTypeCode().equals(userEntity.getAdLookupValuesByRegStatusId().getLookupCode()) ) && (LookupTypeValueEnum.REG_STATUS_CONFIRMED.getTypeCode().equals(updateRegStatus.getLookupCode()) || LookupTypeValueEnum.REG_STATUS_DENIED.getTypeCode().equals(updateRegStatus.getLookupCode())))
+		{
+			userEntity.setAdLookupValuesByRegStatusId(waitForConfirmRegStatus);
+			adUsersDAO.merge(userEntity);
+			adUsersDAO.flush();
+		}
+		//Update registration status
+		userEntity.setAdLookupValuesByRegStatusId(updateRegStatus);
+		//Update active status
+		userEntity.setActiveStatus(userDomain.getActiveStatus());
+		//Update membership----------
+		AdUserMemberships userMemberships = userEntity.getAdUserMembershipset().iterator().next();
+		//Update payment status
+		userMemberships.setAdLookupValues(adLookupValuesDAO.findAdLookupValuesByLookupValueId(userDomain.getUserMembership().get(0).getPaymentStatusId()));
+		//Update memPricing id
+		userMemberships.setStMemPricingOptions(stMemPricingOptionsDAO.findStMemPricingOptionsByMemPricingId(userDomain.getUserMembership().get(0).getMembershipPricingId()));
+		//Update membership expiration date
+		userMemberships.setExpirationDate(XMLGregorianCalendarConverter.convertXMLGregorianCalendarToCalendar(userDomain.getUserMembership().get(0).getExperiationDate()));
+		AdUsers updatedUserEntity = adUsersDAO.merge(userEntity);
+		AdUsersDomain updatedUserDomain = new AdUsersDomain();
+		adUsersDAO.flush();
+		try {
+			modelConverter.convertAdUsersEntityToDomain(updatedUserEntity, updatedUserDomain);
+			modelConverter.convertAdUsersEntityAssociationsToDomain(updatedUserEntity, updatedUserDomain);
+			AdLookupValuesDomain regStatusDomain = new AdLookupValuesDomain();
+			modelConverter.convertSingleAdLookupValuesEntityToDomain(updatedUserEntity.getAdLookupValuesByRegStatusId(), regStatusDomain);
+			updatedUserDomain.setRegisterStatus(regStatusDomain);
+			AdUserMemberships updatedMembership = updatedUserEntity.getAdUserMembershipset().iterator().next();
+			StMemPricingOptionsDomain updatedMemPricingOptionsDomain = modelConverter.convertStMemPricingOptionsEntityToDomain(updatedMembership.getStMemPricingOptions());
+			updatedUserDomain.getUserMembership().get(0).getMemPricingOption().add(updatedMemPricingOptionsDomain);
+			status.setStatuscode(StatusCodesEnum.STATUS_SUCCESS.getCode());
+		} catch (DatatypeConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			status.setStatuscode(StatusCodesEnum.STATUS_ERR_UNKNOWN.getCode());
+			status.setDescription("Unknown error");
+		}
+		response.setUser(updatedUserDomain);
+		return response;
+	}
+	
+}

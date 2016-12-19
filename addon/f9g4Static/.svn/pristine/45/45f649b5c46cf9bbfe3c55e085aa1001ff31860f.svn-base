@@ -1,0 +1,222 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fashion for Globe | Leadership</title>
+    <link rel="stylesheet" href="/css/ver3/normalize.css" />
+    <link rel="stylesheet" href="/css/ver3/foundation.css" />
+    <link rel="stylesheet" href="/css/ver3/main.css" />
+    <script src="/js/vendor/modernizr.js"></script>
+    <script src="/js/vendor/jquery.js"></script>
+    <script src="/js/foundation.min.js"></script>
+</head>
+<body>
+  	<!-- Header -->
+  	<div class="header">
+  		<div class="row">
+  			<div class="logo large-4 columns">
+      			<a href="/"><img src="/images/logo_rev.png"/></a>
+      			<div class="logo-subtitle">crowdsourcing creatives</div>
+    		</div>
+    		<div class="large-6 columns">
+    			<a class="header-th" href="/pages/howitworks.html" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" data-options="is_hover:true">How it Works</a><!--
+    			--><a class="header-th" href="/pages/categories.html" data-dropdown="drop2" aria-controls="drop2" aria-expanded="false" data-options="is_hover:true">Categories</a><!--
+    			--><a class="header-th" href="/pages/services.html" data-dropdown="drop3" aria-controls="drop3" aria-expanded="false" data-options="is_hover:true">Services</a><!--
+    			--><a class="header-th" href="/pages/company.html" data-dropdown="drop4" aria-controls="drop4" aria-expanded="false" data-options="is_hover:true">Company</a>
+		     	<ul id="drop1" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+  					<li><a href="/pages/howitworks.html">FFG Marketplace</a></li>
+  					<li><a href="/pages/howitworks.html">FFG Commissions</a></li>
+  					<li><a href="/pages/howitworks.html">Public Contest</a></li>
+  					<li><a href="/pages/howitworks.html">Private Contest</a></li>
+  					<li><a href="/pages/getstarted.html">Get Started</a></li>
+				</ul>
+				<!-- <ul id="drop2" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+  					<li><a href="#">This is a link</a></li>
+  					<li><a href="#">This is another</a></li>
+  					<li><a href="#">Yet another</a></li>
+				</ul> -->
+				<ul id="drop3" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+  					<li><a href="/pages/services.html">Consultative Services</a></li>
+  					<li><a href="/pages/support.html">Support</a></li>
+				</ul>
+				<ul id="drop4" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+  					<li><a href="/pages/company.html">About</a></li>
+  					<li><a href="/pages/ourstory.html">Our Story</a></li>
+  					<li><a href="/pages/leadership.html">Leadership</a></li>
+  					<li><a href="/pages/contact.html">Contact</a></li>
+				</ul>
+			</div>
+			<div class="large-2 columns">
+				<ul class="button-group">
+					<li><a class="header-button button tiny" href="/login.html">Login</a></li> 
+					<li><a class="header-button button tiny" href="/f4g/register/designer">Sign up</a></li>
+				<ul class="button-group">
+			</div>
+  		</div>
+  	</div>
+  	<!-- End Of Header -->
+  	
+  	<!-- Content -->
+  	<div class="content">
+  		<div class="row">
+	  		<div class="large-12 columns">
+	  			<div class="content-title">Leadership</div>
+	  		</div>
+	  	</div>
+  		<div class="row profile">	
+  			<div class="large-2 columns">
+ 				<img class="photo" height="124" width="124" src="/images/photo/girish.png"/>
+ 			</div>
+ 			<div class="large-10 columns">
+ 				<div class="name">Girish Siddappa</div>
+ 				<div class="position">CEO</div>
+ 				<div class="story">
+ 					Girish Siddappa founded Fashion For Globe to fulfill his long-held dream of connecting undiscovered designers and artisans around the world with manufactures and brands who could use their fresh ideas and talents.  While trained in technology, Girish’s focus as been on the creative side ever since a professional experience with Nordstrom exposed him to the fashion industry and the way technology impacts design.  At that time was a senior systems analyst at Infosys, working directly under since-retired CEO Mr. Shibu Lal. As his career advanced, Girish sought opportunities to apply his technical expertise towards creating products and services that would empower creative users in the fashion industry. He served as Senior Systems Analyst at Gerber Technology, and in 2010 launched PLM technology Inc. where he remains CEO. Girish holds an engineering degree in computer science from JMIT of Kuvempu University, India.
+ 				</div>
+			</div>
+		</div>
+		
+		<div class="row gap default profile">	
+  			<div class="large-2 columns">
+ 				<img class="photo" height="124" width="124" src="/images/photo/ivana.png"/>
+ 			</div>
+ 			<div class="large-10 columns">
+ 				<div class="name">Ivana Ristic</div>
+ 				<div class="position">VP of Operations</div>
+ 				<div class="story">
+ 					<div>
+ 						Ivana Ristic is a serial entrepreneur who began her career as a fashion designer and then venturing into the tech world as a product visionary and brand manager. Founding her first company in 1995, she ran a successful retail manufacturing company for 13 years. As designer/curator for various categories including Activewear, Missy, Juniors, Young Men, Evening Wear and Couture Bridal, her designs have been featured in fashion editorial for Harper’s Bazaar, InStyle, Lucky, Surface Magazine, People, Martha Stewart Weddings, The Knot, Brides. Wholesale accounts included Sak’s Fifth Ave, Neiman Marcus, Bergdorf Goodman and Kleinfeld’s.
+ 					</div>
+ 					<div class="gap tiny"> 
+						Ivana has appeared on “Good Morning America” as an expert in celebrity wedding style, and her designs were featured for a challenge on “The Apprentice”. She earned a BFA in Fashion Design from Parsons School Design and was an Instructor at the Academy of Art University for the Master’s program in Fashion Illustration and 3D Design. Ivana also holds a dual MBA from Columbia School of Business and Haas School of Business (UC Berkeley).
+					</div>
+ 				</div>
+			</div>
+		</div>
+		
+		<div class="row gap default">
+	  		<div class="large-12 columns">
+	  			<div class="content-title b">Board of Advisors</div>
+	  		</div>
+	  	</div>
+		
+		<div class="row gap default profile">	
+  			<div class="large-2 columns">
+ 				<img class="photo" height="124" width="124" src="/images/photo/sharon.png"/>
+ 			</div>
+ 			<div class="large-10 columns">
+ 				<div class="name">Sharon Graubard</div>
+ 				<div class="position">Creative Advisor</div>
+ 				<div class="story">
+ 					<div>
+ 					Sharon Graubard’s skill at pinpointing the silhouettes, items, fabrics and colors that will drive business for the coming season has earned her work an international following. A trailblazer in using catwalk collections as a starting point for analysis, she was most recently SVP Fashion Director at Stylesight. Prior to that she was VP/Creative Director at ESP Trendlab, Creative Director at Doneger Design Direction, and Creative Director at The Tobé Report, where she began as an illustrator.
+ 					</div>
+ 					<div class="gap tiny">
+					Now consulting for a variety of progressive brands, retailers and leading forecasting companies, she is a sought-after speaker and authority on design-related trends. Frequent speaking engagements include Premiere Vision New York and Paris, The Fashion Group International, Sao Paulo Fashion Week, Hong Kong Fashion Week, and trend conferences around the world. Graubard is regularly quoted in The New York Times, The Wall Street Journal, NPR, Vogue, Elle, international press and other media.
+					</div>
+ 				</div>
+			</div>
+		</div>
+		
+		<div class="row gap default profile">	
+  			<div class="large-2 columns">
+ 				<img class="photo" height="124" width="124" src="/images/photo/paula.jpg"/>
+ 			</div>
+ 			<div class="large-10 columns">
+ 				<div class="name">Paula Levy</div>
+ 				<div class="story">
+ 					<div>
+ 					Paula Levy is a seasoned SVP Global Sales and Industry Business Specialist with a focus on Retail and Brands. For 25+ years, Paula has provided consulting services and technology solutions based upon her depth of knowledge regarding best practices combined with a deep understanding of value-based selling, cost savings, operational efficiencies, and go-to-market strategies. Her expertise includes enterprise solutions ranging from ERP, CRM, WMS, Omni-channel Retailing, Mobile Client Telling, PLM, and DesignCad. Paula’s customers cover a worldwide roster of leading retailers and brands, including Brooks Brothers, Chanel, Giorgio Armani, Tory Burch, Polo Ralph Lauren, St. John Knits, Escada, Tommy Hilfiger, Valentino, Joseph Abboud, Liz Claiborne, and Calvin Klein. She sits on multiple boards in the technology and retail sectors.
+					</div>
+ 				</div>
+			</div>
+		</div>
+
+		<div class="row gap default profile">	
+  			<div class="large-2 columns">
+ 				<img class="photo" height="124" width="124" src="/images/photo/jerry.jpg"/>
+ 			</div>
+ 			<div class="large-10 columns ">
+ 				<div class="name">Jerry Inman</div>
+ 				<div class="story">
+ 					<div>
+ 					Jerry Inman is a seasoned Chief Marketing Officer focused on the Retail and Technology industries. Inman has a proven track record of driving global market share, revenue growth and increased brand equity — with clients ranging from start-ups to the established. Sought after for his motivational skills as well as his expertise, he is regularly invited to speak at leading industry conferences and events. Specialties include branding, demand generation, PR, SEM, sales/marketing alignment and innovative integrated marketing campaigns. Jerry brings his innovative approach to industry-leading technologies including Business Intelligence, Integration, Design, PLM, Trend Forecasting, and Omni-Channel Planning. He sits on multiple boards in the technology and retail sectors.
+					</div>
+ 				</div>
+			</div>
+		</div>
+  	</div>
+  	<!-- End of content -->
+ 
+	<!-- Footer -->
+	<div class="footer footer-wrapper gap">
+		<div class="footer-holder row">
+			<div class="sitemap row">
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="/pages/howitworks.html">How it works</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="/pages/getstarted.html">Get Started</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="/">Resource Center</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="/pages/services.html">Services</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="/pages/company.html">Company</a>
+				 </div>
+				 <div class="large-2 columns"></div>
+			</div>
+			<div class="sitemap sub row">
+				<div class="large-2 columns">
+				 	<a class="sitem-link" href="/pages/howitworks.html">FFG Marketplace</a>
+				 	<a class="sitem-link" href="/pages/howitworks.html">FFG Commissions</a>
+				 	<a class="sitem-link" href="/pages/howitworks.html">Public Contest</a>
+				 	<a class="sitem-link" href="/pages/howitworks.html">Private Contest</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-link" href="/pages/getstarted.html">Retailers / Private Label</a>
+				 	<a class="sitem-link" href="/pages/getstarted.html">Brands</a>
+				 	<a class="sitem-link" href="/pages/getstarted.html">Manufactures</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-link" href="/f4g/register/designer">Become an FFG Creative</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-link" href="/pages/services.html">Consultative Services</a>
+				 	<a class="sitem-link" href="/pages/support.html">Support</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-link" href="/pages/company.html">About</a>
+				 	<a class="sitem-link" href="/pages/ourstory.html">Our Story</a>
+				 	<a class="sitem-link" href="/pages/leadership.html">Leadership</a>
+				 	<a class="sitem-link" href="/pages/contact.html">Contact</a>
+				 </div>
+				 <div class="large-2 columns"></div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns">
+					<div class="footer-logo"><img src="/images/logo_rev.png" alt="Fashion For Globe"/></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End of footer -->
+	
+  	<script>
+     	$(document).foundation({
+     		orbit: {
+     			timer_speed: 5000, // Sets the amount of time in milliseconds before transitioning a slide
+     		    pause_on_hover: false, // Pauses on the current slide while hovering
+     		    resume_on_mouseout: false, // If pause on hover is set to true, this setting resumes playback after mousing out of slide
+     		    next_on_click: true, // Advance to next slide on click
+     		    animation_speed: 500, // Sets the amount of time in milliseconds the transition between slides will last
+     		   	navigation_arrows: false
+     		}
+        });
+   	</script>
+</body>
+</html>

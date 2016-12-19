@@ -1,0 +1,362 @@
+package com.f9g4.service.sdk;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+import java.util.Map;
+
+import javax.security.auth.callback.CallbackHandler;
+
+import org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor;
+import org.apache.cxf.endpoint.Client;
+import org.apache.cxf.endpoint.Endpoint;
+import org.apache.cxf.frontend.ClientProxy;
+import org.apache.cxf.interceptor.Interceptor;
+import org.apache.cxf.message.Message;
+import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
+import org.apache.ws.security.WSConstants;
+import org.apache.ws.security.handler.WSHandlerConstants;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import com.f9g4.service.sdk.testutil.UrlSetup;
+
+
+public abstract class AbstractSdkFactoryTest
+		<FAC extends AbstractSecureServiceFactory<SVC>, SVC extends Object> {
+
+	private enum GenericParams {
+		FAC, SVC
+	}
+
+	private FAC factory;
+	private final Constructor<FAC> liveFactoryCtor;
+	private final Constructor<FAC> unsecureFactoryCtor;
+
+	public AbstractSdkFactoryTest() {
+
+		Type[] genericTypeArgs = extractGenericTypeArguments();
+		liveFactoryCtor = extractLiveFactoryCtor(genericTypeArgs);
+		unsecureFactoryCtor = extractUnsecureFactoryCtor(genericTypeArgs);
+	}
+
+	@SuppressWarnings("unchecked")
+	private Constructor<FAC> extractLiveFactoryCtor(Type[] genericTypeArgs) {
+
+		Class<FAC> factoryClass = (Class<FAC>) genericTypeArgs[GenericParams.FAC.ordinal()];
+		try {
+			return factoryClass.getConstructor(String.class, String.class, String.class);
+		} catch (NoSuchMethodException e) {
+			return null;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private Constructor<FAC> extractUnsecureFactoryCtor(Type[] genericTypeArgs) {
+
+		Class<FAC> factoryClass = (Class<FAC>) genericTypeArgs[GenericParams.FAC.ordinal()];
+		try {
+			return factoryClass.getConstructor(String.class);
+		} catch (NoSuchMethodException e) {
+			return null;
+		}
+	}
+
+	private Type[] extractGenericTypeArguments() {
+
+		ParameterizedType genericSuperclass = (ParameterizedType) this
+				.getClass().getGenericSuperclass();
+		return genericSuperclass.getActualTypeArguments();
+	}
+
+	protected void setUpServiceFactory(UrlSetup urlSetup)
+	throws IllegalArgumentException, InstantiationException, IllegalAccessException,
+			InvocationTargetException {
+
+		switch (urlSetup) {
+		
+		case unsecured:
+			factory = getUnsecureFactoryInstance(urlSetup);
+			return;
+			
+		case live:
+		case bogus:
+		case clean:
+		default:
+			factory = getSecureFactoryInstance(urlSetup);
+			return;
+		}
+	}
+
+	private FAC getUnsecureFactoryInstance(UrlSetup urlSetup)
+	throws InstantiationException, IllegalAccessException, InvocationTargetException {
+		
+		return getUnsecureFactoryConstructor()== null
+				? null 
+				: getUnsecureFactoryConstructor().newInstance(buildWsdlUrlString(urlSetup));
+	}
+
+	private FAC getSecureFactoryInstance(UrlSetup urlSetup)
+			throws InstantiationException, IllegalAccessException, InvocationTargetException {
+		
+		return getFactoryConstructor().newInstance(
+				buildWsdlUrlString(urlSetup), getUsername(), getPassword());
+	}
+
+	protected String buildWsdlUrlString(UrlSetup urlSetup) {
+
+		switch (urlSetup) {
+		
+		case live:
+		case unsecured:
+			return getLiveWsdlUrlString();
+			
+		case bogus:
+			return "bogus://nobody.is.home?wsdl";
+			
+		case clean:
+			ClassLoader classLoader = AbstractSdkFactoryTest.class.getClassLoader();
+			URL url = classLoader.getResource(getCleanRelativePathString());
+			return url.toExternalForm();
+			
+		default:
+			throw new RuntimeException("Something Very Strange Happened Here");
+		}
+	}
+
+	protected Constructor<FAC> getFactoryConstructor() {
+		return liveFactoryCtor;
+	}
+
+	protected Constructor<FAC> getUnsecureFactoryConstructor() {
+		return unsecureFactoryCtor;
+	}
+
+	protected FAC getFactory() {
+		return factory;
+	}
+
+	/**
+	 * Isolated unit test of XXXServiceFactory.getPort()
+	 */
+	@Test
+	@SuppressWarnings("unchecked")
+	public void testGetPort() throws Exception {
+
+		setUpServiceFactory(UrlSetup.clean);
+
+		//////////////////////////////////// Method to test ////////////////////////////////////
+		SVC p = getFactory().getPort();
+		////////////////////////////////////////////////////////////////////////////////////////
+
+		assertThat(p, is(notNullValue()));
+
+		Client client = ClientProxy.getClient(p);
+		assertThat(client, is(notNullValue()));
+
+		Endpoint endpoint = client.getEndpoint();
+		assertThat(endpoint, is(notNullValue()));
+
+		List<Interceptor<? extends Message>> outInterceptors = endpoint.getOutInterceptors();
+		assertThat(outInterceptors, is(notNullValue()));
+		assertThat(outInterceptors.isEmpty(), is(false));
+
+		int size = outInterceptors.size();
+
+		WSS4JOutInterceptor woi = (WSS4JOutInterceptor) outInterceptors
+				.get(size - 2);
+		assertThat(outInterceptors.get(size - 1),
+				is(instanceOf(SAAJOutInterceptor.class)));
+
+		Map<String, Object> woiProps = woi.getProperties();
+		assertThat(woiProps.size(), is(equalTo(4)));
+		assertThat(woiProps.get(WSHandlerConstants.ACTION),
+				is(equalTo((Object) WSHandlerConstants.USERNAME_TOKEN)));
+		assertThat(woiProps.get(WSHandlerConstants.USER),
+				is(equalTo((Object) getUsername())));
+		assertThat(woiProps.get(WSHandlerConstants.PASSWORD_TYPE),
+				is(equalTo((Object) WSConstants.PW_TEXT)));
+		assertThat(woiProps.get(WSHandlerConstants.PW_CALLBACK_REF),
+				is(instanceOf(CallbackHandler.class)));
+	}
+
+	/**
+	 * Isolated unit test of XXXServiceFactory.getPort()
+	 */
+	@Test
+	@SuppressWarnings("unchecked")
+	public void testGetPort_SECURITY_DISABLED() throws Exception {
+
+		setUpServiceFactory(UrlSetup.clean);
+		getFactory().setSecurityEnabled(false);
+
+		//////////////////////////////////// Method to test ////////////////////////////////////
+		SVC p = getFactory().getPort();
+		////////////////////////////////////////////////////////////////////////////////////////
+
+		assertThat(p, is(notNullValue()));
+
+		Client client = ClientProxy.getClient(p);
+		assertThat(client, is(notNullValue()));
+
+		Endpoint endpoint = client.getEndpoint();
+		assertThat(endpoint, is(notNullValue()));
+
+		List<Interceptor<? extends Message>> outInterceptors = endpoint.getOutInterceptors();
+		assertThat(outInterceptors, is(notNullValue()));
+		assertThat(outInterceptors.isEmpty(), is(false));
+		
+		for (Interceptor interceptor : outInterceptors) {
+			assertThat(interceptor, is(not(instanceOf(WSS4JOutInterceptor.class))));
+			assertThat(interceptor, is(not(instanceOf(SAAJOutInterceptor.class))));
+		}
+	}
+
+	/**
+	 * Isolated unit test of XXXServiceFactory.getPort()
+	 */
+	@Test(expected = MalformedURLException.class)
+	public void testGetPort_FAIL_badURL() throws Exception {
+
+		setUpServiceFactory(UrlSetup.bogus);
+
+		//////////////////////////////////// Method to test ////////////////////////////////////
+		getFactory().getPort();
+		////////////////////////////////////////////////////////////////////////////////////////
+	}
+
+	/**
+	 * THIS TEST IS NORMALLY IGNORED, AND *MUST* BE IGNORED ON COMMIT.
+     * This is a smoke test of connection to remote (secure) live WSDL.
+	 */
+	@Test
+	@Ignore
+	@SuppressWarnings("unchecked")
+	public void testGetPort_LIVE() throws Exception {
+
+		setUpServiceFactory(UrlSetup.live);
+
+		//////////////////////////////////// Method to test ////////////////////////////////////
+		SVC p = getFactory().getPort();
+		////////////////////////////////////////////////////////////////////////////////////////
+
+		assertThat(p, is(notNullValue()));
+
+		Client client = ClientProxy.getClient(p);
+		assertThat(client, is(notNullValue()));
+
+		Endpoint endpoint = client.getEndpoint();
+		assertThat(endpoint, is(notNullValue()));
+
+		List<Interceptor<? extends Message>> outInterceptors = endpoint.getOutInterceptors();
+		assertThat(outInterceptors, is(notNullValue()));
+		assertThat(outInterceptors.isEmpty(), is(false));
+
+		int size = outInterceptors.size();
+
+		WSS4JOutInterceptor woi = (WSS4JOutInterceptor) outInterceptors
+				.get(size - 2);
+		assertThat(outInterceptors.get(size - 1),
+				is(instanceOf(SAAJOutInterceptor.class)));
+
+		Map<String, Object> woiProps = woi.getProperties();
+		assertThat(woiProps.size(), is(equalTo(4)));
+		assertThat(woiProps.get(WSHandlerConstants.ACTION),
+				is(equalTo((Object) WSHandlerConstants.USERNAME_TOKEN)));
+		assertThat(woiProps.get(WSHandlerConstants.USER),
+				is(equalTo((Object) getUsername())));
+		assertThat(woiProps.get(WSHandlerConstants.PASSWORD_TYPE),
+				is(equalTo((Object) WSConstants.PW_TEXT)));
+		assertThat(woiProps.get(WSHandlerConstants.PW_CALLBACK_REF),
+				is(instanceOf(CallbackHandler.class)));
+	}
+
+	/**
+	 * THIS TEST IS NORMALLY IGNORED, AND *MUST* BE IGNORED ON COMMIT.
+     * This is a smoke test of connection to remote unsecured live WSDL.
+	 */
+	@Test
+	@Ignore
+	@SuppressWarnings("unchecked")
+	public void testGetPort_UNSECURE() throws Exception {
+
+		setUpServiceFactory(UrlSetup.unsecured);
+		
+		if (getFactory() == null) {
+			// Class being tested does not have an unsecured factory constructor
+			return;
+		}
+
+		//////////////////////////////////// Method to test ////////////////////////////////////
+		SVC p = getFactory().getPort();
+		////////////////////////////////////////////////////////////////////////////////////////
+
+		assertThat(p, is(notNullValue()));
+
+		Client client = ClientProxy.getClient(p);
+		assertThat(client, is(notNullValue()));
+
+		Endpoint endpoint = client.getEndpoint();
+		assertThat(endpoint, is(notNullValue()));
+
+		List<Interceptor<? extends Message>> outInterceptors = endpoint.getOutInterceptors();
+		assertThat(outInterceptors, is(notNullValue()));
+		assertThat(outInterceptors.isEmpty(), is(false));
+		
+		for (Interceptor interceptor : outInterceptors) {
+			assertThat(interceptor, is(not(instanceOf(WSS4JOutInterceptor.class))));
+			assertThat(interceptor, is(not(instanceOf(SAAJOutInterceptor.class))));
+		}
+	}
+
+	public void setFactory(FAC factory) {
+		this.factory = factory;
+	}
+
+	/**
+	 * Gets a relative path string used to build a working local WSDL URL from the classpath.
+	 * @return relative path to WSDL
+	 */
+	protected abstract String getCleanRelativePathString();
+
+	/**
+	 * Gets a working remote WSDL URL string.
+	 * @return remote WSDL URL string
+	 */
+	protected abstract String getLiveWsdlUrlString();
+
+	/**
+	 * Get working remote hostname string
+	 * @return remote hostname string
+	 */
+	protected abstract String getHostname();
+
+	/**
+	 * Get working remote port number string
+	 * @return remote host number string
+	 */
+	protected abstract String getPortNumber();
+
+	/**
+	 * Get working WS-Security username string
+	 * @return WS-Security username string
+	 */
+	protected abstract String getUsername();
+
+	/**
+	 * Get working WS-Security password string
+	 * @return WS-Security password
+	 */
+	protected abstract String getPassword();
+}

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://services.businessobjects.f9g4.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cp="http://services.businessobjects.f9g4.com" xmlns:f9g4="http://common.businessobjects.f9g4.com" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+xmlns:annox="http://annox.dev.java.net"
+ xmlns:Q1="http://domain.businessobjects.f9g4.com" targetNamespace="http://services.businessobjects.f9g4.com" attributeFormDefault="unqualified" jaxb:version="2.1">
+
+	<xsd:import namespace="http://common.businessobjects.f9g4.com" schemaLocation="f9g4Common.xsd"/>
+	<xsd:import namespace="http://domain.businessobjects.f9g4.com" schemaLocation="f9g4schema.xsd"/>
+		
+ 		
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='AddRatingRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="AddRatingRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='AddRatingResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="AddRatingResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+ 	
+ 	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetBoardRatingsRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetBoardRatingsRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+ 	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetBoardRatingsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetBoardRatingsResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation> 	
+		
+	<xsd:complexType name="AddRatingRequest">
+		<xsd:sequence>
+			<xsd:element name="boardrating" type="Q1:trRatingsDomain">
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	<xsd:complexType name="AddRatingResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	<xsd:complexType name="GetBoardRatingsResponse">
+		<xsd:sequence>
+			<xsd:element name="boardrating" type="Q1:trRatingsDomain"></xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GetBoardRatingsRequest">
+		<xsd:sequence>
+			<xsd:element name="boardid" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+ 	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetUserRatingRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetUserRatingRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation> 
+		
+	<xsd:complexType name="GetUserRatingRequest">
+		<xsd:attribute name="UserId" type="xsd:int"></xsd:attribute>
+	</xsd:complexType>
+
+ 	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetUserRatingResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetUserRatingResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation> 	
+	
+    <xsd:complexType name="GetUserRatingResponse">
+    	<xsd:sequence>
+			<xsd:element name="overallRating" type="Rating1"></xsd:element>
+			<xsd:element name="qualityRating" type="Rating1"></xsd:element>
+			<xsd:element name="priceRating" type="Rating1"></xsd:element>
+			<xsd:element name="reliabilityRating" type="Rating1"></xsd:element>
+			<xsd:element name="customizationRating" type="Rating1"></xsd:element>
+			<xsd:element name="averageRating" type="Rating1"></xsd:element>
+		</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Rating1">
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:decimal"></xsd:element>
+			<xsd:element name="numberOfRatings" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

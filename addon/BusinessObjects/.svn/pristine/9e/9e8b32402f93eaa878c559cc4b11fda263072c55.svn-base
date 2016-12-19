@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://services.businessobjects.f9g4.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cp="http://services.businessobjects.f9g4.com" xmlns:f9g4="http://common.businessobjects.f9g4.com" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:annox="http://annox.dev.java.net" xmlns:Q1="http://domain.businessobjects.f9g4.com" targetNamespace="http://services.businessobjects.f9g4.com" attributeFormDefault="unqualified" jaxb:version="2.1">
+	<xsd:import namespace="http://common.businessobjects.f9g4.com" schemaLocation="f9g4Common.xsd"/>
+	<xsd:import namespace="http://domain.businessobjects.f9g4.com" schemaLocation="f9g4schema.xsd"/>
+	<xsd:complexType name="SecurityQuestion">
+		<xsd:sequence>
+			<xs:element name="QuestionId" type="xs:int" minOccurs="0" maxOccurs="1" />
+			<xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1" />
+			<xs:element name="Answer" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>	
+	<!-- RegisterUser operation -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='RegisterUserRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="RegisterUserRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='RegisterUserResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="RegisterUserResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="RegisterUserRequest" type="RegisterUserRequest"/>
+	<xsd:element name="RegisterUserResponse" type="RegisterUserResponse"/>
+	<xsd:complexType name="RegisterUserRequest">
+		<xsd:sequence>
+			<xsd:element name="user" type="Q1:adUsersDomain"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RegisterUserResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="user" type="Q1:adUsersDomain"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- ViewUser operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='ViewUserRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="ViewUserRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='ViewUserResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="ViewUserResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="ViewUserRequest" type="ViewUserRequest"/>
+	<xsd:element name="ViewUserResponse" type="ViewUserResponse"/>
+	<xsd:complexType name="ViewUserRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xs:int"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ViewUserResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="user" type="Q1:adUsersDomain"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- UpdateUser operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateUserRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateUserRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateUserResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateUserResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="UpdateUserRequest" type="UpdateUserRequest"/>
+	<xsd:element name="UpdateUserResponse" type="UpdateUserResponse"/>
+	<xsd:complexType name="UpdateUserRequest">
+		<xsd:sequence>
+			<xsd:element name="user" type="Q1:adUsersDomain"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateUserResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="user" type="Q1:adUsersDomain"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- DeleteUser operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='DeleteUserRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="DeleteUserRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='DeleteUserResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="DeleteUserResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="DeleteUserRequest" type="DeleteUserRequest"/>
+	<xsd:element name="DeleteUserResponse" type="DeleteUserResponse"/>
+	<xsd:complexType name="DeleteUserRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xsd:int"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DeleteUserResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="user" type="Q1:adUsersDomain"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- UpdateUserName operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateUserNameRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateUserNameRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateUserNameResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateUserNameResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="UpdateUserNameRequest" type="UpdateUserNameRequest"/>
+	<xsd:element name="UpdateUserNameResponse" type="UpdateUserNameResponse"/>
+	<xsd:complexType name="UpdateUserNameRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xsd:int" nillable="false" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="newUserName" type="xsd:string" nillable="false" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateUserNameResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="user" type="Q1:adUserMembershipDomain"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- UpdatePassword operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdatePasswordRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdatePasswordRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdatePasswordResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdatePasswordResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="UpdatePasswordRequest" type="UpdatePasswordRequest"/>
+	<xsd:element name="UpdatePasswordResponse" type="UpdatePasswordResponse"/>
+	<xsd:complexType name="UpdatePasswordRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xsd:int" nillable="false" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="newPassword" type="xsd:string" nillable="false" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdatePasswordResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="user" type="Q1:adUsersDomain"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- validateUser operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='ValidateUserRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="ValidateUserRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='ValidateUserResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="ValidateUserResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="ValidateUserRequest" type="ValidateUserRequest"/>
+	<xsd:element name="ValidateUserResponse" type="ValidateUserResponse"/>
+	<xsd:complexType name="ValidateUserRequest">
+		<xsd:sequence>
+			<xsd:element name="userName" type="xsd:string" nillable="false" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="password" type="xsd:string" nillable="false" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ValidateUserResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="user" type="Q1:adUsersDomain"/>
+			<xsd:element name="termsExprired" type="xsd:boolean" />
+			<xsd:element name="membershipExprired" type="xsd:boolean" />
+			<xsd:element name="latestTermsId" type="xsd:int" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- getSecurityQuestion operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetSecurityQuestionRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetSecurityQuestionRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetSecurityQuestionResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetSecurityQuestionResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="GetSecurityQuestionRequest" type="GetSecurityQuestionRequest"/>
+	<xsd:element name="GetSecurityQuestionResponse" type="GetSecurityQuestionResponse"/>
+	<xsd:complexType name="GetSecurityQuestionRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xsd:int" nillable="false" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GetSecurityQuestionResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xs:element name="securityQuestion1" type="cp:SecurityQuestion"></xs:element>
+			<xs:element name="securityQuestion2" type="cp:SecurityQuestion"></xs:element>
+			<xs:element name="securityQuestion3" type="cp:SecurityQuestion"></xs:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- validate security questions  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='ValidateSecurityQuestionsRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="ValidateSecurityQuestionsRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='ValidateSecurityQuestionsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="ValidateSecurityQuestionsResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="ValidateSecurityQuestionsRequest" type="ValidateSecurityQuestionsRequest"/>
+	<xsd:element name="ValidateSecurityQuestionsResponse" type="ValidateSecurityQuestionsResponse"/>
+	<xsd:complexType name="ValidateSecurityQuestionsRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="securityQuestion1" type="cp:SecurityQuestion"></xs:element>
+			<xs:element name="securityQuestion2" type="cp:SecurityQuestion"></xs:element>
+			<xs:element name="securityQuestion3" type="cp:SecurityQuestion"></xs:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ValidateSecurityQuestionsResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+		</xsd:sequence>
+	</xsd:complexType>	
+
+	<!-- resetPassword operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='ResetPasswordRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="ResetPasswordRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='ResetPasswordResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="ResetPasswordResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="ResetPasswordRequest" type="ResetPasswordRequest"/>
+	<xsd:element name="ResetPasswordResponse" type="ResetPasswordResponse"/>
+	<xsd:complexType name="ResetPasswordRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="newPassword" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>	
+	<xsd:complexType name="ResetPasswordResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- updateTermsAndConditions operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateTermsAndConditionsRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateTermsAndConditionsRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateTermsAndConditionsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateTermsAndConditionsResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="UpdateTermsAndConditionsRequest" type="UpdateTermsAndConditionsRequest"/>
+	<xsd:element name="UpdateTermsAndConditionsResponse" type="UpdateTermsAndConditionsResponse"/>
+	<xsd:complexType name="UpdateTermsAndConditionsRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="adAccepttermsDomain" type="Q1:adAccepttermsDomain" minOccurs="1" maxOccurs="1" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateTermsAndConditionsResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- getLookupTypeValues for a lookup Type operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetLookupTypeValuesForTypeResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetLookupTypeValuesForTypeResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="GetLookupTypeValuesForTypeResponse" type="GetLookupTypeValuesForTypeResponse"/>
+	<xsd:complexType name="GetLookupTypeValuesForTypeResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="lookupTypeValues" type="Q1:adLookupValuesDomain" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- getLatestTermsConditions for a lookup Type operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetTermsConditionsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetTermsConditionsResponse" />
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="GetTermsConditionsResponse" type="GetTermsConditionsResponse"/>
+	<xsd:complexType name="GetTermsConditionsResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="termCondition" type="Q1:stTermConditionDomain" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- getAlerts  operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetAlertsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetAlertsResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="GetAlertsResponse" type="GetAlertsResponse"/>
+	<xsd:complexType name="GetAlertsResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="alertMessages" type="Q1:trMessagesDomain" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- getDesignWallInfo  operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetDesignWallBoardInfoResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetDesignWallBoardInfoResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="GetDesignWallBoardInfoResponse" type="GetDesignWallBoardInfoResponse"/>
+	<xsd:complexType name="GetDesignWallBoardInfoResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="totalRows" type="xsd:long"/>
+			<xsd:element name="totalAmount" type="xsd:double"/>
+			<xsd:element name="boards" type="cp:DesignWallBoardInfoDomain" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="DesignWallBoardInfoDomain">
+		<xsd:sequence>
+			<xsd:element name="userName" type="xsd:string" />
+			<xsd:element name="boardPrice">
+				<xsd:simpleType>
+					<xsd:restriction base="xs:decimal">
+						<xsd:totalDigits value="15"/>
+						<xsd:fractionDigits value="2"/>
+						<xsd:minExclusive value="-10000000000000"/>
+						<xsd:maxExclusive value="10000000000000"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="totalPrice">
+				<xsd:simpleType>
+					<xsd:restriction base="xs:decimal">
+						<xsd:totalDigits value="15"/>
+						<xsd:fractionDigits value="2"/>
+						<xsd:minExclusive value="-10000000000000"/>
+						<xsd:maxExclusive value="10000000000000"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="sellerPayDate" type="xsd:dateTime" />
+			<xsd:element name="lastname" type="xsd:string" />
+			<xsd:element name="firstname" type="xsd:string" />
+			<xsd:element name="profilename" type="xsd:string" />
+			<xsd:element name="useProfilename" type="xsd:int"/>
+			<xsd:element name="statusdescription" type="xsd:string" />
+			<xsd:element name="mainImageUrl" type="xsd:string" />
+			<xsd:element name="thumbnailUrl" type="xsd:string" />
+			<xsd:element name="tileImageUrl" type="xsd:string" />
+			<xsd:element name="fileType" type="xsd:string"></xsd:element>
+			<xsd:element name="name" type="xsd:string"></xsd:element>
+			<xsd:element name="boardId" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- getDesignerAccount  operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetDesignerAccountResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetDesignerAccountResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="GetDesignerAccountResponse" type="GetDesignerAccountResponse"/>
+	<xsd:complexType name="GetDesignerAccountResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="totalRows" type="xsd:long"/>
+			<xsd:element name="totalAmount" type="xsd:double"/>
+			<xsd:element name="boards" type="cp:DesignerAccountDomain" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="DesignerAccountDomain">
+		<xsd:sequence>
+			<xsd:element name="boardId" type="xsd:int" />
+			<xsd:element name="boardName" type="xsd:string" />
+			<xsd:element name="boardPrice">
+				<xsd:simpleType>
+					<xsd:restriction base="xs:decimal">
+						<xsd:totalDigits value="15"/>
+						<xsd:fractionDigits value="2"/>
+						<xsd:minExclusive value="-10000000000000"/>
+						<xsd:maxExclusive value="10000000000000"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="totalPrice">
+				<xsd:simpleType>
+					<xsd:restriction base="xs:decimal">
+						<xsd:totalDigits value="15"/>
+						<xsd:fractionDigits value="2"/>
+						<xsd:minExclusive value="-10000000000000"/>
+						<xsd:maxExclusive value="10000000000000"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="boardImage" type="xsd:string" />
+			<xsd:element name="tileImageUrl" type="xsd:string" />
+			<xsd:element name="portfilioId" type="xsd:int" />
+			<xsd:element name="portfolioName" type="xsd:string" />
+			<xsd:element name="purchaserId" type="xsd:int" />
+			<xsd:element name="purchaserName" type="xsd:string" />
+			<xsd:element name="dateSold" type="xsd:dateTime"></xsd:element>
+			<xsd:element name="paymentStatusId" type="xsd:int"></xsd:element>
+			<xsd:element name="paymentStatus" type="xsd:string"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	<!-- getCategories operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetCategoriesResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetCategoriesResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="GetCategoriesResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="stCategoryMasterDomain" type="Q1:stCategoryMasterDomain" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- getCategories operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetCategoriesRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetCategoriesRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="GetCategoriesRequest">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="level" type="xsd:int" />
+			<xsd:element name="portfolioId" type="xsd:int" />
+			<xsd:element name="level1" type="xsd:int" />
+			<xsd:element name="level2" type="xsd:int" />
+			<xsd:element name="nameForLevel3" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- getSeasonAllYears operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetSeasonYearsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetSeasonYearsResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="GetSeasonYearsResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="stSeasonYearDomains" type="Q1:stSeasonYearDomain" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="CheckUsernameAvailabilityRequest">
+		<xsd:sequence>
+			<xsd:element name="username2Check" type="xsd:string"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CheckUsernameAvailabilityResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CheckUsernameAvailabilityResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="CheckUsernameAvailabilityResponse">
+		<xsd:sequence>
+			<xsd:element name="isAvailable" type="xsd:boolean"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetUsersListRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetUsersListRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="GetUsersListRequest">
+		<xsd:sequence>
+			<xsd:element name="regStatus" type="Q1:adLookupValuesDomain" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			<xsd:element name="userType" type="Q1:adLookupValuesDomain" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			<xsd:element name="sortOption" type="xsd:int" />
+			<xsd:element name="firstResult" type="xsd:int" />
+			<xsd:element name="maxResult" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetUsersListResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetUsersListResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="GetUsersListResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="total" type="xsd:int"/>
+			<xsd:element name="users" type="cp:UserInfoDomain" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			<xsd:element name="usersAdUsersDomain" type="Q1:adUsersDomain" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="UserInfoDomain">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xsd:int" />
+			<xsd:element name="userName" type="xsd:string" />
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="regStatus" type="Q1:adLookupValuesDomain" />
+			<xsd:element name="activeStatus" type="xsd:int" />
+			<xsd:element name="userLogo" type="xsd:string" />
+			<xsd:element name="userType" type="Q1:adLookupValuesDomain" />
+			<xsd:element name="membership" type="Q1:adUserMembershipDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="memPricingOption" type="Q1:stMemPricingOptionsDomain"></xsd:element>
+			<xsd:element name="approverComment" type="xsd:string" />
+			<xsd:element name="portfolio" type="Q1:trPortfolioDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="adminRating" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='getLatestTermsByUserResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="getLatestTermsByUserResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="getLatestTermsByUserResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="term" type="Q1:stTermConditionDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateApproverCommentRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateApproverCommentRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="UpdateApproverCommentRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xsd:int" />
+			<xsd:element name="approverComment" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateApproverCommentResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateApproverCommentResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="UpdateApproverCommentResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="approverComment" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	
+	
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateAdminRatingRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateAdminRatingRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="UpdateAdminRatingRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xsd:int" />
+			<xsd:element name="rating" type="xsd:float" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateAdminRatingResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateAdminRatingResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="UpdateAdminRatingResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="rating" type="xsd:float" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='SearchUsersRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="SearchUsersRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='SearchUsersResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="SearchUsersResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	
+	<xsd:complexType name="SearchUsersRequest">
+		<xsd:sequence>
+			<xsd:element name="designerName" type="xsd:string"
+				minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="countryIds" type="xsd:int" minOccurs="0"
+				maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element name="skillIds" type="xsd:int" minOccurs="0"
+				maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element name="languageIds" type="xsd:int" minOccurs="0"
+				maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element name="schoolAwards" type="xsd:string"
+				minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="expertiseIds" type="xsd:int" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			<xsd:element name="specialtyIds" type="xsd:int" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			<xsd:element name="educationIds" type="xsd:int" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			<xsd:element name="minAdminRating" type="xsd:int"></xsd:element>
+			<xsd:element name="maxAdminRating" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SearchUsersResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="users" type="Q1:adUsersDomain" minOccurs="0" maxOccurs="unbounded" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+</xsd:schema>

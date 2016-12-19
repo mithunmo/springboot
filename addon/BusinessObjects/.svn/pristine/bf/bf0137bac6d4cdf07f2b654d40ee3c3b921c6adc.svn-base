@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://services.businessobjects.f9g4.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cp="http://services.businessobjects.f9g4.com" xmlns:f9g4="http://common.businessobjects.f9g4.com" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+xmlns:annox="http://annox.dev.java.net"
+ xmlns:Q1="http://domain.businessobjects.f9g4.com" targetNamespace="http://services.businessobjects.f9g4.com" attributeFormDefault="unqualified" jaxb:version="2.1">
+
+	<xsd:import namespace="http://common.businessobjects.f9g4.com" schemaLocation="f9g4Common.xsd"/>
+	<xsd:import namespace="http://domain.businessobjects.f9g4.com" schemaLocation="f9g4schema.xsd"/>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='AddPortfolioRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="AddPortfolioRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='AddPortfolioResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="AddPortfolioResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+ 		
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetPortfolioByIdRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetPortfolioByIdRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetPortfolioByIdResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetPortfolioByIdResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+ 	
+ 		
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetPortfolioByUserRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetPortfolioByUserRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetPortfolioByUserResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetPortfolioByUserResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+ 
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetContestByUserIdRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetContestByUserIdRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetContestByUserIdResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetContestByUserIdResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+ 	
+ 	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreateContestRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreateContestRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreateContestResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreateContestResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='EditContestRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="EditContestRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='EditContestResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="EditContestResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetAllContestsRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetAllContestsRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetAllContestsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetAllContestsResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetContestMembersResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetContestMembersResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='AssignMembersToContestResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="AssignMembersToContestResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='AssignMembersToContestRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="AssignMembersToContestRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+ 	
+ 	
+	<xsd:complexType name="GetContestByUserIdRequest">
+		<xsd:sequence>
+			<xsd:element name="portfolioid" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GetContestByUserIdResponse">
+		<xsd:sequence>
+			<xsd:element name="contest" type="Q1:trPortfolioContestDomain" maxOccurs="unbounded" minOccurs="0">
+			</xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+ 	
+
+	<xsd:complexType name="EditContestRequest">
+		<xsd:sequence>
+			<xsd:element name="contest" type="Q1:trPortfolioContestDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="EditContestResponse">
+		<xsd:sequence>
+			<xsd:element name="contest" type="Q1:trPortfolioContestDomain"></xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="AssignMembersToContestRequest">
+		<xsd:sequence>
+			<xsd:element name="portfolioid" type="xsd:int"></xsd:element>
+			<xsd:element name="member" type="Q1:trPortfolioContestMembersDomain" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AssignMembersToContestResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="GetAllContestsRequest">
+		<xsd:sequence>
+			<xsd:element name="contest" type="Q1:trPortfolioContestDomain" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GetAllContestsResponse">
+		<xsd:sequence>
+			<xsd:element name="contest" type="Q1:trPortfolioContestDomain" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="GetContestMembersResponse">
+		<xsd:sequence>
+			<xsd:element name="member" type="Q1:trPortfolioContestMembersDomain" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	
+	
+	<xsd:complexType name="CreateContestRequest">
+		<xsd:sequence>
+			<xsd:element name="contest" type="Q1:trPortfolioContestDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CreateContestResponse">
+		<xsd:sequence>
+			<xsd:element name="contest" type="Q1:trPortfolioContestDomain"></xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="AddPortfolioRequest">
+		<xsd:sequence>
+			<xsd:element name="portfolio" type="Q1:trPortfolioDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AddPortfolioResponse">
+		<xsd:sequence>
+			<xsd:element name="portfolio" type="Q1:trPortfolioDomain"></xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="GetPortfolioByIdRequest">
+		<xsd:sequence>
+			<xsd:element name="portfolioid" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+
+
+	<xsd:complexType name="GetPortfolioByIdResponse">
+		<xsd:sequence>
+			<xsd:element name="portfolio" type="Q1:trPortfolioDomain"></xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="GetPortfolioByUserRequest">
+		<xsd:sequence>
+			<xsd:element name="userid" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	
+
+	<xsd:complexType name="GetPortfolioByUserResponse">
+		<xsd:sequence>
+			<xsd:element name="portfolio" type="Q1:trPortfolioDomain"
+				maxOccurs="unbounded" minOccurs="0">
+			</xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='DeletePortfolioByIdResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="DeletePortfolioByIdResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:complexType name="DeletePortfolioByIdResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdatePortfolioRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdatePortfolioRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdatePortfolioResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdatePortfolioResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:complexType name="UpdatePortfolioRequest">
+		<xsd:sequence>
+			<xsd:element name="portfolio" type="Q1:trPortfolioDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdatePortfolioResponse">
+		<xsd:sequence>
+			<xsd:element name="portfolio" type="Q1:trPortfolioDomain"></xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

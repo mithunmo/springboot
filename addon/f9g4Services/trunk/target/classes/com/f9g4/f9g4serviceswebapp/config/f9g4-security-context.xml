@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security" xmlns:beans="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:lang="http://www.springframework.org/schema/lang" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd      http://www.springframework.org/schema/security    http://www.springframework.org/schema/security/spring-security-3.0.xsd        http://www.springframework.org/schema/context         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+<http auto-config="true">
+		<intercept-url pattern="/pages/login.jsp"/>
+		<intercept-url access="IS_AUTHENTICATED_REMEMBERED" pattern="/*/"/>
+		<form-login always-use-default-target="false" authentication-failure-url="/pages/login.jsp?login_error=true" default-target-url="/index.jsp" login-page="/pages/login.jsp"/> 
+		<logout invalidate-session="true" logout-success-url="/pages/logout-redirect.jsp"/>
+		<remember-me key="f9g4RMKey" user-service-ref="userDetailsService"/>
+	</http>
+<authentication-manager alias="authenticationManager">
+	
+	<authentication-provider user-service-ref="userDetailsService">
+		<password-encoder hash="plaintext"/>
+	</authentication-provider>
+</authentication-manager>
+<beans:bean class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl" id="userDetailsService">
+		<beans:property name="rolePrefix" value="ROLE_"/>
+		<beans:property name="dataSource" ref="springSecurityDataSource"/>
+		<beans:property name="usersByUsernameQuery" value="SELECT username,password,enabled FROM Users WHERE username = ?"/>
+		<beans:property name="authoritiesByUsernameQuery" value="SELECT u.username, a.authorityname FROM Users u JOIN Users_Authorities ua on u.id = ua.user_id JOIN Authorities a on ua.authorities_id = a.id WHERE u.username = ?"/>
+	</beans:bean>
+<global-method-security>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.service.AdAuthoritiesService.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.service.AdLookupTypesService.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.service.AdUsersService.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.service.CpCompanyService.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.service.TrDesignTrxService.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.AdActiveUsersDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.AdAuditDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.AdAuthoritiesDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.AdClickEventsDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.AdLookupTypesDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.AdLookupValuesDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.AdPrivilegesDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.AdUserPrivilegesDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.AdUsersAuthoritiesDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.AdUsersDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.CpAddressesDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.CpClassificationPrefDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.CpClassificationSourceDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.CpCompanyDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.CpContactsDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.CpCustPreferencesDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.CpDesignerProfileDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.CpFashionShowsDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.CpProfileSamplesDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.TrAdsDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.TrDesignTrxDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.TrDesignTrxFilesDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.TrDesignTrxMassloadDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.TrFavDesignersDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.TrFavGroupsDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.TrMessageInboxDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.TrMessagesDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.TrNegotiationsDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.TrNotificationHeaderDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.TrNotificationsDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.TrPurchasesDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.TrRatingsDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.TrReferalsDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.dao.TrWishlistDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.security.UsersDAO.*(..))"/>
+		<protect-pointcut access="IS_AUTHENTICATED_REMEMBERED" expression="execution(* com.f9g4.security.AuthoritiesDAO.*(..))"/>
+	</global-method-security>
+</beans:beans>

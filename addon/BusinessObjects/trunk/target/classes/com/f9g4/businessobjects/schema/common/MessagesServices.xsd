@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://services.businessobjects.f9g4.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cp="http://services.businessobjects.f9g4.com" xmlns:f9g4="http://common.businessobjects.f9g4.com" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+xmlns:annox="http://annox.dev.java.net"
+ xmlns:Q1="http://domain.businessobjects.f9g4.com" targetNamespace="http://services.businessobjects.f9g4.com" attributeFormDefault="unqualified" jaxb:version="2.1">
+
+	<xsd:import namespace="http://common.businessobjects.f9g4.com" schemaLocation="f9g4Common.xsd"/>
+	<xsd:import namespace="http://domain.businessobjects.f9g4.com" schemaLocation="f9g4schema.xsd"/>
+		
+ 		
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='AddMessageRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="AddMessageRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='AddMessageResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="AddMessageResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+ 	
+ 	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetlatestMessagesByBoardGroupByUserRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetlatestMessagesByBoardGroupByUserRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+ 	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetlatestMessagesByBoardGroupByUserResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetlatestMessagesByBoardGroupByUserResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation> 	
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetAllMessagesbyBoardAndUserRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetAllMessagesbyBoardAndUserRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+ 	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetAllMessagesbyBoardAndUserResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetAllMessagesbyBoardAndUserResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='DeleteMessageByIdResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="DeleteMessageByIdResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+		
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetMessageByIdResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetMessageByIdResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetBroadcastMessagesResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetBroadcastMessagesResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreateBroadcastMessagesResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreateBroadcastMessagesResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreateBroadcastMessagesRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreateBroadcastMessagesRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:complexType name="AddMessageRequest">
+		<xsd:sequence>
+			<xsd:element name="message" type="Q1:trMessagesDomain">
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	<xsd:complexType name="AddMessageResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	<xsd:complexType name="GetlatestMessagesByBoardGroupByUserRequest">
+		<xsd:sequence>
+			<xsd:element name="touserid" type="xsd:int">
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GetlatestMessagesByBoardGroupByUserResponse">
+		<xsd:sequence>
+			<xsd:element name="messageList" type="Q1:trMessagesDomain" minOccurs="0" maxOccurs="unbounded" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="GetAllMessagesbyBoardAndUserRequest">
+		<xsd:sequence>
+			<xsd:element name="touserid" type="xsd:int"></xsd:element>
+			<xsd:element name="fromuserid" type="xsd:int"></xsd:element>
+			<xsd:element name="boardid" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GetAllMessagesbyBoardAndUserResponse">
+		<xsd:sequence>
+			<xsd:element name="messageList" type="Q1:trMessagesDomain" minOccurs="0" maxOccurs="unbounded" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="DeleteMessageByIdResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="GetMessageByIdResponse">
+		<xsd:sequence>
+			<xsd:element name="message" type="Q1:trMessagesDomain"></xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="GetBroadcastMessagesResponse">
+		<xsd:sequence>
+			<xsd:element name="result" type="Q1:trBroadcastMessagesDomain" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="CreateBroadcastMessagesResponse">
+		<xsd:sequence>
+			<xsd:element name="update" type="Q1:trBroadcastMessagesDomain"></xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="CreateBroadcastMessagesRequest">
+		<xsd:sequence>
+			<xsd:element name="item" type="Q1:trBroadcastMessagesDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

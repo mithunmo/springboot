@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!-- Appenders -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+		</layout>
+	</appender>
+	<appender name="APPLOGFILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="../logs/f9g4.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="5000KB" />
+		<param name="MaxBackupIndex" value="10"/> 
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd-MM-yyyy HH:mm:ss SSS} %-5p %t %C{1}.%M: %m%n" />
+		</layout>
+	</appender>
+	
+	<logger name="org.springframework">
+        <level value="error"/>
+    </logger>
+	
+	<!-- Application Loggers -->
+	<logger name="com.f9g4">
+		<level value="error" />
+		<appender-ref ref="APPLOGFILE" />    
+		<appender-ref ref="console" />
+	</logger>
+
+
+	<logger name="com.f9g41">
+		<level value="error" />
+		<appender-ref ref="APPLOGFILE" />    
+	</logger>
+	
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core">
+		<level value="error" />
+		<appender-ref ref="APPLOGFILE" />
+	</logger>
+	
+	<logger name="org.springframework.beans">
+		<level value="error" />
+		<appender-ref ref="APPLOGFILE" />
+	</logger>
+	
+	<logger name="org.springframework.context">
+		<level value="error" />
+		<appender-ref ref="APPLOGFILE" />
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value="error" />
+		<appender-ref ref="APPLOGFILE" />
+	</logger>
+
+	<!-- Root Logger -->
+	<root>
+		<priority value="error" />
+		<appender-ref ref="console" />
+		<appender-ref ref="APPLOGFILE" />
+	</root>
+	
+</log4j:configuration>

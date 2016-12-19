@@ -1,0 +1,456 @@
+
+/*
+ * SpringSourcery - http://www.springsourcery.org
+ *
+ * Copyright (C) 2011 Dan Macklin.
+ *
+ * SpringSourcery is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ *
+ * SpringSourcery is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with SpringSourcery; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
+ */
+
+package com.f9g4.webapp.servicesFacade.impl;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.UUID;
+
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+
+import com.f9g4.webapp.controllers.SearchController;
+import com.f9g4.webapp.domain.UploadProperties;
+import com.f9g4.webapp.domain.UploadResult;
+import com.f9g4.webapp.servicesFacade.UploadFacade;
+
+
+@Service
+@Scope("prototype")
+public class UploadFacadeApacheCommonsUploadImpl implements UploadFacade 
+{
+
+	private static final Logger logger = LoggerFactory.getLogger(UploadFacadeApacheCommonsUploadImpl.class);
+	
+	@Autowired @Value("${fileStore}")
+	private String profileLocation;
+	
+	@Autowired @Value("${fileStore_400}")
+	private String profileLocation_400;
+	
+	@Autowired @Value("${fileStore_100}")
+	private String profileLocation_100;
+	
+	@Autowired @Value("${fileStore_bigimage}")
+	private String profileLocation_bigimage;
+	
+	@Autowired @Value("${fileStore_ai}")
+	private String profileLocation_source;
+	
+	@Autowired @Value("${fileStore_files}")
+	private String profileLocation_files;
+	
+	@Autowired @Value("${fileStore_error_files}")
+	private String profileLocation_error_files;
+	
+	@Autowired @Value("${plmsplitterlocation}") 
+	private String plmsplitter;
+	@Autowired @Value("${ghostscriptlocation}") 
+	private String ghostscript;
+	
+	@Autowired @Value("${plmsplitterparameters}") 
+	private String plmsplitterparameters;
+	
+	@Autowired @Value("${plmsplitterparameterswithwatermark}") 
+	private String plmsplitterparametersWithWatermark;
+	
+	@Autowired @Value("${dummy_image}") 
+	private String dummyImage;
+	
+	private String original_ext;
+	private String originalFileName;
+	private String fileName;
+	private String fileName_size_400;
+	private String fileName_size_100;
+	private String fileName_size_original;
+	private int uploadStatus;
+	private boolean isFailedProcessing;
+	
+	public boolean isFailedProcessing() {
+		return isFailedProcessing;
+	}
+	public void setFailedProcessing(boolean isFailedProcessing) {
+		this.isFailedProcessing = isFailedProcessing;
+	}
+	public String getOriginalFileName()
+	{
+		return this.originalFileName;
+	}
+	public String getFileName()
+	{
+		return this.fileName;
+	}
+	public String getOriginal_ext() 
+	{
+		return original_ext.replace(".", "");
+	}
+	public String getFileName_size_400() 
+	{
+		return fileName_size_400;
+	}
+	public String getFileName_size_100() 
+	{
+		return fileName_size_100;
+	}
+	public String getFileName_size_original() 
+	{
+		return fileName_size_original;
+	}
+	public int getUploadStatus()
+	{
+		return uploadStatus;
+	}
+	public boolean upload(UploadProperties uploadDetails,int uploadMode, UploadResult result) 
+	{
+		int exitVal;
+		boolean isFailedProcessing=false;
+		//check the folder, if not exist create it.=================
+		File folder=new File(profileLocation);
+		File folder_100x100=new File(profileLocation_100);
+		File folder_400x400=new File(profileLocation_400);
+		File folder_bigimage=new File(profileLocation_bigimage);
+		File folder_source=new File(profileLocation_source);
+		//Add folder for files
+		File folder_files=new File(profileLocation_files);
+		if(!folder.exists())
+			folder.mkdir();
+		if(!folder_100x100.exists())
+			folder_100x100.mkdir();
+		if(!folder_400x400.exists())
+			folder_400x400.mkdir();
+		if(!folder_bigimage.exists())
+			folder_bigimage.mkdir();
+		if(!folder_source.exists())
+			folder_source.mkdir();
+		if(!folder_files.exists())
+			folder_files.mkdir();
+		
+//		User u = userDAO.getUser(username);
+		
+		FileOutputStream fos=null;
+		int extIndex = uploadDetails.getFiledata().getOriginalFilename().lastIndexOf('.');
+		//fileName = file.name.substr(0, extIndex);
+		String original_ext = uploadDetails.getFiledata().getOriginalFilename().substring(extIndex, uploadDetails.getFiledata().getOriginalFilename().length());
+		//normalize file extension 06/11/2013
+		original_ext=original_ext.toLowerCase(); //change to lower case
+		if (extIndex != -1 && uploadMode!=3) //skip the ext check when uploadMode is files 
+		{
+			//if the extension is pdf, then change to AI
+			if(original_ext.equals(".pdf"))
+				original_ext=".ai";
+			if(original_ext.equals(".jpeg")) //if the extension equals to jpeg, reset to jpg
+				original_ext=".jpg";
+		}
+		//create filename
+		final String uuid=UUID.randomUUID().toString();
+		String filename=profileLocation + uuid + original_ext;
+		/* 
+		this.fileName=uuid + original_ext;
+		this.fileName_size_100=UUID.randomUUID().toString()+".jpg";
+		this.fileName_size_400=UUID.randomUUID().toString()+".jpg";
+		this.fileName_size_original=UUID.randomUUID().toString()+".jpg";
+		this.originalFileName = uploadDetails.getFiledata().getOriginalFilename();
+		*/
+		
+		//Set value to UploadResult object
+		result.setOriginal_ext(original_ext);
+		result.setFileName(uuid + original_ext);
+		result.setFileName_size_100(UUID.randomUUID().toString()+".jpg");
+		result.setFileName_size_400(UUID.randomUUID().toString()+".jpg");
+		result.setFileName_size_original(UUID.randomUUID().toString()+".jpg");
+		result.setOriginalFileName(uploadDetails.getFiledata().getOriginalFilename());
+		
+		try
+		{
+			
+			File f = new File(filename);
+			if (!f.exists()) 
+			{
+				f.createNewFile();
+			}
+//		
+//			if (!f.exists()){
+//				boolean result = f.mkdir();
+//				
+//				if (!result){
+//					System.out.println("Could not create dir");
+//				}
+//				
+//			}
+
+//			fos = new FileOutputStream("C:\\Users\\kamlesh\\Downloads\\" + uploadDetails.getFiledata().getOriginalFilename().toUpperCase());
+			fos = new FileOutputStream(f);
+		
+			fos.write(uploadDetails.getFiledata().getBytes());
+			fos.flush();
+			fos.close();
+			
+			
+			
+			//Convert AI files to Jpeg - use Utility along ghost script
+			//PLMSplitter.exe �location of your AI file� DPI=150 ALL=TRUE LAYER=OFF Renderer=�Location of GS exe from the bin directory where you install Ghost Script�
+			//decide the parameter by uploadMode
+			//Mode==1, no watermark; Mode==2, with watermark; Mode==3, files mode. skip the plmsplitter process.
+			String runtimecoomand="";
+			if(uploadMode==1)
+			{
+				runtimecoomand=plmsplitter + " " + filename + " " + plmsplitterparameters + " Renderer="+ghostscript;
+			}
+			else if(uploadMode==2)	
+			{
+				runtimecoomand=plmsplitter + " " + filename + " " + plmsplitterparametersWithWatermark + " Renderer="+ghostscript;
+			}
+			else if(uploadMode==3)
+			{
+				// Do not need to run plmsplitter.
+				// Move the file to files folder.
+				//get file
+				File temp=new File(filename);
+				//create new file
+				File dest=new File(profileLocation_files+result.getFileName());
+				temp.renameTo(dest);
+				return true;
+			}
+			else
+			{
+				runtimecoomand=plmsplitter + " " + filename + " " + plmsplitterparametersWithWatermark + " Renderer="+ghostscript;
+			}
+			
+			//Process process= Runtime.getRuntime().exec(runtimecoomand);
+			logger.trace("COMPLETE");
+			
+			//wait the process finish and continue the program.====================
+			try
+	        {
+	            Runtime rt = Runtime.getRuntime();
+	            Process proc = rt.exec(runtimecoomand);
+	            
+	            // any error message?
+	            StreamGobbler errorGobbler = new StreamGobbler(proc.getErrorStream(), "ERR");            
+	            
+	            // any output?
+	            StreamGobbler outputGobbler = new StreamGobbler(proc.getInputStream(), "OUT");
+	                
+	            // kick them off
+	            errorGobbler.start();
+	            outputGobbler.start();
+	                                    
+	            // any error???
+	            exitVal = proc.waitFor();
+	            //this.uploadStatus=exitVal;
+	            if(exitVal!=0)
+	            	isFailedProcessing = true;
+	            else
+	            	isFailedProcessing = false;
+	        } 
+			catch (Throwable t)
+	        {
+	            t.printStackTrace();
+	            result.setFailedProcessing(true);
+	            return false;
+	        }
+			/*try
+			{
+				process.wait();
+			}
+			catch (Exception e)
+			//catch (InterruptedException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			
+			logger.trace("READEING FILE LIST");
+			File dir=new File(profileLocation);
+		    FilenameFilter filefilter = new FilenameFilter() 
+		    {
+			      public boolean accept(File dir, String name) 
+			      {
+			    	  //if the file extension is .jpg return true, else false
+			    	  return name.matches(".*"+uuid+".*jpg");
+			      }
+		    };
+			String[] fileList=dir.list(filefilter);
+			if(fileList.length<=0) //if no thumbnails images are created after plmsplitter, it's failed processing.
+			{
+				isFailedProcessing=true;
+			}
+			//create a FilenameFilter and override its accept-method
+			if(isFailedProcessing)
+			{
+				//create the dummy images to thumbnails folder to occupies the file name.
+				//get dummy image file
+				File dummyImageFile=new File(dummyImage);
+				File dest100=new File(profileLocation_100+result.getFileName_size_100());
+				File dest400=new File(profileLocation_400+result.getFileName_size_400());
+				File destOriginalSize=new File(profileLocation_bigimage+result.getFileName_size_original());
+				FileUtils.copyFile(dummyImageFile, dest100); //100*100
+				FileUtils.copyFile(dummyImageFile, dest400); //400*400
+				FileUtils.copyFile(dummyImageFile, destOriginalSize); //original image size
+				//move the file to error files folder
+				File temp=new File(filename);
+				//create new file
+				File dest=new File(profileLocation_error_files+result.getFileName());
+				temp.renameTo(dest);
+			}
+			else
+			{
+				//move source files==================================
+				//get file
+				File temp=new File(filename);
+				//create new file
+				File dest=new File(profileLocation_source+result.getFileName());
+				temp.renameTo(dest);
+				//move generated jpg files.
+				for(int i=0;i<fileList.length;i++)
+				{
+					if(fileList[i].matches(".*400x400.*"))
+					{
+						logger.trace("MOVE "+fileList[i]+" to 400x400 folder");
+						//move to 400x400 folder
+						//get file
+						temp=new File(profileLocation+fileList[i]);
+						//create new file
+						dest=new File(profileLocation_400+result.getFileName_size_400());
+						temp.renameTo(dest);
+					}
+					else if(fileList[i].matches(".*100x100.*"))
+					{
+						logger.trace("MOVE "+fileList[i]+" to 100x100 folder");
+						//move to 100x100 folder
+						//get file
+						temp=new File(profileLocation+fileList[i]);
+						//create new file
+						dest=new File(profileLocation_100+result.getFileName_size_100());
+						temp.renameTo(dest);
+					}
+					else
+					{
+						logger.trace("MOVE "+fileList[i]+" to bigimage folder");
+						//move to original folder
+						//get file
+						temp=new File(profileLocation+fileList[i]);
+						//create new file
+						dest=new File(profileLocation_bigimage+result.getFileName_size_original());
+						temp.renameTo(dest);
+					}
+				}
+			}
+			/*Update uploadResult object*/
+			result.setUploadStatus(exitVal);
+			result.setFailedProcessing(isFailedProcessing);
+			return true;
+		}
+		catch (FileNotFoundException e) 
+		{
+				e.printStackTrace();
+				return false;
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally{
+			try {
+				if (fos != null){
+					fos.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		// Add Runtime to parse the AI files and convert it to jpg	 
+	}
+	class StreamGobbler extends Thread
+	{
+	    InputStream is;
+	    String type;
+	    OutputStream os;
+	    
+	    StreamGobbler(InputStream is, String type)
+	    {
+	        this(is, type, null);
+	    }
+	    StreamGobbler(InputStream is, String type, OutputStream redirect)
+	    {
+	        this.is = is;
+	        this.type = type;
+	        this.os = redirect;
+	    }
+	    
+	    public void run()
+	    {
+	        try
+	        {
+	            PrintWriter pw = null;
+	            if (os != null)
+	                pw = new PrintWriter(os);
+	                
+	            InputStreamReader isr = new InputStreamReader(is);
+	            BufferedReader br = new BufferedReader(isr);
+	            String line=null;
+	            while ( (line = br.readLine()) != null)
+	            {
+	                if (pw != null)
+	                    pw.println(line);
+	            }
+	            if (pw != null)
+	                pw.flush();
+	        } catch (IOException ioe)
+	            {
+	            ioe.printStackTrace();  
+	            }
+	    }
+	}
+	@Override
+	public boolean setupProperties() {
+		// TODO Auto-generated method stub
+		this.profileLocation="";
+		this.profileLocation_400="";
+		this.profileLocation_100="";
+		this.profileLocation_bigimage="";
+		this.profileLocation_source="";
+		this.plmsplitter="";
+		this.ghostscript="";
+		this.plmsplitterparameters="";
+		this.plmsplitterparametersWithWatermark="";
+		
+		return false;
+	}
+}
+

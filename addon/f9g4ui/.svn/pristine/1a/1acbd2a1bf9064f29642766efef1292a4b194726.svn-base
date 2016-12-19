@@ -1,0 +1,215 @@
+package com.f9g4.web.forms;
+
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+
+import org.joda.time.Days;
+import org.springframework.ui.ModelMap;
+
+import com.f9g4.businessobjects.domain.StSeasonYearDomain;
+import com.f9g4.businessobjects.domain.TrPortfolioContestDomain;
+import com.f9g4.common.util.ContestEnum;
+import com.f9g4.common.util.XMLGregorianCalendarConverter;
+
+
+public class ContestBeanDetail {
+
+	private Integer contestId;
+	private Integer portfolioId;
+	private String title;
+	private Integer contestType;
+	private Integer contestStatus;
+	private String dueDate;
+	private Integer winners;
+	private Integer client;
+	private Integer division;
+	private Integer category;
+	private String[] product;
+	private String[] productType;
+	private String subKeywords1;
+	private String subKeywords2;
+	private String subKeywords3;
+	private String subKeywords4;
+	private Integer season;
+	private String associatedBrandsInfluence;
+	private String associatedBrandsHangWith;
+	private String introduction;
+	private String description;
+	private String deliverables;
+	private String otherInformation;
+	private Integer dimensions;
+	private Integer format;
+	
+	public Integer getContestId() {
+		return contestId;
+	}
+	public void setContestId(Integer contestId) {
+		this.contestId = contestId;
+	}
+	public Integer getPortfolioId() {
+		return portfolioId;
+	}
+	public void setPortfolioId(Integer portfolioId) {
+		this.portfolioId = portfolioId;
+	}
+	public Integer getContestStatus() {
+		return contestStatus;
+	}
+	public void setContestStatus(Integer contestStatus) {
+		this.contestStatus = contestStatus;
+	}
+	public String[] getProduct() {
+		return product;
+	}
+	public void setProduct(String[] product) {
+		this.product = product;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public Integer getContestType() {
+		return contestType;
+	}
+	public void setContestType(Integer contestType) {
+		this.contestType = contestType;
+	}
+	public String getDueDate() {
+		return dueDate;
+	}
+	public void setDueDate(String dueDate) {
+		this.dueDate = dueDate;
+	}
+	public Integer getWinners() {
+		return winners;
+	}
+	public void setWinners(Integer winners) {
+		this.winners = winners;
+	}
+	public Integer getClient() {
+		return client;
+	}
+	public void setClient(Integer client) {
+		this.client = client;
+	}
+	public Integer getDivision() {
+		return division;
+	}
+	public void setDivision(Integer division) {
+		this.division = division;
+	}
+	public Integer getCategory() {
+		return category;
+	}
+	public void setCategory(Integer category) {
+		this.category = category;
+	}
+	public String[] getProductType() {
+		return productType;
+	}
+	public void setProductType(String[] productType) {
+		this.productType = productType;
+	}
+	public String getSubKeywords1() {
+		return subKeywords1;
+	}
+	public void setSubKeywords1(String subKeywords1) {
+		this.subKeywords1 = subKeywords1;
+	}
+	public String getSubKeywords2() {
+		return subKeywords2;
+	}
+	public void setSubKeywords2(String subKeywords2) {
+		this.subKeywords2 = subKeywords2;
+	}
+	public String getSubKeywords3() {
+		return subKeywords3;
+	}
+	public void setSubKeywords3(String subKeywords3) {
+		this.subKeywords3 = subKeywords3;
+	}
+	public String getSubKeywords4() {
+		return subKeywords4;
+	}
+	public void setSubKeywords4(String subKeywords4) {
+		this.subKeywords4 = subKeywords4;
+	}
+	public Integer getSeason() {
+		return season;
+	}
+	public void setSeason(Integer season) {
+		this.season = season;
+	}
+	public String getAssociatedBrandsInfluence() {
+		return associatedBrandsInfluence;
+	}
+	public void setAssociatedBrandsInfluence(String associatedBrandsInfluence) {
+		this.associatedBrandsInfluence = associatedBrandsInfluence;
+	}
+	public String getAssociatedBrandsHangWith() {
+		return associatedBrandsHangWith;
+	}
+	public void setAssociatedBrandsHangWith(String associatedBrandsHangWith) {
+		this.associatedBrandsHangWith = associatedBrandsHangWith;
+	}
+	public String getIntroduction() {
+		return introduction;
+	}
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getDeliverables() {
+		return deliverables;
+	}
+	public void setDeliverables(String deliverables) {
+		this.deliverables = deliverables;
+	}
+	public String getOtherInformation() {
+		return otherInformation;
+	}
+	public void setOtherInformation(String otherInformation) {
+		this.otherInformation = otherInformation;
+	}
+	public Integer getDimensions() {
+		return dimensions;
+	}
+	public void setDimensions(Integer dimensions) {
+		this.dimensions = dimensions;
+	}
+	public Integer getFormat() {
+		return format;
+	}
+	public void setFormat(Integer format) {
+		this.format = format;
+	}
+	
+	@Override
+	public String toString() {
+		return "ContestBeanDetail [contestId=" + contestId + ", portfolioId="
+				+ portfolioId + ", title=" + title + ", contestType="
+				+ contestType + ", contestStatus=" + contestStatus
+				+ ", dueDate=" + dueDate + ", winners=" + winners + ", client="
+				+ client + ", division=" + division + ", category=" + category
+				+ ", product=" + Arrays.toString(product) + ", productType="
+				+ Arrays.toString(productType) + ", subKeywords1="
+				+ subKeywords1 + ", subKeywords2=" + subKeywords2
+				+ ", subKeywords3=" + subKeywords3 + ", subKeywords4="
+				+ subKeywords4 + ", season=" + season
+				+ ", associatedBrandsInfluence=" + associatedBrandsInfluence
+				+ ", associatedBrandsHangWith=" + associatedBrandsHangWith
+				+ ", introduction=" + introduction + ", description="
+				+ description + ", deliverables=" + deliverables
+				+ ", otherInformation=" + otherInformation + ", dimensions="
+				+ dimensions + ", format=" + format + "]";
+	}
+}

@@ -1,0 +1,217 @@
+@import "component.less";
+
+html {
+	overflow: -moz-scrollbars-vertical; 
+	overflow-y: scroll;
+}
+/*=========================== Search ================================*/
+/* Search Criteria Input Container */
+.groups-holder 
+{
+ 	&.show-all { overflow:visible !important;}
+	position:relative; width:100%; clear:both; overflow:hidden;
+	.groups 
+	{
+		width:25%; float:left; .tile(block,65px,40px,4em,1.3em);
+		.group-holder
+		{
+			width:95%; margin:10px auto; position:relative; .rounded-corners(block);
+			.group-content
+			{
+				background-color:#EEE;
+				&.active { background-color:#F5F4F0 !important;}
+				&.na { background-color:#FFF;}
+				padding:5px;
+			}
+		}
+	}
+}
+
+/*=========================== Projects ==============================*/
+.projects-viewer 
+{ 
+	width:100%; margin-top:10px;
+	&.pv-d /* Designer viewer */
+	{
+		th
+		{
+			&:nth-child(1) { width:11%; min-width:100px; text-align:center;} /* buyer logo */
+			&:nth-child(2) { width:14%; text-align:center;} /* type */
+			&:nth-child(3) { width:26%;} /* title */
+			&:nth-child(4) { width:10%; min-width:100px;  text-align:center;} /* season */
+			&:nth-child(5) { width:11%; text-align:center;} /* docs */
+			&:nth-child(6) { width:10%; text-align:center;} /* awards */
+			&:nth-child(7) { width:10%; text-align:left;} /* submissions */
+			&:nth-child(8) { width:8%; text-align:center;} /* ends */
+		}
+	}
+	&.pv-c /* Company viewer */
+	{
+		th
+		{
+			&:nth-child(1) { width:14%;  text-align:center;} /* type */
+			&:nth-child(2) { width:27%;} /* title */
+			&:nth-child(3) { width:10%;  text-align:center;} /* season */
+			&:nth-child(4) { width:11%; min-width:100px;  text-align:center;} /* doc */
+			&:nth-child(5) { width:10%; text-align:center;} /* status */
+			&:nth-child(6) { width:10%; text-align:center;} /* awards */
+			&:nth-child(7) { width:10%; text-align:left;} /* submissions */
+			&:nth-child(8) { width:8%; text-align:center;} /* ends */
+		}
+	}
+	thead 
+	{
+		th 
+		{ 
+		  	.linkStyle();
+			background-color: #333; color:#FFF; padding:5px 0px;
+		}
+	}
+	tbody
+	{
+		tr
+		{
+			/*&:nth-child(odd) { background-color: #E6E7E8;} */
+			/*&:nth-child(even) { background-color: #BCBEC0;} */
+			border:1px solid #CCC;
+		}
+		td 
+		{
+			overflow:hidden; height:70px; text-align:center; white-space:normal; word-break:break-word; padding:5px 0px;
+		}
+	}
+	.proj-nav 
+	{
+		cursor: pointer;
+		&:hover { background-color:#EEE;}
+	}
+	.proj-user-logo { width:100px; height:auto;}
+	.proj-label 
+	{ 
+		.rounded-corners; display:block;
+		padding:5px 8px; font-size:14px;
+		&.s { color:#000; min-width:120px; width:120px; margin:0px auto; font-weight:bold;}
+		&.s-winter { background-color:#829DB0;}
+		&.s-spring { background-color:#C4DF9C;}
+		&.s-fall { background-color:#FED699;}
+		&.s-summer { background-color:#ED008E;}
+		&.s-other { background-color:#949599;}
+		&.t { color:#FFF; min-width:140px; width:150px; margin:0px auto;}
+		&.tb { background-color:#1CA9E1;}
+		&.tg { background-color:#3AB54A;}
+		&.tr { background-color:#ED008E;}
+		&.tt { font-weight:bold; text-align:left;}
+	}
+	.proj-status
+	{
+		&.g { color:#00A651;}
+		&.b { color:#18ABDF;}
+		&.r { color:#C01D2E;}
+		&.gr { color:#949599;}
+	}
+	.proj-award { font-weight:bold; font-size:14px;}
+	.proj-end
+	{
+		display:block; width:60px; min-width:60px; margin:0px auto; padding:5px; .rounded-corners; background-color: #000; text-align:center; color:#FFF; font-weight:900; font-size:1.3em;
+		.month { clear:both; display:block;}
+		.day { clear:both; display:block;}
+	}
+	.proj-rem-days 
+	{ 
+		display:block; clear:both; text-align:left;
+		.glyphicon { margin-right:8px;}
+	}
+	.proj-subs 
+	{ 
+		display:block; clear:both; text-align:left;
+		.glyphicon { margin-right:8px;}
+	}
+	.proj-docs
+	{
+		img 
+		{
+			&:nth-child(1) { margin-right:5px;} 
+			width:80px; height:80px;
+		}
+	}
+	
+	/* */
+	.user-logo { display:block; width:100%; height:auto;}
+	.user-profile-score { color: @ffgBlue; font-weight:900; font-size:1.5em;}
+	.user-message 
+	{
+		display:block; width:40px; margin:15px auto; line-height:40px; .rounded-corners; background-color: @ffgBlue; text-align:center; color:#FFF; font-weight:900; font-size:1.3em;
+		&.none { background-color:#000 !important;}
+	}
+	.rating-edit { .link-style(#000); float:right; margin-right:5px;}
+	.edit-panel 
+	{
+		a.glyphicon-ok { .link-style(@ffgGreen);}
+		a.glyphicon-remove { .link-style(@ffgRed);}
+	}
+}
+
+/*============================== Portfolio viewer ====================================*/
+.portfolio-viewer
+{
+	width:100%; clear:both; overflow:hidden;
+	.items
+	{
+		.item
+		{
+			float:left; margin-top:20px; position:relative;
+			.proj-label 
+			{ 
+				.rounded-corners; display:block; position:absolute; top:5px; left:0px;
+				padding:2px 3px;
+				&.s { color:#000; min-width:120px; width:120px; margin:0px auto; font-weight:bold;}
+				&.s-winter { background-color:#829DB0;}
+				&.s-spring { background-color:#C4DF9C;}
+				&.s-fall { background-color:#FED699;}
+				&.s-summer { background-color:#ED008E;}
+				&.s-other { background-color:#949599;}
+				&.t { color:#FFF; margin:0px auto;}
+				&.tb { background-color:#1CA9E1;}
+				&.tg { background-color:#3AB54A;}
+				&.tr { background-color:#ED008E;}
+				&.tt { font-weight:bold; text-align:left;}
+			}
+			.tile
+			{
+				width:90%; border:thin solid #000; margin:0px auto; position:relative; padding-bottom: 15px;
+				cursor:pointer; display:block;
+				.tile-imgs
+				{
+					margin-top:25px; clear:both; overflow:hidden; min-height:220px; position:relative;
+					.tile-img-holder { float:left; width:50%; text-align:center; margin:5px 0px;}
+					.tile-img
+					{
+						img { max-width:100px;}
+					}
+					.loading
+					{
+						position:absolute; width:100%; height:100%; text-align:center;
+						.glyphicon { .link-style(#000); position:absolute; top:50%; font-size:40px; margin:-20px 0px 0px -20px;}
+					}
+				}
+			}
+			.item-info
+			{
+				width:90%; margin:0px auto; position:relative; margin-top:8px;
+				.item-func 
+				{ 
+					float:right; .linkStyle(#000); font-size:16px;
+				}
+			}
+			&:hover
+			{
+				.tile { .box-shadow;}
+			}
+		}
+		&.default 
+		{ 
+			.item { width:20%;}
+		}
+		&.large { .item { width:25%;} }
+	}
+}

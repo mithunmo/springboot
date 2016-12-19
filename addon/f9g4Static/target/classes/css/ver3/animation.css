@@ -1,0 +1,47 @@
+.iih-show-hide {
+  -webkit-transition: max-height ease 1s;
+  transition: max-height ease 1s;
+  max-height: 2000px;
+  overflow: hidden;
+}
+.iih-show-hide.ng-hide {
+  max-height: 0px;
+}
+.sync {
+  -webkit-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+  opacity: 1;
+}
+.sync.ng-hide {
+  height: 0px;
+  opacity: 0;
+}
+.msg-box-container {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s;
+  max-height: 500px;
+}
+.msg-box-container.ng-hide {
+  max-height: 0px;
+  opacity: 0;
+}
+/* Test */
+.animate-show {
+  line-height: 20px;
+  opacity: 1;
+  padding: 10px;
+  border: 1px solid black;
+  background: white;
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s;
+}
+.animate-show.ng-hide {
+  line-height: 0;
+  opacity: 0;
+  padding: 0 10px;
+}
+.check-element {
+  padding: 10px;
+  border: 1px solid black;
+  background: white;
+}

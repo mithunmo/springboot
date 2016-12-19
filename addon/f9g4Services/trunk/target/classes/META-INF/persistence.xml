@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+				<persistence-unit name="mysql_f4g" transaction-type="JTA" >
+				<!-- <persistence-unit name="mysql_f4g" transaction-type="RESOURCE_LOCAL" > -->
+				<description>generated-persistence-unit</description>
+				<provider>org.hibernate.ejb.HibernatePersistence</provider>
+      			<class>com.f9g4.domain.TrPaymentAuthSubmit</class>
+      			<class>com.f9g4.domain.AdLookupTypes</class>
+      			<class>com.f9g4.domain.TrReceiveMembershipPayments</class>
+      			<class>com.f9g4.domain.StTermsConditions</class>
+      			<class>com.f9g4.domain.AdUsers</class>
+      			<class>com.f9g4.domain.AdUserMemberships</class>
+      			<class>com.f9g4.domain.TrSalesTransactionDetails</class>
+      			<class>com.f9g4.domain.AdAudit</class>
+      			<class>com.f9g4.domain.AdCompanyNews</class>
+      			<class>com.f9g4.domain.StCategoryMaster</class>
+      			<class>com.f9g4.domain.AdActiveUsers</class>
+      			<class>com.f9g4.domain.AdCompanyNewsDetail</class>
+      			<class>com.f9g4.domain.AdUserSkills</class>
+      			<class>com.f9g4.domain.AdAddresses</class>
+      			<class>com.f9g4.domain.TrRecentlyViewed</class>
+      			<class>com.f9g4.domain.TrSearches</class>
+      			<class>com.f9g4.domain.TrMessages</class>
+      			<class>com.f9g4.domain.TrBoard</class>
+      			<class>com.f9g4.domain.TrPortfolio</class>
+      			<class>com.f9g4.domain.TrPortfolioContest</class>
+      			<class>com.f9g4.domain.TrPortfolioContestMembers</class>
+      			<class>com.f9g4.domain.TrCompanyCredit</class>
+      			<class>com.f9g4.domain.TrCompanyAvailCredit</class>
+      			<class>com.f9g4.domain.TrCompanyCreditTransactionHeader</class>
+      			<class>com.f9g4.domain.TrCompanyCreditTransactionDetail</class>
+      			<class>com.f9g4.domain.AdAcceptTerms</class>
+      			<class>com.f9g4.domain.TrMembershipAuthSubmit</class>
+      			<class>com.f9g4.domain.TrNotificationsQ</class>
+      			<class>com.f9g4.domain.StSeasonYear</class>
+      			<class>com.f9g4.domain.TrSearchSkills</class>
+      			<class>com.f9g4.domain.AdLookupValues</class>
+      			<class>com.f9g4.domain.AdContacts</class>
+      			<class>com.f9g4.domain.TrSearchLanguages</class>
+      			<class>com.f9g4.domain.TrPaymentAuthSubmitHeader</class>
+      			<class>com.f9g4.domain.StCategoryDenorm</class>
+      			<class>com.f9g4.domain.AdUserLanguages</class>
+      			<class>com.f9g4.domain.TrSearchCategories</class>
+      			<class>com.f9g4.domain.StMemPricingOptions</class>
+      			<class>com.f9g4.domain.TrReferrals</class>
+      			<class>com.f9g4.domain.TrRatings</class>
+      			<class>com.f9g4.domain.TrSalesTransactionHeader</class>
+      			<class>com.f9g4.domain.TrSearchSeason</class>
+      			<class>com.f9g4.domain.TrBoardImages</class>
+      			<class>com.f9g4.domain.TrBoardSearch</class>
+      			<class>com.f9g4.domain.TrActivityScreenCompanyGrid</class>
+      			<class>com.f9g4.domain.TrActivityScreenDesignerGrid</class>
+      			<class>com.f9g4.domain.TrActivityScreenGraph</class>
+      			<class>com.f9g4.domain.TrPayGatewayAuditLog</class>
+      			<class>com.f9g4.domain.SingleResultLong</class>
+      			<class>com.f9g4.domain.TrBoardApproval</class>
+      			<class>com.f9g4.domain.AdEmailTemplates</class>
+      			<class>com.f9g4.domain.TrBroadcastMessages</class>
+      			<class>com.f9g4.domain.TrPortfolioImages</class>
+      			<class>com.f9g4.domain.AdUserDocuments</class>
+      			<class>com.f9g4.domain.AdUserExpertises</class>
+      			<class>com.f9g4.domain.AdUserEducations</class>
+      			<class>com.f9g4.domain.AdUserDegaccs</class>
+      			<class>com.f9g4.domain.AdUserSpecialities</class>
+	   			<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		</persistence-unit>
+</persistence>

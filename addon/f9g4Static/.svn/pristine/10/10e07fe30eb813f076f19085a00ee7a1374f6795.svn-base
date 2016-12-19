@@ -1,0 +1,1 @@
+angular.module("adminFilters",[]).filter("rating",function(){return function(a,b){var c="",c="-1"==a?"Unrated":a;b&&(c=a);return c}}).filter("groupIndex",function(){return function(a){var b="";return b=Math.floor(a).toString()}}).filter("upperBound",function(){return function(a,b){var c="---";null!=a&&void 0!=a&&"---"!=a&&(c=a<b?a:b-1+"+");return c}});

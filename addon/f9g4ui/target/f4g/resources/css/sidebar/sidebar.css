@@ -1,0 +1,41 @@
+@charset "utf-8";
+/* CSS Document */
+.sidebar
+{
+	position:absolute;
+	top:170px;
+	right:0px;
+	width:50px;
+	height:60%;
+	background:#bdcbd4;
+	border-top-left-radius:60px;
+	border-bottom-left-radius:60px;
+	overflow:hidden;
+	z-index:10;
+}
+
+.sidebar .left
+{
+	display:inline-block;
+	width:5px;
+	height:100%;
+	padding-top:30px;
+	padding-left:15px;
+	word-wrap:break-word;
+	font-size:14px;
+}
+
+.sidebar .content
+{
+	display:inline-block;
+	display:none;
+	float:right;
+	overflow:hidden;
+	width:300px;
+	height:90%;
+	margin-top:5%;
+	margin-bottom:5%;
+	background-color:#FFF;
+	border-top-left-radius:10px;
+	border-bottom-left-radius:10px;
+}

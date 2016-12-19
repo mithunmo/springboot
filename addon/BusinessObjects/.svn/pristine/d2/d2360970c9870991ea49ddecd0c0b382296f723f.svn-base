@@ -1,0 +1,4868 @@
+<xs:schema xmlns="http://domain.businessobjects.f9g4.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:f9g4="http://common.businessobjects.f9g4.com" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" targetNamespace="http://domain.businessobjects.f9g4.com" elementFormDefault="qualified" attributeFormDefault="unqualified" jaxb:version="2.1">
+	<xs:simpleType name="INTEGER">
+		<xs:annotation>
+			<xs:documentation>
+                Primary Key
+                The "INT" type from the data base was mapped to "xs:integer" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:maxInclusive value="2147483647"/>
+			<xs:minInclusive value="-2147483648"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TIMESTAMP_0">
+		<xs:annotation>
+			<xs:documentation>
+                Date/time of user login
+                The "DATETIME" type from the data base was mapped to "xs:dateTime" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime">
+			<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_60">
+		<xs:annotation>
+			<xs:documentation>
+                Table Name that is being changed.
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_4000">
+		<xs:annotation>
+			<xs:documentation>
+                Present column value
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_10">
+		<xs:annotation>
+			<xs:documentation>
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_120">
+		<xs:annotation>
+			<xs:documentation>
+                Role Name
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="120"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_300">
+		<xs:annotation>
+			<xs:documentation>
+                Role Description
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="300"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_8">
+		<xs:annotation>
+			<xs:documentation>
+                To deactivate roles
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_500">
+		<xs:annotation>
+			<xs:documentation>
+                Provide Description for lookup type
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="500"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_240">
+		<xs:annotation>
+			<xs:documentation>
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="240"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_5">
+		<xs:annotation>
+			<xs:documentation>
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_45">
+		<xs:annotation>
+			<xs:documentation>
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="45"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_255">
+		<xs:annotation>
+			<xs:documentation>
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_1000">
+		<xs:annotation>
+			<xs:documentation>
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_640">
+		<xs:annotation>
+			<xs:documentation>
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="640"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_400">
+		<xs:annotation>
+			<xs:documentation>
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="400"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_30">
+		<xs:annotation>
+			<xs:documentation>
+                Designer or Customer
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_200">
+		<xs:annotation>
+			<xs:documentation>
+                TAX ID 
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_40">
+		<xs:annotation>
+			<xs:documentation>
+                Year when the company was estd
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_150">
+		<xs:annotation>
+			<xs:documentation>
+                Payment Method
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="150"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DECIMAL_15_2">
+		<xs:annotation>
+			<xs:documentation>
+                Credit Limit, future use
+                The "DECIMAL" type from the data base was mapped to "xs:decimal" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="15"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_20">
+		<xs:annotation>
+			<xs:documentation>
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BLOB">
+		<xs:annotation>
+			<xs:documentation>
+                The "BLOB" type from the data base was mapped to "xs:base64Binary" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:base64Binary">
+			<xs:maxLength value="65535"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_320">
+		<xs:annotation>
+			<xs:documentation>
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="320"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_2000">
+		<xs:annotation>
+			<xs:documentation>
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_15">
+		<xs:annotation>
+			<xs:documentation>
+                Customer or Designer
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DATE">
+		<xs:annotation>
+			<xs:documentation>
+                The "DATE" type from the data base was mapped to "xs:date" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date">
+			<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VARCHAR_80">
+		<xs:annotation>
+			<xs:documentation>
+                The "VARCHAR" type from the data base was mapped to "xs:string" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="80"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="REAL">
+		<xs:annotation>
+			<xs:documentation>
+                The "FLOAT" type from the data base was mapped to "xs:float" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="BIGINT">
+		<xs:annotation>
+			<xs:documentation>
+                The "BIT" type from the data base was mapped to "xs:unsignedLong" XML Schema type.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedLong"/>
+	</xs:simpleType>
+	<xs:complexType name="adAccepttermsDomain">
+		<xs:sequence>
+			<xs:element name="acceptTermId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="acceptanceDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="termConditionId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="adActiveUserDomain">
+		<xs:sequence>
+			<xs:element name="activeUserId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="loginDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="logoutDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sessionId">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="adAddressDomain">
+		<xs:sequence>
+			<xs:element name="addressId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="countryId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="countryName" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="addressLine1">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="addressLine2" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="city">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="county" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="state">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="postalcode">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="60"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus" default="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langCode" default="en-US">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="adAuditDomain">
+		<xs:sequence>
+			<xs:element name="auditId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="tableName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="60"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="columnName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="60"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="oldValue">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="newValue">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="transactionPKID">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CREATION_DATE">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+			<xs:element name="LAST_UPDATE_DATE">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="LANG_CODE" default="en-US" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="adCompanyNewsDomain">
+		<xs:sequence>
+			<xs:element name="companyNewsId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="contentType">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="45"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="contentLocation">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="contentAlias" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="startDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="endDate" nillable="true" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="companyNewsDetails" type="adCompanyNewsDetailDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="adCompanyNewsDetailDomain">
+		<xs:sequence>
+			<xs:element name="companyNewDetailId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="companyNewsId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="contentImage" >
+				<xs:simpleType>
+					<xs:restriction base="xs:base64Binary">
+						<xs:maxLength value="65535"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="contentImagePath" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="contentHeading">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="contentDetail">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2147483647"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="adContactsDomain">
+		<xs:sequence>
+			<xs:element name="contactId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="workphone" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="workext" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="cellphone" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fax" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langCode" default="en-US" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="adLookupTypesDomain">
+		<xs:sequence>
+			<xs:element name="lookupTypeId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lookuptype">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="60"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lookupDescription" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langCode" default="en-US">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lookupValues" type="adLookupValuesDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="adLookupValuesDomain">
+		<xs:sequence>
+			<xs:element name="lookupValueId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lookupTypeId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lookupCode">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="description">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langCode" default="en-US">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="address" type="adAddressDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="userLanguages" type="adUserLanguagesDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="userMembership" type="adUserMembershipDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="userSkills" type="adUserSkillsDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="userEducations" type="adUserEducationsDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="userExpertises" type="adUserExpertisesDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="userSpecialities" type="adUserSpecialitiesDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="userDegaccs" type="adUserDegaccsDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="users" type="adUsersDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="pricingOptions" type="stMemPricingOptionsDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="termCondition" type="stTermConditionDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="boards" type="trBoardDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="messages" type="trMessagesDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="notification" type="trNotificationQDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="rating" type="trRatingsDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="searchLang" type="trSearchLanguagesDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="searchSkills" type="trSearchSkillsDomain" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="adUserLanguagesDomain">
+		<xs:sequence>
+			<xs:element name="userLangId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="adUserMembershipDomain">
+		<xs:sequence>
+			<xs:element name="membershipid">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="membershipPricingId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="membershipPrice">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="paymentStatusId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="paymentStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="240"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="effectiveDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="experiationDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="autopay">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="autopayWithdrawDate" >
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="membershipAuthSubmit" type="trMembershipAuthSubmitDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="memPricingOption" type="stMemPricingOptionsDomain" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="adUserSkillsDomain">
+		<xs:sequence>
+			<xs:element name="userSkillId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="skillId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="skillName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="adUserEducationsDomain">
+		<xs:sequence>
+			<xs:element name="userEducationId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="educationId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="educationName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="other">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="adUserExpertisesDomain">
+		<xs:sequence>
+			<xs:element name="userExpertiseId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="expertiseId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="expertiseName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="other">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="adUserSpecialitiesDomain">
+		<xs:sequence>
+			<xs:element name="userSpecialitiesId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="specialitiesId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="specialitiesName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="other">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="adUserDegaccsDomain">
+		<xs:sequence>
+			<xs:element name="userDegaccsId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="degaccsId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="degaccsName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="other">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="adUsersDomain">
+		<xs:sequence>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="registerStatusId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="registerStatusCode">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="registerStatus" type="adLookupValuesDomain" />
+			<xs:element name="userName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="password">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="firstname">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastname">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="companyname" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="aboutYou" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="companywebsite" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="logoimageurl" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="schoolawards" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus" default="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="securityQuestion1">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="securityAnswer1">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="securityQuestion2">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="securityAnswer2">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="securityquestion3" >
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="securityAnswer3" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="taxid" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="overallRating" >
+				<xs:simpleType>
+					<xs:restriction base="xs:float">
+						<xs:minInclusive value="-3.402823e+038"/>
+						<xs:maxInclusive value="3.402823e+038"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langCode" default="en-US">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userType">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+				  	</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="isTempPassword" default="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+			<xs:element name="yrsExp" type="adLookupValuesDomain" />
+			<xs:element name="howDidYouHearAboutUs">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="companiesWorked">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="approverComments">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="adminRating">
+				<xs:simpleType>
+					<xs:restriction base="xs:float">
+						<xs:minInclusive value="-3.402823e+038"/>
+						<xs:maxInclusive value="3.402823e+038"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="profilename">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="useProfilename">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>						
+			<xs:element name="profileScore" type="xs:int" />	
+			<xs:element name="acceptedTermsCondition" type="adAccepttermsDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="activeUser" type="adActiveUserDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="address" type="adAddressDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="contacts" type="adContactsDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="UserLangs" type="adUserLanguagesDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="userMembership" type="adUserMembershipDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="useSkills" type="adUserSkillsDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="education" type="adUserEducationsDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="specialty" type="adUserSpecialitiesDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="expertise" type="adUserExpertisesDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="degAcc" type="adUserDegaccsDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="boards" type="trBoardDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="messages" type="trMessagesDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="paymentAuthSubmit" type="trPaymentAuthSubmitDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="portfolio" type="trPortfolioDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ratings" type="trRatingsDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="recentlyViewed" type="trRecentlyViewedDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="referrals" type="trReferralsDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="salesTransactionDetails" type="trSalesTransactionDetailsDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="userDocuments" type="adUserDocumentsDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="userTypeDomain" type="adLookupValuesDomain" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="stCategoryDenormDomain">
+		<xs:sequence>
+			<xs:element name="categoryDenormId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel1">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel1Value">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel2">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel2Value">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel3">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel3Value">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel4">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel4Value">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel5" >
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel5Value" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langCode" default="en-US" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="stCategoryMasterDomain">
+		<xs:sequence>
+			<xs:element name="categoryId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="parentID">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="name">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="level">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langCode" default="en-US">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="board" type="trBoardDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="portfolio" type="trPortfolioDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="searchCategory" type="trSearchCategoriesDomain" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="stMemPricingOptionsDomain">
+		<xs:sequence>
+			<xs:element name="memberPricingId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userTypeId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="membershipTypeId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="durationInMonths">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="price">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="effectiveDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="experiationDate" >
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="description" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="commission">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langCode" default="en-US" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userMembership" type="adUserMembershipDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="membershipType" type="adLookupValuesDomain" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="stSeasonYearDomain">
+		<xs:sequence>
+			<xs:element name="seasonYearId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="season">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="60"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="year">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus" >
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langCode" default="en-US" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="portfolio" type="trPortfolioDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="searchSeason" type="trSearchSeasonDomain" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="stTermConditionDomain">
+		<xs:sequence>
+			<xs:element name="termCondId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="termTypeId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userTypeId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="effectiveDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="experiationDate" >
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="displayedTerm" >
+				<xs:simpleType>
+					<xs:restriction base="xs:base64Binary">
+						<xs:maxLength value="65535"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="reviewedByLegal" >
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langCode" default="en-US" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userTermandConditionAccept" type="adAccepttermsDomain" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trBoardDomain">
+		<xs:sequence>
+			<xs:element name="boardId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="portfolioId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="saleTypeId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel3Id">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel4Id">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel5Id" >
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="currentUerId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="originalUserId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+			<xs:element name="portfolioUserId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+			<xs:element name="name">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="description" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boardPrice">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="effectiveDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="experiationDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastUpdateDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="publishToMP">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="keyword" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="totalPrice">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langCode" default="en-US">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="statusId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boardStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boardImages" type="trBoardImagesDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="portfolioImages" type="trPortfolioImagesDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="messages" type="trMessagesDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="paymentAuthSubmit" type="trPaymentAuthSubmitDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ratings" type="trRatingsDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="recentlyViewed" type="trRecentlyViewedDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="salesTransactionDetails" type="trSalesTransactionDetailsDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="originalUser" type="adUsersDomain" />
+			<xs:element name="currentUser" type="adUsersDomain" />
+			<xs:element name="category" type="stCategoryDenormDomain" />
+			<xs:element name="salePrice">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="hasSellablePortfolio">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trBoardImagesDomain">
+		<xs:sequence>
+			<xs:element name="boardImageId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boardId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sourceFileURL">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fileType">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fileName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="thumbnailUrl">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="mainImageUrl">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="creationDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastUpdateDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="trBoardSearchDomain">
+		<xs:sequence>
+			<xs:element name="boardId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="portfolioId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>			
+			<xs:element name="name">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="description" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boardPrice">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="totalPrice">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="salePrice">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="thumbnailUrl">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="mainImageUrl">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="tileImageUrl">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="designerName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="date">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="trMembershipAuthSubmitDomain">
+		<xs:sequence>
+			<xs:element name="memAuthSubmitId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="membershipId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="chargeAmount">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="initialTimeStamp">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="0001-01-01T00:00:00.000000000"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59.000000000"/>
+						<!-- comment - pardha <xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}.\p{Nd}{1}"/> -->
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="secureToken">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="receiveMembershipPayments" type="trReceiveMembershipPaymentsDomain" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trMessagesDomain">
+		<xs:sequence>
+			<xs:element name="messageId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648" />
+						<xs:maxInclusive value="2147483647" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="board" type="trBoardDomain" />
+			<xs:element name="boardId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648" />
+						<xs:maxInclusive value="2147483647" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boardName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boardThumbnailUrl">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boardTileUrl">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fromUserId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648" />
+						<xs:maxInclusive value="2147483647" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fromUserFirstName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fromUserLastName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fromUserCompanyName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fromUserLogoUrl">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fromUserProfilename">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fromUserUseProfilename">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648" />
+						<xs:maxInclusive value="2147483647" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fromUserType" type="adLookupValuesDomain" />
+			<xs:element name="toUserId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648" />
+						<xs:maxInclusive value="2147483647" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="toUserFirstName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="toUserLastName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="toUserCompanyName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="toUserLogoUrl">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="toUserProfilename">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="toUserUseProfilename">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648" />
+						<xs:maxInclusive value="2147483647" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="toUserType" type="adLookupValuesDomain" />
+			<xs:element name="msgStatusId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648" />
+						<xs:maxInclusive value="2147483647" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="subject">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="messageBody">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="messageType">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="45" />
+						<xs:minLength value="1" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="readOn">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00" />
+						<xs:maxInclusive value="9999-12-31T23:59:59" />
+						<xs:pattern
+							value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648" />
+						<xs:maxInclusive value="2147483647" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langCode" default="en-US">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10" />
+						<xs:minLength value="1" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648" />
+						<xs:maxInclusive value="2147483647" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648" />
+						<xs:maxInclusive value="2147483647" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="creationDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00" />
+						<xs:maxInclusive value="9999-12-31T23:59:59" />
+						<xs:pattern
+							value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastUpdateDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00" />
+						<xs:maxInclusive value="9999-12-31T23:59:59" />
+						<xs:pattern
+							value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trNotificationQDomain">
+		<xs:sequence>
+			<xs:element name="notificationId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fromUserId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="toUserId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fromEmail">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="150"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="toEmail">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="150"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="subject" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="bodyText" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="emailStatusId" >
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+			<xs:element name="deliveryDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trPaymentAuthSubmitDomain">
+		<xs:sequence>
+			<xs:element name="authSubmitId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boardId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="batchTransactionId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="price">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trPaymentAuthSubmitHeaderDomain">
+		<xs:sequence>
+			<xs:element name="batchTransactionId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="subtotal">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="shipping">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="tax">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="total">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="secureToken">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="paymentAuthSubnit" type="trPaymentAuthSubmitDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="saleTransactionHeader" type="trSalesTransactionHeaderDomain" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="trPortfolioContestMembersDomain">
+		<xs:sequence>
+			<xs:element name="contestMembersId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="portfolioId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userDomain" type="adUsersDomain"></xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		
+		
+		</xs:sequence>
+	</xs:complexType>
+			
+	<xs:complexType name="trCompanyCreditTxnHeaderDomain">
+		<xs:sequence>
+			<xs:element name="txnheaderId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="totalCredits">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>							
+		</xs:sequence>
+	</xs:complexType>			
+
+	<xs:complexType name="trCompanyCreditTxnDetailDomain">
+		<xs:sequence>
+			<xs:element name="txnDetailId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="companyCreditId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="numCredits">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="txnHeaderId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>			
+		</xs:sequence>
+	</xs:complexType>				
+	<xs:complexType name="trCompanyCreditDomain">
+		<xs:sequence>
+			<xs:element name="companyCreditId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="totalCredits">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+			<xs:element name="creditVal">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+			<xs:element name="totalCreditAmount">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+
+		</xs:sequence>
+	</xs:complexType>
+		
+	<xs:complexType name="trPortfolioContestDomain">
+		<xs:sequence>
+			<xs:element name="contestId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="portfolioId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="projectType">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="projectStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boardDimension">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boardDimensionDomain" type="adLookupValuesDomain"></xs:element>
+			<xs:element name="boardFormat">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boardFormatDomain" type="adLookupValuesDomain"></xs:element>
+			<xs:element name="numberOfWinners">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="otherInformation" default="{{DEFAULT}}">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="deliverable" default="{{DEFAULT}}">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="associatedBrandsInfluence" default="{{DEFAULT}}">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="associatedBrandsHangWith" default="{{DEFAULT}}">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>		
+			<xs:element name="langCode" default="en-US">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+				<xs:element name="startDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="0001-01-01T00:00:00.000000000"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59.000000000"/>
+						<!-- Comment - pardha <xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}.\p{Nd}{1}"/> --> 
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="endDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="0001-01-01T00:00:00.000000000"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59.000000000"/>
+						<!-- Comment - pardha <xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}.\p{Nd}{1}"/> --> 
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="category">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="introduction" default="{{DEFAULT}}">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="contestPortfolioDomain" type="trPortfolioDomain" />
+			<xs:element name="contestMemberDomain" type="trPortfolioContestMembersDomain" />				
+		</xs:sequence>	
+	</xs:complexType>
+			
+	<xs:complexType name="trPortfolioDomain">
+		<xs:sequence>
+			<xs:element name="portfolioId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="name">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="description" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="seasonYearId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel1Id">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel1">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel2Id">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryLevel2">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="user" type="adUsersDomain" />
+			<xs:element name="activeStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langCode" default="en-US">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boards" type="trBoardDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="portfolioImages" type="trPortfolioImagesDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="sellable">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trPortfolioImagesDomain">
+		<xs:sequence>
+			<xs:element name="portfolioImageId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="portfolioId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sourceFileURL">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fileType">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fileName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="thumbnailUrl">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="mainImageUrl">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<!-- Image dimension info -->
+			<xs:element name="imageWidth" type="xs:double" />
+			<xs:element name="imageHeight" type="xs:double" />
+			<xs:element name="isActualSize" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="trRatingsDomain">
+		<xs:sequence>
+			<xs:element name="ratingId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boardId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ratingUserId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="rateTransactionId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="avarageRating">
+				<xs:simpleType>
+					<xs:restriction base="xs:float">
+						<xs:minInclusive value="-3.402823e+038"/>
+						<xs:maxInclusive value="3.402823e+038"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ratingQuestion1Id">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="rating1">
+				<xs:simpleType>
+					<xs:restriction base="xs:float">
+						<xs:minInclusive value="-3.402823e+038"/>
+						<xs:maxInclusive value="3.402823e+038"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ratingQuestion2Id">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="rating2">
+				<xs:simpleType>
+					<xs:restriction base="xs:float">
+						<xs:minInclusive value="-3.402823e+038"/>
+						<xs:maxInclusive value="3.402823e+038"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ratingQuestion3Id">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="rating3">
+				<xs:simpleType>
+					<xs:restriction base="xs:float">
+						<xs:minInclusive value="-3.402823e+038"/>
+						<xs:maxInclusive value="3.402823e+038"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ratingQuestion4Id">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="rating4">
+				<xs:simpleType>
+					<xs:restriction base="xs:float">
+						<xs:minInclusive value="-3.402823e+038"/>
+						<xs:maxInclusive value="3.402823e+038"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ratingQuestion5Id" >
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="rating5" >
+				<xs:simpleType>
+					<xs:restriction base="xs:float">
+						<xs:minInclusive value="-3.402823e+038"/>
+						<xs:maxInclusive value="3.402823e+038"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ratingQuestion6Id" >
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="rating6" >
+				<xs:simpleType>
+					<xs:restriction base="xs:float">
+						<xs:minInclusive value="-3.402823e+038"/>
+						<xs:maxInclusive value="3.402823e+038"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="comment">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langCode" default="en-US">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trReceiveMembershipPaymentsDomain">
+		<xs:sequence>
+			<xs:element name="memberPaymentId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="paymentTransmissionId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="receivedTimeStamp">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="0001-01-01T00:00:00.000000000"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59.000000000"/>
+						<!-- Comment - pardha <xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}.\p{Nd}{1}"/> --> 
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="paymentAmount">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="authStatusId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="authCode">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="paymentError" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="secureToken">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>			
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+		
+	</xs:complexType>
+	<xs:complexType name="trRecentlyViewedDomain">
+		<xs:sequence>
+			<xs:element name="clickId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boardId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="eventTime">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="0001-01-01T00:00:00.000000000"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59.000000000"/>
+						<!-- Comment Pardha <xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}.\p{Nd}{1}"/> -->
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trReferralsDomain">
+		<xs:sequence>
+			<xs:element name="referalId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sentUserId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="firstName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="phone">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="email">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="signedupUserid" >
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="expirationDate" >
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="whyRefer" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="message" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="authCode">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="120"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="dateSent">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="signupOn" >
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langCode" default="en-US">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trSalesTransactionDetailsDomain">
+		<xs:sequence>
+			<xs:element name="salesTransactionDetailId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="salesTransactionId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boardId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sellerShare">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="commission">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sellerPayDate" nillable="true" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="paymentStatusId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="comments" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trSalesTransactionHeaderDomain">
+		<xs:sequence>
+			<xs:element name="salesTransactionId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="batchtransactionId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="paymentAuthCode">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="60"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="secureToken">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>			
+			<xs:element name="paymentTimestamp">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="0001-01-01T00:00:00.000000000"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59.000000000"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}.\p{Nd}{1}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="paymentStatusId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="paymentErrorMessage" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>			
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="salesTransactionsDetails" type="trSalesTransactionDetailsDomain" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trSearchCategoriesDomain">
+		<xs:sequence>
+			<xs:element name="searchCategoryId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="searchId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="categoryId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trSearchLanguagesDomain">
+		<xs:sequence>
+			<xs:element name="searchLanguageId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="searchId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="langId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trSearchSeasonDomain">
+		<xs:sequence>
+			<xs:element name="searchSeasonId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="searchId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="seasonYearId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trSearchSkillsDomain">
+		<xs:sequence>
+			<xs:element name="searchSkillId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="searchId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="skillId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trSeachesDomain">
+		<xs:sequence>
+			<xs:element name="searchId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ownerId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="searchName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="120"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="designerCountryId" >
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="rating" >
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="schoolAwards" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="keyword" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="boardFileFormat" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fromPrice" >
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="toPrice" >
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="designerName" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="120"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="searchCategory" type="trSearchCategoriesDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="searchLang" type="trSearchLanguagesDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="searchSeason" type="trSearchSeasonDomain" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="searchSkills" type="trSearchSkillsDomain" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="trPaypalAdaptiveMessage">
+		<xs:sequence>
+			
+			<xs:element name="ack" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>
+			<!-- Pay Key  -->
+			<xs:element name="paykey" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>
+			<xs:element name="timestamp" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>
+			<xs:element name="build" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>	
+			<!-- payStatus is mapped to main status  -->
+			<xs:element name="payStatus" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>		
+			<!-- if status is pending populate this -->
+			<xs:element name="pendingReason" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>
+			<xs:element name="transactionId" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>
+			<xs:element name="transactionStatus" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>
+			<xs:element name="transactionAmount" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>
+			<xs:element name="senderTransactionId" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>
+			<xs:element name="senderTransactionStatus" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>
+			<xs:element name="memo" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>					
+			<xs:element name="senderEmail" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>
+						
+			<xs:element name="actionType" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>
+			<xs:element name="cancelUrl" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>
+			<xs:element name="returnUrl" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>
+			<xs:element name="currencyCode" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>
+			<xs:element name="feesPayer" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>			
+			<xs:element name="trackingId" type="xs:string" minOccurs="0" maxOccurs="1" ></xs:element>
+				
+
+ 		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="trBoardApprovalDomain">
+		<xs:sequence>
+			<xs:element name="boardApprovalId" type="xs:int" />
+			<xs:element name="mainImageUrl" type="xs:string" />
+			<xs:element name="approvalStatus" type="xs:int" />
+			<xs:element name="comments" type="xs:string" />	
+			<xs:element name="approverName" type="xs:string" />		
+			<xs:element name="processStatus" type="xs:string" />
+			<xs:element name="errorMessage" type="xs:string" />
+			<xs:element name="creationDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="0001-01-01T00:00:00.000000000"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59.000000000"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}.\p{Nd}{1}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdBy" type="xs:int" />
+			<xs:element name="lastUpdateDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="0001-01-01T00:00:00.000000000"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59.000000000"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}.\p{Nd}{1}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastUpdatedBy" type="xs:int" />
+ 		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="trBroadcastMessagesDomain">
+		<xs:sequence>
+			<xs:element name="broadcastId" type="xs:int" />
+			<xs:element name="templateName" type="xs:string" />
+			<xs:element name="subject" type="xs:string" />
+			<xs:element name="messageText" type="xs:string" />
+			<xs:element name="msgScopeId" type="xs:int" />
+			<xs:element name="msgStatusId" type="xs:int" />
+			<xs:element name="adLookupValuesByMsgScopeId" type="adLookupValuesDomain" />	
+			<xs:element name="adLookupValuesByMsgStatusId" type="adLookupValuesDomain" />		
+			<xs:element name="processedDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="0001-01-01T00:00:00.000000000"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59.000000000"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}.\p{Nd}{1}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="errorMessage" type="xs:string" />
+			<xs:element name="creationDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="0001-01-01T00:00:00.000000000"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59.000000000"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}.\p{Nd}{1}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdBy" type="xs:int" />
+			<xs:element name="lastUpdateDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="0001-01-01T00:00:00.000000000"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59.000000000"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}.\p{Nd}{1}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastUpdatedBy" type="xs:int" />
+ 		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="adEmailTemplatesDomain">
+		<xs:sequence>
+			<xs:element name="emailTemplId" type="xs:int" />
+			<xs:element name="tempCode" type="xs:string" />
+			<xs:element name="subject" type="xs:string" />
+			<xs:element name="body" type="xs:string" />
+			<xs:element name="supportEmail" type="xs:string" />
+			<xs:element name="creationDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="0001-01-01T00:00:00.000000000"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59.000000000"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}.\p{Nd}{1}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdBy" type="xs:int" />
+			<xs:element name="lastUpdateDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="0001-01-01T00:00:00.000000000"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59.000000000"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}.\p{Nd}{1}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastUpdatedBy" type="xs:int" />
+ 		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="adUserDocumentsDomain">
+		<xs:sequence>
+			<xs:element name="docId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="userId">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sourceFileURL">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fileType">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fileName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="thumbnailUrl">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="mainImageUrl">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activeStatus">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="createdby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastupdateby">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="-2147483648"/>
+						<xs:maxInclusive value="2147483647"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+</xs:schema>

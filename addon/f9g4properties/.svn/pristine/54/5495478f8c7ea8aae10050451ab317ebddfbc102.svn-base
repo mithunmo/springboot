@@ -1,0 +1,12 @@
+#Place this config file in the same folder of MailApp.jar
+mail.smtp.host=email-smtp.us-east-1.amazonaws.com
+mail.smtp.auth=true
+mail.smtp.ssl=false
+mail.smtp.port=587
+mail.smtp.username=AKIAIU3IMSL2WA5WOAQQ
+mail.smtp.password=Ar24OrR62QFo1ODiGZAM1g+4eVfwMqE0vbsh3G3Zn7wo
+mail.debug=true
+mail.smtp.starttls.enable=true
+mail.smtp.starttls.required=true
+mail.from.address=admin@fashionforglobe.com
+mail.warningMail.receiver=admin@fashionforglobe.com,chao@plmtechnology.com

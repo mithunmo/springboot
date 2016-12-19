@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://services.businessobjects.f9g4.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cp="http://services.businessobjects.f9g4.com" xmlns:f9g4="http://common.businessobjects.f9g4.com" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:annox="http://annox.dev.java.net" xmlns:Q1="http://domain.businessobjects.f9g4.com" targetNamespace="http://services.businessobjects.f9g4.com" attributeFormDefault="unqualified" jaxb:version="2.1">
+	<xsd:import namespace="http://common.businessobjects.f9g4.com" schemaLocation="f9g4Common.xsd"/>
+	<xsd:import namespace="http://domain.businessobjects.f9g4.com" schemaLocation="f9g4schema.xsd"/>
+	
+	<!-- createMembership operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreateMembershipRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreateMembershipRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreateMembershipResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreateMembershipResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="CreateMembershipRequest">
+		<xsd:sequence>
+			<xsd:element name="adUserMembershipDomain" type="Q1:adUserMembershipDomain" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<!-- <xsd:element name="trMembershipAuthSubmitDomain" type="Q1:trMembershipAuthSubmitDomain" minOccurs="0" maxOccurs="1" ></xsd:element> -->
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CreateMembershipResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="adUserMembershipDomain" type="Q1:adUserMembershipDomain" minOccurs="1" maxOccurs="1" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	<!-- UpdateMembership operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateMembershipRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateMembershipRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateMembershipResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateMembershipResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="UpdateMembershipRequest" type="UpdateMembershipRequest"/>
+	<xsd:element name="UpdateMembershipResponse" type="UpdateMembershipResponse"/>
+	<xsd:complexType name="UpdateMembershipRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xsd:int"/>
+			<xsd:element name="adUserMembership" type="Q1:adUserMembershipDomain"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateMembershipResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="adUserMembershipDomain" type="Q1:adUserMembershipDomain" minOccurs="1" maxOccurs="1" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!-- updateMembershipPaymentStatusResponse operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateMembershipPaymentStatusRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateMembershipPaymentStatusRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateMembershipPaymentStatusResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateMembershipPaymentStatusResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="UpdateMembershipPaymentStatusRequest" type="UpdateMembershipPaymentStatusRequest"/>
+	<xsd:element name="UpdateMembershipPaymentStatusResponse" type="UpdateMembershipPaymentStatusResponse"/>
+	<xsd:complexType name="UpdateMembershipPaymentStatusRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xsd:int"/>
+			<xsd:element name="membershipId" type="xsd:int"/>
+			<xsd:element name="paymentStatus" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateMembershipPaymentStatusResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+    <!-- GetMembershipdetails operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetMembershipdetailsRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetMembershipdetailsRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetMembershipdetailsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetMembershipdetailsResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:element name="GetMembershipdetailsRequest" type="GetMembershipdetailsRequest"/>
+	<xsd:element name="GetMembershipdetailsResponse" type="GetMembershipdetailsResponse"/>
+	<xsd:complexType name="GetMembershipdetailsRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xsd:int"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GetMembershipdetailsResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="adUserMembership" type="Q1:adUserMembershipDomain" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+		
+	<!-- createMembershipAuthSbmit operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreateMembershipAuthSbmitRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreateMembershipAuthSbmitRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreateMembershipAuthSbmitResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreateMembershipAuthSbmitResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="CreateMembershipAuthSbmitRequest">
+		<xsd:sequence>
+			<xsd:element name="cancelUrl" type="xsd:string" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<xsd:element name="returnUrl" type="xsd:string" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<xsd:element name="paymentMembershipListenerUrl" type="xsd:string" minOccurs="1" maxOccurs="1" ></xsd:element>	
+			<xsd:element name="userID" type="xsd:int" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<!-- Silver - SL. , Standerd - SD. -->
+			<xsd:element name="membershipType" type="xsd:string" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<xsd:element name="trMembershipAuthSubmitDomain" type="Q1:trMembershipAuthSubmitDomain" minOccurs="0" maxOccurs="1" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CreateMembershipAuthSbmitResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="payKey" type="xsd:string" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<!-- <xsd:element name="adUserMembershipDomain" type="Q1:adUserMembershipDomain" minOccurs="1" maxOccurs="1" ></xsd:element> -->
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- createReceiveMembershipPayments operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreateReceiveMembershipPaymentsRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreateReceiveMembershipPaymentsRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreateReceiveMembershipPaymentsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreateReceiveMembershipPaymentsResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="CreateReceiveMembershipPaymentsRequest">
+		<xsd:sequence>
+			<xsd:element name="secureToken" type="xsd:string"/>
+			<xsd:element name="payCommand" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CreateReceiveMembershipPaymentsResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetMembershipCommissionRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetMembershipCommissionRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetMembershipCommissionResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetMembershipCommissionResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:complexType name="GetMembershipCommissionRequest">
+		<xsd:sequence>
+			<xsd:element name="UserId" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="GetMembershipCommissionResponse">
+		<xsd:sequence>
+			<xsd:element name="stPricingOptions" type="Q1:stMemPricingOptionsDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	
+	 <!-- GetMembershipdetails operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CheckPayKeyProcessedResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CheckPayKeyProcessedResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+		<xsd:element name="CheckPayKeyProcessedResponse" type="CheckPayKeyProcessedResponse"/>
+		<xsd:complexType name="CheckPayKeyProcessedResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- GetMemPricingOptions operation  -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetMemPricingOptionsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetMemPricingOptionsResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="GetMemPricingOptionsResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="options" type="Q1:stMemPricingOptionsDomain" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- UpdateUserMembership request -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateUserMembershipRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateUserMembershipRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="UpdateUserMembershipRequest">
+		<xsd:sequence>
+			<xsd:element name="user" type="Q1:adUsersDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- UpdateUserMembership response -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateUserMembershipResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateUserMembershipResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="UpdateUserMembershipResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="user" type="Q1:adUsersDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!--  AddCredit Request-->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='AddCreditRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="AddCreditRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="AddCreditRequest">
+		<xsd:sequence>
+			<xsd:element name="companyCredit" type="Q1:trCompanyCreditDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- Add Credit response -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='AddCreditResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="AddCreditResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="AddCreditResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!--  Redeem credit Request-->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='RedeemUserCreditRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="RedeemUserCreditRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="RedeemUserCreditRequest">
+		<xsd:sequence>
+			<xsd:element name="UserId" type="xsd:int"></xsd:element>
+			<xsd:element name="credits" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--  Redeem credit Response-->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='RedeemUserCreditResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="RedeemUserCreditResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="RedeemUserCreditResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>		
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+</xsd:schema>

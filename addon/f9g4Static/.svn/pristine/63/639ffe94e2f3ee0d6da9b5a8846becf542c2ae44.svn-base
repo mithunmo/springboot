@@ -1,0 +1,298 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fashion for Globe | Contact Us</title>
+    <link rel="stylesheet" href="/css/ver3/normalize.css" />
+    <link rel="stylesheet" href="/css/ver3/foundation.css" />
+    <link rel="stylesheet" href="/css/ver3/main.css" />
+    <script src="/js/vendor/modernizr.js"></script>
+    <script src="/js/vendor/jquery.js"></script>
+    <script src="/js/foundation.min.js"></script>
+</head>
+<body>
+  	<!-- Header -->
+  	<div class="header">
+  		<div class="row">
+  			<div class="logo large-4 columns">
+      			<a href="/"><img src="/images/logo_rev.png"/></a>
+      			<div class="logo-subtitle">crowdsourcing creatives</div>
+    		</div>
+    		<div class="large-6 columns">
+    			<a class="header-th" href="/pages/howitworks.html" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" data-options="is_hover:true">How it Works</a><!--
+    			--><a class="header-th" href="/pages/categories.html" data-dropdown="drop2" aria-controls="drop2" aria-expanded="false" data-options="is_hover:true">Categories</a><!--
+    			--><a class="header-th" href="/pages/services.html" data-dropdown="drop3" aria-controls="drop3" aria-expanded="false" data-options="is_hover:true">Services</a><!--
+    			--><a class="header-th" href="/pages/company.html" data-dropdown="drop4" aria-controls="drop4" aria-expanded="false" data-options="is_hover:true">Company</a>
+		     	<ul id="drop1" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+  					<li><a href="/pages/howitworks.html">FFG Marketplace</a></li>
+  					<li><a href="/pages/howitworks.html">FFG Commissions</a></li>
+  					<li><a href="/pages/howitworks.html">Public Contest</a></li>
+  					<li><a href="/pages/howitworks.html">Private Contest</a></li>
+  					<li><a href="/pages/getstarted.html">Get Started</a></li>
+				</ul>
+				<!-- <ul id="drop2" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+  					<li><a href="#">This is a link</a></li>
+  					<li><a href="#">This is another</a></li>
+  					<li><a href="#">Yet another</a></li>
+				</ul> -->
+				<ul id="drop3" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+  					<li><a href="/pages/services.html">Consultative Services</a></li>
+  					<li><a href="/pages/support.html">Support</a></li>
+				</ul>
+				<ul id="drop4" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+  					<li><a href="/pages/company.html">About</a></li>
+  					<li><a href="/pages/ourstory.html">Our Story</a></li>
+  					<li><a href="/pages/leadership.html">Leadership</a></li>
+  					<li><a href="/pages/contact.html">Contact</a></li>
+				</ul>
+			</div>
+			<div class="large-2 columns">
+				<ul class="button-group">
+					<li><a class="header-button button tiny" href="/login.html">Login</a></li> 
+					<li><a class="header-button button tiny" href="/f4g/register/designer">Sign up</a></li>
+				<ul class="button-group">
+			</div>
+  		</div>
+  	</div>
+  	<!-- End Of Header -->
+  	
+  	<!-- Content -->
+  	<div class="content">
+  		<div class="row">
+  		
+  
+  		
+  			<div class="large-7 columns">
+  				<div class="content-title">Let's Talk</div>
+  				<div class="gap default">
+  					<div class="content-subtitle">
+  						<b>Fashion For Globe</b>
+  					</div>
+  					<div>
+  						375 Park Avenue
+  						<br/>
+						Suite 2607
+						<br/>
+						New York, NY 10152
+					</div>
+  				</div>
+  				<div class="gap tiny">
+  					<a href="mailto://sales@fashionforglobe.com">sales@fashionforglobe.com</a>
+  				</div>
+  				<div class="gap tiny">
+  					Tel: 212 763 0074
+  				</div>
+  				<div class="sicons">
+  					<a href="http://www.facebook.com" target="_blank"><img src="/images/pages/fb.png" /></a>
+  					<a href="http://www.twitter.com" target="_blank"><img src="/images/pages/twitter.png" /></a>
+  					<a href="#" target="_blank"><img src="/images/pages/gplus.png" /></a>
+  				</div>
+  			</div>
+  			
+  			<form action="MAILTO:support@fashionforglobe.com" method="post" enctype="text/plain">
+  			
+  			<div class="large-5 columns form-area">
+  			
+  			  				<div class="row gap">
+  								<div class="large-12 columns">
+  
+ 			<span size="5" style="font-size: x-large;"><span style="font-size: 14pt; color: #808080;">Contact Us</span><br></span>
+   			<hr>
+  			</div>
+   			</div>
+  				<div class="row gap">
+  					<div class="large-4 columns">
+  						Name *:
+  					</div>
+  					<div class="large-4 columns">
+  						<input type="text" name="Firstname"/>
+  						<div>First</div>
+  					</div>
+  					<div class="large-4 columns">
+  						<input type="text" name="Lastname"/>
+  						<div>Last</div>
+  					</div>
+  				</div>
+  				<div class="row gap">
+  					<div class="large-4 columns">
+  						Company *:
+  					</div>
+  					<div class="large-8 columns">
+  						<input type="text" name="Compnay"/>
+  					</div>
+  				</div>
+  				
+  				<div class="row gap">
+  					<div class="large-4 columns">
+  						Website:
+  					</div>
+  					<div class="large-8 columns">
+  						<input type="text" name="Website"/>
+  					</div>
+  				</div>
+  				<div class="row gap">
+  					<div class="large-4 columns">
+  						Email *:
+  					</div>
+  					<div class="large-8 columns">
+  						<input type="text" name="Email"/>
+  					</div>
+  				</div>
+  
+  				<div class="row gap">
+  					<div class="large-4 columns">
+  						Phone Number *:
+  					</div>
+  					<div class="large-8 columns">
+  						<input type="text" name="Ph Number"/>
+  					</div>
+  				</div>
+				<div class="row gap">
+  					<div class="large-4 columns">
+  						Job Title *:
+  					</div>
+  					<div class="large-8 columns">
+  						<input type="text" name="Job Title"/>
+  					</div>
+  				</div>
+    				
+    				
+				<div class="row gap">
+  					<div class="large-4 columns">
+  						Job Function *:
+  					</div>
+  					<div class="large-8 columns">
+						 <select name="Job Function">
+						<option value="Design/Creative" selected="selected">Design/Creative</option>
+						<option value="Merchandising">Merchandising</option>
+						<option value="Sourcing/Procurement">Sourcing/Procurement</option>
+						<option value="Materials">Materials</option>
+						<option value="Marketing/Sales">Marketing/Sales</option>
+						<option value="Executive/Management/Decision Maker">Executive/Management/Decision Maker</option>
+						<option value="IT">IT</option>
+						<option value="Press/Media">Press/Media</option>
+						<option value="Education">Education</option>
+						<option value="Other">Other</option>
+						</select>
+						  					</div>
+  				</div>
+    				
+				<div class="row gap">
+  					<div class="large-4 columns">
+  						Business Type *:
+  					</div>
+  					<div class="large-8 columns">
+							<select name="Business Type">
+							<option value="Manufacturing - Wholesale/Retail" selected="selected">Manufacturing - Wholesale/Retail</option>
+							<option value="Vertical Retailer">Vertical Retailer</option>
+							<option value="Retailer + Private Label">Retailer + Private Label</option>
+							<option value="Retailer">Retailer</option>
+							<option value="Design Studio">Design Studio</option>
+							<option value="Textiles/Materials">Textiles/Materials</option>
+							<option value="Agency, Media, Press">Agency, Media, Press</option>
+							<option value="Higher Education - Faculty">Higher Education - Faculty</option>
+							<option value="Individual/Freelance/Student">Individual/Freelance/Student</option>
+							<option value="Other">Other</option>
+							</select> 					
+  					
+				   </div>
+  				</div>
+    				
+
+				<div class="row gap">
+  					<div class="large-4 columns">
+  						Message *:
+  					</div>
+  					<div class="large-8 columns">
+					<textarea rows="4" cols="50" name="Message"> </textarea>
+									  					
+				   </div>
+  				</div>
+
+
+    				
+  				<div class="row gap">
+  				  					
+  				  	<div class="large-4 columns"> </div>				
+  					<div class="large-8 columns">
+  						<input type="submit" class="form-button" value="Send" />
+  					</div>
+  				</div>
+  				<div class="row gap"></div>
+  			</div>
+  			</form>
+  		</div>
+  	</div>
+ 
+	<!-- Footer -->
+	<div class="footer footer-wrapper gap">
+		<div class="footer-holder row">
+			<div class="sitemap row">
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="/pages/howitworks.html">How it works</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="/pages/getstarted.html">Get Started</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="/">Resource Center</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="/pages/services.html">Services</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="/pages/company.html">Company</a>
+				 </div>
+				 <div class="large-2 columns"></div>
+			</div>
+			<div class="sitemap sub row">
+				<div class="large-2 columns">
+				 	<a class="sitem-link" href="/pages/howitworks.html">FFG Marketplace</a>
+				 	<a class="sitem-link" href="/pages/howitworks.html">FFG Commissions</a>
+				 	<a class="sitem-link" href="/pages/howitworks.html">Public Contest</a>
+				 	<a class="sitem-link" href="/pages/howitworks.html">Private Contest</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-link" href="/pages/getstarted.html">Retailers / Private Label</a>
+				 	<a class="sitem-link" href="/pages/getstarted.html">Brands</a>
+				 	<a class="sitem-link" href="/pages/getstarted.html">Manufactures</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-link" href="/f4g/register/designer">Become an FFG Creative</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-link" href="/pages/services.html">Consultative Services</a>
+				 	<a class="sitem-link" href="/pages/support.html">Support</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-link" href="/pages/company.html">About</a>
+				 	<a class="sitem-link" href="/pages/ourstory.html">Our Story</a>
+				 	<a class="sitem-link" href="/pages/leadership.html">Leadership</a>
+				 	<a class="sitem-link" href="/pages/contact.html">Contact</a>
+				 </div>
+				 <div class="large-2 columns"></div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns">
+					<div class="footer-logo"><img src="/images/logo_rev.png" alt="Fashion For Globe"/></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End of footer -->
+	
+  	<script>
+     	$(document).foundation({
+     		orbit: {
+     			timer_speed: 5000, // Sets the amount of time in milliseconds before transitioning a slide
+     		    pause_on_hover: false, // Pauses on the current slide while hovering
+     		    resume_on_mouseout: false, // If pause on hover is set to true, this setting resumes playback after mousing out of slide
+     		    next_on_click: true, // Advance to next slide on click
+     		    animation_speed: 500, // Sets the amount of time in milliseconds the transition between slides will last
+     		   	navigation_arrows: false
+     		}
+        });
+   	</script>
+</body>
+</html>

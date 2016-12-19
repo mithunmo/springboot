@@ -1,0 +1,47 @@
+#### Registration Validation messages..
+require.userName= Username required, can't be empty.
+require.userName.size= Username should be less than 240 chars.
+require.userName.email.format=The username has to be email format.
+
+ 
+require.password=password
+require.confirmPassword =confirmPassword
+
+require.securityQ1= Secuoryt Question 1
+require.securityQ2= Secuoryt Question 2
+
+require.firstName=Requires First Name
+require.lastName=Requires Last Name
+
+require.street1= Street 1
+require.city  City
+require.state = State
+require.zip = zip
+require.cell = cell
+require.workPhone = work
+require.langs =langs
+
+
+
+
+require.aboutYou=The field aboutYou can't be empty.
+require.aboutYou.size= The field aboutYou can't exceed 4000 char's. 
+require.companyName=companyName
+require.companyName.size=companyName.size
+require.company.website=company.website
+require.company.website=company.website.size
+require.skills=skills
+require.awards=awards
+require.awards.size=awards.size
+ 
+ ####For Add Referrals########
+ require.firstName=Please enter First Name.
+ require.lastName=Please enter Last Name.
+ require.phone=Please enter Phone number.
+ require.email=Please enter Email.
+ require.reason=Please enter Why do you recommend this person.
+ require.background=Please enter How do you know this person.
+ require.email.format=Invalid Email format.
+ require.comment_remarks=Please enter comments / remarks.
+ require.feedback=Please enter your feedback.
+ 

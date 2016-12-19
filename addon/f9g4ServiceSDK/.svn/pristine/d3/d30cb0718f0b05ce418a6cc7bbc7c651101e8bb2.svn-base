@@ -1,0 +1,250 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:oxm="http://www.springframework.org/schema/oxm"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:cxf="http://cxf.apache.org/core"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:http="http://cxf.apache.org/transports/http/configuration"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd
+			http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd 
+			http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd 
+			http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd 
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+			http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd" >
+     
+	<context:annotation-config/>
+    <context:component-scan base-package="com.f9g4.servicesdk"/>
+    <context:component-scan base-package="com.f9g4.services.rest"/>
+    <context:component-scan base-package=" com.f9g4.ui"></context:component-scan>
+    <context:component-scan base-package="com.f9g4.businessobjects.domain"></context:component-scan>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" />
+
+	<!-- SDK for Security Service -->
+      <bean id="f9g4SecurityServiceSDK" class="com.f9g4.servicesdk.SecurityServiceSDK">
+        	<property name="callType" value="REST"/>
+        <property name="securityServiceProperties" ref="securityServiceProperties"/>
+         <property name="securityServiceConfigFile">
+            <value>/SecurityServiceConfig.xml</value>
+        </property>
+    </bean>
+
+    <bean id="securityServiceProperties"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+				<prop key="restURL">${service_url}securityservice</prop>
+            </props>
+        </property>
+    </bean>
+    
+    
+    <!-- SDK for Security Service -->
+      <bean id="portfolioServiceSDK" class="com.f9g4.servicesdk.PortfolioServiceSDK">
+        	<property name="callType" value="REST"/>
+        <property name="portfolioServiceProperties" ref="portfolioServiceProperties"/>
+         <property name="portfolioServiceConfigFile">
+            <value>/PortfolioServiceConfig.xml</value>
+        </property>
+    </bean>
+
+   
+    
+     <bean id="portfolioServiceProperties"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+				<prop key="restURL">${service_url}portfolio/</prop>
+            </props>
+        </property>
+    </bean>
+
+      <bean id="referralsServiceSDK" class="com.f9g4.servicesdk.ReferralsServiceSDK">
+        	<property name="callType" value="REST"/>
+        <property name="referralsServiceProperties" ref="referralsServiceProperties"/>
+         <property name="referralsServiceConfigFile">
+            <value>/ReferralsServiceConfig.xml</value>
+        </property>
+    </bean>
+
+   
+    
+     <bean id="referralsServiceProperties"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+				<prop key="restURL">${service_url}referrals/</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="notificationQServiceSDK" class="com.f9g4.servicesdk.NotificationQServiceSDK">
+        	<property name="callType" value="REST"/>
+        <property name="notificationQServiceProperties" ref="notificationQServiceProperties"/>
+         <property name="notificationQServiceConfigFile">
+            <value>/ReferralsServiceConfig.xml</value>
+        </property>
+    </bean>
+
+   
+    
+     <bean id="notificationQServiceProperties"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+				<prop key="restURL">${service_url}notificationQ/</prop>
+            </props>
+        </property>
+    </bean>
+    
+
+     <bean id="boardServiceProperties"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+				<prop key="restURL">${service_url}board/</prop>
+            </props>
+        </property>
+    </bean>
+    
+       <bean id="boardServiceSDK" class="com.f9g4.servicesdk.BoardServiceSDK">
+        	<property name="callType" value="REST"/>
+        <property name="boardServiceProperties" ref="boardServiceProperties"/>
+         <property name="boardServiceConfigFile">
+            <value>/BoardServiceConfig.xml</value>
+        </property>
+    </bean>
+
+   
+
+    <!-- SDK for Registration Service -->
+	<bean id="registrationServiceSDK" class="com.f9g4.servicesdk.RegistrationServiceSDK">
+		<property name="callType" value="REST"/>
+        <property name="registrationSvcProperties" ref="registrationSvcProperties"/>
+        <property name="registrationSvcConfigFile">
+        	<value>/RegistrationServiceConfig.xml</value>
+        </property>
+    </bean>
+    <bean id="registrationSvcProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+				<prop key="restURL">${service_url}register/</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <!-- SDK for Membership  Service -->
+	<bean id="membershipServiceSDK" class="com.f9g4.servicesdk.MembershipServiceSDK">
+		<property name="callType" value="REST"/>
+        <property name="membershipSvcProperties" ref="membershipSvcProperties"/>
+        <property name="membershipSvcConfigFile">
+        	<value>/MembershipServiceConfig.xml</value>
+        </property>
+    </bean>
+    <bean id="membershipSvcProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+				<prop key="restURL">${service_url}membership/</prop>
+            </props>
+        </property>
+    </bean>
+    
+    
+    <!-- SDK for SalesTransaction  Service -->
+	<bean id="salesTransactionServiceSDK" class="com.f9g4.servicesdk.SalesTransactionServiceSDK">
+		<property name="callType" value="REST"/>
+        <property name="salesTransactionSvcProperties" ref="salesTransactionSvcProperties"/>
+        <property name="salesTransactionSvcConfigFile">
+        	<value>/SalesTransactionServiceConfig.xml</value>
+        </property>
+    </bean>
+    <bean id="salesTransactionSvcProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+				<prop key="restURL">${service_url}sales/</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <!-- SDK for PaypalPaymentServiceSDK  Service -->
+	<bean id="paypalPaymentServiceSDK" class="com.f9g4.servicesdk.PaypalPaymentServiceSDK">
+		<property name="callType" value="REST"/>
+        <property name="paypalPaymentServiceProperties" ref="paypalPaymentServiceProperties"/>
+        <property name="paypalPaymentServiceConfigFile">
+        	<value>/PaypalPaymentServiceConfigFile.xml</value>
+        </property>
+    </bean>
+    <bean id="paypalPaymentServiceProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+				<prop key="restURL">${service_url}payment/</prop>
+            </props>
+        </property>
+    </bean>
+    
+    
+    <bean id="companyNewsServiceSDK" class="com.f9g4.servicesdk.CompanyNewsSDK">
+		<property name="callType" value="REST"/>
+        <property name="companyNewsServiceProperties" ref="companyNewsServiceProperties"/>
+        <property name="companyNewsServiceConfigFile">
+        	<value>/CompanyNewsServiceConfig.xml</value>
+        </property>
+    </bean>
+    <bean id="companyNewsServiceProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+				<prop key="restURL">${service_url}news/</prop>
+            </props>
+        </property>
+    </bean>
+    
+     <bean id="ratingServiceSDK" class="com.f9g4.servicesdk.RatingServiceSDK">
+		<property name="callType" value="REST"/>
+        <property name="ratingServiceProperties" ref="ratingServiceProperties"/>
+        <property name="ratingServiceConfigFile">
+        	<value>/RatingServiceConfig.xml</value>
+        </property>
+    </bean>
+    <bean id="ratingServiceProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+				<prop key="restURL">${service_url}rating/</prop>
+            </props>
+        </property>
+    </bean>
+      <bean id="messageServiceSDK" class="com.f9g4.servicesdk.MessageServiceSDK">
+		<property name="callType" value="REST"/>
+        <property name="messageServiceProperties" ref="messageServiceProperties"/>
+        <property name="messageServiceConfigFile">
+        	<value>/MessageServiceConfig.xml</value>
+        </property>
+    </bean>
+    <bean id="messageServiceProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+				<prop key="restURL">${service_url}messages/</prop>
+            </props>
+        </property>
+    </bean>
+       <bean id="dataCaptureServiceSDK" class="com.f9g4.servicesdk.DataCaptureServiceSDK">
+		<property name="callType" value="REST"/>
+        <property name="dataCaptureServiceProperties" ref="dataCaptureServiceProperties"/>
+        <property name="dataCaptureServiceConfigFile">
+        	<value>/DataCaptureServiceConfig.xml</value>
+        </property>
+    </bean>
+    <bean id="dataCaptureServiceProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+				<prop key="restURL">${service_url}logger/</prop>
+            </props>
+        </property>
+    </bean>
+
+    
+</beans>

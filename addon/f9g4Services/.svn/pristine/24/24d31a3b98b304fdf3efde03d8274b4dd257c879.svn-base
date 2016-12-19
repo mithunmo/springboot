@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.paypal.ap</groupId>
+  <artifactId>paypal_platform_stubs_AP</artifactId>
+  <versioning>
+    <release>1.0.0</release>
+    <versions>
+      <version>1.0.0</version>
+    </versions>
+    <lastUpdated>20120821075343</lastUpdated>
+  </versioning>
+</metadata>

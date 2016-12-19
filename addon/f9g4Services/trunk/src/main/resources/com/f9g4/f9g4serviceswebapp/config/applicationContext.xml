@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:oxm="http://www.springframework.org/schema/oxm" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:cxf="http://cxf.apache.org/core"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/util 
+http://www.springframework.org/schema/util/spring-util.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/oxm
+http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+http://cxf.apache.org/jaxrs
+http://cxf.apache.org/schemas/jaxrs.xsd
+http://cxf.apache.org/core
+http://cxf.apache.org/schemas/core.xsd">
+
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
+    <!-- <import resource="classpath:META-INF/cxf/cxf-extension-jaxrs-binding.xml"/> -->
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+   	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+    <import resource="classpath:/com/f9g4/f9g4serviceswebapp/config/f9g4-service-context.xml"/>
+    <import resource="classpath:/com/f9g4/f9g4serviceswebapp/config/f9g4-dao-context.xml"/>
+<!-- 	<import resource="classpath:/com/f9g4/f9g4serviceswebapp/config/f9g4-security-context.xml"/> -->
+	
+	<context:component-scan base-package="com.f9g4.web.rest" />
+	
+<!-- 	<util:properties id="paypalProps" location="classpath:paypal_sdk_client.properties"/> -->
+	<util:properties id="paypalProps" location="file:${f9g4.paypal.properties}"/>	
+    <bean id="xmlBeanProvider" class="org.apache.cxf.jaxrs.provider.xmlbeans.XMLBeansElementProvider"/>
+    <bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.xmlbeans.XMLBeansJSONProvider"/>
+    <bean id="multipartProvider" class="org.apache.cxf.jaxrs.provider.MultipartProvider"/>
+
+	<!-- <bean id="adAuthoritiesRestController" class="com.f9g4.web.rest.AdAuthoritiesRestController"></bean>
+	<bean id="securityService" class="com.f9g4.services.security.SecurityServiceImpl"></bean>
+	<bean id="fileuploadservice" class="com.f9g4.services.FileUpload.FileUploadService"></bean>
+	<bean id="registerService" class="com.f9g4.services.RegistrationServiceImpl"></bean>
+	
+	 -->
+	
+	<bean id="portfolioService" class="com.f9g4.services.PortfolioServiceImpl"></bean>
+	<bean id="boardService" class="com.f9g4.services.BoardServiceImpl"></bean>
+	<bean id="referralsService" class="com.f9g4.services.ReferralsServiceImpl"></bean>
+	<bean id="notificationQService" class="com.f9g4.services.NotificationQServiceImpl"></bean>
+	<bean id="companyNews" class="com.f9g4.services.CompanyNewsService"></bean>
+	<bean id="ratingService" class="com.f9g4.services.RatingService"></bean>
+	<bean id="messageService" class="com.f9g4.services.MessageServiceImpl"></bean>
+	<bean id="membershipService" class="com.f9g4.services.MembershipServiceImpl"></bean>
+	<bean id="dataCaptureService" class="com.f9g4.services.DataCaptureServiceImpl"></bean>
+	
+	<!-- <bean id="paypalAdaptivePayService" class="com.f9g4.services.adaptivepayments.PaypalAdaptivePaymentServiceImpl"></bean> -->
+	
+<!-- 	Kamlesh commentedout for future -->
+	<!-- 	<context:property-placeholder location="classpath:paypal_sdk_client.properties"/>	 -->
+<!-- 	<util:properties id="paypalproperties" location="classpath:paypal_sdk_client.properties"/> -->
+
+	
+	<!-- 
+    <jaxrs:server id="securityRestService" address="/securityservice">
+        <jaxrs:serviceBeans>
+            <ref bean="securityService"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="xmlBeanProvider"/>
+            <ref bean="jsonProvider"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+    
+      <jaxrs:server id="fileUploadRestService" address="/fileuploadservice">
+        <jaxrs:serviceBeans>
+            <ref bean="fileuploadservice"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="xmlBeanProvider"/>
+            <ref bean="jsonProvider"/>
+            <ref bean="multipartProvider" />
+        </jaxrs:providers>
+    </jaxrs:server>
+ 	
+	<bean id="echoService" class="com.f9g4.service.EchoService"></bean>
+	 <jaxrs:server id="echoServiceBean">
+	 	<jaxrs:serviceBeans>
+	 		<ref bean="echoService"/>
+	 	</jaxrs:serviceBeans>
+	 	<jaxrs:providers>
+	 	<ref bean="xmlBeanProvider"/>
+	 	<ref bean="jsonProvider"/>
+	 	</jaxrs:providers>
+	 </jaxrs:server>
+	-->
+   <jaxrs:server id="registerRestService" address="/register">
+        <jaxrs:serviceBeans>
+            <ref bean="registerService"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="xmlBeanProvider"/>
+            <ref bean="jsonProvider"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+    
+    
+       <jaxrs:server id="portfolioRestService" address="/portfolio">
+        <jaxrs:serviceBeans>
+            <ref bean="portfolioService"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="xmlBeanProvider"/>
+            <ref bean="jsonProvider"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+    
+        <jaxrs:server id="boardRestService" address="/board">
+        <jaxrs:serviceBeans>
+            <ref bean="boardService"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="xmlBeanProvider"/>
+            <ref bean="jsonProvider"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+    
+       <jaxrs:server id="referralsRestService" address="/referrals">
+        <jaxrs:serviceBeans>
+            <ref bean="referralsService"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="xmlBeanProvider"/>
+            <ref bean="jsonProvider"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+    <jaxrs:server id="notificationQRestService" address="/notificationQ">
+        <jaxrs:serviceBeans>
+            <ref bean="notificationQService"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="xmlBeanProvider"/>
+            <ref bean="jsonProvider"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+    
+     <jaxrs:server id="paypalpaymentservice" address="/payment">
+        <jaxrs:serviceBeans>
+            <ref bean="paypalAdaptivePayService"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="xmlBeanProvider"/>
+            <ref bean="jsonProvider"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+    
+     <jaxrs:server id="salesTranService" address="/sales">
+        <jaxrs:serviceBeans>
+            <ref bean="salesTransactionService"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="xmlBeanProvider"/>
+            <ref bean="jsonProvider"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+    
+      <jaxrs:server id="companyRestService" address="/news">
+        <jaxrs:serviceBeans>
+            <ref bean="companyNews"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="xmlBeanProvider"/>
+            <ref bean="jsonProvider"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+    
+    
+      <jaxrs:server id="ratingRestService" address="/rating">
+        <jaxrs:serviceBeans>
+            <ref bean="ratingService"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="xmlBeanProvider"/>
+            <ref bean="jsonProvider"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+    
+     <jaxrs:server id="messageRestService" address="/messages">
+        <jaxrs:serviceBeans>
+            <ref bean="messageService"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="xmlBeanProvider"/>
+            <ref bean="jsonProvider"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+    
+     <jaxrs:server id="membershipSvc" address="/membership">
+        <jaxrs:serviceBeans>
+            <ref bean="membershipService"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="xmlBeanProvider"/>
+            <ref bean="jsonProvider"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+    <jaxrs:server id="dataCaptureRestService" address="/logger">
+       <jaxrs:serviceBeans>
+            <ref bean="dataCaptureService"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="xmlBeanProvider"/>
+            <ref bean="jsonProvider"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+</beans>

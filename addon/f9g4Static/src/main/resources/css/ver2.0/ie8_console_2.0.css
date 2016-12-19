@@ -1,0 +1,107 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*Global Setting ******************************************************************/
+body
+{
+	/*background: #e6e7e8;*/ /* Old browsers */
+	/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6e7e8', endColorstr='#ffffff',GradientType=0 );*/ /* IE6-8 */
+	/*-pie-background: linear-gradient(bottom, #e6e7e8 0%,#ffffff 30%,#ffffff 70%,#e6e7e8 100%);*/ /*ie 6-9 via PIE*/
+	behavior: url(/PIE.htc);
+}
+
+.ie7inline { display:inline-block;}
+
+/*Basic components==========================================================*/
+
+/*Messages tab=====================================================================================*/
+#messages .odd { width:100%; height:166px; border-bottom:11px solid #FFF; background-color: #E6E7E8; /* margin:5px 0px; height:80px; padding-bottom:2px; */}
+#messages .even { width:100%; height:166px; border-bottom:11px solid #FFF; background-color: #FFFFFF; /* margin:5px 0px; height:80px; padding-bottom:2px; */}
+
+/*Design Wall tab==========================================================================================*/
+#design_wall .wall_content .td1{ width:15%; text-align:center;}
+#design_wall .wall_content .td2{ width:5%; text-align:center;}
+#design_wall .wall_content .td3{ width:20%; text-align:center;}
+#design_wall .wall_content .td4{ width:15%; text-align:center;}
+#design_wall .wall_content .td5{ width:15%; text-align:center;}
+#design_wall .wall_content .td6{ width:15%; text-align:center;}
+#design_wall .wall_content .td7{ width:15%; text-align:center; padding:0px 10px;}
+#design_wall .wall_content .odd{ background-color:#E6E7E8;}
+#design_wall .wall_content .even{ background-color:#FFFFFF;}
+#designWallEmptyPanel .loadingOverlay { height:100%;}
+/*Ends of design wall tab===================================================================================*/
+
+/*Activity tab==============================================================================================*/
+#activity .act_company_table_header .td1 {width:10%} /*BoardImage*/
+#activity .act_company_table_header .td2 {width:20%} /*boardname*/
+#activity .act_company_table_header .td3 {width:20%} /*season*/
+#activity .act_company_table_header .td4 {width:20%} /*Designer*/
+#activity .act_company_table_header .td5 {width:10%} /*price*/
+#activity .act_company_table_header .td6 {width:20%} /*Date Viewed*/
+#activity .act_company_table .even {background: #E6E7E8; /*border-top:2px solid #fff;*/}
+#activity .act_company_table .odd {background: #FFFFFF; /*border-top:2px solid #fff;*/}
+#activity .act_company_table .td1 {width:10%} /*Board Name*/
+#activity .act_company_table .td2 {width:20%; overflow: hidden; white-space: nowrap;} /*Boardname*/
+#activity .act_company_table .td3 {width:20%} /*Season*/
+#activity .act_company_table .td4 {width:20%} /*Designer*/
+#activity .act_company_table .td5 {width:10%} /*Date Purchased*/
+#activity .act_company_table .td6 {width:20%} /*Date Paid*/
+
+/*For Designer-------------------------------------*/
+#activity .act_designer_table .table_header .td1 {width:10%} /*Board*/
+#activity .act_designer_table .table_header .td2 {width:20%} /*Board Name*/
+#activity .act_designer_table .table_header .td3 {width:20%} /*season*/
+#activity .act_designer_table .table_header .td4 {width:20%} /*portfolio*/
+#activity .act_designer_table .table_header .td5 {width:10%} /*views*/
+#activity .act_designer_table .table_header .td6 {width:20%} /*Price*/
+#activity .act_designer_table .even {background: #E6E7E8; /*border-top:2px solid #fff;*/}
+#activity .act_designer_table .odd {background: #FFFFFF; /*border-top:2px solid #fff;*/}
+#activity .act_designer_table .td1 {width:10%} /*Board*/
+#activity .act_designer_table .td2 {width:20%; overflow: hidden; white-space: nowrap;} /*Board Name*/
+#activity .act_designer_table .td3 {width:20%} /*season*/
+#activity .act_designer_table .td4 {width:20%; overflow: hidden; white-space: nowrap;} /*portfolio*/
+#activity .act_designer_table .td5 {width:10%} /*views*/
+#activity .act_designer_table .td6 {width:20%} /*Price*/
+/*Ends of activity tab======================================================================================*/
+
+/*Manage Portfolio tab======================================================================================*/
+/* #manage_portfolio .portfolio .topLeft { width: 94px; height: 94px; border:thin solid #bdcbd4; float:none; display:inline-block;padding:14px 18px}
+#manage_portfolio .portfolio .topLeft img {width: 92px; height: 92px; margin: 1px;}
+#manage_portfolio .portfolio .topRight { width: 94px; height: 94px; border:thin solid #bdcbd4; float:none; display:inline-block; clear:both;padding:14px 18px}
+#manage_portfolio .portfolio .topRight img {width: 92px; height: 92px; margin: 1px;}
+#manage_portfolio .portfolio .bottomLeft { width: 94px; height: 94px; border:thin solid #bdcbd4; float:none; display:inline-block;padding:14px 18px}
+#manage_portfolio .portfolio .bottomLeft img {width: 92px; height: 92px; margin: 1px;}
+#manage_portfolio .portfolio .bottomRight { width: 94px; height: 94px; border:thin solid #bdcbd4; float:none; display: inline-block;padding:14px 18px}
+#manage_portfolio .portfolio .bottomRight img {width: 92px; height: 92px; margin: 1px;} */
+#manage_portfolio .detail { width:100%; margin-top:10px;}
+/*End of manage portfolio tab==============================================================================*/
+
+/*Manage board tab=========================================================================================*/
+#manage_board .shadow{ box-shadow: 5px 5px 5px #888888;}
+/*End of manage board tab==================================================================================*/
+
+/*Account=====================================================================================*/
+#account_scrollbar table tr {border-top:5px solid #FFF; border-bottom:5px solid #FFF;}
+#account .wall_content .td1{ width:15%;}
+#account .wall_content .td2{ width:15%;}
+#account .wall_content .td3{ width:15%; text-align:center}
+#account .wall_content .td4{ width:15%; text-align:center;}
+#account .wall_content .td5{ width:10%; text-align:center}
+#account .wall_content .td6{ width:15%; text-align:center}
+#account .wall_content .td7{ width:15%; text-align:center}
+#account .wall_content .odd{ background-color:#E6E7E8;}
+#account .wall_content .even{ background-color:#FFFFFF;}
+/*End of account=====================================================================================*/
+
+/*bottom footer==========================================================*/
+.bottomNavigation
+{
+	clear:both;
+	width:inherit;
+	height:45px;
+	background-color: #00AEEF;
+	text-align:center;
+	font-size: 0px;
+	position:relative;
+}
+/*end of footer==========================================================*/

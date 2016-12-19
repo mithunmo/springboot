@@ -1,0 +1,125 @@
+@charset "utf-8";
+/* CSS Document */
+.sidebar
+{
+	position:fixed;
+	top:170px;
+	right:0px;
+	width:50px;
+	height:60%;
+	background:#bdcbd4;
+	border-top-left-radius:60px;
+	border-bottom-left-radius:60px;
+	overflow:hidden;
+	z-index:10;
+	box-shadow: 10px 10px 5px #888888;
+}
+
+.sidebar .left
+{
+	display:inline-block;
+	width:50px;
+	height:100%;
+	cursor:pointer;
+	border-top-left-radius:60px;
+	border-bottom-left-radius:60px;
+}
+
+.sidebar .left .text
+{
+	width:5px;
+	height:78%;
+	margin-top:10px;
+	/*padding-top:30px;*/
+	padding-left:15px;
+	word-wrap:break-word;
+	font-size:14px;
+	border-top-left-radius:60px;
+	border-bottom-left-radius:60px;
+}
+#arrowUp 
+{
+	padding-top:30px;
+	padding-left:18px;
+}
+#arrowDown
+{
+	padding-left:18px;
+}
+.leftArrow
+{
+	transform:rotate(90deg);
+	-ms-transform:rotate(90deg); /* IE 9 */
+	-moz-transform:rotate(90deg); /* Firefox */
+	-webkit-transform:rotate(90deg); /* Safari and Chrome */
+	-o-transform:rotate(90deg); /* Opera */
+}
+
+.rightArrow
+{
+	transform:rotate(270deg);
+	-ms-transform:rotate(270deg); /* IE 9 */
+	-moz-transform:rotate(270deg); /* Firefox */
+	-webkit-transform:rotate(270deg); /* Safari and Chrome */
+	-o-transform:rotate(270deg); /* Opera */
+}
+
+.sidebar .content
+{
+	display:inline-block;
+	display:none;
+	float:right;
+	overflow:auto;
+	width:280px;
+	height:87%;
+	margin-top:5%;
+	/*margin-bottom:5%;*/
+	margin-right:5px;
+	padding-top:15px;
+	padding-bottom:15px;
+	background-color:#FFF;
+	border-radius:10px;
+}
+
+.block
+{
+	width:96%;
+	border-top:3px solid #bdcbd4;
+	border-bottom:3px solid #bdcbd4;
+	padding-left:10px;
+	padding-top:5px;
+	padding-bottom:5px;
+	font-size:14px;
+	font-weight:bold;
+}
+
+.blockContent
+{
+	padding-left:10px;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+.label
+{
+	display:inline-block;
+	width:50px;
+}
+
+.noti
+{
+	color:#C30;
+	display:inline-block;
+	margin-left:40px;
+	margin-right:10px;
+}
+
+.statsList{ margin-left:25px;}
+.actList{}
+.rateList{margin-left:25px;}
+
+.amount
+{
+	float:right;
+	margin-right:10px;
+}

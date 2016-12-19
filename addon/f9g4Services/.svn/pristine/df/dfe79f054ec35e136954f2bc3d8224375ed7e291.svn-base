@@ -1,0 +1,390 @@
+package com.f9g4.services;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.f9g4.businessobjects.domain.TrPortfolioContestDomain;
+import com.f9g4.businessobjects.domain.TrPortfolioContestMembersDomain;
+import com.f9g4.businessobjects.domain.TrPortfolioDomain;
+import com.f9g4.businessobjects.domain.TrPortfolioImagesDomain;
+import com.f9g4.businessobjects.services.AddPortfolioRequest;
+import com.f9g4.businessobjects.services.AddPortfolioResponse;
+import com.f9g4.businessobjects.services.AssignMembersToContestRequest;
+import com.f9g4.businessobjects.services.AssignMembersToContestResponse;
+import com.f9g4.businessobjects.services.CreateContestRequest;
+import com.f9g4.businessobjects.services.CreateContestResponse;
+import com.f9g4.businessobjects.services.EditContestRequest;
+import com.f9g4.businessobjects.services.EditContestResponse;
+import com.f9g4.businessobjects.services.GetAllContestsResponse;
+import com.f9g4.businessobjects.services.GetContestByUserIdResponse;
+import com.f9g4.businessobjects.services.GetContestMembersResponse;
+import com.f9g4.businessobjects.services.GetPortfolioByIdResponse;
+import com.f9g4.businessobjects.services.GetPortfolioByUserResponse;
+import com.f9g4.businessobjects.services.UpdatePortfolioRequest;
+import com.f9g4.businessobjects.services.UpdatePortfolioResponse;
+import com.f9g4.common.util.ActiveStatusEnum;
+import com.f9g4.common.util.LanguageCodesEnum;
+import com.f9g4.common.util.XMLGregorianCalendarConverter;
+import com.f9g4.services.rest.IPortfolioService;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@TestExecutionListeners({
+	DependencyInjectionTestExecutionListener.class,
+	DirtiesContextTestExecutionListener.class,
+	TransactionalTestExecutionListener.class })
+@ContextConfiguration(locations = {
+		"classpath:com/f9g4/f9g4serviceswebapp/config/applicationContext.xml"
+		})
+
+@Transactional
+public class PortfolioServiceImplTest {
+
+	
+	@Autowired
+	private IPortfolioService portfolioService = null;
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+	
+	@Test
+	public void testAddPortfolio() {
+		AddPortfolioRequest request=new AddPortfolioRequest();
+		
+		TrPortfolioDomain portfolio=new TrPortfolioDomain();
+		
+		portfolio.setActiveStatus(ActiveStatusEnum.ACTIVE.value());
+		portfolio.setCategoryLevel1Id(1);
+		portfolio.setCategoryLevel2Id(1);
+		portfolio.setCreatedby(1);
+		portfolio.setDescription("Junit Portfolio");
+		portfolio.setLangCode(LanguageCodesEnum.EN_US.getLangCode());
+		
+		portfolio.setLastupdateby(1);
+		portfolio.setName("First Portfolio");
+		portfolio.setUserId(1);
+		portfolio.setSeasonYearId(5);
+		//setup portfolio images
+		List<TrPortfolioImagesDomain> portfolioImagesDomains = portfolio.getPortfolioImages();
+		TrPortfolioImagesDomain domain = new TrPortfolioImagesDomain();
+		domain.setSourceFileURL("11.jpg");
+		domain.setFileType("ai");
+		domain.setFileName("12.jpg");
+		domain.setThumbnailUrl("13.jpg");
+		domain.setMainImageUrl("14.jpg");
+		domain.setCreatedby(12);
+		domain.setLastupdateby(12);
+		TrPortfolioImagesDomain domain2 = new TrPortfolioImagesDomain();
+		domain2.setSourceFileURL("21.jpg");
+		domain2.setFileType("ai");
+		domain2.setFileName("22.jpg");
+		domain2.setThumbnailUrl("23.jpg");
+		domain2.setMainImageUrl("24.jpg");
+		domain2.setCreatedby(12);
+		domain2.setLastupdateby(12);
+		portfolioImagesDomains.add(domain);
+		portfolioImagesDomains.add(domain2);
+//		portfolio.set;
+		request.setPortfolio(portfolio);
+		AddPortfolioResponse response=portfolioService.addPortfolio(request);	
+		assertNotNull(response.getPortfolio());		
+	}
+	
+	@Test
+	public void testGetMembers(){
+		GetContestMembersResponse response = new GetContestMembersResponse();
+		response = portfolioService.getContestMembers(284);
+		
+		System.out.println(response);
+		
+	}
+	
+	@Test
+	public void testaddMembersToContest(){
+		AssignMembersToContestRequest request = new AssignMembersToContestRequest();
+		AssignMembersToContestResponse response = new AssignMembersToContestResponse();
+		
+		List<TrPortfolioContestMembersDomain> list = request.getMember();
+		request.setPortfolioid(284);
+		
+		TrPortfolioContestMembersDomain domain = new TrPortfolioContestMembersDomain();
+		TrPortfolioContestMembersDomain domain1 = new TrPortfolioContestMembersDomain();
+		
+		domain.setUserId(10);
+		domain.setPortfolioId(284);
+		domain.setActiveStatus(0);
+		domain.setCreatedby(1);
+		domain.setLastupdateby(1);
+
+		
+		domain1.setUserId(9);
+		domain1.setPortfolioId(284);
+		domain1.setActiveStatus(-1);
+		domain1.setCreatedby(1);
+		domain1.setLastupdateby(1);
+		
+		
+		list.add(domain);
+		list.add(domain1);
+		response = portfolioService.assignMembersToContest(request);
+		
+	}
+	
+	@Test
+	public void getAllContests(){
+		GetAllContestsResponse reponse = portfolioService.getAllContests();
+		System.out.println(reponse);
+		for ( TrPortfolioContestDomain item : reponse.getContest() ){
+			System.out.println("ddd"+item.getContestId());
+			System.out.println("ddd"+item.getContestPortfolioDomain().getName());
+		}
+		
+	}
+	
+	@Test
+	public void testEditContest(){
+		EditContestRequest request = new EditContestRequest();
+		TrPortfolioDomain portfolio=new TrPortfolioDomain();
+		portfolio.setName(" Portfolio  dasdsa");
+		portfolio.setDescription("new desc");
+		portfolio.setPortfolioId(284);
+		portfolio.setUserId(10);
+		portfolio.setActiveStatus(ActiveStatusEnum.ACTIVE.value());
+		portfolio.setCategoryLevel1Id(1);
+		portfolio.setCategoryLevel2Id(1);
+		portfolio.setSeasonYearId(5);
+
+
+		portfolio.setLangCode(LanguageCodesEnum.EN_US.getLangCode());
+
+		TrPortfolioContestDomain  contest = new TrPortfolioContestDomain();
+		contest.setContestPortfolioDomain(portfolio);
+		contest.setContestId(13);
+		contest.setCategory("category 11");
+		contest.setIntroduction("new details 1111");
+		contest.setLangCode(LanguageCodesEnum.EN_US.getLangCode());
+
+		Calendar calendar = new GregorianCalendar(2015,10,10,13,24,56);
+		
+		Calendar calendar1 = new GregorianCalendar(2015,11,11,13,24,56);	
+
+		
+		try {
+		contest.setStartDate(XMLGregorianCalendarConverter.convertCalendarToXMLGregorianCalendar(calendar));		
+		contest.setEndDate(XMLGregorianCalendarConverter.convertCalendarToXMLGregorianCalendar(calendar1));
+	
+		} catch(Exception e){
+			
+		}
+		
+		
+		request.setContest(contest);
+		
+		EditContestResponse response = portfolioService.editContest(request);
+		
+		System.out.println(response);
+		
+		//request.set
+	}
+	
+	@Test
+	public void testAddContest(){
+		
+		CreateContestRequest request = new CreateContestRequest();
+		
+		TrPortfolioDomain portfolio=new TrPortfolioDomain();
+		
+		portfolio.setActiveStatus(ActiveStatusEnum.ACTIVE.value());
+		portfolio.setCategoryLevel1Id(1);
+		portfolio.setCategoryLevel2Id(1);
+		portfolio.setCreatedby(1);
+		portfolio.setDescription("Portfolio nov 77");
+		portfolio.setLangCode(LanguageCodesEnum.EN_US.getLangCode());
+		portfolio.setSellable(1);
+		portfolio.setLastupdateby(1);
+		portfolio.setName("new 1 Portfolio");
+		portfolio.setUserId(10);
+		portfolio.setSeasonYearId(5);
+		
+		TrPortfolioContestDomain  contest = new TrPortfolioContestDomain();
+		contest.setCategory("test 100");
+		
+		Calendar calendar = new GregorianCalendar(2014,10,10,13,24,56);
+		
+		Calendar calendar1 = new GregorianCalendar(2014,11,11,13,24,56);	
+
+		
+		try {
+		contest.setStartDate(XMLGregorianCalendarConverter.convertCalendarToXMLGregorianCalendar(calendar));		
+		contest.setEndDate(XMLGregorianCalendarConverter.convertCalendarToXMLGregorianCalendar(calendar1));
+	
+		} catch(Exception e){
+			
+		}
+		
+		
+		contest.setProjectType(1);
+		contest.setProjectStatus(2);
+		contest.setIntroduction("November 6");
+		contest.setLangCode(LanguageCodesEnum.EN_US.getLangCode());
+		
+		contest.setNumberOfWinners(4);
+		contest.setAssociatedBrandsHangWith("32e232332");
+		contest.setAssociatedBrandsInfluence("dasdasdsa");
+		contest.setDeliverable("noveee");
+		contest.setOtherInformation("noveee");
+		contest.setBoardDimension(750);
+		contest.setBoardFormat(753);
+		
+		contest.setContestPortfolioDomain(portfolio);
+		
+		request.setContest(contest);
+		CreateContestResponse response=portfolioService.createContest(request);
+		
+	}
+	
+	@Test 
+	public void testGetContestByUserId(){
+		GetContestByUserIdResponse response = new GetContestByUserIdResponse();
+	response = portfolioService.getContestByUserId(10);
+		
+		
+		
+		 
+		System.out.println(response.getContest());
+		for( TrPortfolioContestDomain item : response.getContest()){
+			System.out.println("ddd"+item.getCategory());
+		}
+		
+		/*
+		response = portfolioService.getContestByUserId(9);
+		System.out.println(response.getContest());
+		for( TrPortfolioContestDomain item : response.getContest()){
+			System.out.println("ddd"+item.getCategory());
+		}
+	*/
+	}
+	
+	@Test
+	public void testUpdaetPortfolio() {
+		AddPortfolioRequest request=new AddPortfolioRequest();
+		
+		TrPortfolioDomain portfolio=new TrPortfolioDomain();
+		
+		portfolio.setActiveStatus(ActiveStatusEnum.ACTIVE.value());
+		portfolio.setCategoryLevel1Id(1);
+		portfolio.setCategoryLevel2Id(2);
+		portfolio.setCreatedby(1);
+		portfolio.setDescription("Portfolio_1");
+		portfolio.setLangCode(LanguageCodesEnum.EN_US.getLangCode());
+		portfolio.setLastupdateby(1);
+		portfolio.setName("First Portfolio");
+		portfolio.setUserId(1);
+		portfolio.setSeasonYearId(1);
+		request.setPortfolio(portfolio);
+		AddPortfolioResponse response = portfolioService.addPortfolio(request);
+
+		assertNotNull(response.getPortfolio());
+		
+		TrPortfolioDomain responseDomain = new TrPortfolioDomain();
+		responseDomain.setPortfolioId(372);
+		UpdatePortfolioRequest update = new UpdatePortfolioRequest();
+		responseDomain.setName("Update Portfolio");
+		responseDomain.setDescription("Updating");
+//		responseDomain.setUserId(15);
+		responseDomain.setSeasonYearId(1);
+		responseDomain.setCategoryLevel1Id(1);
+		responseDomain.setCategoryLevel2Id(2);
+		responseDomain.setLastupdateby(2);
+		//update portfolio images
+		//setup portfolio images
+		List<TrPortfolioImagesDomain> portfolioImagesDomains = responseDomain.getPortfolioImages();
+		TrPortfolioImagesDomain domain = new TrPortfolioImagesDomain();
+		domain.setPortfolioImageId(29);
+		domain.setSourceFileURL("111.jpg");
+		domain.setFileType("ai");
+		domain.setFileName("112.jpg");
+		domain.setThumbnailUrl("113.jpg");
+		domain.setMainImageUrl("114.jpg");
+		domain.setCreatedby(12);
+		domain.setLastupdateby(12);
+		
+		TrPortfolioImagesDomain domain2 = new TrPortfolioImagesDomain();
+		domain2.setPortfolioImageId(30);
+		domain2.setSourceFileURL("221.jpg");
+		domain2.setFileType("ai");
+		domain2.setFileName("222.jpg");
+		domain2.setThumbnailUrl("223.jpg");
+		domain2.setMainImageUrl("224.jpg");
+		domain2.setCreatedby(12);
+		domain2.setLastupdateby(12);
+		
+		portfolioImagesDomains.add(domain);
+		portfolioImagesDomains.add(domain2);
+		
+		update.setPortfolio(responseDomain);
+		UpdatePortfolioResponse updateresponse = portfolioService.updatePortfolio(update);
+		//assertEquals(updateresponse.getPortfolio().getPortfolioId(), response.getPortfolio().getPortfolioId());
+	}
+
+	@Test
+	public void testGetPortfolioById(){
+		GetPortfolioByIdResponse response= portfolioService.getPortfoliobyId(338);
+		for(TrPortfolioImagesDomain item : response.getPortfolio().getPortfolioImages())
+		{
+			System.out.println(item.getFileName());
+		}
+		assertNotNull(response.getPortfolio());
+	}
+	
+	@Test
+	public void testGetPortfolioByUserId(){
+//		GetPortfolioByUserRequest request=new GetPortfolioByUserRequest();
+//		request.setUserid(1);
+		GetPortfolioByUserResponse response= portfolioService.getPortfoliobyUser(1);
+		System.out.println(response.getPortfolio().size());
+		assertNotNull(response.getPortfolio());
+		assertNotNull(response.getPortfolio());
+		assertNotNull(response.getPortfolio().size());
+//		assertEquals("First Portfolio",response.getPortfolio().getName());
+		
+	}
+	
+	@Test
+	public void getUnsellablePortfolioByUserId()
+	{
+		GetPortfolioByUserResponse response= portfolioService.getUnsellablePortfoliobyUser(16);
+		System.out.println(response.getPortfolio().size());
+	}
+}

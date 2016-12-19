@@ -1,0 +1,112 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fashion for Globe</title>
+    <link rel="stylesheet" href="/css/ver3/normalize.css" />
+    <link rel="stylesheet" href="/css/ver3/foundation.css" />
+    <link rel="stylesheet" href="/css/ver3/main.css?v=1" />
+    <script src="/js/vendor/modernizr.js"></script>
+    <script src="/js/vendor/jquery.js"></script>
+    <script src="/js/foundation.min.js"></script>
+</head>
+<body>
+  	<div class="header">
+  		<div class="row">
+  			<div class="logo large-4 columns">
+      			<img src="/images/logo_rev.png"/>
+      			<div class="logo-subtitle">crowdsourcing creatives</div>
+    		</div>
+    		<div class="large-6 columns">
+    			<a class="header-th" href="">How it Works</a><!--
+    			--><a class="header-th"href="">Categories</a><!--
+    			--><a class="header-th"href="">Services</a><!--
+    			--><a class="header-th" href="">Company</a>
+		     	<!-- <ul class="right button-group">
+		      		<li><a href="#" class="button">Link 1</a></li>
+		      		<li><a href="#" class="button">Link 2</a></li>
+		      		<li><a href="#" class="button">Link 3</a></li>
+		    		<li><a href="#" class="button">Link 4</a></li>
+		    	</ul> -->
+			</div>
+			<div class="large-2 columns">
+				<ul class="button-group">
+					<li><a class="header-button button tiny">Login</a></li> 
+					<li><a class="header-button button tiny">Sign Up</a></li>
+				<ul class="button-group">
+			</div>
+  		</div>
+  	</div>
+  	
+  	<!-- Content -->
+  	<div class="main-content">
+  		<div class="row">
+  			<!--  -->
+  		</div>
+  	</div>
+ 
+	<!-- Footer -->
+	<div class="footer footer-wrapper">
+		<div class="footer-holder row">
+			<div class="sitemap row">
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="/pages/howitworks.html">How it works</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="/pages/getstarted.html">Get Started</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="/">Resource Center</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="/pages/customer.html">Customer</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="/pages/services.html">Services</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="/pages/company.html">Company</a>
+				 </div>
+			</div>
+			<div class="sitemap sub row">
+				<div class="large-2 columns">
+				 	<a class="sitem-link" href="/pages/howitworks.html">FFG Marketplace</a>
+				 	<a class="sitem-link" href="/pages/howitworks.html">FFG Commissions</a>
+				 	<a class="sitem-link" href="/pages/howitworks.html">Public Contest</a>
+				 	<a class="sitem-link" href="/pages/howitworks.html">Private Contest</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-link" href="/pages/getstarted.html">Retailers / Private Label</a>
+				 	<a class="sitem-link" href="/pages/getstarted.html">Brands</a>
+				 	<a class="sitem-link" href="/pages/getstarted.html">Manufactures</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-link" href="/f4g/register/designer">Become an FFG Creative</a>
+				 </div>
+				 <div class="large-2 columns">&nbsp;</div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-link" href="/pages/services.html">Consultative Services</a>
+				 	<a class="sitem-link" href="/pages/support.html">Support</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-link" href="/pages/company.html">About</a>
+				 	<a class="sitem-link" href="/pages/ourstory.html">Our Story</a>
+				 	<a class="sitem-link" href="/pages/leadership.html">Leadership</a>
+				 	<a class="sitem-link" href="/pages/contact.html">Contact</a>
+				 	<a class="sitem-link" href="/pages/news.html">News</a>
+				 </div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns">
+					<div class="footer-logo"><img src="/images/logo_rev.png" alt="Fashion For Globe"/></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End of footer -->
+	
+  	<!-- Foundation initialization -->
+  	<script type="text/javascript" src="/js/init_foundation.js"></script>
+</body>
+</html>

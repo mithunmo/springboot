@@ -1,0 +1,139 @@
+package com.f9g4.servicesdk;
+
+import java.util.Properties;
+
+import com.f9g4.businessobjects.services.AddNotificationQRequest;
+import com.f9g4.businessobjects.services.AddNotificationQResponse;
+import com.f9g4.businessobjects.services.AddNotificationQWithMultiUsersRequest;
+import com.f9g4.businessobjects.services.AddNotificationQWithMultiUsersResponse;
+import com.f9g4.businessobjects.services.DeleteNotificationQByIdResponse;
+import com.f9g4.businessobjects.services.GetEmailTemplateByCodeContainingResponse;
+import com.f9g4.businessobjects.services.GetEmailTemplateByCodeResponse;
+import com.f9g4.businessobjects.services.GetNotificationQByIdResponse;
+import com.f9g4.businessobjects.services.GetNotificationQForStatusResponse;
+import com.f9g4.businessobjects.services.GetNotificationQForUserResponse;
+import com.f9g4.businessobjects.services.UpdateNotificationQRequest;
+import com.f9g4.businessobjects.services.UpdateNotificationQResponse;
+import com.f9g4.service.sdk.AbstractRestSDK;
+import com.f9g4.service.sdk.common.ServiceType;
+import com.f9g4.services.rest.INotificationQService;
+
+public class NotificationQServiceSDK extends AbstractRestSDK<INotificationQService> implements INotificationQService {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Properties notificationQServiceProperties;
+
+	private String notificationQServiceConfigFile;
+
+	private ServiceType callType;
+	
+	//	@Autowired
+	private INotificationQService notificationQService;
+
+	public void setCallType(ServiceType callType) {
+		this.callType = callType;
+	}
+
+	public Properties getNotificationQServiceProperties() {
+		return notificationQServiceProperties;
+	}
+
+	public void setNotificationQServiceProperties(
+			Properties notificationQServiceProperties) {
+		this.notificationQServiceProperties = notificationQServiceProperties;
+	}
+
+	public String getNotificationQServiceConfigFile() {
+		return notificationQServiceConfigFile;
+	}
+
+	public void setNotificationQServiceConfigFile(String notificationQServiceConfigFile) {
+		this.notificationQServiceConfigFile = notificationQServiceConfigFile;
+	}
+
+	public INotificationQService getnotificationQService() {
+		return notificationQService;
+	}
+
+	public void setnotificationQService(INotificationQService notificationQService) {
+		this.notificationQService = notificationQService;
+	}
+
+	@Override
+	protected String getClientConfigFile() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Properties getProperties() {
+		// TODO Auto-generated method stub
+		return this.notificationQServiceProperties;
+	}
+
+	@Override
+	protected ServiceType getCallType() {
+		// TODO Auto-generated method stub
+		return this.callType;
+	}
+
+	@Override
+	protected INotificationQService getLocalService() {
+		// TODO Auto-generated method stub
+		return this.notificationQService;
+	}
+
+	@Override
+	protected INotificationQService getMockService() {
+		// TODO Add STUB implementation
+
+		return null;
+	}
+
+	public AddNotificationQResponse addNotificationQ(AddNotificationQRequest request) {
+
+		return getService().addNotificationQ(request);
+	}
+
+	public GetNotificationQByIdResponse getNotificationQbyId(
+			int request) {
+		
+		return getService().getNotificationQbyId(request);
+	}
+
+
+	public DeleteNotificationQByIdResponse deleteNotificationQById(int notificationQid) {
+		// TODO Auto-generated method stub
+		return getService().deleteNotificationQById(notificationQid);
+	}
+
+	public GetNotificationQForUserResponse getNotificationQForUser(int userId) {
+		return getService().getNotificationQForUser(userId);	
+	}
+
+	public GetNotificationQForStatusResponse getNotificationQForStatus(int statusId) {
+		return getService().getNotificationQForStatus(statusId);	
+	}
+	
+	public UpdateNotificationQResponse updateNotificationQ(UpdateNotificationQRequest request) {
+		return getService().updateNotificationQ(request);
+	}
+
+	public GetEmailTemplateByCodeResponse getEmailTemplateByCode(String templateCode) {
+		return getService().getEmailTemplateByCode(templateCode);
+	}
+
+	public GetEmailTemplateByCodeContainingResponse getEmailTemplateByCodeContaining(String templateCode) {
+		return getService().getEmailTemplateByCodeContaining(templateCode);
+	}
+	
+	public AddNotificationQWithMultiUsersResponse addNotificationQWithMultiUsers(AddNotificationQWithMultiUsersRequest request)
+	{
+		return getService().addNotificationQWithMultiUsers(request);
+	}
+
+}

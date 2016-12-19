@@ -1,0 +1,54 @@
+package com.f9g4.common.util;
+
+public interface Constants {
+	
+	public static final int AUTO_PAY_NO = 0;
+	public static final int AUTO_PAY_YES = 1;
+	
+	public static final int CATEGORY_LAVEL_1 = 1;
+	public static final int CATEGORY_LAVEL_2 = 2;
+	public static final int CATEGORY_LAVEL_3 = 3;
+	public static final int CATEGORY_LAVEL_4 = 4;
+	
+	public static final int PARENT_ID_0 = 0;
+	
+	public static final int DEFAULT_RATING_MIN = 0;
+	public static final int DEFAULT_RATING_MAX = 5;
+	public static final int SEARCH_OPTION_RATING_ALL = 0;
+	public static final int SEARCH_OPTION_RATING_5 = 1;
+	public static final int SEARCH_OPTION_RATING_1_TO_4 = 2;
+	
+	public static final int SEARCH_OPTION_PRICE_ALL = 0;
+	public static final int SEARCH_OPTION_PRICE_0_TO_499 = 1;
+	public static final int SEARCH_OPTION_PRICE_500_TO_999 = 2;
+	public static final int SEARCH_OPTION_PRICE_1000_TO_2999 = 3;
+	public static final int SEARCH_OPTION_PRICE_3000_OR_ABOVE = 4;
+	
+	public static final String ADD_USER_LOG_ACTION_CREATE = "C";
+	public static final String ADD_USER_LOG_ACTION_UPDATE = "U";
+
+	public static final int PUBLISH_TO_MARKET_YES= 1;
+	public static final int PUBLISH_TO_MARKET_NO = 0;
+	public static final int PUBLISH_TO_MARKET_REVIEWING=2;
+	
+	public static final int USE_PROFILE_NAME = 1;
+	public static final String PROFILE_NAME = "Designer";
+
+		
+	public static final String TEMPLATE_CODE_BOARD_APPROVED = "BOARD_APPROVED";
+	public static final String TEMPLATE_CODE_BOARD_REJECTED = "BOARD_REJECTED";
+	public static final String TEMPLATE_CODE_TEMP_PASSWORD = "TEMP_PASSWORD";
+	public static final String TEMPLATE_CODE_RESUBMIT_SAMPLES = "RESUBMIT_SAMPLES";
+	public static final String TEMPLATE_CODE_PAGE_APPROVED = "PAGE_APPROVED";
+	public static final String TEMPLATE_CODE_PAGE_REJECTED = "PAGE_REJECTED";
+	public static final String ADMIN_UPDATED_BOARD = "ADMIN_UPDATED_BOARD";
+	public static final String DESIGNER_UPDATED_PUBLISHED_BOARD = "DESIGNER_UPDATED_PUBLISHED_BOARD";
+	
+	//Replace ${content} to real value
+	public static final String KEYWORD_TEMPLATE = "<kw><skw1></skw1><skw2></skw2><skw3></skw3><skw4></skw4><ptl></ptl><bcl1></bcl1><bcl2></bcl2><bcl3></bcl3></kw>";
+	public static final String KEYWORD_KEYWORD_XML = "<skw1>%${content}%</skw4>";
+	public static final String KEYWORD_DIVISION_XML = "<bcl1>%${content}%</bcl1>";
+	public static final String KEYWORD_CATEGORY_XML = "<bcl2>%${content}%</bcl2>";
+	public static final String KEYWORD_PRODUCT_XML = "<bcl3>%${content}%</bcl3>";
+	public static final String KEYWORD_PRODUCT_TYPE_XML = "<ptl>%${content}%</ptl>";
+}

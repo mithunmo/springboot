@@ -1,0 +1,346 @@
+package com.f9g4.webapp.controllers;
+
+import java.awt.Desktop.Action;
+import java.awt.TrayIcon.MessageType;
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.f9g4.businessobjects.domain.AdUsersDomain;
+import com.f9g4.businessobjects.domain.TrBoardDomain;
+import com.f9g4.businessobjects.domain.TrMessagesDomain;
+import com.f9g4.businessobjects.services.AddMessageRequest;
+import com.f9g4.businessobjects.services.AddMessageResponse;
+import com.f9g4.businessobjects.services.GetAllMessagesbyBoardAndUserResponse;
+import com.f9g4.businessobjects.services.GetBoardByIdResponse;
+import com.f9g4.businessobjects.services.GetlatestMessagesByBoardGroupByUserResponse;
+import com.f9g4.businessobjects.services.ViewUserResponse;
+import com.f9g4.common.errors.StatusCodesEnum;
+import com.f9g4.common.util.ActiveStatusEnum;
+import com.f9g4.common.util.LanguageCodesEnum;
+import com.f9g4.common.util.LookupTypeValueEnum;
+import com.f9g4.common.util.MessageTypes;
+import com.f9g4.common.util.XMLGregorianCalendarConverter;
+import com.f9g4.servicesdk.BoardServiceSDK;
+import com.f9g4.servicesdk.MessageServiceSDK;
+import com.f9g4.servicesdk.RegistrationServiceSDK;
+import com.f9g4.web.forms.BoardImageFilterResult;
+import com.f9g4.web.forms.MessageEntity;
+import com.f9g4.web.forms.MessageForm;
+import com.f9g4.web.forms.MessageItem;
+import com.f9g4.web.forms.BoardImageFilterResult;
+//import com.f9g4.web.utils.TextFilter;
+//import com.f9g4.web.utils.TextFilterResult;
+import com.f9g4.web.utils.TimeConvertUtil;
+import com.f9g4.web.utils.UserNameUtil;
+import com.f9g4.web.utils.ViewNames;
+import com.f9g4.web.utils.ViewPaths;
+
+@Controller
+@SessionAttributes({"user", "userId","timezoneOffset"})
+public class MessageController 
+{
+	private static final Logger logger = LoggerFactory.getLogger(MessageController.class);
+	
+	@Autowired
+	private RegistrationServiceSDK registrationServiceSDK=new RegistrationServiceSDK();
+	
+	@Autowired
+	private MessageServiceSDK messageServiceSDK=new MessageServiceSDK();
+	
+	@Autowired
+	private BoardServiceSDK boardServiceSDK=new BoardServiceSDK();
+	
+	@RequestMapping(value=ViewPaths.MESSAGES+"/{page}",method=RequestMethod.GET)
+	public String showMessages(@PathVariable(value="page") int page,@ModelAttribute(value="user") AdUsersDomain adUser,@ModelAttribute(value="timezoneOffset") Integer timezoneOffset,ModelMap model)
+	{
+		logger.trace("MESSAGE PAGE=>"+page);
+		GetlatestMessagesByBoardGroupByUserResponse response=new GetlatestMessagesByBoardGroupByUserResponse();
+		response=messageServiceSDK.getLatestMessagesbyUserForBoard(adUser.getUserId());
+		logger.trace(response.toString());
+		//convert TrMessageDomain to bean class
+		ArrayList<MessageEntity> messageList=new ArrayList<MessageEntity>();
+		for(TrMessagesDomain item: response.getMessageList())
+		{
+			MessageEntity entity=new MessageEntity();
+			entity.setMessageId(item.getMessageId());
+			//board
+			entity.setBoardId(item.getBoardId());
+			entity.setBoardName(item.getBoardName());
+			entity.setBoardUrl(item.getBoardThumbnailUrl());
+			entity.setBoardTileUrl(item.getBoardTileUrl());
+			
+			//check board status
+			BoardImageFilterResult result=this.boardImageFilter(item.getBoard(), adUser);
+			entity.setShowImage(result.isShow());
+			entity.setTypeCode(result.getTypeCode());
+			
+			//from user
+			entity.setFromUserId(item.getFromUserId());
+			entity.setFromUserFirstName(item.getFromUserFirstName());
+			entity.setFromUserLastName(item.getFromUserLastName());
+			entity.setFromFinalName(item.getFromUserFirstName()+" "+item.getFromUserLastName());
+			entity.setFromUserCompanyName(item.getFromUserCompanyName());
+			entity.setFromUserLogo(item.getFromUserLogoUrl());
+			//to user
+			entity.setToUserId(item.getToUserId());
+			entity.setToUserFirstName(item.getToUserFirstName());
+			entity.setToUserLastName(item.getToUserLastName());
+			entity.setToFinalName(item.getToUserFirstName()+" "+item.getToUserLastName());
+			entity.setToUserCompanyName(item.getToUserCompanyName());
+			entity.setToUserLogo(item.getToUserLogoUrl());
+			//if user is designer, means his sender are all company, show the company at the end of name
+			if(adUser.getUserType().equals(LookupTypeValueEnum.USER_TYPE_DESIGNER.getTypeCode()))
+			{
+				//entity.setFromUserName(item.getFromUserName()+"<span class=\"companyName\">@"+item.getFromUserCompanyName()+"</span>");
+				entity.setFromUserIsCompany(true);
+			}
+			else
+			{
+				entity.setFromUserIsCompany(false);
+				//The user is buyer, it needs to apply the profile name logic.
+				UserNameUtil.getDesignerName(entity, item);
+			}
+			
+			//messageBody
+			entity.setMessageBody(item.getMessageBody());
+			//format the date
+			Calendar creationDate=XMLGregorianCalendarConverter.convertXMLGregorianCalendarToCalendar(item.getCreationDate()); //convert to Calendar
+			TimeConvertUtil.convertToLocalTime(creationDate, timezoneOffset); //convert to local time
+			entity.setDate(creationDate.getTime());
+			messageList.add(entity);
+		}
+		model.addAttribute("messageList",messageList);
+		model.addAttribute("messageListCount", messageList.size());
+		return ViewNames.MESSAGES;
+	}
+	
+	@RequestMapping(value=ViewPaths.MESSAGE_DETAIL+"/{boardId}/{fromId}/{toId}",method=RequestMethod.GET)
+	public String getMessageDetail(@PathVariable(value="boardId") int boardId, @PathVariable(value="fromId") int fromId,@PathVariable(value="toId") int toId,@ModelAttribute(value="user") AdUsersDomain adUser,@ModelAttribute(value="timezoneOffset") Integer timezoneOffset,ModelMap model)
+	{
+		GetBoardByIdResponse boardResponse=boardServiceSDK.getBoardbyId(boardId);
+		TrBoardDomain trBoardDomain=boardResponse.getBoard();
+		
+		GetAllMessagesbyBoardAndUserResponse response=new GetAllMessagesbyBoardAndUserResponse();
+		response=messageServiceSDK.getAllMessagesByUserandBoard(fromId,toId,boardId);
+		
+		logger.trace("History=>"+response.getMessageList().toString());
+		model.addAttribute("messageForm", new MessageForm());
+		//get replyToUser detail
+		//get the first message
+		ViewUserResponse userResponse = null;
+		TrMessagesDomain message = response.getMessageList().get(response.getMessageList().size()-1);
+		if(adUser.getUserType().equals(LookupTypeValueEnum.USER_TYPE_DESIGNER.getTypeCode()))
+			userResponse = registrationServiceSDK.viewUser(message.getFromUserId());
+		else
+			userResponse = registrationServiceSDK.viewUser(message.getToUserId());
+		
+		
+		model.addAttribute("replyToUserId", userResponse.getUser().getUserId());
+		if(adUser.getUserType().equals(LookupTypeValueEnum.USER_TYPE_DESIGNER.getTypeCode()))
+		{
+			//model.addAttribute("replyToUserName", userResponse.getUser().getFirstname() + " " +  userResponse.getUser().getLastname() + "<span class=\"companyName\">@" + userResponse.getUser().getCompanyname()+"</span>");
+			//now we just show first name for company
+			model.addAttribute("replyToUserName", userResponse.getUser().getFirstname() + " " +  userResponse.getUser().getLastname());
+			model.addAttribute("replyToUserCompanyName", userResponse.getUser().getCompanyname());
+			model.addAttribute("replyToUserIsCompany", true);
+		}
+		else
+			model.addAttribute("replyToUserName", UserNameUtil.getDesignerName(userResponse.getUser())); //apply profile name logic
+		model.addAttribute("replyToUserLogo", userResponse.getUser().getLogoimageurl());
+		
+		//get board detail
+		ViewUserResponse designerResponse=registrationServiceSDK.viewUser(boardResponse.getBoard().getOriginalUserId());
+		model.addAttribute("boardDetail", boardResponse.getBoard());
+		model.addAttribute("boardDesigner",designerResponse.getUser().getFirstname() + " " + designerResponse.getUser().getLastname());
+		//check board status to determine to show the real image or dummy image
+		BoardImageFilterResult filterResult=this.boardImageFilter(trBoardDomain, adUser);
+		model.addAttribute("showBoardImage", filterResult.isShow());
+		model.addAttribute("typeCode", filterResult.getTypeCode());
+		
+		model.addAttribute("boardImageUrl", boardResponse.getBoard().getBoardImages().get(0).getFileName());
+		
+		ArrayList<MessageItem> messageHistory=new ArrayList<MessageItem>(); 
+		for(TrMessagesDomain domain:response.getMessageList())
+		{
+			MessageItem item=new MessageItem();
+			item.setToUserId(domain.getToUserId());
+			item.setMessageBody(domain.getMessageBody());
+			//convert date type
+			//format the date
+			Calendar lastUpdateDate=XMLGregorianCalendarConverter.convertXMLGregorianCalendarToCalendar(domain.getLastUpdateDate()); //convert to Calendar
+			TimeConvertUtil.convertToLocalTime(lastUpdateDate, timezoneOffset); //convert to local time
+			item.setLastUpdateDate(lastUpdateDate.getTime());
+			Calendar creationDate=XMLGregorianCalendarConverter.convertXMLGregorianCalendarToCalendar(domain.getCreationDate()); //convert to Calendar
+			TimeConvertUtil.convertToLocalTime(creationDate, timezoneOffset); //convert to local time
+			item.setCreationDate(creationDate.getTime());
+			messageHistory.add(item);
+		}
+		model.addAttribute("messageHistory",messageHistory);
+		return ViewNames.MESSAGE_DETAIL;
+	}
+	
+	@RequestMapping(value=ViewPaths.SEND_MESSAGE,method=RequestMethod.POST)
+	public @ResponseBody ModelMap sendMessage(@ModelAttribute(value="user") AdUsersDomain adUser,MessageForm formbean, ModelMap model)
+	{
+		ModelMap map=new ModelMap();
+		AddMessageRequest request=new AddMessageRequest();
+		AddMessageResponse response=new AddMessageResponse();
+		TrMessagesDomain messageDomain=new TrMessagesDomain();
+		logger.trace("MESSAGE FORM=>"+formbean.toString());
+	
+		//TODO set message
+		messageDomain.setBoardId(formbean.getBoardId());
+		messageDomain.setFromUserId(adUser.getUserId());
+		messageDomain.setToUserId(formbean.getToUserId());
+		messageDomain.setMsgStatusId(LookupTypeValueEnum.MESSAGE_STATUS_UNREAD.getTypeId());
+		messageDomain.setSubject(formbean.getBoardName());
+		messageDomain.setMessageBody(formbean.getMessageBody());
+		messageDomain.setLangCode(LanguageCodesEnum.EN_US.getLangCode());
+		messageDomain.setMessageType(MessageTypes.INBOX);
+		messageDomain.setActiveStatus(ActiveStatusEnum.ACTIVE.value());
+		messageDomain.setCreatedby(adUser.getUserId());
+		messageDomain.setLastupdateby(adUser.getUserId());
+		request.setMessage(messageDomain);
+		response=messageServiceSDK.addMessages(request);
+		
+		if(response.getStatus().getStatuscode().equals(StatusCodesEnum.STATUS_SUCCESS.getCode()))
+		{
+			map.addAttribute("hasError", false);
+		}
+		else
+		{
+			map.addAttribute("hasError", true);
+		}
+		return map;
+	}
+	
+	/* New controller. Content detector added(Phone or email).*/
+	/*@RequestMapping(value=ViewPaths.SEND_MESSAGE,method=RequestMethod.POST)
+	public @ResponseBody ModelMap sendMessage(@ModelAttribute(value="user") AdUsersDomain adUser,MessageForm formbean, ModelMap model)
+	{
+		ModelMap map=new ModelMap();
+		AddMessageRequest request=new AddMessageRequest();
+		AddMessageResponse response=new AddMessageResponse();
+		TrMessagesDomain messageDomain=new TrMessagesDomain();
+		logger.trace("MESSAGE FORM=>"+formbean.toString());
+		//filter the message
+		TextFilter textFilter = new TextFilter();
+		TextFilterResult result = textFilter.check(formbean.getMessageBody());
+		if(result.isContainEmail() || result.isContainPhone())
+		{
+			map.addAttribute("hasError", true);
+			map.addAttribute("errorCode", "message.contain.emailorphone");
+		}
+		else
+		{
+			//TODO set message
+			messageDomain.setBoardId(formbean.getBoardId());
+			messageDomain.setFromUserId(adUser.getUserId());
+			messageDomain.setToUserId(formbean.getToUserId());
+			messageDomain.setMsgStatusId(LookupTypeValueEnum.MESSAGE_STATUS_UNREAD.getTypeId());
+			messageDomain.setSubject(formbean.getBoardName());
+			messageDomain.setMessageBody(formbean.getMessageBody());
+			messageDomain.setLangCode(LanguageCodesEnum.EN_US.getLangCode());
+			messageDomain.setMessageType(MessageTypes.INBOX);
+			messageDomain.setActiveStatus(ActiveStatusEnum.ACTIVE.value());
+			messageDomain.setCreatedby(adUser.getUserId());
+			messageDomain.setLastupdateby(adUser.getUserId());
+			request.setMessage(messageDomain);
+			response=messageServiceSDK.addMessages(request);
+			if(response.getStatus().getStatuscode().equals(StatusCodesEnum.STATUS_SUCCESS.getCode()))
+			{
+				map.addAttribute("hasError", false);
+			}
+			else
+			{
+				map.addAttribute("hasError", true);
+			}
+		}
+		return map;
+	}*/
+	
+	private BoardImageFilterResult boardImageFilter(TrBoardDomain board,AdUsersDomain user)
+	{
+		BoardImageFilterResult filterResult=new BoardImageFilterResult();
+		//check board status
+		switch(board.getPublishToMP())
+		{
+		case 0: //unpublished
+			//the board is being sold or ready to download (handle MP=0, Board is SOLD or READY)
+			if(board.getStatusId()==LookupTypeValueEnum.BOARD_SALE_STATUS_SOLD.getTypeId()
+				|| board.getStatusId()==LookupTypeValueEnum.BOARD_SALE_STATUS_READY.getTypeId()
+				|| board.getStatusId()==LookupTypeValueEnum.BOARD_SALE_STATUS_PROCESSING.getTypeId())
+			{
+				//if user is original user or current user of board, show the thumb image.
+				if(user.getUserId()==board.getOriginalUserId() || user.getUserId()==board.getCurrentUerId() || user.getUserId()==board.getLastupdateby())
+					filterResult.setShow(true);
+				else
+				{
+					filterResult.setShow(false);	//if it's sold and the user is not current user or original user, don't show the image.
+					filterResult.setTypeCode("board.sold.unrelatedusers");
+				}		
+			}
+			else //handle MP=0, the board is processing or available
+			{
+				//if the user is designer, he can see the image, and others cannot.
+				if(user.getUserType().equals(LookupTypeValueEnum.USER_TYPE_DESIGNER.getTypeCode()) && (user.getUserId()==board.getCurrentUerId() || user.getUserId()==board.getOriginalUserId()))
+					filterResult.setShow(true);
+				else
+				{
+					filterResult.setShow(false);
+					filterResult.setTypeCode("board.unpublished");
+				}
+			}
+			break;
+		case 1: //published
+			if(board.getStatusId()==LookupTypeValueEnum.BOARD_SALE_STATUS_AVAILABLE.getTypeId()) //Everybody can see the image.
+				filterResult.setShow(true);
+			else if(board.getStatusId()==LookupTypeValueEnum.BOARD_SALE_STATUS_SOLD.getTypeId() 
+					|| board.getStatusId()==LookupTypeValueEnum.BOARD_SALE_STATUS_READY.getTypeId()
+					|| board.getStatusId()==LookupTypeValueEnum.BOARD_SALE_STATUS_PROCESSING.getTypeId())
+			{
+				//if user is original user or current user of board, show the thumb image.
+				if(user.getUserId()==board.getCurrentUerId() || user.getUserId()==board.getOriginalUserId() || user.getUserId()==board.getLastupdateby())
+					filterResult.setShow(true);
+				else
+				{
+					filterResult.setShow(false);	//if it's sold and the user is not current user or original user, don't show the image.
+					filterResult.setTypeCode("board.sold.unrelatedusers");
+				}
+			}
+			else
+				filterResult.setShow(true);
+			break;
+		case 2: //processing
+			//Only the user who is original user can see the image
+			if(user.getUserType().equals(LookupTypeValueEnum.USER_TYPE_DESIGNER.getTypeCode()) && (user.getUserId()==board.getCurrentUerId() || user.getUserId()==board.getOriginalUserId()))
+			{
+				filterResult.setShow(true);
+				filterResult.setTypeCode("board.processing.designer");
+			}
+			else
+			{
+				filterResult.setShow(false);
+				filterResult.setTypeCode("board.processing");
+			}
+			break;
+		default:
+			filterResult.setShow(false);
+			filterResult.setTypeCode("board.unknownstates");
+			break;
+		}
+		return filterResult;
+	}
+}

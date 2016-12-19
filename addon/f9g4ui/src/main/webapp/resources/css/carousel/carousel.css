@@ -1,0 +1,154 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*carousel in search result=====================================*/
+#content ul 
+{
+    position:absolute; /* required */
+    overflow:hidden; /* required */
+	width:100%;
+    margin:0;
+    padding:0px;
+    list-style:none;
+}
+ 
+#content ul li 
+{
+    float:left; /* required */
+    width:920px;
+    height:auto;
+    /*margin:10px 10px 10px 10px;*/
+}
+ 
+#content .mask 
+{
+    position:relative; /* required */
+    overflow:hidden; /* required */
+    width:850px; /* required */
+	height:auto;
+}
+ 
+#content .pagination-links 
+{
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+ 
+#content .pagination-links li 
+{
+    display:inline;
+}
+ 
+#content .pagination-links li.current 
+{
+    background:grey;
+}
+ 
+#content .disabled 
+{
+    color:grey;
+}
+
+#page .pagination-links 
+{
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+ 
+#page .pagination-links li 
+{
+    display:inline;
+	margin-right:3px;
+}
+#page .pagination-links .hide
+{
+	display:none;
+}
+#page .pagination-links li.current 
+{
+    background:grey;
+}
+/*End of search result carousel===================================*/
+
+/*Carousel in manage_portfolio====================================*/
+#manage_portfolio ul 
+{
+    position:absolute; /* required */
+    overflow:hidden; /* required */
+	width:100%;
+    margin:0;
+    padding:0px;
+    list-style:none;
+}
+ 
+#manage_portfolio ul li 
+{
+    float:left; /* required */
+    width:920px;
+    height:480px;
+    /*margin:10px 10px 10px 10px;*/
+}
+ 
+#manage_portfolio .mask 
+{
+    position:relative; /* required */
+    overflow:hidden; /* required */
+    width:890px; /* required */
+	height:auto;
+}
+ 
+#manage_portfolio .pagination-links 
+{
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+ 
+#manage_portfolio .pagination-links li 
+{
+    display:inline;
+}
+ 
+#manage_portfolio .pagination-links li.current 
+{
+    background:grey;
+}
+ 
+#manage_portfolio .disabled 
+{
+    color:grey;
+}
+
+#pages .pagination-links 
+{
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+ 
+#pages .pagination-links li 
+{
+    display:inline;
+	margin-right:5px;
+}
+#pages .pagination-links .hide
+{
+	display:none;
+}
+#pages .pagination-links li.current 
+{
+    background:grey;
+}
+/*End of carousel in manage portfolio=================================*/
+
+#prev
+{
+	display:inline;
+}
+
+#next
+{
+	display:inline;
+}

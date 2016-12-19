@@ -1,0 +1,197 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundation | Welcome</title>
+    <link rel="stylesheet" href="/css/ver3/normalize.css" />
+    <link rel="stylesheet" href="/css/ver3/foundation.css" />
+    <link rel="stylesheet" href="/css/ver3/main.css" />
+    <script src="/js/vendor/modernizr.js"></script>
+    <script src="/js/vendor/jquery.js"></script>
+    <script src="/js/foundation.min.js"></script>
+</head>
+<body>
+  	<!-- Header -->
+  	<div class="header">
+  		<div class="row">
+  			<div class="logo large-4 columns">
+      			<img src="/images/logo_rev.png"/>
+      			<div class="logo-subtitle">crowdsourcing creatives</div>
+    		</div>
+    		<div class="large-6 columns">
+    			<a class="header-th" href="" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false">How it Works</a><!--
+    			--><a class="header-th" href="" data-dropdown="drop2" aria-controls="drop2" aria-expanded="false">Categories</a><!--
+    			--><a class="header-th" href="" data-dropdown="drop3" aria-controls="drop3" aria-expanded="false">Services</a><!--
+    			--><a class="header-th" href="" data-dropdown="drop4" aria-controls="drop4" aria-expanded="false">Company</a>
+		     	<ul id="drop1" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+  					<li><a href="#">This is a link</a></li>
+  					<li><a href="#">This is another</a></li>
+  					<li><a href="#">Yet another</a></li>
+				</ul>
+				<ul id="drop2" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+  					<li><a href="#">This is a link</a></li>
+  					<li><a href="#">This is another</a></li>
+  					<li><a href="#">Yet another</a></li>
+				</ul>
+				<ul id="drop3" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+  					<li><a href="#">This is a link</a></li>
+  					<li><a href="#">This is another</a></li>
+  					<li><a href="#">Yet another</a></li>
+				</ul>
+				<ul id="drop4" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+  					<li><a href="#">This is a link</a></li>
+  					<li><a href="#">This is another</a></li>
+  					<li><a href="#">Yet another</a></li>
+				</ul>
+			</div>
+			<div class="large-2 columns">
+				<ul class="button-group">
+					<li><a class="header-button button tiny">Login</a></li> 
+					<li><a class="header-button button tiny">Sign Up</a></li>
+				<ul class="button-group">
+			</div>
+  		</div>
+  	</div>
+  	<!-- End Of Header -->
+  	
+  	<div id="slider">
+      <ul class="example-orbit" data-orbit>
+      	<li><img src="/images/splash/splash_carousel/a.png"/></li>
+      	<li><img src="/images/splash/splash_carousel/b.png"/></li>
+      	<li><img src="/images/splash/splash_carousel/c.png"/></li>
+      </ul>
+    </div>  
+ 
+ 
+ 
+ 
+  <div class="row">
+    <div class="large-12 columns">
+    
+    <hr/>
+    </div>
+  </div>
+  
+ 
+ 
+  <div class="row">
+    <div class="large-4 columns">
+      <img src="http://placehold.it/400x300&text=[img]"/>
+      <h4>This is a content section.</h4>
+      <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
+    </div>
+    
+    <div class="large-4 columns">
+      <img src="http://placehold.it/400x300&text=[img]"/>
+      <h4>This is a content section.</h4>
+      <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
+    </div>
+    
+    <div class="large-4 columns">
+      <img src="http://placehold.it/400x300&text=[img]"/>
+      <h4>This is a content section.</h4>
+      <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
+    </div>
+  
+    </div>
+    
+ 
+	<div class="row">
+	    <div class="large-12 columns">
+	    
+	      <div class="panel">
+	        <h4>Get in touch!</h4>
+	            
+	        <div class="row">
+	          <div class="large-9 columns">
+	            <p>We'd love to hear from you, you attractive person you.</p>
+	          </div>
+	          <div class="large-3 columns">
+	            <a href="#" class="radius button right">Contact Us</a>
+	          </div>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+
+		 <!-- <footer class="row">
+		   <div class="large-12 columns">
+		     <hr/>
+		     <div class="row">
+		       <div class="large-6 columns">
+		         <p>� Copyright no one at all. Go to town.</p>
+		       </div>
+		       <div class="large-6 columns">
+		         <ul class="inline-list right">
+		           <li><a href="#">Link 1</a></li>
+		           <li><a href="#">Link 2</a></li>
+		           <li><a href="#">Link 3</a></li>
+		           <li><a href="#">Link 4</a></li>
+		         </ul>
+		       </div>
+		     </div>
+		   </div> 
+		 </footer> -->
+	<!-- Footer -->
+	<div class="footer footer-wrapper">
+		<div class="footer-holder row">
+			<div class="sitemap row">
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="">How it works</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="">Get Started</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="">Resource Center</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="">Services</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-title" href="">Company</a>
+				 </div>
+				 <div class="large-2 columns"></div>
+			</div>
+			<div class="sitemap sub row">
+				<div class="large-2 columns">
+				 	<a class="sitem-link" href="">FFG Marketplace</a>
+				 	<a class="sitem-link" href="">FFG Commissions</a>
+				 	<a class="sitem-link" href="">Public Contest</a>
+				 	<a class="sitem-link" href="">Private Contest</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-link" href="">Retailers / Private Label</a>
+				 	<a class="sitem-link" href="">Brands</a>
+				 	<a class="sitem-link" href="">Manufactures</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-link" href="">Become an FFG Creative</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-link" href="">Consultative Services</a>
+				 	<a class="sitem-link" href="">Support</a>
+				 </div>
+				 <div class="large-2 columns">
+				 	<a class="sitem-link" href="">About</a>
+				 	<a class="sitem-link" href="">Our Story</a>
+				 	<a class="sitem-link" href="">Leadership</a>
+				 	<a class="sitem-link" href="">Contact</a>
+				 </div>
+				 <div class="large-2 columns"></div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns">
+					<div class="footer-logo"><img src="/images/logo_rev.png" alt="Fashion For Globe"/></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End of footer -->
+	
+	<!-- Foundation initialization -->
+  	<script type="text/javascript" src="/js/init_foundation.js"></script>
+</body>
+</html>

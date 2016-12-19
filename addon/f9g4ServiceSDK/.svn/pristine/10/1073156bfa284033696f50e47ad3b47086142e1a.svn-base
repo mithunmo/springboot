@@ -1,0 +1,106 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:oxm="http://www.springframework.org/schema/oxm"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:cxf="http://cxf.apache.org/core"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/oxm
+http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd
+http://cxf.apache.org/jaxrs
+http://cxf.apache.org/schemas/jaxrs.xsd
+http://cxf.apache.org/core
+http://cxf.apache.org/schemas/core.xsd
+http://cxf.apache.org/jaxws
+http://cxf.apache.org/schemas/jaxws.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.f4g.servicesdk"/>
+    <context:component-scan base-package="com.f9g4.services.rest"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"/>
+
+<!--     <bean id="securityServiceSDK" class="com.f4g.servicesdk.SecurityServiceSDK"> -->
+<!--         <property name="callType" value="REST"/> -->
+<!--         <property name="securityServiceConfigFile" value="f4g-config-test.xml"/> -->
+<!--         <property name="securityServiceProperties"> -->
+<!--             <props> -->
+<!--                  <prop key="restURL">http://localhost:8081/f4gservice/securityservice</prop> -->
+<!--                 <prop key="servicePort">8081</prop> -->
+<!--                 <prop key="maxConnectionsPerRoute">15</prop> -->
+<!--                 <prop key="maxConnectionsTotal">20</prop> -->
+<!--                 <prop key="connectionTimeout">30000</prop> -->
+<!--                 <prop key="idleConnectionTimeout">60000</prop> -->
+<!--             </props> -->
+<!--         </property> -->
+<!--     </bean> -->
+
+
+<bean id="portfolioServiceSDK" class="com.f4g.servicesdk.PortfolioServiceSDK">
+        <property name="callType" value="REST"/>
+        <property name="portfolioServiceConfigFile" value="f4g-config-test.xml"/>
+        <property name="portfolioServiceProperties">
+            <props>
+                 <prop key="restURL">http://localhost:8080/f9g4services/</prop>
+                <prop key="servicePort">8080</prop>
+                <prop key="maxConnectionsPerRoute">15</prop>
+                <prop key="maxConnectionsTotal">20</prop>
+                <prop key="connectionTimeout">30000</prop>
+                <prop key="idleConnectionTimeout">60000</prop>
+            </props>
+        </property>
+    </bean>
+
+<bean id="referralsServiceSDK" class="com.f4g.servicesdk.ReferralsServiceSDK">
+        <property name="callType" value="REST"/>
+        <property name="referralsServiceConfigFile" value="f4g-config-test.xml"/>
+        <property name="referralsServiceProperties">
+            <props>
+                 <prop key="restURL">http://localhost:8081/f9g4services/</prop>
+                <prop key="servicePort">8081</prop>
+                <prop key="maxConnectionsPerRoute">15</prop>
+                <prop key="maxConnectionsTotal">20</prop>
+                <prop key="connectionTimeout">30000</prop>
+                <prop key="idleConnectionTimeout">60000</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="notificationQServiceSDK" class="com.f4g.servicesdk.NotificationQServiceSDK">
+        <property name="callType" value="REST"/>
+        <property name="notificationQServiceConfigFile" value="f4g-config-test.xml"/>
+        <property name="notificationQServiceProperties">
+            <props>
+                 <prop key="restURL">http://localhost:8081/f9g4services/</prop>
+                <prop key="servicePort">8081</prop>
+                <prop key="maxConnectionsPerRoute">15</prop>
+                <prop key="maxConnectionsTotal">20</prop>
+                <prop key="connectionTimeout">30000</prop>
+                <prop key="idleConnectionTimeout">60000</prop>
+            </props>
+        </property>
+    </bean>
+
+	 <bean id="registrationServiceSDK" class="com.f4g.servicesdk.RegistrationServiceSDK">
+        <property name="callType" value="REST"/>
+        <property name="registrationSvcConfigFile" value="f4g-config-test.xml"/>
+        <property name="registrationSvcProperties">
+            <props>
+                <prop key="restURL">http://localhost:8080/f9g4services/</prop>
+                <prop key="servicePort">8080</prop>
+                <prop key="maxConnectionsPerRoute">15</prop>
+                <prop key="maxConnectionsTotal">20</prop>
+                <prop key="connectionTimeout">30000</prop>
+                <prop key="idleConnectionTimeout">60000</prop>
+            </props>
+        </property>
+    </bean>
+</beans>

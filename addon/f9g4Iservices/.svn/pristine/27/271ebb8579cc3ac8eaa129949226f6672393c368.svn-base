@@ -1,0 +1,73 @@
+package com.f9g4.services.rest;
+
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import com.f9g4.businessobjects.services.AddPortfolioRequest;
+import com.f9g4.businessobjects.services.AddPortfolioResponse;
+import com.f9g4.businessobjects.services.CreateContestRequest;
+import com.f9g4.businessobjects.services.DeletePortfolioByIdResponse;
+import com.f9g4.businessobjects.services.EditContestRequest;
+import com.f9g4.businessobjects.services.EditContestResponse;
+import com.f9g4.businessobjects.services.GetAllContestsRequest;
+import com.f9g4.businessobjects.services.GetAllContestsResponse;
+import com.f9g4.businessobjects.services.GetAllSamplesResponse;
+import com.f9g4.businessobjects.services.GetContestByUserIdResponse;
+import com.f9g4.businessobjects.services.GetPortfolioByIdResponse;
+import com.f9g4.businessobjects.services.GetPortfolioByUserResponse;
+import com.f9g4.businessobjects.services.UpdatePortfolioRequest;
+import com.f9g4.businessobjects.services.UpdatePortfolioResponse;
+import com.f9g4.businessobjects.services.CreateContestResponse;
+import com.f9g4.businessobjects.services.CreateContestRequest;
+
+
+@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+public interface IPortfolioService {
+	
+	@PUT
+	@Path("/portfolio/")
+	public AddPortfolioResponse addPortfolio(AddPortfolioRequest request);
+	
+	@POST
+	@Path("/portfolio/")
+	public UpdatePortfolioResponse updatePortfolio(UpdatePortfolioRequest request);
+	
+	@GET
+	@Path("/portfolio/{portfolioid}")
+	public GetPortfolioByIdResponse getPortfoliobyId(@PathParam("portfolioid") int portfolioid);
+	
+	@GET
+	@Path("/portfolio/user/{userid}")
+	public GetPortfolioByUserResponse getPortfoliobyUser(@PathParam("userid") int userid);
+	
+	@GET
+	@Path("/portfolio/unsellable/user/{userid}")
+	public GetPortfolioByUserResponse getUnsellablePortfoliobyUser(@PathParam("userid") int userid);
+	
+	@DELETE
+	@Path("/portfolio/{portfolioid}")
+	public DeletePortfolioByIdResponse deletePortfolioById(@PathParam("portfolioid") int portfolioid);
+	
+	@PUT
+	@Path("/contest/")
+	public CreateContestResponse createContest(CreateContestRequest request);
+	
+	@POST
+	@Path("/contest/")
+	public EditContestResponse editContest(EditContestRequest request);
+
+	@GET
+	@Path("/contest/{userid}")
+	public GetContestByUserIdResponse getContestByUserId(@PathParam("userid") int userid);
+	
+	@GET
+	@Path("/contests/")
+	public GetAllContestsResponse getAllContests();
+
+}

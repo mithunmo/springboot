@@ -1,0 +1,40 @@
+//Initialize the app and load the module
+app.config(['$routeProvider', function($routeProvider) {
+	var contextPath='/f4g';
+	$routeProvider
+		.when(ajaxPaths['createProjectPath'], {
+			templateUrl: ajaxPaths['createProjectContentPath'],
+			controller: 'editProjectController',
+			resolve: {
+				mode: function() {
+					return 'create';
+				}
+			}
+		})
+		.when(ajaxPaths['createProjectPath']+'/:portfolioId', {
+			templateUrl: ajaxPaths['createProjectContentPath'],
+			controller: 'editProjectController',
+			resolve: {
+				mode: function() {
+					return 'update';
+				}
+			}
+		})
+		.when(ajaxPaths['updateProjectPath']+'/:portfolioId', {
+			templateUrl: ajaxPaths['createProjectContentPath'],
+			controller: 'editProjectController',
+			resolve: {
+				mode: function() {
+					return 'update';
+				}
+			}
+		})
+		.when(ajaxPaths['manageProjectsPath'], {
+			templateUrl: ajaxPaths['manageProjectsContentPath'],
+			controller: 'manageProjectsController'
+		})
+		.when(ajaxPaths['approveSubmissionsPath']+'/:portfolioId', {
+			templateUrl: ajaxPaths['approveSubmissionsContentPath'],
+			controller: 'approveSubmissionsController'
+		});
+}]);

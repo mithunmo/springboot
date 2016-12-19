@@ -1,0 +1,299 @@
+package com.f9g4.test.servicesdk;
+
+
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.f9g4.businessobjects.domain.TrBoardApprovalDomain;
+import com.f9g4.businessobjects.domain.TrBoardDomain;
+import com.f9g4.businessobjects.domain.TrBoardImagesDomain;
+import com.f9g4.businessobjects.domain.TrBoardSearchDomain;
+import com.f9g4.businessobjects.services.GetAllSamplesResponse;
+import com.f9g4.businessobjects.services.GetBoardByIdResponse;
+import com.f9g4.businessobjects.services.GetBoardsByPMRequest;
+import com.f9g4.businessobjects.services.GetBoardsByPMResponse;
+import com.f9g4.businessobjects.services.GetBoardsByPortfolioResponse;
+import com.f9g4.businessobjects.services.GetBoardsSuggestionRequest;
+import com.f9g4.businessobjects.services.GetBoardsSuggestionResponse;
+import com.f9g4.businessobjects.services.GetRecentlyViewedBoardsResponse;
+import com.f9g4.businessobjects.services.GetSamplesByUserIdRequest;
+import com.f9g4.businessobjects.services.GetSamplesByUserIdResponse;
+import com.f9g4.businessobjects.services.ResubmitSamplesRequest;
+import com.f9g4.businessobjects.services.ResubmitSamplesResponse;
+import com.f9g4.businessobjects.services.SearchExampleBoardsRequest;
+import com.f9g4.businessobjects.services.SearchExampleBoardsResponse;
+import com.f9g4.businessobjects.services.SubmitSamplesRequest;
+import com.f9g4.businessobjects.services.SubmitSamplesResponse;
+import com.f9g4.businessobjects.services.UpdateBoardByAdminRequest;
+import com.f9g4.businessobjects.services.UpdateBoardByAdminResponse;
+import com.f9g4.common.util.LookupTypeValueEnum;
+import com.f9g4.common.util.XMLGregorianCalendarConverter;
+import com.f9g4.servicesdk.BoardServiceSDK;
+
+
+//@Ignore
+//@TestExecutionListeners
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath*:applicationContext.xml"})
+public class BoardServiceSDKIntegrationTest {
+
+ 
+   @Autowired
+	private BoardServiceSDK boardServiceSDK;
+
+    @Test
+    public void testGetBoardById() throws Exception {
+ 
+    	GetBoardByIdResponse response =boardServiceSDK.getBoardbyId(510);
+    	System.out.println(response.getStatus().getStatuscode());
+    	Assert.assertNotNull(response.getBoard());
+    	Assert.assertEquals(response.getBoard().getBoardId(), 510);
+      
+    }
+    @Test
+    public void testGetBoardsByPortfolioId() throws Exception{
+    	GetBoardsByPortfolioResponse response = new GetBoardsByPortfolioResponse();
+    	response= boardServiceSDK.getBoardsbyPortfolioId(3);
+    	System.out.println(response.getBoards().size());
+    	System.out.println(response.getStatus().getStatuscode());
+    }
+    
+    @Test
+	public void testUpdateBoardByAdmin()
+	{
+		UpdateBoardByAdminRequest request = new UpdateBoardByAdminRequest();
+		UpdateBoardByAdminResponse response = new UpdateBoardByAdminResponse();
+		GetBoardByIdResponse oBoard = boardServiceSDK.getBoardbyId(386);
+		TrBoardDomain oldBoard = oBoard.getBoard();
+		TrBoardDomain newBoard = new TrBoardDomain();
+		request.setNewBoard(newBoard);
+		request.setOldBoard(oldBoard);
+		
+		
+		oldBoard=oBoard.getBoard();
+		
+		newBoard.setBoardPrice(new BigDecimal(400.00));
+		newBoard.setTotalPrice(new BigDecimal(800.00));
+		newBoard.setKeyword("<kw><skw1>14</skw1><skw2>23</skw2><skw3>32</skw3><skw4>41</skw4><ptl>Casual,Evening Gowns,Formal,Party,Test & 1,Wedding</ptl></kw>");
+		newBoard.setCategoryLevel3Id(126);
+		
+		response = boardServiceSDK.updateBoardByAdmin(request);
+		assertEquals(0, response.getStatus().getStatuscode());
+	}
+
+	public BoardServiceSDK getBoardServiceSDK() {
+		return boardServiceSDK;
+	}
+
+	public void setBoardServiceSDK(BoardServiceSDK boardServiceSDK) {
+		this.boardServiceSDK = boardServiceSDK;
+	}
+
+
+	
+	@Test
+	public void testGetBoardsHisotry(){
+		GetRecentlyViewedBoardsResponse response  = boardServiceSDK.getRecentlyViewedBoards(1, 7,LookupTypeValueEnum.USER_TYPE_CUSTOMER.getTypeCode());
+		assertNotNull(response);
+		assertNotNull(response.getStatus());
+		assertEquals(0, response.getStatus().getStatuscode());
+
+	}
+	
+	@Test
+	public void testGetBoardSuggestion()
+	{
+		GetBoardsSuggestionRequest request=new GetBoardsSuggestionRequest();
+		request.setNumberOfBoards(4);
+		GetBoardsSuggestionResponse response=boardServiceSDK.getBoardsSuggestion(request);
+		assertNotNull(response);
+	}
+   
+	@Test
+	public void testSubmitSamples()
+	{
+		SubmitSamplesRequest request = new SubmitSamplesRequest();
+		SubmitSamplesResponse response = new SubmitSamplesResponse();
+		request.setUserId(373);
+		List<TrBoardDomain> samples = request.getSamples();
+		TrBoardDomain sample1 = new TrBoardDomain();
+		sample1.setBoardId(0);
+		List<TrBoardImagesDomain> sample1Image = sample1.getBoardImages();
+		TrBoardImagesDomain image = new TrBoardImagesDomain();
+		image.setFileName("aa1.jpg");
+		image.setFileType("ai");
+		image.setMainImageUrl("aa2.jpg");
+		image.setSourceFileURL("aa3.jpg");
+		image.setThumbnailUrl("aa4.jpg");
+		image.setCreatedby(2);
+		image.setLastupdateby(2);
+		sample1Image.add(image);
+		samples.add(sample1);
+		
+		TrBoardDomain sample2 = new TrBoardDomain();
+		sample2.setBoardId(0); //create new record
+		List<TrBoardImagesDomain> sample2Image = sample2.getBoardImages();
+		TrBoardImagesDomain image2 = new TrBoardImagesDomain();
+		image2.setFileName("b5.jpg");
+		image2.setFileType("ai");
+		image2.setMainImageUrl("b6.jpg");
+		image2.setSourceFileURL("b7.jpg");
+		image2.setThumbnailUrl("b8.jpg");
+		image2.setCreatedby(2);
+		image2.setLastupdateby(2);
+		sample2Image.add(image2);
+		samples.add(sample2);
+		
+		TrBoardDomain sample3 = new TrBoardDomain();
+		sample3.setBoardId(0);
+		List<TrBoardImagesDomain> sample3Image = sample3.getBoardImages();
+		TrBoardImagesDomain image3 = new TrBoardImagesDomain();
+		image3.setFileName("aaa5.jpg");
+		image3.setFileType("ai");
+		image3.setMainImageUrl("aaa6.jpg");
+		image3.setSourceFileURL("aaa7.jpg");
+		image3.setThumbnailUrl("aaa8.jpg");
+		image3.setCreatedby(2);
+		image3.setLastupdateby(2);
+		sample3Image.add(image3);
+		samples.add(sample3);
+		
+		response = boardServiceSDK.submitSamples(request);
+		System.out.println(response.getSamplesCount());
+	}
+	
+	@Test
+	public void testGetAllSamples()
+	{
+		GetAllSamplesResponse response = new GetAllSamplesResponse();
+		response = boardServiceSDK.getAllSamples();
+		System.out.println(response.getSamples().size());
+	}
+	
+	@Test
+	public void testGetSamplesByUserId()
+	{
+		GetSamplesByUserIdRequest request = new GetSamplesByUserIdRequest();
+		List<Integer> userIds = request.getUserId();
+		userIds.add(372);
+		GetSamplesByUserIdResponse response = boardServiceSDK.getSamplesByUserId(request);
+		System.out.println(response.getSamples().size());
+	}
+	
+	@Test
+	public void testResubmitSamples() throws DatatypeConfigurationException
+	{
+		ResubmitSamplesRequest request=new ResubmitSamplesRequest();
+		TrBoardApprovalDomain domain=new TrBoardApprovalDomain();
+		request.setInstance(domain);
+		request.setUserId(17); //set administrator id
+		request.setBoardId(499);
+		domain.setMainImageUrl("baa7e72c-33ed-4d81-a751-c3a9ce663640.jpg");
+		domain.setApprovalStatus(1);
+		domain.setComments("Test Service of resubmit samples");
+		domain.setApproverName("admin");
+		domain.setProcessStatus("Processing");
+		domain.setErrorMessage("Test");
+		domain.setCreationDate(XMLGregorianCalendarConverter.convertCalendarToXMLGregorianCalendar(Calendar.getInstance()));
+		domain.setCreatedBy(2);
+		domain.setLastUpdateDate(XMLGregorianCalendarConverter.convertCalendarToXMLGregorianCalendar(Calendar.getInstance()));
+		domain.setLastUpdatedBy(2);
+		ResubmitSamplesResponse response = boardServiceSDK.resubmitSamples(request);
+		System.out.println(response.getStatus().getStatuscode());
+	}
+	
+	@Test
+	public void testFetchBoardsByPMStatus()
+	{
+		GetBoardsByPMRequest request = new GetBoardsByPMRequest();
+		request.setUserId(17);
+		request.getPublishToMP().add(0);
+		request.getPublishToMP().add(1);
+		request.getPublishToMP().add(2);
+		request.getPortfolioTypes().add(1);
+		request.getPortfolioTypes().add(0);
+		GetBoardsByPMResponse response = boardServiceSDK.fetchBoardsByPMStatus(request);
+		System.out.println(response.getBoards().size());
+	}
+	
+	@Test
+	public void testSearchExampleBoards(){
+		SearchExampleBoardsRequest request = new SearchExampleBoardsRequest();
+		request.setDesignerName(null);
+		request.setMinAdminRating(-1);
+		request.setMaxAdminRating(5);
+		request.setIsPortfolioSearch(true);
+	
+		//request.setSchoolAwards(null);
+		
+		//request.setUserId(133);
+		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		Date startDate = null;
+		Date endDate= null;
+		try {
+			startDate = formatter.parse("01/01/2000");
+			endDate = formatter.parse("08/25/2014");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		GregorianCalendar c = new GregorianCalendar();
+		c.setTime(endDate);
+		XMLGregorianCalendar date2 =null;
+		try {
+			date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+		} catch (DatatypeConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		request.setPortfoliosearchenddate(date2);
+
+		GregorianCalendar d = new GregorianCalendar();
+		 //SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
+		 //   Date date = fmt.parse("25-08-2014");		
+		d.setTime(startDate);
+		XMLGregorianCalendar date3 =null;
+		try {
+			date3 = DatatypeFactory.newInstance().newXMLGregorianCalendar(d);
+		} catch (DatatypeConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		request.setPortfoliosearchstartdate(date3);			
+		
+		SearchExampleBoardsResponse response = boardServiceSDK.searchExampleBoards(request);
+		System.out.println(response.getTrBoardSearchDomains().size());
+		
+		List<TrBoardSearchDomain> list = response.getTrBoardSearchDomains();
+		
+		for (TrBoardSearchDomain item : list) {
+			System.out.println(item.getBoardId() +  " = " + item.getName() + " = " + item.getDesignerName());
+		}
+		//assertNotNull(response);
+		//assertNotNull(response.getStatus());
+		//assertTrue(response.getStatus().getStatuscode().equals(StatusCodesEnum.STATUS_SUCCESS.getCode()));
+		//assertTrue(response.getTrBoardSearchDomains().size() > 0);
+	}
+}

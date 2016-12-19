@@ -1,0 +1,261 @@
+package com.f9g4.services;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Set;
+
+import javax.swing.text.DefaultEditorKit.CutAction;
+import javax.xml.datatype.DatatypeConfigurationException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.f9g4.businessobjects.common.Status;
+import com.f9g4.businessobjects.domain.TrBroadcastMessagesDomain;
+import com.f9g4.businessobjects.domain.TrMessagesDomain;
+import com.f9g4.businessobjects.services.AddMessageRequest;
+import com.f9g4.businessobjects.services.AddMessageResponse;
+import com.f9g4.businessobjects.services.CreateBroadcastMessagesRequest;
+import com.f9g4.businessobjects.services.CreateBroadcastMessagesResponse;
+import com.f9g4.businessobjects.services.DeleteMessageByIdResponse;
+import com.f9g4.businessobjects.services.GetAllMessagesbyBoardAndUserRequest;
+import com.f9g4.businessobjects.services.GetAllMessagesbyBoardAndUserResponse;
+import com.f9g4.businessobjects.services.GetBroadcastMessagesResponse;
+import com.f9g4.businessobjects.services.GetMemPricingOptionsResponse;
+import com.f9g4.businessobjects.services.GetMessageByIdResponse;
+import com.f9g4.businessobjects.services.GetlatestMessagesByBoardGroupByUserRequest;
+import com.f9g4.businessobjects.services.GetlatestMessagesByBoardGroupByUserResponse;
+import com.f9g4.common.errors.StatusCodesEnum;
+import com.f9g4.common.util.ActiveStatusEnum;
+import com.f9g4.common.util.LookupTypeValueEnum;
+import com.f9g4.common.util.MessageTypes;
+import com.f9g4.common.util.XMLGregorianCalendarConverter;
+import com.f9g4.dao.AdLookupValuesDAO;
+import com.f9g4.dao.AdLookupValuesDAOImpl;
+import com.f9g4.dao.AdUsersDAO;
+import com.f9g4.dao.AdUsersDAOImpl;
+import com.f9g4.dao.TrBoardDAO;
+import com.f9g4.dao.TrBoardDAOImpl;
+import com.f9g4.dao.TrBroadcastMessagesDAO;
+import com.f9g4.dao.TrMessagesDAO;
+import com.f9g4.dao.TrMessagesDAOImpl;
+import com.f9g4.domain.AdLookupValues;
+import com.f9g4.domain.AdUsers;
+import com.f9g4.domain.TrBroadcastMessages;
+import com.f9g4.domain.TrMessages;
+import com.f9g4.services.rest.IMessageService;
+import com.f9g4.util.ModelConverter;
+
+@Service("messageService")
+@Transactional(propagation=Propagation.REQUIRED, rollbackFor=RuntimeException.class)
+public class MessageServiceImpl implements IMessageService {
+	
+	@Autowired
+	private TrMessagesDAO trMessagesDao;
+	
+		
+	@Autowired
+	private AdUsersDAO adUserDao;
+	
+	@Autowired
+	private TrBoardDAO trBoard;
+
+	@Autowired
+	private AdLookupValuesDAO lookupValueDao;
+	
+	@Autowired
+	private TrBroadcastMessagesDAO trBroadcastMessagesDAO;
+	
+	@Autowired
+	private ModelConverter modelConverter;
+	
+	public AddMessageResponse addMessages(AddMessageRequest request) {
+		AddMessageResponse response= new AddMessageResponse();
+		Status status=new Status();
+		try{
+		trMessagesDao.merge(this.convertDomaintoEntity(request.getMessage()));
+	
+		status.setStatuscode(StatusCodesEnum.STATUS_SUCCESS.getCode());
+		status.setDescription("Success");
+		response.setStatus(status);
+		}catch (Exception e) {
+			status.setStatuscode(StatusCodesEnum.STATUS_ERR_UNKNOWN.getCode());
+			status.setDescription("Error:" + e.getMessage());
+			response.setStatus(status);
+		}
+		return response;
+	}
+
+	public GetlatestMessagesByBoardGroupByUserResponse getLatestMessagesbyUserForBoard(
+			int userid) {
+		AdUsers curUser = adUserDao.findAdUsersByUserId(userid);
+		// TODO Auto-generated method stub
+		GetlatestMessagesByBoardGroupByUserResponse response= new GetlatestMessagesByBoardGroupByUserResponse();
+		List<TrMessagesDomain> trMessagesDomainsList =new ArrayList<TrMessagesDomain>();
+		try {
+			if(curUser.getAdLookupValuesByUserTypeId().getLookupCode().equals(LookupTypeValueEnum.USER_TYPE_DESIGNER.getTypeCode()))
+				modelConverter.convertTrMessagesEntityToDomain( trMessagesDao.findLastestBoardDesignerMessagesbyUserID(userid, MessageTypes.INBOX), trMessagesDomainsList);
+			else
+				modelConverter.convertTrMessagesEntityToDomain( trMessagesDao.findLastestBoardCompanyMessagesbyUserID(userid, MessageTypes.INBOX), trMessagesDomainsList);
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DatatypeConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		response.getMessageList().addAll(trMessagesDomainsList);
+		return response;
+		 
+	}
+
+	public GetAllMessagesbyBoardAndUserResponse getAllMessagesByUserandBoard(
+			int userid, int duserid, int boardid) {
+		GetAllMessagesbyBoardAndUserResponse response= new GetAllMessagesbyBoardAndUserResponse();
+		List<TrMessagesDomain> trMessagesDomainsList =new ArrayList<TrMessagesDomain>();
+		try {
+			Set<TrMessages> messagesEntity=trMessagesDao.findTrMessagesByBoardUserMessageTypeAndMessageStatus(boardid,userid,duserid, MessageTypes.INBOX);
+			modelConverter.convertTrMessagesEntityToDomain( messagesEntity, trMessagesDomainsList);
+			//Change messages status from unread to read
+			for(TrMessages item:messagesEntity)
+			{
+				AdLookupValues readStatus=new AdLookupValues();
+				readStatus.setLookupValueId(LookupTypeValueEnum.MESSAGE_STATUS_READ.getTypeId());
+				if(item.getAdUsersByToUserId().getUserId()==duserid) //set message status only the to_user is the current user.
+					item.setAdLookupValues(readStatus);
+				//Merge to database
+				trMessagesDao.merge(item);
+			}
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DatatypeConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		response.getMessageList().addAll(trMessagesDomainsList);
+		return response;
+	}
+	
+	public DeleteMessageByIdResponse deleteMessageById(int messageId)
+	{
+		DeleteMessageByIdResponse response = new DeleteMessageByIdResponse();
+		Status status = new Status();
+		response.setStatus(status);
+		try
+		{
+			TrMessages message=trMessagesDao.findTrMessagesByMessageId(messageId);
+			message.setActiveStatus(ActiveStatusEnum.INACTIVE.value());
+			status.setStatuscode(StatusCodesEnum.STATUS_SUCCESS.getCode());
+			trMessagesDao.merge(message);
+			trMessagesDao.flush();
+		}
+		catch (DataAccessException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			status.setStatuscode(StatusCodesEnum.STATUS_ERR_UNKNOWN.getCode());
+			status.setDescription("Unknowned error occured");
+		}
+		return response;
+	}
+	
+	public GetMessageByIdResponse getMessageById(int messageId)
+	{
+		GetMessageByIdResponse response = new GetMessageByIdResponse();
+		Status status = new Status();
+		response.setStatus(status);
+		try
+		{
+			TrMessages entity = trMessagesDao.findTrMessagesByMessageId(messageId);
+			response.setMessage(this.convertEntityToDomain(entity));
+			status.setStatuscode(StatusCodesEnum.STATUS_SUCCESS.getCode());
+		}
+		catch(Throwable th)
+		{
+			status.setStatuscode(StatusCodesEnum.STATUS_ERR_UNKNOWN.getCode());
+			status.setDescription("Unknowned error occurred");
+		}
+		return response;
+	}
+	
+	/*public GetInstantUpdateResponse GetInstantUpdate(int userId)
+	{
+		
+	}*/
+	
+	public GetBroadcastMessagesResponse getBroadcastMessages()
+	{
+		GetBroadcastMessagesResponse response = new GetBroadcastMessagesResponse();
+		Set<TrBroadcastMessages> entitySet = trBroadcastMessagesDAO.findAllTrBroadcastMessages();
+		List<TrBroadcastMessagesDomain> domain = response.getResult();
+		domain.addAll(modelConverter.convertTrBroadcastMessagesEntityToDomain(entitySet));
+		return response;
+	}
+	
+	public CreateBroadcastMessagesResponse createBroadcastMessages(CreateBroadcastMessagesRequest request)
+	{
+		CreateBroadcastMessagesResponse response = new CreateBroadcastMessagesResponse();
+		Status status = new Status();
+		response.setStatus(status);
+		
+		try {
+			Calendar currentTimeStamp = Calendar.getInstance();
+			TrBroadcastMessages entity = modelConverter.convertTrBroadcastMessagesDomainToEntity(request.getItem());
+			entity.setCreatedBy(2);
+			entity.setLastUpdatedBy(2);
+			entity.setProcessedDate(currentTimeStamp);
+			entity.setCreationDate(currentTimeStamp);
+			entity.setLastUpdateDate(currentTimeStamp);
+			TrBroadcastMessages updatedItem = trBroadcastMessagesDAO.merge(entity);
+			response.setUpdate(modelConverter.convertTrBroadcastMessagesEntityToDomain(updatedItem));
+			status.setStatuscode(StatusCodesEnum.STATUS_SUCCESS.getCode());
+		}
+		catch(Exception e) {
+			status.setStatuscode(StatusCodesEnum.STATUS_ERR_UNKNOWN.getCode());
+		}
+		return response;
+	}
+	
+	private TrMessages convertDomaintoEntity(TrMessagesDomain domain){
+		TrMessages entity= new TrMessages();
+		entity.setActiveStatus(ActiveStatusEnum.ACTIVE.value());
+		entity.setMessageType(MessageTypes.INBOX);
+		entity.setAdUsersByFromUserId(adUserDao.findAdUsersByPrimaryKey(domain.getFromUserId()));
+		entity.setAdUsersByToUserId(adUserDao.findAdUsersByPrimaryKey(domain.getToUserId()));
+		entity.setLangCode("en-US");
+		entity.setMessageBody(domain.getMessageBody());
+		entity.setSubject(domain.getSubject());
+		entity.setTrBoard(trBoard.findTrBoardByBoardId(domain.getBoardId()));
+		entity.setAdLookupValues(lookupValueDao.findAdLookupValuesByLookupValueId(domain.getMsgStatusId()));
+		entity.setCreatedBy(domain.getCreatedby());
+		entity.setLastUpdatedBy(domain.getLastupdateby());
+		
+		return entity;
+		
+	}
+	
+	private TrMessagesDomain convertEntityToDomain(TrMessages entity) throws DatatypeConfigurationException{
+		TrMessagesDomain domain= new TrMessagesDomain();
+		domain.setMessageId(entity.getMessageId());
+		domain.setBoard(modelConverter.convertTrBoardEntityToDomain(entity.getTrBoard()));
+		domain.setBoardName(entity.getTrBoard().getName());
+		domain.setActiveStatus(entity.getActiveStatus());
+		domain.setMessageType(entity.getMessageType());
+		domain.setFromUserId(entity.getAdUsersByFromUserId().getUserId());
+		domain.setToUserId(entity.getAdUsersByToUserId().getUserId());
+		domain.setLangCode(entity.getLangCode());
+		domain.setMessageBody(entity.getMessageBody());
+		domain.setSubject(entity.getSubject());
+		domain.setBoardId(entity.getTrBoard().getBoardId());
+		domain.setMsgStatusId(entity.getAdLookupValues().getLookupValueId());
+		domain.setCreatedby(entity.getCreatedBy());
+		domain.setLastupdateby(entity.getLastUpdatedBy());
+		return domain;
+		
+	}
+}

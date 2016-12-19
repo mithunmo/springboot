@@ -1,0 +1,149 @@
+package com.f9g4.web.forms;
+
+import java.io.File;
+import java.math.BigDecimal;
+import java.util.Date;
+
+import com.f9g4.businessobjects.services.DesignWallBoardInfoDomain;
+
+
+public class BoardImageForm {
+	private String userName;
+    private BigDecimal totalPrice;
+    private Date sellerPayDate;
+    private String lastname;
+    private String firstname;
+    private String statusdescription;
+    private String mainImageUrl;
+	private String thumbnailName;
+	private String fileType;
+	private boolean linkBroken;
+	private String boardName;
+	private Integer boardId;
+	private String fileName;
+	private String tileImageUrl;
+    
+    public BoardImageForm(DesignWallBoardInfoDomain item, String profileLocation) {
+		// TODO Auto-generated constructor stub
+    	this.userName = item.getUserName();
+    	this.totalPrice = item.getTotalPrice().setScale(2);
+    	if(item.getSellerPayDate()!=null)
+    		this.sellerPayDate = item.getSellerPayDate().toGregorianCalendar().getTime();
+    	this.lastname = item.getLastname();
+    	this.firstname=item.getFirstname();
+    	this.statusdescription = item.getStatusdescription();
+    	this.mainImageUrl = item.getMainImageUrl();
+    	this.thumbnailName = item.getThumbnailUrl();
+    	this.fileType = item.getFileType();
+    	this.boardName = item.getName();
+    	this.boardId = item.getBoardId();
+    	this.fileName = lastname.replace(" ", "") + "_" + firstname.replace(" ", "") + "_" + boardName.replace(" ", "") + "." + fileType;
+    	this.tileImageUrl = item.getTileImageUrl();
+    	//Checking for broken Link
+    	File file = new File(profileLocation + item.getMainImageUrl());
+    	this.setLinkBroken(file.exists());
+    	//System.out.println("Link Status->"+this.isLinkBroken());
+    	//System.out.println("file type ->"+item.getFileType());
+	}
+
+    
+    public String getTileImageUrl() {
+		return tileImageUrl;
+	}
+
+	public void setTileImageUrl(String tileImageUrl) {
+		this.tileImageUrl = tileImageUrl;
+	}
+
+	public Integer getBoardId() {
+		return boardId;
+	}
+
+	public void setBoardId(Integer boardId) {
+		this.boardId = boardId;
+	}
+
+	public String getBoardName() {
+		return boardName;
+	}
+
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public boolean isLinkBroken() {
+		return linkBroken;
+	}
+
+	public void setLinkBroken(boolean isLinkBroken) {
+		this.linkBroken = isLinkBroken;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public Date getSellerPayDate() {
+		return sellerPayDate;
+	}
+	public void setSellerPayDate(Date sellerPayDate) {
+		this.sellerPayDate = sellerPayDate;
+	}
+	public String getLastname() {
+		return lastname;
+	}
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+	public String getFirstname() {
+		return firstname;
+	}
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+	public String getStatusdescription() {
+		return statusdescription;
+	}
+	public void setStatusdescription(String statusdescription) {
+		this.statusdescription = statusdescription;
+	}
+	public String getMainImageUrl() {
+		return mainImageUrl;
+	}
+	public void setMainImageUrl(String mainImageUrl) {
+		this.mainImageUrl = mainImageUrl;
+	}
+
+	public String getThumbnailName() {
+		return thumbnailName;
+	}
+
+	public void setThumbnailName(String thumbnailName) {
+		this.thumbnailName = thumbnailName;
+	}
+
+}

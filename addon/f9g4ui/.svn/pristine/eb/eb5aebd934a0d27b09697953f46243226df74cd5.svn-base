@@ -1,0 +1,16 @@
+package com.f9g4.web.Helper;
+
+import com.f9g4.businessobjects.domain.TrPortfolioContestDomain;
+
+public class ProjectHelper {
+
+	private ProjectHelper() {}
+	
+	public static String projectIdFormatter(TrPortfolioContestDomain source)
+	{
+		String projectType=String.format("%02d", source.getProjectType());
+		String portfolioId=String.format("%07d", source.getContestPortfolioDomain().getPortfolioId());
+		String contestId=String.format("%02d", source.getContestId());
+		return projectType+"-"+portfolioId+"@"+contestId;
+	}
+}

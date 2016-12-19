@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition name="base.definition" template="/WEB-INF/views/templates/layout.jsp">
+        <put-attribute name="title" value="page.title" />
+        <!-- <put-attribute name="header" value="/WEB-INF/views/templates/header_no_path.jsp" /> -->
+        <put-attribute name="header" value="/WEB-INF/views/templates/header.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/templates/footer.jsp" />
+        <put-attribute name="login_panel" value="/WEB-INF/views/login_panel.jsp" />
+    </definition>
+ 
+    <definition name="splashscreen" extends="base.definition">
+        <!-- <put-attribute name="title" value="Fashion For Globe" /> -->
+        <put-attribute name="body" value="/WEB-INF/views/splashscreen.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/templates/footer_without_login.jsp" />
+    </definition>
+    
+    <definition name="login_panel" template="/WEB-INF/views/login_panel.jsp"></definition>
+    
+    <definition name="about_us" extends="base.definition">
+        <!-- <put-attribute name="title" value="About Us" /> -->
+        <put-attribute name="body" value="/WEB-INF/views/about_us.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/templates/footer_without_login.jsp" />
+    </definition>
+    
+    <definition name="work_with_us" extends="base.definition">
+        <!-- <put-attribute name="title" value="Work With Us" /> -->
+        <put-attribute name="body" value="/WEB-INF/views/work_with_us.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/templates/footer_without_login.jsp" />
+    </definition>
+    
+    <definition name="contact_us" extends="base.definition">
+        <!-- <put-attribute name="title" value="Contact Us" /> -->
+        <put-attribute name="body" value="/WEB-INF/views/contact_us.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/templates/footer_without_login.jsp" />
+    </definition>
+    
+    <definition name="what_we_do" extends="base.definition">
+        <!-- <put-attribute name="title" value="What We Do" /> -->
+        <put-attribute name="body" value="/WEB-INF/views/whatwedo.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/templates/footer_without_login_social.jsp" />
+    </definition>
+    
+    <definition name="faqs" extends="base.definition">
+        <!-- <put-attribute name="title" value="What We Do" /> -->
+        <put-attribute name="body" value="/WEB-INF/views/faqs.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/templates/footer_without_login_social.jsp" />
+    </definition>
+    
+    <definition name="how_it_works" extends="base.definition">
+        <!-- <put-attribute name="title" value="How To Succeed" /> -->
+        <put-attribute name="body" value="/WEB-INF/views/howitworks.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/templates/footer_without_login.jsp" />
+    </definition>
+    
+    <definition name="privacy_policy" extends="base.definition">
+        <!-- <put-attribute name="title" value="Privacy Policy" /> -->
+        <put-attribute name="body" value="/WEB-INF/views/privacy_policy.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/templates/footer_without_login.jsp" />
+    </definition>
+    
+    <definition name="samples_submission" extends="base.definition">
+        <!-- <put-attribute name="title" value="Privacy Policy" /> -->
+        <put-attribute name="body" value="/WEB-INF/views/samples.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/templates/footer_without_login.jsp" />
+    </definition>
+    
+    <!-- <definition name="UploadPictures" extends="base.definition">
+        <put-attribute name="title" value="Splash Screen" />
+        <put-attribute name="body" value="/WEB-INF/views/UploadPictures.jsp" />
+    </definition>
+     <definition name="UploadPicturesSuccess" extends="base.definition">
+        <put-attribute name="title" value="Splash Screen" />
+        <put-attribute name="body" value="/WEB-INF/views/UploadPicturesSuccess.jsp" />
+    </definition> -->
+    
+    <!--
+    <definition name="error" extends="base.definition">
+            <put-attribute name="title" value="Error Page" />
+            <put-attribute name="body" value="/WEB-INF/views/error.jsp" />
+    </definition>-->
+    <definition name="error" template="/WEB-INF/views/error.jsp" />
+    <definition name="errorSession" extends="base.definition">
+        <!-- <put-attribute name="title" value="Error" /> -->
+        <put-attribute name="body" value="/WEB-INF/views/errorSession.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/templates/footer_without_login.jsp" />
+    </definition>
+    
+<!--     <definition name="error" template="/WEB-INF/views/error.jsp"></definition> -->
+    
+    <definition name="base.popup" template="/WEB-INF/views/templates/popup_layout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="popup_header" value="/WEB-INF/views/templates/popup_header.jsp" />
+        <put-attribute name="popup_body" value="" />
+        <put-attribute name="popup_footer" value="/WEB-INF/views/templates/popup_footer.jsp" />
+    </definition>
+    
+    <definition name="forgot_password" extends="base.popup">
+        <put-attribute name="title" value="TForgot Password" />
+        <put-attribute name="popup_body" value="/WEB-INF/views/forgot_password.jsp" />
+    </definition>
+        
+    <definition name="registration.definition" template="/WEB-INF/views/templates/registration_layout.jsp">
+        <put-attribute name="title" value="page.title" />
+        <put-attribute name="reg_header" value="/WEB-INF/views/templates/registration_header_with_path.jsp" />
+        <put-attribute name="reg_body" value="" />
+        <put-attribute name="reg_footer" value="/WEB-INF/views/templates/registration_footer.jsp" />
+        <put-attribute name="login_panel" value="/WEB-INF/views/login_panel.jsp" />
+    </definition>
+
+    <definition name="registration_company" extends="registration.definition">
+        <!-- <put-attribute name="title" value="registration.page.title.company" /> -->
+        <put-attribute name="reg_body" value="/WEB-INF/views/registration_company.jsp" />
+    </definition>
+
+    <definition name="registration_designer" extends="registration.definition">
+        <!-- <put-attribute name="title" value="registration.page.title.designer" /> -->
+        <put-attribute name="reg_body" value="/WEB-INF/views/registration_designer.jsp" />
+    </definition>
+    
+    <definition name="membership_payment" extends="registration.definition">
+    	<!-- <put-attribute name="title" value="registration.page.title.designer" /> -->
+    	<!-- <put-attribute name="reg_header" value="/WEB-INF/views/templates/membership_payment_header.jsp" /> -->
+        <put-attribute name="reg_body" value="/WEB-INF/views/membership_payment.jsp" />
+    </definition>
+
+    <definition name="membership_payment_end" extends="registration.definition">
+    	<!-- <put-attribute name="title" value="registration.page.title.designer" /> -->
+    	<!-- <put-attribute name="reg_header" value="/WEB-INF/views/templates/membership_payment_header.jsp" /> -->
+        <put-attribute name="reg_body" value="/WEB-INF/views/membership_payment_end.jsp" />
+    </definition>
+    
+    <definition name="console_header" template="/WEB-INF/views/console/console_header.jsp"></definition>
+    <definition name="console_footer" template="/WEB-INF/views/console/console_footer.jsp"></definition>
+    
+    <definition name="console.definition" template="/WEB-INF/views/console/console_layout.jsp">
+    	<put-attribute name="ajaxPaths" value="/WEB-INF/views/console/console_ajax_paths.jsp" />
+    	<put-attribute name="jsLibraries" value="/WEB-INF/views/console/console_js_libraries.jsp" />
+    	<put-attribute name="jsCore" value="/WEB-INF/views/console/console_js_core.jsp" />
+        <put-attribute name="title" value="page.title" />
+        <put-attribute name="console_header" value="/WEB-INF/views/console/console_header.jsp" />
+        <put-attribute name="console_body" value="" />        
+        <put-attribute name="console_footer" value="/WEB-INF/views/console/console_footer.jsp" />
+    </definition>
+    
+    <definition name="membership_payment_update" extends="registration.definition">
+    	<!-- <put-attribute name="title" value="registration.page.title.designer" /> -->
+    	<!-- <put-attribute name="reg_header" value="/WEB-INF/views/templates/membership_payment_header.jsp" /> -->
+        <put-attribute name="reg_body" value="/WEB-INF/views/membership_payment.jsp" />
+    </definition>
+    
+    <definition name="console_home" extends="console.definition">
+        <!-- <put-attribute name="title" value="console.title.company" /> -->
+        <put-attribute name="console_body" value="/WEB-INF/views/console/console_home.jsp" />
+    </definition>
+    
+    <definition name="console_home_designer" extends="console.definition">
+        <!-- <put-attribute name="title" value="console.title.designer" /> -->
+        <put-attribute name="console_body" value="/WEB-INF/views/console/console_home_designer.jsp" />
+    </definition>
+    
+    <!-- Limited access user panel (LAU) -->
+    <definition name="console_home_designer_limited_access" extends="console.definition">
+        <!-- <put-attribute name="title" value="console.title.designer" /> -->
+        <put-attribute name="ajaxPaths" value="/WEB-INF/views/console/limited_access_user/console_ajax_paths.jsp" />
+    	<put-attribute name="jsLibraries" value="/WEB-INF/views/console/limited_access_user/console_js_libraries.jsp" />
+        <put-attribute name="jsCore" value="/WEB-INF/views/console/limited_access_user/console_js_core.jsp" />
+        <put-attribute name="console_body" value="/WEB-INF/views/console/limited_access_user/console_home_designer.jsp" />
+    </definition>
+    <definition name="console_full_access_information" template="/WEB-INF/views/console/limited_access_user/console_full_access_information.jsp"></definition>
+    <!-- End of Limited access user panel -->
+    
+    <definition name="console_about_us" extends="console.definition">
+        <!-- <put-attribute name="title" value="footer.about_us" /> -->
+        <put-attribute name="console_body" value="/WEB-INF/views/about_us.jsp" />
+    </definition>
+    
+    <definition name="console_work_with_us" extends="console.definition">
+       <!--  <put-attribute name="title" value="footer.work_with_us" /> -->
+        <put-attribute name="console_body" value="/WEB-INF/views/work_with_us.jsp" />
+    </definition>
+    
+    <definition name="console_contact_us" extends="console.definition">
+        <!-- <put-attribute name="title" value="footer.contact_us" /> -->
+        <put-attribute name="console_body" value="/WEB-INF/views/contact_us.jsp" />
+    </definition>
+    
+    <definition name="console_privacy_policy" extends="console.definition">
+        <!-- <put-attribute name="title" value="footer.privacy" /> -->
+        <put-attribute name="console_body" value="/WEB-INF/views/privacy_policy.jsp" />
+    </definition>
+
+	<!-- Profile -->
+    <definition name="company_profile" template="/WEB-INF/views/console/company_profile.jsp"></definition>
+    <definition name="edit_company_profile" template="/WEB-INF/views/console/edit_company_profile.jsp"></definition>    
+    <definition name="designer_profile" template="/WEB-INF/views/console/designer_profile.jsp"></definition>
+    <definition name="edit_designer_profile" template="/WEB-INF/views/console/edit_designer_profile.jsp"></definition>
+    <definition name="designer_info" template="/WEB-INF/views/console/designer_info.jsp"></definition>
+    <definition name="company_info" template="/WEB-INF/views/console/company_info.jsp"></definition>
+
+	<!--  TAB -->
+    <definition name="console_alerts"  template="/WEB-INF/views/console/console_alerts.jsp"></definition>
+    <!--<definition name="console_search_criteria"  template="/WEB-INF/views/console/search_criteria.jsp"></definition>-->
+    <definition name="console_search_result"  template="/WEB-INF/views/console/search_result.jsp"></definition>
+    <definition name="design_wall"  template="/WEB-INF/views/console/design_wall.jsp"></definition>
+    <definition name="activity_company"  template="/WEB-INF/views/console/activity_company.jsp"></definition>
+    <definition name="activity_designer"  template="/WEB-INF/views/console/activity_designer.jsp"></definition>
+    <definition name="console_messages"  template="/WEB-INF/views/console/messages.jsp"></definition>
+    <definition name="console_message_detail"  template="/WEB-INF/views/console/message_detail.jsp"></definition>
+    <definition name="console_checkout"  template="/WEB-INF/views/console/checkout.jsp"></definition>
+    <definition name="console_collections" template="/WEB-INF/views/console/manage_collections.jsp"></definition>
+    <definition name="console_create_collection" template="/WEB-INF/views/console/create_collection.jsp"></definition>
+    <definition name="console_portfolio" template="/WEB-INF/views/console/manage_portfolio.jsp"></definition>
+    <definition name="console_create_portfolio" template="/WEB-INF/views/console/create_portfolio.jsp"></definition>
+    <definition name="console_board" template="/WEB-INF/views/console/manage_board.jsp"></definition>
+    <definition name="console_portfolio_board" template="/WEB-INF/views/console/manage_portfolio_board.jsp"></definition>
+    <definition name="console_create_board" template="/WEB-INF/views/console/create_board.jsp"></definition>
+    <definition name="console_create_portfolio_board" template="/WEB-INF/views/console/create_portfolio_board.jsp"></definition>
+    <definition name="console_rating" template="/WEB-INF/views/console/rating.jsp"></definition>
+    <definition name="season_year_list" template="/WEB-INF/views/console/season_year_list.jsp"></definition>
+    <definition name="console_loading" template="/WEB-INF/views/console/season_year_list.jsp"></definition>
+    <definition name="console_account" template="/WEB-INF/views/console/account.jsp"></definition>
+	<!-- Javascript Static Text Pack -->
+	<definition name="console_js_stp"  template="/WEB-INF/views/console/console_js_static_text.jsp"></definition>
+	
+    <definition name="terms_login"  template="/WEB-INF/views/tandcatlogin.jsp"></definition>
+    <definition name="terms"  template="/WEB-INF/views/tandc.jsp"></definition>
+    <definition name="reset_pwd"  template="/WEB-INF/views/reset_password.jsp"></definition>
+    <definition name="designer_membership_terms"  template="/WEB-INF/views/tandc.jsp"></definition>
+    <definition name="designer_registration_terms"  template="/WEB-INF/views/tandc.jsp"></definition>
+    <definition name="customer_sale_terms"  template="/WEB-INF/views/tandc.jsp"></definition>
+    <definition name="customer_registration_terms"  template="/WEB-INF/views/tandc.jsp"></definition>
+    <definition name="view_terms"  template="/WEB-INF/views/view_tandc.jsp"></definition>
+    
+    <!-- Popup -->
+    <definition name="referral"  template="/WEB-INF/views/referralsscreen.jsp"></definition>
+    <definition name="referral_manage"  template="/WEB-INF/views/referral_manage.jsp"></definition>
+    <definition name="add_to_cart"  template="/WEB-INF/views/add_to_cart.jsp"></definition>
+    <definition name="UploadPictures" template="/WEB-INF/views/upload.jsp"></definition>
+    <definition name="UploadPicturesSuccess" template="/WEB-INF/views/UploadPicturesSuccess.jsp"></definition>
+    <definition name="UploadPicturesFailed" template="/WEB-INF/views/UploadPicturesFailed.jsp"></definition>
+    <definition name="save_search_criteria" template="/WEB-INF/views/save_search_criteria.jsp"></definition>
+    <definition name="board_detail" template="/WEB-INF/views/board_detail.jsp"></definition>
+    <definition name="commission" template="/WEB-INF/views/commission.jsp"></definition>
+    <definition name="price_guideline" template="/WEB-INF/views/price_guideline.jsp"></definition>
+    <definition name="image_viewer" template="/WEB-INF/views/image_viewer.jsp"></definition>
+    <definition name="invitation_form" template="/WEB-INF/views/invitation.jsp"></definition>
+    <!-- Setup security question and password -->
+    <definition name="setup_seq_password" template="/WEB-INF/views/setup_seq_password.jsp"></definition>
+    <!-- Change password popup -->
+    <definition name="change_password" template="/WEB-INF/views/change_password.jsp"></definition>
+    <!-- Information about why provide the complete profile -->
+    <definition name="why_complete_profile" template="/WEB-INF/views/why_complete_profile.jsp"></definition>
+    
+    <!-- Sidebar -->
+    <definition name="sidebar"  template="/WEB-INF/views/console/sidebar.jsp"></definition>
+    <definition name="sidebar_designer"  template="/WEB-INF/views/console/sidebar_designer.jsp"></definition>
+    <definition name="payment_listener"  template="/WEB-INF/views/payment_listener.jsp"></definition>
+    <definition name="membershipPaylistener"  template="/WEB-INF/views/membershipPaylistener.jsp"></definition>
+    
+    <!-- Admin Mode -->
+    <definition name="admin.console.definition" template="/WEB-INF/views/admin/admin_console_layout.jsp">
+    	<put-attribute name="admin.console.header" value="/WEB-INF/views/admin/admin_header.jsp"></put-attribute>
+    	<put-attribute name="admin.console.body" value="/WEB-INF/views/admin/admin_overview.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="admin.console.boardsapproval" extends="admin.console.definition">
+    	<put-attribute name="admin.console.body" value="/WEB-INF/views/admin/boards_approval.jsp"></put-attribute>
+    </definition>
+    <definition name="admin.console.usersviewer" extends="admin.console.definition">
+    	<put-attribute name="admin.console.body" value="/WEB-INF/views/admin/users_viewer.jsp"></put-attribute>
+    </definition>
+    <definition name="admin.console.referralsviewer" extends="admin.console.definition">
+    	<put-attribute name="admin.console.body" value="/WEB-INF/views/admin/referrals_viewer.jsp"></put-attribute>
+    </definition>
+    <definition name="admin.console.broadcastalert" extends="admin.console.definition">
+    	<put-attribute name="admin.console.body" value="/WEB-INF/views/admin/broadcast_alert.jsp"></put-attribute>
+    </definition>
+    <definition name="admin.console.editboard" extends="admin.console.definition">
+    	<put-attribute name="admin.console.body" value="/WEB-INF/views/admin/edit_board.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="admin_boards_approval" extends="console.definition">
+        <!-- <put-attribute name="title" value="admin.console.title" /> -->
+        <put-attribute name="console_body" value="admin.console.boardsapproval"></put-attribute>
+    </definition>
+    
+    <definition name="admin_users_viewer" extends="console.definition">
+        <!-- <put-attribute name="title" value="admin.console.title" /> -->
+        <put-attribute name="console_body" value="admin.console.usersviewer"></put-attribute>
+    </definition>
+    
+    <definition name="admin_referrals_viewer" extends="console.definition">
+        <!-- <put-attribute name="title" value="admin.console.title" /> -->
+        <put-attribute name="console_body" value="admin.console.referralsviewer"></put-attribute>
+    </definition>
+    
+    <definition name="admin_broadcast_alert" extends="console.definition">
+        <!-- <put-attribute name="title" value="admin.console.title" /> -->
+        <put-attribute name="console_body" value="admin.console.broadcastalert"></put-attribute>
+    </definition>
+    
+    <definition name="admin_edit_board" extends="console.definition">
+        <!-- <put-attribute name="title" value="admin.console.title" /> -->
+        <put-attribute name="console_body" value="admin.console.editboard"></put-attribute>
+    </definition>
+    
+    <!-- Overview -->
+    <definition name="admin_overview" extends="console.definition">
+        <!-- <put-attribute name="title" value="admin.console.title" /> -->
+        <put-attribute name="console_body" value="admin.console.definition"></put-attribute>
+    </definition>
+    
+    <definition name="admin_users_viewer_detail" template="/WEB-INF/views/admin/users_viewer_detail.jsp" />
+    <definition name="admin_approver_comments_history" template="/WEB-INF/views/admin/approver_comments_history.jsp" />
+    <definition name="admin_rating_panel" template="/WEB-INF/views/admin/admin_rating_panel.jsp" />    
+    
+<!--    <definition name="terms" extends="base.popup">
+        <put-attribute name="title" value="Terms And Conditions" />
+        <put-attribute name="popup_header" value="" />
+        <put-attribute name="popup_body" value="/WEB-INF/views/terms.jsp" />
+        <put-attribute name="popup_footer" value="" />
+    </definition> -->
+    
+    <!-- Mobile version -->
+    <definition name="mobile.definition" template="/WEB-INF/views/mobile/mobile_layout.jsp">
+    	<put-attribute name="title" value="page.title" />
+        <put-attribute name="header" value="/WEB-INF/views/mobile/mobile_header.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/mobile/mobile_footer.jsp" />
+    </definition>
+    
+    <definition name="mobile_registration_designer" extends="mobile.definition">
+        <put-attribute name="body" value="/WEB-INF/views/mobile/registration_designer.jsp" />
+    </definition>
+    
+    <definition name="mobile_registration_result" extends="mobile.definition">
+        <put-attribute name="body" value="/WEB-INF/views/mobile/registration_successfully.jsp" />
+    </definition>
+    
+    <!-- Upload result -->
+    <definition name="upload_result_json" template="/WEB-INF/views/upload_result_json.jsp"></definition>
+    
+    <!-- ***************************************************************************************************** -->
+    <!-- UI 3.0 -->
+    <!-- Admin UI -->
+    <definition name="console.admin.definition" template="/WEB-INF/views/admin_2.0/template/admin_console_layout.jsp">
+        <put-attribute name="title" value="page.title" />
+        <put-attribute name="js_ajax_path" value="/WEB-INF/views/admin_2.0/js/ajax_paths_json.jsp" />
+        <put-attribute name="header" value="/WEB-INF/views/admin_2.0/template/admin_console_header.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/admin_2.0/content/dashboard.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/admin_2.0/template/admin_console_footer.jsp" />
+    </definition>
+    
+    <definition name="admin_dashboard" extends="console.admin.definition"></definition>
+    
+    <!-- Admin search -->
+    <definition name="admin_search_criteria" extends="console.admin.definition">
+    	<put-attribute name="body" value="/WEB-INF/views/admin_2.0/content/search_criteria.jsp" />
+    </definition>
+    <definition name="admin_search_viewer" extends="console.admin.definition">
+    	<put-attribute name="body" value="/WEB-INF/views/admin_2.0/content/search_viewer.jsp" />
+    </definition>
+    
+    <definition name="admin_members" extends="console.admin.definition">
+    	<put-attribute name="body" value="/WEB-INF/views/admin_2.0/content/members.jsp" />
+    </definition>
+    <definition name="ajax_paths"  template="/WEB-INF/views/admin_2.0/js/ajax_paths_json_req.jsp"></definition>
+        
+    <!-- Admin projects -->
+    <definition name="admin_projects" extends="console.admin.definition">
+    	<put-attribute name="body" value="/WEB-INF/views/admin_2.0/content/projects/projects_frame.jsp" />
+    </definition>
+    <definition name="admin_projects_create_project" template="/WEB-INF/views/admin_2.0/content/projects/create_project.jsp"></definition>
+    <definition name="admin_projects_manage_projects" template="/WEB-INF/views/admin_2.0/content/projects/view_projects.jsp"></definition>
+    <definition name="admin_projects_approve_submissions" template="/WEB-INF/views/admin_2.0/content/projects/approve_submissions.jsp"></definition>
+    
+    <!-- ***************************************************************************************************** -->
+    <!-- User Console 2.0 UI -->
+    <definition name="console.2.definition" template="/WEB-INF/views/console_2.0/template/console_layout.jsp">
+        <put-attribute name="title" value="page.title" />
+        <put-attribute name="core_js_libs" value="/WEB-INF/views/console_2.0/js/import_core_libs_buyer.jsp" />
+        <put-attribute name="js_ajax_path" value="/WEB-INF/views/console_2.0/js/ajax_paths_json.jsp" />
+        <put-attribute name="header" value="/WEB-INF/views/console_2.0/template/console_header.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/console_2.0/content/search_criteria.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/console_2.0/template/console_footer.jsp" />
+    </definition>
+    
+    <!-- Components -->
+    <!-- Pagin Container -->
+    <definition name="console.2.components.pagin.upper" template="/WEB-INF/views/components/component/upper_pagin.jsp">
+    	<put-attribute name="page-function" value="" />
+    </definition>
+    <!-- Basic pagin -->
+    <definition name="component.pagin.upper.basic" extends="console.2.components.pagin.upper"></definition>
+    <definition name="component.pagin.upper.submissions" extends="console.2.components.pagin.upper">
+    	<put-attribute name="page-function" value="/WEB-INF/views/components/component/pagin_function_submissions.jsp" />
+    </definition>
+    <definition name="component.pagin.upper.submissions.nav" extends="console.2.components.pagin.upper">
+    	<put-attribute name="page-function" value="/WEB-INF/views/components/component/pagin_function_submissions_nav.jsp" />
+    </definition>
+    
+       
+    <!-- 3 components container -->
+    <definition name="console.2.components" template="/WEB-INF/views/components/components.jsp">
+		<put-attribute name="upper-sub-comp" value="" />
+		<put-attribute name="main-comp" value="" />
+		<put-attribute name="lower-sub-comp" value="" />
+    </definition>
+    <!-- Boards viewer -->
+    <definition name="user_boards_viewer" extends="console.2.components">
+    	<put-attribute name="upper_sub_comp" value="component.pagin.upper.basic"></put-attribute>
+		<put-attribute name="main_comp" value="/WEB-INF/views/components/component/board_viewer.jsp"></put-attribute>
+		<put-attribute name="lower_sub_comp" value="/WEB-INF/views/components/component/lower_pagin.jsp"></put-attribute>
+    </definition>
+    
+    <!-- Buyer Basic definition -->
+    <definition name="console.2.buyer" extends="console.2.definition">
+    	<put-attribute name="core_js_libs" value="/WEB-INF/views/console_2.0/js/import_core_libs_buyer.jsp" />
+    	<put-attribute name="header" value="/WEB-INF/views/console_2.0/template/console_header.jsp" />
+    </definition>
+    <!-- Designer Basic definition -->
+    <definition name="console.2.designer" extends="console.2.definition">
+    	<put-attribute name="core_js_libs" value="/WEB-INF/views/console_2.0/js/import_core_libs_designer.jsp" />
+    	<put-attribute name="js_ajax_path" value="/WEB-INF/views/console_2.0/js/ajax_paths_json_designer.jsp" />
+    	<put-attribute name="header" value="/WEB-INF/views/console_2.0/template/console_header_designer.jsp" />
+    </definition>
+    
+    <!-- Buyer search -->
+    <definition name="console_search_criteria" extends="console.2.buyer">
+       	<put-attribute name="body" value="/WEB-INF/views/console_2.0/content/search_criteria.jsp" />
+    </definition>
+    <definition name="console_search_viewer" extends="console.2.buyer">
+    	<put-attribute name="body" value="/WEB-INF/views/console_2.0/content/search_viewer.jsp" />
+    </definition>
+    
+    <!-- Buyer projects -->
+    <definition name="buyer_projects" extends="console.2.buyer">
+    	<put-attribute name="body" value="/WEB-INF/views/console_2.0/content/projects/buyer_projects_frame.jsp" />
+    </definition>
+    <definition name="buyer_projects_create_project" template="/WEB-INF/views/console_2.0/content/projects/create_project.jsp"></definition>
+    <definition name="buyer_projects_view_projects" template="/WEB-INF/views/console_2.0/content/projects/view_projects.jsp"></definition>
+    <definition name="buyer_projects_manage_projects" template="/WEB-INF/views/console_2.0/content/projects/manage_projects.jsp"></definition>
+    <definition name="buyer_projects_boards_viewer" extends="user_boards_viewer">
+    	<put-attribute name="upper_sub_comp" value="component.pagin.upper.submissions.nav"></put-attribute>
+    </definition>
+    
+    <!-- Designer projects -->
+    <definition name="designer_projects" extends="console.2.designer">
+    	<put-attribute name="body" value="/WEB-INF/views/console_2.0/content/mywork/my_work_frame.jsp" />
+    </definition>
+    <definition name="designer_projects_view_projects" template="/WEB-INF/views/console_2.0/content/projects/view_projects_designer.jsp"></definition>
+    <definition name="user_projects_portfolio_viewer" template="/WEB-INF/views/console_2.0/content/mywork/portfolio_viewer.jsp"></definition>
+    <definition name="designer_projects_boards_viewer" extends="user_boards_viewer">
+    	<put-attribute name="upper_sub_comp" value="component.pagin.upper.submissions"></put-attribute>
+    </definition>
+    <definition name="user_projects_create_board" template="/WEB-INF/views/console_2.0/content/mywork/project_board_editor.jsp"></definition>
+</tiles-definitions>

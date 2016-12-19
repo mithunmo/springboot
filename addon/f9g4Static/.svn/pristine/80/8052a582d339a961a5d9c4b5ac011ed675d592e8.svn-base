@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="x-ua-compatible" content="IE=Edge"/> 
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=1050, maximum-scale=1.5, user-scalable=1">
+		<title>Fashion For Globe</title>
+		<link rel="stylesheet" type="text/css" href="/css/ver2.0/popup_2.0.css">
+		<link rel="stylesheet" type="text/css" href="/css/ver2.0/splashscreen_2.0.css">
+		<link rel="stylesheet" type="text/css" href="/css/nivo-slider/nivo-slider.css">
+		<link rel="stylesheet" type="text/css" href="/css/uploadify/uploadify.css" media="all">
+		<!--[if IE 8]>
+			<link rel="stylesheet" type="text/css" href="/css/ver2.0/ie8_popup_2.0.css" />
+			<style type="text/css">
+				body { filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#e6e7e8', endColorstr='#ffffff'); /* For IE7-8-9  */}
+			</style>
+		<![endif]-->
+		<!--[if IE 7]>
+			<link rel="stylesheet" type="text/css" href="/css/ver2.0/ie7_popup_2.0.css" />
+			<link rel="stylesheet" type="text/css" href="/css/ver2.0/ie7_splashscreen_2.0.css" />
+			<style type="text/css">
+				body { filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#e6e7e8', endColorstr='#ffffff'); /* For IE7-8-9  */}
+				.body { overflow:hidden;}
+			</style>
+		<![endif]-->
+		<script id="twitter-wjs" type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+		<script type="text/javascript" src="/js/jquery/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="/js/jquery/scrollbar/jquery.tinyscrollbar.min.js"></script>
+		<!-- File Uploading -->
+		<script type="text/javascript" src="/js/jquery/uploadify/jquery.uploadify-3.1.min.js"></script>
+		<script type="text/javascript" src="/js/ValidationHelper.min.js?v=1.1"></script>
+		<script type="text/javascript" src="/js/popup.min.js?v=2.1"></script>
+		<script type="text/javascript" src="/js/splashscreen.min.js?v=1.24"></script>
+		<script type="text/javascript" src="/js/jquery/placeholder/jquery.placeholder.min.js"></script>
+		<!-- For image rotator -->
+		<script type="text/javascript" src="/js/jquery/nivo-slider/jquery.nivo.slider.pack.js"></script>
+		<script type="text/javascript">
+			var splashUrl = "/f4g"+"/user/login";
+			var forgotPwdUrl = "/f4g/user/forgotpwd";
+			var consoleHomeUrl = "/f4g/console/home";
+			var securityQuestionsUrl = "/f4g/user/questions";
+			var termsUrl = "/f4g/user/terms";
+			var updateMembershipPath="/f4g"+"/membership/pay";
+			var invitationFormPath = "/f4g"+"/invitation";
+			var setupSeqPasswordPath = "/f4g"+"/user/setup_seq_pass";
+			var membershipUrl  = "/f4g" + "/membership/pay";
+			var submitSamplesPath = "/f4g"+"/register/samples";
+		</script>
+		<script type="text/javascript" src="/js/gainit.min.js"></script>
+	</head>
+	<body>
+		<div class="body">
+			<input type="hidden" id="sessionTimeout" value="true">
+			
+			<div class="splash-header">
+				<div class="header-functions">
+					<div id="free_trial" style="display: block;">US PATENT PENDING</div>
+					<div class="right-holder">
+						<div class="header-login" id="showLogin"></div>
+						<a href="/f4g/register/designer" class="header-signup" id="mapSignUp"></a>
+						<div class="header-contact" id="showContactInfo"></div>
+						<a href="/faqs.html" class="header-faqs"></a>
+					</div>
+				</div>
+				<div class="logo"><a href="/"><img src="/images/logo3.png"></a></div>
+				<div class="header-buttons">
+					<a href="/f4g/about_us" id="who"></a>
+					<a href="/f4g/what_we_do" id="what"></a>
+					<!-- <a href="/f4g/how_it_works" id="how"></a> -->
+					<a href="/f4g/get_started" id="freeDemo"></a>
+					<a href="http://fashionforglobe.wordpress.com/" data-outbound-link="true" id="blog"></a>
+					<a href="javascript:void(0);" id="wptf"></a>
+				</div>
+			</div>
+			
+			<noscript>
+				&lt;div id="nojavascriptsupport" style="width:100%; background-color:#EEE; height:30px; vertical-align: middle;"&gt;
+					&lt;span&gt;You have to enable the Javascript to log in our website, thank you.&lt;/span&gt;
+				&lt;/div&gt;
+			</noscript>
+			<div class="mainbox">
+				<div id="mainbox-image-rotator" class="nivoSlider mainbox-image">
+					<img src="/images/splash/splash_carousel/a.jpg" style="width: 1050px; visibility: hidden;">
+					<img src="/images/splash/splash_carousel/b.jpg" style="width: 1050px; visibility: hidden;">
+					<img src="/images/splash/splash_carousel/c.jpg" style="width: 1050px; visibility: hidden;">
+					<img src="/images/splash/splash_carousel/d.jpg" style="width: 1050px; visibility: hidden;">
+					<img src="/images/splash/splash_carousel/e.jpg" style="width: 1050px; visibility: hidden;">
+			  	</div>
+				<div class="leftarea">
+					<!-- <img src="/images/splash/companyinfo.png" alt="Company Info" title="Company Info" id="company_info"/> -->
+					<div class="leftarea-content">
+						<div class="leftarea-title">WHAT IS FASHION FOR GLOBE(FFG)?</div>
+						<div class="area-content">
+						We are a curated marketplace for fashion industry professionals where freelance designers can easily
+						connect with big name brands across the world. Our platform is the best at discovering new talent,
+						curating high quality designs and building lasting relationships between companies and designers.
+						</div>
+						<div class="leftarea-title space">WHO CAN JOIN?</div>
+						<div class="area-content">
+						We emphasize the diversity and originality of our designers. They come from all fashion categories and a 
+						wide range of experience levels. Artisans, self-taught designers, students, freelance or long term industry 
+						professionals are all welcome. Just getting started in the fashion industry? FFG can help you 
+						find your next freelance fashion design job. 
+						</div>
+					</div>
+					<!-- <img src="/images/splash/bigtext.png" alt="Company Info" title="Company Info" id="lower_quote"/> -->
+					<div class="leftarea-content space">
+						<div class="leftarea-title">CONNECTING BRANDS WITH INSPIRING TALENT FROM ACROSS THE GLOBE</div>
+					</div>
+					<div class="leftarea-content mainbox-quote-holder">
+						<div class="rightarea-quote-title"><span>WHAT THEY'RE SAYING...</span></div>
+						<div class="mainbox-quote">
+							<div class="mainbox-quote-item item1">
+								<div class="mainbox-quote-item-content">
+									<div class="mainbox-quote-item-text">
+										<img class="quote-img" src="/images/splash/quotes/upquote.png">FFG GIVES DESIGNERS THE FREEDOM TO FOCUS ON THE CREATIVE PROCESS, ENABLING US TO EXPAND OUR INSPIRATIONAL PURSUITS.<img class="quote-img" src="/images/splash/quotes/downquote.png">
+									</div>
+									<div class="mainbox-quote-item-name">- LAUREN B., STUDENT DESIGNER</div>
+								</div>
+							</div>
+							<div class="mainbox-quote-item item2" style="display:none;">
+								<div class="mainbox-quote-item-content">
+									<div class="mainbox-quote-item-text">
+										<img class="quote-img" src="/images/splash/quotes/upquote.png">FFG ALLOWS ME TO FLEX MY CREATIVITY, BROADEN MY DESIGN AESTHETIC AND GIVES ME THE OPPORTUNITY TO SHOWCASE MY WORK TO A BROAD RANGE OF CLIENTELE.<img class="quote-img" src="/images/splash/quotes/downquote.png">
+									</div>
+									<div class="mainbox-quote-item-name">- CHRIS M., FASHION DESIGNER</div>
+								</div>
+							</div>
+							<div class="mainbox-quote-item item3" style="display:none;">
+								<div class="mainbox-quote-item-content">
+									<div class="mainbox-quote-item-text">
+										<img class="quote-img" src="/images/splash/quotes/upquote.png">FASHION FOR GLOBE IS A FABULOUS PLATFORM BRINGING ME, AND EMERGING DESIGNER, ONE STEP FORWARD IN MY FASHION CAREER.<img class="quote-img" src="/images/splash/quotes/downquote.png">
+									</div>
+									<div class="mainbox-quote-item-name">- FIONA L., FASHION DESIGNER</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="rightarea">
+					<!-- <img src="/images/splash/quotes/quotes-title.png" alt="Quotes" title="Quotes" id="quotes"/> -->
+					<div class="leftarea-title banner" style="text-align: center;">
+						<!-- WIN $100 BY PARTICIPATING IN "PROJECT OF THE WEEK" -->
+						WIN $100 FOR "PROJECT OF THE WEEK"
+						<div style="text-align: center; width:100%;">
+							<a href="http://fashionforglobe.wordpress.com/projects-and-competitions/project-of-the-week-specifications/" data-outbound-link="true">Click here for details</a>&nbsp;or&nbsp;<a href="/f4g/register/designer">Register now</a>
+						</div>
+					</div>
+					<div class="tt-wrapper">
+						<a class="twitter-timeline" href="https://twitter.com/FashionForGlobe" data-widget-id="436390820363522048" width="525">Tweets by @FashionForGlobe</a>
+					</div>
+					<!-- <div id="mainbox-quote-rotator" class="nivoSlider mainbox-quote">
+						<img src="/images/splash/quotes/quotes-1.png" style="background-color: #FFF;"/>
+			    	</div> -->
+				</div>
+			</div>
+			<script type="text/javascript">
+			_gaq.push(['_trackPageview']);
+			</script>
+			<div class="bottomPanel">
+				<div class="sitemap"></div>
+				<span class="socialButtons">
+					<a href="http://www.linkedin.com/company/fashion-for-globe" target="_blank"><img src="/images/LinkedIn.png"></a>
+				    <a href="https://www.facebook.com/fashionforglobe" target="_blank"><img src="/images/Facebook.png"></a>
+				    <a href="https://twitter.com/fashionforglobe" target="_blank"><img src="/images/Twitter.png"></a>
+				    <a href="javascript:void(0);" target="_blank"><img src="/images/RSS.png"></a>
+				</span>
+			</div>
+			<div class="copyright">
+				<i></i><span><!-- Copyright&nbsp;&copy;&nbsp;2012. All Rights Reserved. --><img src="/images/copyright.png" alt="Copyright&nbsp;©&nbsp;2012. All Rights Reserved."></span>
+			</div>
+			<div style="clear:both; width:100%; height:1px;"></div>
+		</div>
+		<div class="debug" id="debug"></div>
+		<!-- POPUP -->
+		<div class="popupContainer" id="popupContainer"></div>
+		<div class="overlay" id="overlay"></div>	
+		<!--  LOGIN PANEL -->
+		<div id="loginPanel">
+			<div class="overlay"></div>
+			<div class="content-holder">
+				<div id="closeLoginPanel"><a href="javascript:void(0);">Close</a></div>
+				<div class="content-holder-title"><img src="/images/splash/members_login.png" title="MEMBERS LOGIN" alt="MEMBERS LOGIN"></div>
+				<form method="post" action="/f4g/user/login" id="form_login">
+				<div class="username">
+					<span>E-MAIL&nbsp;ADDRESS</span>
+					<input type="text" name="userName" id="username" placeholder="Please enter your email" value="">
+					<!-- <input type="text" name="username" id="username"></input> -->
+				</div>
+				<div class="password">
+					<span>PASSWORD</span>
+					<input type="password" name="password" id="password" value="">
+					<!-- <input type="password" name="password" id="password" placeholder="Please enter your password"></input> -->
+				</div>
+				<div class="remember">
+					<input type="checkbox" name="rememberme" id="remember" checked="checked" tabindex="0">Remember Me
+			    </div>
+				<div class="login"><div class="button center" id="submit">LOGIN</div></div>
+				<div class="forget-password"><a href="javascript:void(0);" id="link_forget" title="Forget Password">Forgot Password?</a></div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

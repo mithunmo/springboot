@@ -1,0 +1,262 @@
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<%-- The flag to determine the label needs to display or not. --%>
+<c:set var="hasDisplayedLabel" value="false" />
+<!---set specific id to set  popup width-------->
+<div class="popup" id="board_detail"> 
+<div class="header">
+Board Details
+    <div class="close">X</div>
+</div>
+<!---Set id to fill in data--->
+<div class="content" id="popup_board_detail">
+	<div class="loadingSpinner" style="z-index:10001; display:none;"><span><img src="/images/spinner.gif" /></span></div>
+	<div class="leftArea">
+		<table>
+			<tr>
+			<c:choose>
+				<c:when test="${canShow}">
+					<td class="board-gallery-holder">
+						<div class="board-gallery">
+							<div class="board-gallery-label separated">Design</div>
+							<img class="board-gallery-item" src="/100x100/${detail.boardImages[0].thumbnailUrl}" image-actual-size="${hasSimiliarSize}" image-width="${imageWidth}" image-height="${imageHeight}" image-data="${imageurl_original}" image-data1="${detail.boardImages[0].fileName}" />
+							<c:forEach var="portfolioItem" items="${detail.portfolioImages}" varStatus="counter">
+								<c:if test="${portfolioItem.activeStatus == 1}">
+									<c:if test="${!empty detail.portfolioImages && hasDisplayedLabel==false}">
+										<div class="board-gallery-label separated">Inspiration</div>
+										<c:set var="hasDisplayedLabel" value="true" />
+									</c:if>
+									<img class="board-gallery-item" src="/100x100/${portfolioItem.thumbnailUrl}" image-actual-size="${portfolioItem.isActualSize}" image-width="${portfolioItem.imageWidth}" image-height="${portfolioItem.imageHeight}" image-data="${portfolioItem.mainImageUrl}" image-data1="${portfolioItem.fileName}" />
+								</c:if>
+							</c:forEach>				
+						</div>
+					</td>
+				</c:when>
+				<c:otherwise>
+					<td></td>
+				</c:otherwise>
+			</c:choose>
+			<td>
+	    	<div class="pic">
+	    		<c:choose>
+	    			<c:when test="${!canShow}">
+	    				<c:choose>
+							<c:when test="${typeCode eq 'board.sold' || typeCode eq 'board.unpublished' || typeCode eq 'board.unpublished.unrelatedusers'}">
+								<div class="main-image-wrapper">
+									<img src="/images/forbidden_with_detail.jpg" />
+								</div>
+	    						<span>(The board is sold)</span>
+							</c:when>
+							<c:when test="${typeCode eq 'board.processing'}">
+								<div class="main-image-wrapper">
+									<img src="/images/processing_with_detail.jpg" />
+								</div>
+	    						<span>(The image is being reviewed)</span>
+							</c:when>
+						</c:choose>
+	    			</c:when>
+	    			<c:when test="${empty imageurl_original}">
+	    				<div class="main-image-wrapper">
+	    					<img src="/400x400/${imageurl}" />
+	    				</div>
+	    				<span class="leftArea-hint">(The original image is not available.)</span>
+	    			</c:when>
+	    			<c:otherwise>
+	    				<c:choose>
+	    					<c:when test="${hasSimiliarSize}">
+	    						<div class="main-image-wrapper">
+	    							<img src="/400x400/${imageurl}" />
+	    						</div>
+	    						<span class="leftArea-hint">(Actual size)</span>
+	    					</c:when>
+	    					<c:otherwise>
+	    						<div class="main-image-wrapper">
+									<a href='/bigimage/${imageurl_original}' class = 'cloud-zoom' id='zoom1' rel="zoomWidth:450, softFocus: false">
+				    					<img src="/400x400/${imageurl}" />
+				    				</a>
+			    				</div>
+			    				<span class="leftArea-hint">(Rollover image to zoom detail)</span>
+			    				<span class="enlargeOption"><a class="enlargeImage" image-width="${imageWidth}" image-height="${imageHeight}" image-data="${imageurl_original}">[+] Enlarge</a></span>
+		    				</c:otherwise>
+	    				</c:choose>
+	    			</c:otherwise>
+	    		</c:choose>
+	    	</div>
+    		</td>
+    		</tr>
+    	</table>
+    	
+    	<div class="navigator" id="navigator">
+    		<div class="navi-header">Search Result</div>
+			<div class="navi-gallery">
+				<a class="prev-board nailBoardLink"></a>
+				<a class="next-board nailBoardLink"></a>
+			</div>
+		</div>
+    </div>
+    <div class="rightArea" id="popup_boarddetail_rightarea">
+    	<div class="entity" id="board_detail_scrollbar">
+			<div class="scrollbar" id="board_detail_scrollbar_entity"><div class="track"><div class="thumb" style="top: 0px; height: 49.33555555555556px; "><div class="end"></div></div></div></div>
+			<div class="viewport">
+				<div class="overview" style="top: 0px;">
+					<%-- <form> --%>
+			    	<div class="info">
+			        	<span class="info-board-name" status="${shopTypeCode}">BOARD NAME:&nbsp;${detail.name}</span>
+			        	<c:if test="${userType == 'CT'}">
+			        		<c:choose>
+			        			<c:when test="${canShop && !hasInShoppingCart}">
+			        				<div class="cart-icon" id="add_to_shopping_cart" data="${detail.boardId}"><img src="/images/shoppingcart.png"></div>
+			        			</c:when>
+			        			<%-- <c:otherwise>
+			        				<span id="remove_from_shopping_cart" data="${detail.boardId}">Remove from Shopping Cart</span>
+			        			</c:otherwise> --%>
+			        		</c:choose>
+			        	</c:if>
+			            <img src="${designerLogo}" class="info-designer-logo" /><span class="info-designer-name">${designerName}</span>
+			            <span class="info-posted-date">Date Posted: <fmt:formatDate pattern="MMM-dd-yyyy" value="${postDate}"/></span>
+			            <c:if test="${userType == 'DG'}">
+			            	Board Status: <span style="color:#C30;">${detail.boardStatus}</span>
+			            </c:if>
+			        </div>
+			        <div class="detail">
+			        	<input type="hidden" id="boardId" name="boardId" value="${detail.boardId}"/>
+			            <table>
+			            	<tr class="tableHeader">
+			                  <td width="5%"></td>
+			                  <td width="60%" class="smallText">File Types + Available Options</td>
+			                  <td width="35%" class="smallText">Price</td>
+			                </tr>
+			            	<c:forEach var="item" items="${saleTypeList}">
+			            		<c:choose>
+			            			<c:when test="${item.lookupValueId == detail.saleTypeId}">
+			            				<tr class="grayBackground">
+				            				<td>
+				                  				<input type="radio" name="radio" id="form_saletype_${detail.saleTypeId}" value="${detail.saleTypeId}" checked="checked"/>
+				                  			</td>                  			
+				                  			<td class="border">${item.description}</td>
+				                  			<td class="border" id="saletype_${detail.saleTypeId}_final">
+				                  				<c:choose>
+				                  					<c:when test="${userType != 'CT'}"><img class="credit-unit" src="/images/creditunit.png" alt="FFG Credit"/>&nbsp;${detail.boardPrice}</c:when>
+				                  					<c:otherwise><img class="credit-unit" src="/images/creditunit.png" alt="FFG Credit"/>&nbsp;${detail.totalPrice}</c:otherwise>
+				                  				</c:choose>
+				                  			</td>
+			                  			</tr>
+			            			</c:when>
+			            			<c:otherwise>
+			            				<c:if test="${userType != 'CT'}">
+				            				<tr class="grayBackground">
+					            				<td></td>          			
+					                  			<td class="border">${item.description}</td>
+					                  			<td class="border" id="saletype_${detail.saleTypeId}_final"></td>
+				                  			</tr>
+			                  			</c:if>
+			            			</c:otherwise>
+			            		</c:choose>
+			            	</c:forEach>
+			                
+			                <%-- <tr  class="grayBackground">
+			                  <td style="background-color:#fff"><!-- <input type="radio" name="radio" id="form_saletype_1" value="j_only" /> --></td>
+			                  <td class="border">${detail.saleTypeId} JPG Only</td>
+			                  <td class="border" id="saletype_1_final">000.00</td>
+			                </tr>
+			                <tr>
+			                  <td  style="background-color:#fff"><!-- <input type="radio" name="radio" id="form_saletype_2" value="j_ai" /> --></td>
+			                  <td class="border">${detail.saleTypeId} JPG + AI File Only</td>
+			                  <td class="border" id="saletype_2_final">000.00</td>
+			                </tr>
+			                <tr class="grayBackground">
+			                  <td  style="background-color:#fff"><!-- <input type="radio" name="radio" id="form_saletype_3" value="j_ai_phy" /> --></td>
+			                  <td class="border">${detail.saleTypeId} JPG + AI File + Physical Samples</td>
+			                  <td class="border" id="saletype_3_final">000.00</td>
+			                </tr>
+			                <tr>
+			                  <td  style="background-color:#fff"><input type="radio" name="radio" id="form_saletype_4" value="j_ai_phy_cust" checked="checked"/></td>
+			                  <td class="border">${detail.saleTypeId} JPG + AI File + Physical Samples + Customization</td>
+			                  <td class="border" id="saletype_4_final">${detail.boardPrice}</td>
+			                </tr> --%>
+			                <%-- <tr height="15px">
+			                	<td><input name="dfx" type="checkbox" value="" /></td>
+			                    <td>DFX</td>
+			                    <td>$ ${detail.totalPrice}</td>
+			                </tr> --%>
+			        	</table>
+			            
+			        </div>
+			        <c:if test="${userType == 'CT'}">
+				        <div class="comment">
+				        	<div class="icon"><i></i><img src="${userLogo}" style="width:40px; height:auto;" /></div>
+				            <div class="input">
+				            	${userName}
+				                <br />
+				                <textarea id="form_comment_messageBody"></textarea>
+				                <div class="comm-protocol-holder">
+				                	<label><input type="checkbox" id="popupCommProtocol" /><spring:message code="communication.protocol.company"/></label>
+				                </div>
+				                <a id="form_send_comment">Send</a>
+				                <span id="send_status"></span>
+				            </div>
+				            <form:form modelAttribute="messageForm" id="form_comment">
+					            <input type="hidden" name="messageBody" id="commentBody" />
+					            <input type="hidden" name="boardId" id="boardId" value="${detail.boardId}" />
+					            <input type="hidden" name="boardName" id="boardName" value="<c:out value="${detail.name}"/>" />
+					            <input type="hidden" name="toUserId" value="${detail.originalUserId}" /> 
+				            </form:form>
+				        </div>
+					</c:if>
+					<%-- Show related board when the size of related board is largern than 1. (If the size is equal to 1, it's the board itself.) --%>
+					<c:if test="${fn:length(boardsByPortfolio) > 1}">
+				        <div class="section">
+					        <span class="title">Related Boards</span>
+					        <div id="board-gallery" class="board-gallery">
+				            	<div class="board-gallery-controller">
+				            		<a href="javascript:void(0);" class="control-prev"></a> 
+				            		<a href="javascript:void(0);" class="control-next"></a>
+				            	</div>
+				            	<div class="board-gallery-wrapper">
+				            		<ul>
+					            	<c:forEach var="item" items="${boardsByPortfolio}" varStatus="counter">
+					            		<c:if test="${item.boardId != detail.boardId}">
+						            		<li>
+							            		<img class="boards_suggestion_boardId" data="${item.boardId}" src="/100x100/${item.boardImages[0].thumbnailUrl}" title="<c:out value="${item.name}" />"/>
+						            		</li>
+					            		</c:if>
+					            	</c:forEach>
+					            	</ul>
+				            	</div>
+				            </div>
+			            </div>
+		            </c:if>
+			   		<c:if test="${userType == 'CT'}">
+				        <div class="section suggestion">
+				        	<!-- You Might Also Like
+				        	<div class="list">
+				            	<div class="item"><img src="/images/suggestion/6N_2.jpg" style="width:100%; height:100%"/></div>
+				                <div class="item"><img src="/images/suggestion/6N_3.jpg" style="width:100%; height:100%"/></div>
+				                <div class="item"><img src="/images/suggestion/6N_4.jpg" style="width:100%; height:100%"/></div>
+				                <div class="item"><img src="/images/suggestion/6N_5.jpg" style="width:100%; height:100%"/></div>
+				            </div> -->
+				            <span class="title">You Might Also Like</span><br/>
+				            <!-- Show only 4 boards -->
+				            <c:forEach items="${boardsSuggestion}" var="current" varStatus="counter">
+				            	<c:if test="${counter.count<=4 && !empty current}">
+		    						<div class="item"><a href="javascript:void(0)" class="boards_suggestion_boardId" data="${current.boardId}" title="<c:out value="${current.name}" />"><img src="/100x100/${current.thumbnailUrl}" /></a></div> 
+		    						<!-- ${current.boardId} - ${current.totalPrice} -->
+		    					</c:if>
+		  					</c:forEach>
+				        </div>
+				        <div style="width:100%; height:10px;"></div>
+			        </c:if>
+			        <%-- </form> --%>
+				</div>
+			</div>
+		</div>
+    </div>
+    <div class="content-bottom"></div>
+</div>
+</div>

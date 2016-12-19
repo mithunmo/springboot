@@ -1,0 +1,192 @@
+package com.f9g4.servicesdk;
+
+import java.util.Properties;
+
+import com.f9g4.businessobjects.services.AddBoardApprovalRequest;
+import com.f9g4.businessobjects.services.AddBoardApprovalResponse;
+import com.f9g4.businessobjects.services.AddBoardRequest;
+import com.f9g4.businessobjects.services.AddBoardResponse;
+import com.f9g4.businessobjects.services.CreateBoardImageRequest;
+import com.f9g4.businessobjects.services.CreateBoardImageResponse;
+import com.f9g4.businessobjects.services.DeleteBoardByIdResponse;
+import com.f9g4.businessobjects.services.DrawerInfoResponse;
+import com.f9g4.businessobjects.services.GetAllSamplesResponse;
+import com.f9g4.businessobjects.services.GetBoardByIdResponse;
+import com.f9g4.businessobjects.services.GetBoardsByPMRequest;
+import com.f9g4.businessobjects.services.GetBoardsByPMResponse;
+import com.f9g4.businessobjects.services.GetBoardsByPortfolioResponse;
+import com.f9g4.businessobjects.services.GetBoardsSuggestionRequest;
+import com.f9g4.businessobjects.services.GetBoardsSuggestionResponse;
+import com.f9g4.businessobjects.services.GetRecentlyViewedBoardsResponse;
+import com.f9g4.businessobjects.services.GetSamplesByUserIdRequest;
+import com.f9g4.businessobjects.services.GetSamplesByUserIdResponse;
+import com.f9g4.businessobjects.services.ResubmitSamplesRequest;
+import com.f9g4.businessobjects.services.ResubmitSamplesResponse;
+import com.f9g4.businessobjects.services.SearchBoardsRequest;
+import com.f9g4.businessobjects.services.SearchBoardsResponse;
+import com.f9g4.businessobjects.services.SearchExampleBoardsRequest;
+import com.f9g4.businessobjects.services.SearchExampleBoardsResponse;
+import com.f9g4.businessobjects.services.SubmitSamplesRequest;
+import com.f9g4.businessobjects.services.SubmitSamplesResponse;
+import com.f9g4.businessobjects.services.UpdateBoardByAdminRequest;
+import com.f9g4.businessobjects.services.UpdateBoardByAdminResponse;
+import com.f9g4.businessobjects.services.UpdateBoardRequest;
+import com.f9g4.businessobjects.services.UpdateBoardResponse;
+import com.f9g4.businessobjects.services.UpdateBoardStatusRequest;
+import com.f9g4.businessobjects.services.UpdateBoardStatusResponse;
+import com.f9g4.businessobjects.services.UpdatePublishBoardStatusRequest;
+import com.f9g4.businessobjects.services.UpdatePublishBoardStatusResponse;
+import com.f9g4.businessobjects.services.ValidateBoardsRequest;
+import com.f9g4.businessobjects.services.ValidateBoardsResponse;
+import com.f9g4.service.sdk.AbstractRestSDK;
+import com.f9g4.service.sdk.common.ServiceType;
+import com.f9g4.services.rest.IBoardService;
+
+public class BoardServiceSDK extends AbstractRestSDK<IBoardService> implements IBoardService {
+	
+	private static final long serialVersionUID = 1L;
+
+	private Properties boardServiceProperties;
+
+	private String boardServiceConfigFile;
+
+	private ServiceType callType;
+	
+	private IBoardService boardService;
+	
+	
+
+	public Properties getBoardServiceProperties() {
+		return boardServiceProperties;
+	}
+
+	public void setBoardServiceProperties(Properties boardServiceProperties) {
+		this.boardServiceProperties = boardServiceProperties;
+	}
+
+	public String getBoardServiceConfigFile() {
+		return boardServiceConfigFile;
+	}
+
+	public void setBoardServiceConfigFile(String boardServiceConfigFile) {
+		this.boardServiceConfigFile = boardServiceConfigFile;
+	}
+
+	public void setCallType(ServiceType callType) {
+		this.callType = callType;
+	}
+
+	@Override
+	protected String getClientConfigFile() {
+		return this.boardServiceConfigFile;
+	}
+
+	@Override
+	protected Properties getProperties() {
+		return this.boardServiceProperties;
+	}
+
+	@Override
+	protected ServiceType getCallType() {
+		return this.callType;
+	}
+
+	@Override
+	protected IBoardService getLocalService() {
+		return this.boardService;
+	}
+
+	@Override
+	protected IBoardService getMockService() {
+		return null;
+	}
+
+	public AddBoardResponse addBoards(AddBoardRequest request) {
+		return getService().addBoards(request);
+	}
+
+	public GetBoardByIdResponse getBoardbyId(int boardid) {
+		return getService().getBoardbyId(boardid);
+	}
+
+	public GetBoardsByPortfolioResponse getBoardsbyPortfolioId(int portfolioid) {
+		return getService().getBoardsbyPortfolioId(portfolioid);
+	}
+
+	public DeleteBoardByIdResponse deleteBoardById(int boardid) {
+		return getService().deleteBoardById(boardid);
+	}
+
+	public GetRecentlyViewedBoardsResponse getRecentlyViewedBoards(int userId, int numberOfdays,String userType) {
+		return getService().getRecentlyViewedBoards(userId, numberOfdays,userType);
+	}
+
+	public CreateBoardImageResponse createBoardImage(CreateBoardImageRequest request) {
+		return getService().createBoardImage(request);
+	}
+
+	public SearchBoardsResponse searchBoards(SearchBoardsRequest request) {
+		return getService().searchBoards(request);
+	}
+	
+	public UpdateBoardResponse updateBoard(UpdateBoardRequest request)
+	{
+		return getService().updateBoard(request);
+	}
+
+	public DrawerInfoResponse drawerInfo(Integer userId) {
+		return getService().drawerInfo(userId);
+	}
+
+	public ValidateBoardsResponse validateBoards(ValidateBoardsRequest request) {
+		return getService().validateBoards(request);
+	}
+
+	public UpdateBoardStatusResponse updateBoardStatus(UpdateBoardStatusRequest request) {
+		return getService().updateBoardStatus(request);
+	}
+	
+	public UpdatePublishBoardStatusResponse updatePublishBoardStatus(UpdatePublishBoardStatusRequest request){
+		return getService().updatePublishBoardStatus(request);
+	}
+	
+	public GetBoardsSuggestionResponse getBoardsSuggestion(GetBoardsSuggestionRequest request)
+	{
+		return getService().getBoardsSuggestion(request);
+	}
+	
+	public GetBoardsByPMResponse fetchBoardsByPMStatus(GetBoardsByPMRequest request)
+	{
+		return getService().fetchBoardsByPMStatus(request);
+	}
+
+	public AddBoardApprovalResponse addBoardApproval(AddBoardApprovalRequest request) {
+		return getService().addBoardApproval(request);
+	}
+	
+	public UpdateBoardByAdminResponse updateBoardByAdmin(UpdateBoardByAdminRequest request) {
+		return getService().updateBoardByAdmin(request);
+	}
+	
+	public SubmitSamplesResponse submitSamples(SubmitSamplesRequest request)
+	{
+		return getService().submitSamples(request);
+	}
+
+	public GetAllSamplesResponse getAllSamples() {
+		return getService().getAllSamples();
+	}
+
+	public GetSamplesByUserIdResponse getSamplesByUserId(GetSamplesByUserIdRequest request) {	
+		return getService().getSamplesByUserId(request);
+	}
+
+	public ResubmitSamplesResponse resubmitSamples(ResubmitSamplesRequest request) {
+		return getService().resubmitSamples(request);
+	}
+
+	public SearchExampleBoardsResponse searchExampleBoards(
+			SearchExampleBoardsRequest request) {
+		return getService().searchExampleBoards(request);
+	}
+}

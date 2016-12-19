@@ -1,0 +1,228 @@
+package com.f9g4.domain;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Calendar;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+@Entity
+public class TrActivityScreenCompanyGrid implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+	@Column(name = "CLICK_ID", nullable = false)
+	@Basic(fetch = FetchType.EAGER)
+	@Id
+	@XmlElement
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Integer clickId;
+	
+	@Column(name = "BOARD_ID", nullable = false)
+	@Basic(fetch = FetchType.EAGER)
+	@Id
+	Integer boardId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumns({ @JoinColumn(name = "BOARD_ID", referencedColumnName = "BOARD_ID", nullable = false) })
+	@XmlTransient
+	TrBoard board;
+	
+	@Column(name = "NAME", length = 500, nullable = false)
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	String name;
+	
+	@Column(name = "THUMBNAIL_URL", length = 1000, nullable = false)
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	String thumbnailUrl;
+	
+	@Column(name = "TOTAL_PRICE", scale = 2, precision = 15, nullable = false)
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	BigDecimal totalPrice;
+	
+	@Column(name = "TEMP_SALE_PRICE", scale = 2, precision = 15, nullable = false)
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	BigDecimal salePrice;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "EVENT_TIMESTAMP", nullable = false)
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	Calendar eventTimestamp;
+	
+	@Column(name = "SEASON", length = 60, nullable = false)
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	String season;
+	/**
+	 */
+
+	/*@Column(name = "YEAR", length = 30, nullable = false)
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	String year;*/
+	
+
+	@Column(name = "ORIGINAL_USER_ID", nullable = false)
+	@Basic(fetch = FetchType.EAGER)
+	@Id
+	Integer userId;
+
+	@Column(name = "FIRSTNAME", length = 240, nullable = false)
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	String firstname;
+	/**
+	 */
+
+	@Column(name = "LASTNAME", length = 240, nullable = false)
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	String lastname;
+	
+	
+	public BigDecimal getSalePrice() {
+		return salePrice;
+	}
+
+	public void setSalePrice(BigDecimal salePrice) {
+		this.salePrice = salePrice;
+	}
+
+	public Integer getBoardId() {
+		return boardId;
+	}
+
+	public void setBoardId(Integer boardId) {
+		this.boardId = boardId;
+	}
+
+	public String getThumbnailUrl() {
+		return thumbnailUrl;
+	}
+
+	public void setThumbnailUrl(String thumbnailUrl) {
+		this.thumbnailUrl = thumbnailUrl;
+	}
+
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Calendar getEventTimestamp() {
+		return eventTimestamp;
+	}
+
+	public void setEventTimestamp(Calendar eventTimestamp) {
+		this.eventTimestamp = eventTimestamp;
+	}
+
+	public String getSeason() {
+		return season;
+	}
+
+	public void setSeason(String season) {
+		this.season = season;
+	}
+
+	/*public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}*/
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	
+	public TrBoard getBoard() {
+		return board;
+	}
+
+	public void setBoard(TrBoard board) {
+		this.board = board;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public Integer getClickId() {
+		return clickId;
+	}
+
+	public void setClickId(Integer clickId) {
+		this.clickId = clickId;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((thumbnailUrl == null) ? 0 : thumbnailUrl.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TrBoardSearch other = (TrBoardSearch) obj;
+		if (thumbnailUrl == null) {
+			if (other.name != null)
+				return false;
+		} else if (!thumbnailUrl.equals(other.name))
+			return false;
+		return true;
+	}
+}

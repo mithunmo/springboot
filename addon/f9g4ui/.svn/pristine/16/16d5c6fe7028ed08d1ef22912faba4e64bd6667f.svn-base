@@ -1,0 +1,214 @@
+package com.f9g4.webapp.controllers;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.f9g4.businessobjects.domain.AdUsersDomain;
+import com.f9g4.businessobjects.domain.TrBoardDomain;
+import com.f9g4.businessobjects.domain.TrBoardImagesDomain;
+import com.f9g4.businessobjects.services.BoardSet;
+import com.f9g4.businessobjects.services.GetBoardByIdResponse;
+import com.f9g4.businessobjects.services.GetMembershipCommissionRequest;
+import com.f9g4.businessobjects.services.GetMembershipCommissionResponse;
+import com.f9g4.businessobjects.services.ValidateBoardsRequest;
+import com.f9g4.businessobjects.services.ValidateBoardsResponse;
+import com.f9g4.businessobjects.services.ViewUserResponse;
+import com.f9g4.common.util.LookupTypeEnum;
+import com.f9g4.common.util.LookupTypeValueEnum;
+import com.f9g4.servicesdk.BoardServiceSDK;
+import com.f9g4.servicesdk.MembershipServiceSDK;
+import com.f9g4.servicesdk.RegistrationServiceSDK;
+import com.f9g4.web.forms.Cart;
+import com.f9g4.web.forms.CartItem;
+import com.f9g4.web.utils.UserNameUtil;
+import com.f9g4.web.utils.ViewNames;
+import com.f9g4.web.utils.ViewPaths;
+
+@Controller
+@SessionAttributes(value={ "user","cart" })
+public class CartController {
+
+	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
+	
+	@Autowired
+	private BoardServiceSDK boardServiceSDK;
+	
+	@Autowired
+	private MembershipServiceSDK membershipServiceSDK;
+	
+	@Autowired
+	private RegistrationServiceSDK registrationServiceSDK=new RegistrationServiceSDK();
+	
+	@RequestMapping(value= ViewPaths.ADD_CART, method=RequestMethod.POST)
+	public @ResponseBody ModelMap addToCart(CartItem item, @ModelAttribute(value="cart") Cart cart, @ModelAttribute(value="user") AdUsersDomain adUser){
+		ModelMap model = new ModelMap();
+		
+		//get designer name, board name and board image.
+		GetBoardByIdResponse boardResponse=boardServiceSDK.getBoardbyId(item.getBoardId());
+		ViewUserResponse userResponse=registrationServiceSDK.viewUser(boardResponse.getBoard().getOriginalUserId());
+		
+		//set board name
+		item.setBoardName(boardResponse.getBoard().getName());
+		//set images
+		List<TrBoardImagesDomain> images=boardResponse.getBoard().getBoardImages();
+		item.setImageUrl(images.get(0).getThumbnailUrl());
+		//set board price
+		//item.setBoardprice(boardResponse.getBoard().getTotalPrice());
+		//Compute the SALE_PRICE with company commission
+		GetMembershipCommissionRequest getCommissionRequest = new GetMembershipCommissionRequest();
+		getCommissionRequest.setUserId(adUser.getUserId());
+		GetMembershipCommissionResponse getCommissionResponse =  membershipServiceSDK.getMembershipCommissiondetails(getCommissionRequest);
+		BigDecimal commission = getCommissionResponse.getStPricingOptions().getCommission();
+		BigDecimal salePrice = boardResponse.getBoard().getTotalPrice().multiply(commission.add(new BigDecimal(100))).divide(new BigDecimal(100));
+		item.setBoardprice(salePrice.setScale(2, RoundingMode.HALF_UP)); //With company commission
+		//set board file type
+		item.setFileType(boardResponse.getBoard().getSaleTypeId());
+		//set board lastUpdateDate
+		item.setLastUpdateDate(boardResponse.getBoard().getLastUpdateDate());
+		//set hasAltered value to false
+		item.setHasAltered(false);
+		
+		//set designer Id
+		item.setDesignerId(userResponse.getUser().getUserId());
+		//set designer name. Apply PROFILE NAME logic 10/22/2014
+		item.setDesignerName(UserNameUtil.getDesignerName(userResponse.getUser()));
+		//set designer logo
+		item.setDesignerLogo(userResponse.getUser().getLogoimageurl());
+		logger.trace("Cart Item Info=>"+item.toString());
+		cart.addToCart(item);
+		
+		getCartDetail(cart, model);
+		return model;
+	}
+	
+	@RequestMapping(value= ViewPaths.DELETE_CART, method=RequestMethod.POST)
+	public @ResponseBody ModelMap deleteFromCart(CartItem item, @ModelAttribute(value="cart") Cart cart){
+		ModelMap model = new ModelMap();
+		cart.removeFromCart(item.getBoardId());
+		getCartDetail(cart, model);
+		return model;
+	}
+	
+	
+	@RequestMapping(value=ViewPaths.SHOW_CART, method=RequestMethod.GET)
+	public String showAddToCartPopup(@ModelAttribute(value="") Cart cart,@ModelAttribute(value="user") AdUsersDomain user,ModelMap model)
+	{
+		logger.trace("Cart Items=>"+cart.getNumberOfItems());
+		
+		ValidateBoardsRequest validateRequest = new ValidateBoardsRequest();
+		List<BoardSet> board = validateRequest.getBoards();
+		validateRequest.setUserId(user.getUserId());
+		Collection<CartItem> cartitems = cart.getCart().values();
+		for(CartItem cartitem : cartitems)
+		{
+			BoardSet set=new BoardSet();
+			set.setBoardIds(cartitem.getBoardId());
+			set.setLastUpdateDate(cartitem.getLastUpdateDate());
+			board.add(set);
+			cartitem.setHasAltered(false); //reset the hasAltered value
+		}
+		//check the boards are still available ? 		
+		ValidateBoardsResponse validaetResponse = boardServiceSDK.validateBoards(validateRequest);
+		if(null != validaetResponse.getInvalidBoardIds() && validaetResponse.getInvalidBoardIds().size() > 0){
+			//TODO - remove items from cart and and dispaly message.
+			List<Integer> invalidBoardIdList=validaetResponse.getInvalidBoardIds();
+			model.addAttribute("existInvalidBoard",true);
+			logger.trace("invalid BOARD=>"+invalidBoardIdList);
+			ArrayList<CartItem> invalidBoardList=new ArrayList<CartItem>();
+			for(Integer deleteId:invalidBoardIdList)
+				invalidBoardList.add(cart.removeFromCart(deleteId));
+			model.addAttribute("invalidBoardList",invalidBoardList);
+		}
+		//update the cart if there exists the items has altered after you add to the shopping cart
+		List<Integer> inconsistentBoardList=validaetResponse.getInconsistentBoardIds();
+		if(inconsistentBoardList.size()>0)
+		{
+			model.addAttribute("hasInconsistentItems", true);
+			Map<Integer,CartItem> cartMap=cart.getCart(); //get cart items
+			Set<Integer> keyset=cartMap.keySet(); //get the key set
+			Iterator<Integer> iterator=keyset.iterator(); //get iterator
+			while (iterator.hasNext()) 
+			{  
+	            Integer i = (Integer)iterator.next();  
+	            CartItem s = cartMap.get(i);
+	            if(inconsistentBoardList.contains(s.getBoardId()))
+	            {
+	            	s.setHasAltered(true);
+	            	//resync the boards
+	            	GetBoardByIdResponse boardResponse=boardServiceSDK.getBoardbyId(s.getBoardId());
+	            	TrBoardDomain b = boardResponse.getBoard();
+	            	s.setBoardName(b.getName());
+	            	//s.setBoardprice(b.getTotalPrice());
+	            	GetMembershipCommissionRequest getCommissionRequest = new GetMembershipCommissionRequest();
+	    			getCommissionRequest.setUserId(user.getUserId());
+	    			GetMembershipCommissionResponse getCommissionResponse =  membershipServiceSDK.getMembershipCommissiondetails(getCommissionRequest);
+	    			BigDecimal commission = getCommissionResponse.getStPricingOptions().getCommission();
+	    			BigDecimal salePrice = b.getTotalPrice().multiply(commission.add(new BigDecimal(100))).divide(new BigDecimal(100));
+	            	s.setBoardprice(salePrice.setScale(2, RoundingMode.HALF_UP)); //price with company commission
+	            	s.setFileType(b.getSaleTypeId());
+	            	s.setImageUrl(b.getBoardImages().get(0).getThumbnailUrl());
+	            	s.setLastUpdateDate(b.getLastUpdateDate());
+	            }
+	            else
+	            	s.setHasAltered(false);
+	        }
+		}
+		else
+			model.addAttribute("hasInconsistentItems", false);
+		
+		model=getCartDetail(cart,model);
+
+		//view
+		return ViewNames.ADD_TO_CART;
+	}
+	
+	//Get current shopping cart detail
+	@RequestMapping(value =ViewPaths.SHOW_CART, method=RequestMethod.POST)
+	public @ResponseBody ModelMap getCart(@ModelAttribute(value="") Cart cart)
+	{
+		ModelMap model=new ModelMap();
+		model=getCartDetail(cart,model);
+		return model;
+	}
+	
+	private ModelMap getCartDetail(Cart cart,ModelMap model)
+	{
+		ArrayList<CartItem> cartitems=new ArrayList<CartItem>();
+		ArrayList<Integer> boardIdList=new ArrayList<Integer>();
+		
+		Map<Integer,CartItem> cartMap=cart.getCart(); //get cart items
+		Set<Integer> keyset=cartMap.keySet(); //get the key set
+		Iterator<Integer> iterator=keyset.iterator(); //get iterator
+		
+		while (iterator.hasNext()) 
+		{  
+            Integer i = (Integer)iterator.next();  
+            CartItem s = cartMap.get(i);  
+            cartitems.add(s);
+            boardIdList.add(s.getBoardId());
+        }  
+		
+		model.addAttribute("cartItems", cartitems); //array of shopping cart detail
+		model.addAttribute("boardIdList", boardIdList); //array of boardId list of 
+		model.put("count", cart.getNumberOfItems());
+		model.put("total", cart.recountTotal());
+		return model;
+	}
+}

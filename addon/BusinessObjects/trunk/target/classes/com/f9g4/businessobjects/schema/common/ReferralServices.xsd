@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://services.businessobjects.f9g4.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cp="http://services.businessobjects.f9g4.com" xmlns:f9g4="http://common.businessobjects.f9g4.com" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+xmlns:annox="http://annox.dev.java.net"
+ xmlns:Q1="http://domain.businessobjects.f9g4.com" targetNamespace="http://services.businessobjects.f9g4.com" attributeFormDefault="unqualified" jaxb:version="2.1">
+
+	<xsd:import namespace="http://common.businessobjects.f9g4.com" schemaLocation="f9g4Common.xsd"/>
+	<xsd:import namespace="http://domain.businessobjects.f9g4.com" schemaLocation="f9g4schema.xsd"/>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='AddReferralsRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="AddReferralsRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='AddReferralsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="AddReferralsResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+ 		
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetReferralsByIdRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetReferralsByIdRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetReferralsByIdResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetReferralsByIdResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+ 	
+	<xsd:complexType name="AddReferralsRequest">
+		<xsd:sequence>
+			<xsd:element name="Referrals" type="Q1:trReferralsDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="AddReferralsResponse">
+		<xsd:sequence>
+			<xsd:element name="Referrals" type="Q1:trReferralsDomain"></xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="GetReferralsByIdRequest">
+		<xsd:sequence>
+			<xsd:element name="Referralsid" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+
+
+	<xsd:complexType name="GetReferralsByIdResponse">
+		<xsd:sequence>
+			<xsd:element name="Referrals" type="Q1:trReferralsDomain"></xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="GetReferralsByUserRequest">
+		<xsd:sequence>
+			<xsd:element name="userid" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	
+
+	<xsd:complexType name="GetReferralsByUserResponse">
+		<xsd:sequence>
+			<xsd:element name="Referrals" type="Q1:trReferralsDomain"
+				maxOccurs="unbounded" minOccurs="0">
+			</xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DeleteReferralsByIdResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+
+	<!--  getReferralsForUser operation -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetReferralsForUserResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetReferralsForUserResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="GetReferralsForUserResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status" />
+			<xsd:element name="Referrals" type="Q1:trReferralsDomain" maxOccurs="unbounded" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!--  updateReferral operation -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateReferralRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateReferralRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateReferralResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateReferralResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="UpdateReferralRequest">
+		<xsd:sequence>		
+			<xsd:element name="Referrals" type="Q1:trReferralsDomain"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateReferralResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!--  resendReferralMessage operation -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='ResendReferralMessageResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="ResendReferralMessageResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="ResendReferralMessageResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+ 	<!--  updateReferralAndResendMessage operation -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateReferralAndResendMessageRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateReferralAndResendMessageRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateReferralAndResendMessageResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateReferralAndResendMessageResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="UpdateReferralAndResendMessageRequest">
+		<xsd:sequence>		
+			<xsd:element name="Referrals" type="Q1:trReferralsDomain"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateReferralAndResendMessageResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- Get Referral By Auth Code -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetReferralByAuthCodeResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetReferralByAuthCodeResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="GetReferralByAuthCodeResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status" />
+			<xsd:element name="referral" type="Q1:trReferralsDomain" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- Get Referrals -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetReferralsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetReferralsResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="GetReferralsResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status" />
+			<xsd:element name="referrals" type="Q1:trReferralsDomain" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

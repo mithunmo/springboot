@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://services.businessobjects.f9g4.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cp="http://services.businessobjects.f9g4.com" xmlns:f9g4="http://common.businessobjects.f9g4.com" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+xmlns:annox="http://annox.dev.java.net"
+ xmlns:Q1="http://domain.businessobjects.f9g4.com" targetNamespace="http://services.businessobjects.f9g4.com" attributeFormDefault="unqualified" jaxb:version="2.1">
+
+	<xsd:import namespace="http://common.businessobjects.f9g4.com" schemaLocation="f9g4Common.xsd"/>
+	<xsd:import namespace="http://domain.businessobjects.f9g4.com" schemaLocation="f9g4schema.xsd"/>
+
+	<!--  createSalesTransaction operation -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreateSalesTransactionRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreateSalesTransactionRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreateSalesTransactionResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreateSalesTransactionResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:complexType name="CreateSalesTransactionRequest">
+		<xsd:sequence>
+			<xsd:element name="payActoin" type="xsd:string" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<xsd:element name="salesTransactionHeaderDomain" type="Q1:trSalesTransactionHeaderDomain" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<xsd:element name="salesTransactionDetailsDomain" type="Q1:trSalesTransactionDetailsDomain" minOccurs="1" maxOccurs="unbounded" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CreateSalesTransactionResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!--  createPaymentAuthSubmitHeader operation -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreatePaymentAuthSubmitHeaderRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreatePaymentAuthSubmitHeaderRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreatePaymentAuthSubmitHeaderResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreatePaymentAuthSubmitHeaderResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="CreatePaymentAuthSubmitHeaderRequest">
+		<xsd:sequence>
+			<xsd:element name="paymentAuthSubmitHeader" type="Q1:trPaymentAuthSubmitHeaderDomain" minOccurs="1" maxOccurs="1" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CreatePaymentAuthSubmitHeaderResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="paymentAuthSubmitHeader" type="Q1:trPaymentAuthSubmitHeaderDomain" minOccurs="1" maxOccurs="1" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!--  createPaymentAuthSubmit operation -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreatePaymentAuthSubmitRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreatePaymentAuthSubmitRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreatePaymentAuthSubmitResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreatePaymentAuthSubmitResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="CreatePaymentAuthSubmitRequest">
+		<xsd:sequence>
+			<xsd:element name="paymentAuthSubmitHeader" type="Q1:trPaymentAuthSubmitHeaderDomain" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<xsd:element name="paymentAuthSubmit" type="Q1:trPaymentAuthSubmitDomain" minOccurs="1" maxOccurs="unbounded" ></xsd:element>
+			<xsd:element name="returnUrl" type="xsd:string" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<xsd:element name="cancelUrl" type="xsd:string" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<xsd:element name="ipnUrl" type="xsd:string" minOccurs="1" maxOccurs="1" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CreatePaymentAuthSubmitResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="paymentToken" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetGrossbyTransactionIdRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetGrossbyTransactionIdRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetGrossbyTransactionIdResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetGrossbyTransactionIdResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:complexType name="GetGrossbyTransactionIdRequest">
+		<xsd:sequence>
+			<xsd:element name="transactionId" type="xsd:string"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+    <xsd:complexType name="GetGrossbyTransactionIdResponse">
+	    <xsd:sequence>
+	    	<xs:element name="price">
+	    		<xs:simpleType>
+	    			<xs:restriction base="xs:decimal">
+	    				<xs:totalDigits value="15" />
+	    				<xs:fractionDigits value="2" />
+	    				<xs:maxExclusive value="10000000000000" />
+	    			</xs:restriction>
+	    		</xs:simpleType>
+	    	</xs:element>
+	    </xsd:sequence>
+    </xsd:complexType>
+
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetTrSalesTransactionHeaderExistsRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetTrSalesTransactionHeaderExistsRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetTrSalesTransactionHeaderExistsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetTrSalesTransactionHeaderExistsResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+    <xsd:complexType name="GetTrSalesTransactionHeaderExistsRequest">
+    	<xsd:sequence>
+			<xsd:element name="transactionId" type="xsd:string"></xsd:element>
+		</xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="GetTrSalesTransactionHeaderExistsResponse">
+    	<xsd:sequence>
+			<xsd:element name="trSalesTransactionHeaderExists" type="xsd:boolean"></xsd:element>
+		</xsd:sequence>
+    </xsd:complexType>
+
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetReceiverEmailVerificationRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetReceiverEmailVerificationRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetReceiverEmailVerificationResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetReceiverEmailVerificationResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+    <xsd:complexType name="GetReceiverEmailVerificationRequest">
+    	<xsd:sequence>
+    		<xsd:element name="receiverEmail" type="xsd:string"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="GetReceiverEmailVerificationResponse">
+    	<xsd:sequence>
+			<xsd:element name="isReceiverEmailVerified" type="xsd:boolean"></xsd:element>
+		</xsd:sequence>
+    </xsd:complexType>
+
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreateTrSalesTransactionRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreateTrSalesTransactionRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreateTrSalesTransactionResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreateTrSalesTransactionResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+    <xsd:complexType name="CreateTrSalesTransactionRequest">
+    	<xsd:sequence>
+			<xsd:element name="payKey" type="xsd:string"></xsd:element>
+		</xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="CreateTrSalesTransactionResponse">
+    	<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+		</xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,310 @@
+package com.f9g4.web.utils;
+
+public interface ViewPaths {
+	
+	public static final String MEMBERSHIP = "/user/membership"; 
+		
+	public static final String MEMBERSHIP_PAY = "/membership/pay";
+	
+	public static final String UPDATE_MEMBERSHIP_PAY = "/membership/update/pay";
+	
+	public static final String MEMBERSHIP_PAY_RETURN_URL = "/membership/pay/return";
+	public static final String MEMBERSHIP_PAY_CANCEl_URL = "/membership/pay/cancel";
+	
+
+	public static final String DESIGNER_MEMBERSHIP_PAY = "/user/designer/membership/pay";
+	public static final String CUSTOMER_MEMBERSHIP_PAY = "/user/customer/membership/pay";
+
+	
+	//terms and conditions
+	public static final String TERMS = "/terms";
+	/*public static final String DESIGNER_MEMBERSHIP_TERMS = "/terms/designer/membership";
+	public static final String CUSTOMER_MEMBERSHIP_TERMS = "/terms/customer/membership";*/
+	public static final String CUSTOMER_SALE_TERMS = "/terms/customer/sale";
+	public static final String DESIGNER_REGISTRATION_TERMS = "/terms/designer/registration";
+	public static final String DESIGNER_REGISTRATION_TERMS_BASIC = "/terms/designer/registration_basic";
+	public static final String CUSTOMER_REGISTRATION_TERMS = "/terms/customer/registration";
+	public static final String VIEW_TERMS = "/terms/view";
+	
+	
+	//search criteria
+	public static final String SEARCH_CRITERIA = "/search_criteria";
+	public static final String SEARCH_RESULT = "/search_result";
+	public static final String SAVE_SEARCH_CRITERIA = "/save_search_criteria";
+	public static final String SEASON_YEAR_LIST = "/season_year_list";
+	public static final String SEARCH_VIEWER = "/search_viewer";
+	
+	//messages
+	public static final String MESSAGES = "/messages";
+	public static final String MESSAGE_DETAIL = "/message_detail";
+	public static final String SEND_MESSAGE= "/sendmessage";
+	
+	//checkout
+	public static final String CHECKOUT = "/checkout";
+	public static final String ADD_TO_CART = "/add_to_cart";
+	
+	//upload
+	public static final String UPLOAD_JPG = "/uploadPictures";
+	public static final String UPLOAD_AI = "/uploadPictures";
+	public static final String UPLOADER = "/uploadPictures/json";
+	
+	//portfolio(Rename to Collections)
+	/*public static final String PORTFOLIO = "/portfolio";
+	public static final String CREATE_PORTFOLIO = "/create_portfolio";
+	public static final String EDIT_PORTFOLIO = "/edit_portfolio";
+	public static final String GET_PORTFOLIO_ITEMS = "/portfolioitems";
+	public static final String DELETE_PORTFOLIO = "/deleteportfolio";*/
+	public static final String COLLECTIONS = "/collections";
+	public static final String CREATE_COLLECTION = "/create_collection";
+	public static final String EDIT_COLLECTION = "/edit_collection";
+	public static final String GET_COLLECTION_ITEMS = "/collectionitems";
+	public static final String DELETE_COLLECTION = "/deletecollection";
+	
+	//new portfolio====================================================================
+	public static final String NEW_PORTFOLIO = "/portfolio";
+	public static final String CREATE_NEW_PORTFOLIO = "/create_portfolio";
+	public static final String EDIT_NEW_PORTFOLIO = "/edit_portfolio";
+	public static final String GET_NEW_PORTFOLIO_ITEMS = "/portfolioitems";
+	public static final String DELETE_NEW_PORTFOLIO = "/deleteportfolio";
+	public static final String NEW_PORTFOLIO_BOARD = "/pboard";
+	//new portfolio board
+	public static final String CREATE_PORTFOLIO_BOARD = "/create_pboard";
+	public static final String CREATE_PORTFOLIO_BOARD_WITH_PORTFOLIO = "/create_pboard/portfolio";
+	
+	//collection board==================================================================
+	public static final String BOARD = "/board";
+	public static final String CREATE_BOARD = "/create_board";
+	public static final String CREATE_BOARD_WITH_PORTFOLIO = "/create_board/portfolio";
+	public static final String BOARD_DETAIL = "/board_detail";
+	public static final String BOARD_DETAIL_JSON = "/board_detail/json";
+	public static final String BOARDS_BY_PORTFOLIO_ID ="/boardsbyportfolio";
+	public static final String DELETE_BOARD = "/deleteboard";
+	public static final String TOGGLE_STATUS_BOARD = "/togglestatusboard";
+	public static final String PRICE_GUIDELINE = "/price_guideline";
+	public static final String IMAGE_VIEWER = "/image_viewer";
+	public static final String IMAGE_SIZE_RETRIEVER = "/retrieve_image_size";
+	public static final String COMPUTE_BOARD_EXP_DATE = "/computeboardexpdate";
+	public static final String IS_BOARD_LOCKED = "/retrieveboardstatus";
+	
+	//splashscreen
+	public static final String LOGIN= "/user/login";
+	public static final String LOGOUT= "/user/logout";
+	public static final String ABOUT_US = "/about_us";
+	public static final String WORK_WITH_US = "/work_with_us";
+	public static final String CONTACT_US = "/contact_us";
+	public static final String PRIVACY_POLICY = "/privacy_policy";
+	public static final String WHAT_WE_DO = "/what_we_do";
+	public static final String HOW_IT_WORKS = "/how_it_works";
+	public static final String GET_STARTED = "/get_started";
+	public static final String CONSOLE_ABOUT_US = "/console/about_us";
+	public static final String CONSOLE_WORK_WITH_US = "/console/work_with_us";
+	public static final String CONSOLE_CONTACT_US = "/console/contact_us";
+	public static final String CONSOLE_PRIVACY_POLICY = "/console/privacy_policy";
+	public static final String FAQS= "/faqs";
+	
+	//console home
+	public static final String CONSOLE_HOME = "/console/home";
+	//check out tab
+	public static final String CONSOLE_CHECKOUT_TAB= CONSOLE_HOME + "#shopping_cart";
+	
+	//design wall
+	public static final String DESIGN_WALL = "/console/design_wall";
+	
+	//referral
+	public static final String REFERRALS = "/console/referrals";
+	public static final String MANAGE_REFERRALS = "/console/manage_referrals";
+	public static final String RESEND_REFERRAL_NOTIFICATION = "/console/resendReferralNoti";
+	
+	//chart
+	public static final String CHART = "/console/chart";
+	
+	//sidebar
+	public static final String SIDEBAR = "/console/sidebar";
+	
+	//Rating
+	public static final String RATING = "/rating";
+	
+	//board level list
+	public static final String GET_LEVEL_LIST = "/levellist";
+	
+	//get category list
+	public static final String GET_CATEGORY_LIST = "/categorylist";
+	
+	//get product list
+	public static final String GET_PRODUCT_LIST = "/productlist";
+	public static final String GET_PRODUCT_LIST_BY_PORTFOLIO = "/productlistbyportfolio";
+	
+	//get product type list
+	public static final String GET_PRODUCT_TYPE_LIST = "/producttypelist";
+	
+	//Cart
+	public static final String ADD_CART = "/cart/add";
+	public static final String DELETE_CART = "/cart/del";
+	public static final String DELETE_CART_MULTIPLE = "/cart/multi_del";
+	public static final String SHOW_CART = "/cart/get";
+	public static final String SHOW_CART_JSON = "/cart/get/json";
+	
+	//get commission
+	public static final String SHOW_COMMISSION = "/commission";
+
+	//keep session alive
+	public static final String KEEP_SESSION_ALIVE = "/keepsession";
+	/*//check loginUUId
+	public static final String CHECK_LOGINUUID = "/check_loginuuid";*/
+
+	public static final String PAYPAL_SANDBOX_EC_URL = "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&useraction=commit";
+	
+	public static final String PAYPAL_SANDBOX_AP_URL = "https://www.sandbox.paypal.com/webscr?cmd=_ap-payment";
+	
+	//success 
+	public static final String PAYPAL_RETURN = "/pay/return";
+	
+	//cancel
+	public static final String PAYPAL_CANCEL = "/pay/cancel";
+	
+	
+	public static final String SPLASH_SCREEN = "/user/login";
+
+	public static final String REDIRECT_STRING = "redirect:";
+	
+	//user information
+	public static final String USER_INFO = "/console/userinfo";
+	
+	//designer account
+	public static final String ACCOUNT = "/console/designer_account";
+	
+	public static final String PAYMENT_LISTENER = "/payment_listener";
+	public static final String PAYMENT_MEMBERSHIP_LISTENER = "/membershipPaylistener";
+	
+	//registration
+	public static final String REGISTRATION_DESIGNER = "/register/designer";
+	public static final String REGISTRATION_DESIGNER_GETSTARTED = "/register/designer/getstarted"; //the url for getstarted button
+	public static final String REGISTRATION_USERNAME_CHECK = "/register/usernamecheck";
+	
+	//Samples submission
+	public static final String SAMPLES_SUBMISSION = "/register/samples";
+	
+	//Invitation
+	public static final String INVITATION_FORM = "/invitation";
+	
+	//feedback
+	public static final String FEEDBACK_FORM = "/console/feedback";
+	
+	//Setup security and password
+	public static final String SETUP_SEQ_PASSWORD = "/user/setup_seq_pass";
+	//security question only
+	public static final String SETUP_SEQ_ONLY = "/user/setup_seq_pass?setupSeq=true&setupPwd=false";
+	
+	//change password pop-up
+	public static final String CHANGE_PASSWORD = "/console/change_password";
+	
+	//Get progress for profile
+	public static final String CONSOLE_PROFILE_PROGRESS = "/console/progress/profile";
+	
+	//Information about why provide the complete profile
+	public static final String WHY_COMPLETE_PROFILE = "/console/progress/profile/why";
+	
+	//List
+	//specialty list
+	public static final String SPECIALTY_LIST = "/list/specialty";
+	public static final String LANGUAGE_LIST = "/list/language";
+	public static final String SKILL_LIST = "/list/skill";
+	public static final String EXPERTISE_LIST = "/list/expertise";
+	public static final String EDUCAION_LIST = "/list/education";
+	public static final String BUYER_LIST = "/list/buyer";
+	
+	//admin mode
+	public static final String ADMIN_OVERVIEW = "/admin/overview";
+	public static final String ADMIN_BOARDS_APPROVAL = "/admin/boardsapproval";
+	public static final String ADMIN_ADD_BOARDS_APPROVAL = "/admin/addboardsapproval";
+	public static final String ADMIN_USERS_VIEWER = "/admin/usersviewer";
+	public static final String ADMIN_USERS_VIEWER_DETAIL = "/admin/usersviewer/detail";
+	public static final String ADMIN_RESET_PASSWORD = "/admin/reset/password";
+	public static final String SEND_EMAIL = "/sendemail";
+	public static final String ADMIN_REFERRALS_VIEWER = "/admin/referrals";
+	public static final String ADMIN_BROADCAST_ALERT = "/admin/broadcastalert";
+	public static final String ADMIN_BROADCAST_TEMPLATE_CONTENT = "/admin/broadcastalert/template";
+	public static final String ADMIN_EDIT_BOARD = "/admin/edit/board";
+	public static final String ADMIN_RESUBMIT_SAMPLES = "/admin/samples/resubmit";
+	public static final String ADMIN_APPROVER_COMMENTS = "/admin/approvercomments";
+	public static final String ADMIN_RETRIEVE_ERROR_FILE = "/admin/errorfile";
+	public static final String ADMIN_RETRIEVE_FILE = "/admin/file";
+	public static final String ADMIN_UPDATE_RATING = "/admin/rating/update";
+	public static final String ADMIN_DASHBOARD = "/admin/dashboard";
+	public static final String ADMIN_SEARCH_CRITERIA = "/admin/search/criteria";
+	public static final String ADMIN_SEARCH_VIEWER = "/admin/search/viewer";
+	public static final String ADMIN_SEARCH_MARKETPLACE = "/admin/search/marketplace";
+	public static final String ADMIN_USERS_VIEWER_DATA = "/admin/usersviewer/list";
+	public static final String ADMIN_SEARCH_RESULT = "/admin/search_result";
+	public static final String ADMIN_MEMBERS = "/admin/members";
+	public static final String ADMIN_AJAX_PATHS = "/admin/paths/ajax";
+	//===admin projects
+	public static final String ADMIN_PROJECTS = "/admin/projects";
+	public static final String ADMIN_PROJECTS_CREATE_PROJECT = "/admin/projects/create";
+	public static final String ADMIN_PROJECTS_CREATE_PROJECT_CONTENT = "/admin/projects/create/content";
+	public static final String ADMIN_PROJECTS_UPDATE_PROJECT = "/admin/projects/update";
+	public static final String ADMIN_PROJECTS_UPDATE_PROJECT_CONTENT = "/admin/projects/update/content";
+	public static final String ADMIN_PROJECTS_MANAGE_PROJECTS = "/admin/projects/manage";
+	public static final String ADMIN_PROJECTS_MANAGE_PROJECTS_CONTENT = "/admin/projects/manage/content";
+	public static final String ADMIN_PROJECTS_MANAGE_PROJECTS_DATA = "/admin/projects/manage/data";
+	public static final String ADMIN_PROJECTS_APPROVE_SUBMISSIONS = "/admin/project/submissions";
+	public static final String ADMIN_PROJECTS_APPROVE_SUBMISSIONS_CONTENT = "/admin/project/submissions/content";
+	public static final String ADMIN_PROJECTS_PROJECT_DETAIL = "/admin/project/detail";
+	public static final String ADMIN_PROJECTS_EDIT_PROJECT = "/admin/project/{mode}";
+	public static final String ADMIN_PROJECTS_START_PROJECT = "/admin/project/create";
+	public static final String ADMIN_PROJECTS_SAVE_PROJECT = "/admin/project/save";
+	public static final String ADMIN_PROJECTS_PUBLISH_PROJECT = "/admin/project/publish";
+	public static final String ADMIN_PROJECTS_CANCEL_PROJECT = "/admin/project/cancel";
+	public static final String ADMIN_PROJECTS_PAUSE_PROJECT = "/admin/project/pause";
+	public static final String ADMIN_PROJECTS_RESUME_PROJECT = "/admin/project/resume";
+	public static final String ADMIN_PROJECTS_COMPLETE_PROJECT = "/admin/project/complete";
+	public static final String ADMIN_PROJECTS_CONFIRM_PROJECT = "/admin/project/confirm";
+	public static final String ADMIN_PROJECTS_BOARDS_DATA = "/admin/project/board/data";
+	public static final String ADMIN_PROJECTS_PROJECT_MEMBERS = "/admin/project/members";
+	public static final String ADMIN_PROJECTS_ASSIGN_PROJECT_MEMBERS = "/admin/project/members/assign";
+	public static final String ADMIN_PROJECTS_VIEW_CREATIVE_BRIEF_DETAIL = "/admin/project/cbd";
+	public static final String ADMIN_PROJECTS_VIEW_CREATIVE_BRIEF_DETAIL_PREVIEW = "/admin/project/cbd/preview";
+	
+	//user console tab hash url
+	public static final String TAB_MESSAGES = CONSOLE_HOME + "#messages_page_1";
+	public static final String TAB_DESIGN_WALL = CONSOLE_HOME + "#design_wall_0_3_-1";
+	public static final String TAB_ACTIVITY = CONSOLE_HOME + "#activity";
+	public static final String TAB_PROFILE = CONSOLE_HOME + "#home";
+	public static final String TAB_PORTFOLIO = CONSOLE_HOME + "#tab_manage_portfolio";
+	public static final String TAB_COLLECTION = CONSOLE_HOME + "#collections_page_0_1";
+	public static final String TAB_DESIGNER_ACCOUNT = CONSOLE_HOME + "#tab_account";
+	
+	//pdf viewer
+	public static final String PDF_VIEWER = "/pdfviewer";
+	
+	//User console - Projects
+	public static final String USER_PROJECTS = "/console/projects";
+	public static final String USER_PROJECTS_VIEW_PROJECTS = "/console/projects/view";
+	public static final String USER_PROJECTS_VIEW_PROJECTS_CONTENT = "/console/projects/view/content";
+	public static final String USER_PROJECTS_VIEW_PROJECTS_DATA = "/console/projects/view/data";
+	
+	public static final String USER_PROJECTS_VIEW_CREATIVE_BRIEF_DETAIL = "/console/project/cbd";
+	
+	public static final String USER_PROJECTS_PORTFOLIO = "/console/projects/submissions";
+	public static final String USER_PROJECTS_PORTFOLIO_CONTENT = "/console/projects/submissions/content";
+	
+	public static final String USER_PROJECTS_CREATIVE_VIEW_BRIEF = "/console/projects/cbd";
+	public static final String USER_PROJECTS_CREATIVE_VIEW_BRIEF_CONTENT = "/console/projects/cbd/content";
+	public static final String USER_PROJECTS_CREATIVE_VIEW_BRIEF_DATA = "/console/projects/cbd/data";
+
+	public static final String USER_PROJECTS_BOARDS = "/console/project/board";
+	public static final String USER_PROJECTS_BOARDS_CONTENT = "/console/project/board/content";
+	public static final String USER_PROJECTS_BOARDS_DATA = "/console/project/board/data";
+	public static final String USER_PROJECTS_CREATE_BOARD = "/console/project/board/create";
+	public static final String USER_PROJECTS_CREATE_BOARD_CONTENT = "/console/project/board/create/content";
+	public static final String USER_PROJECTS_EDIT_BOARD = "/console/project/board/edit";
+	public static final String USER_PROJECTS_EDIT_BOARD_CONTENT = "/console/project/board/edit/content";
+	public static final String USER_PROJECTS_SAVE_BOARD = "/console/project/board/save";
+	public static final String BUYER_PROJECTS_CREATE_PROJECT = "/console/projects/create";
+	public static final String BUYER_PROJECTS_CREATE_PROJECT_CONTENT = "/console/projects/create/content";
+	public static final String BUYER_PROJECTS_MANAGE_PROJECTS = "/console/projects/manage";
+	public static final String BUYER_PROJECTS_MANAGE_PROJECTS_CONTENT = "/console/projects/manage/content";
+	
+	//file handler
+	public static final String FILE_RETRIEVER = "/file";
+}

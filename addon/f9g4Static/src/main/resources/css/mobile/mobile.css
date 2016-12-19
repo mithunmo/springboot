@@ -1,0 +1,137 @@
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('/font/BebasNeue-webfont.eot');
+    src: url('/font/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/font/BebasNeue-webfont.woff') format('woff'),
+         url('/font/BebasNeue-webfont.ttf') format('truetype'),
+         url('/font/BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Reset CSS */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+	font-family: 'Arial Narrow', Calibri, 'Arial Bold', Arial, sans-serif;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	/* line-height: 1; */
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+input, select { margin:0px; padding:10px 0px;}
+
+/* Start here */
+.container { width:100%;}
+.row {position:relative; clear:both;}
+.row.center { text-align:center;}
+.logo { margin-top:20px; color:#FFF; text-align: center;}
+.logo img { width:100%; max-width:515px; height:auto;}
+.title-wrapper { margin-bottom:50px; padding-top:50px;}
+.title-wrapper .welcome-info { text-align:center; font-size:38px; font-family: 'BebasNeueRegular'; margin-bottom:30px;}
+.title-wrapper .title { text-align:center; font-size:38px; color:#00AEEF; font-family: 'BebasNeueRegular';}
+.title-wrapper .subtitle { text-align:center; font-size:38px; color:#00AEEF; font-family: 'BebasNeueRegular';}
+.footer { text-align: left;}
+
+.content { margin:0% 5%; width:90%;}
+.content .row { margin-bottom:15px;}
+.content .row.bind { margin-top:-15px;}
+.content .row.hide { display:none;}
+.row-left { display:inline-block; width:50%; font-size:34px; vertical-align:middle; font-family: 'BebasNeueRegular';}
+.row-right { display:inline-block; width:50%; vertical-align:middle;}
+.row-right input, .row-right select { width:90%; padding-left:5px;}
+
+.button { display:inline-block; padding:5px 15px; background-color: #00AEEF; color:#000; text-decoration: none; font-size:60px; border:thin solid #000; font-family: 'BebasNeueRegular';}
+.button:hover { color:#FFF;}
+.button-panel { text-align:center; margin-top:50px;}
+
+.middle-box { width:80%; max-width:400px; margin:0% auto; /* border: 5px solid #000; */ padding-bottom:30px; text-align:center;}
+.middle-box-ffg img{ width:100%; max-width:400px; border-radius:20px; border: 2px solid #000; -moz-box-shadow: 10px 10px 10px #888; -webkit-box-shadow: 10px 10px 10px #888; box-shadow: 10px 10px 10px #888; -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=135, Color='#888888')"; filter: progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=135, Color='#888888');}
+.middle-box-item { display:inline-block; width:33%; max-width:133px; margin-top:30px;}
+.middle-box-item img { width:60px; height:60px; /* -moz-box-shadow: 5px 5px 5px #888; -webkit-box-shadow: 5px 5px 5px #888; box-shadow: 5px 5px 5px #888; -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='#888888')"; filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='#888888'); */}
+
+.submit-result { margin:0px;}
+.submit-result.show-border { border:thin solid #000; margin:50px 0px 20px 0px;}
+#submit { border:thin solid #000;}
+
+/* username checking */
+.username-check-result { display:inline-block; vertical-align: middle;}
+#usernameChecked { background-image:url('/images/checkedicon.png'); background-position:0px 0px; margin:0px 5px 0px 0px; width:10px; height:10px; display:inline-block; vertical-align:middle;}
+#usernameChecked.hide { display:none;}
+#usernameChecked.invalid {background-position:-10px 0px;}
+#usernameChecked.loading { background-image: url('/images/spinner_small_wbg.gif'); background-position: 0px 0px !important; background-size:10px 10px;}
+
+/* Password strength */
+.row-right .short { color:#FF0000;}
+.row-right .weak { color:#E66C2C;}
+.row-right .good{ color:#2D98F3 !important;}
+.row-right .strong{ color:#006400;}
+
+/* registration status */
+.register-status-title { margin-top:20px; color:#00AEEF; font-size:70px; margin-bottom:0px !important; font-family: 'BebasNeueRegular';}
+.register-status-subtitle { font-size:30px; margin-bottom:40px !important;}
+.social-media-info-title { font-size:34px; font-family: 'BebasNeueRegular';}
+.social-media-info-subtitle { font-size:34px; font-family: 'BebasNeueRegular';}
+
+/* Next input controller */
+.next-input-controller {position: fixed; bottom:0px; right:0px; background-color: #C30; color:#000; padding:5px 10px; cursor: pointer; z-index:999;}
+.next-input-controller.hide { display:none;}
+
+/* other value controller */
+.ms-add-other-value { width:60% !important; min-width:200px !important;}
+.ms-add-other-button { display:inline-block; padding:5px 15px; background-color: #00AEEF; color:#000; text-decoration: none; border:thin solid #000; font-family: 'BebasNeueRegular';}
+
+/* Media query */
+@media (max-width:640px)
+{
+	/* .title-wrapper .welcome-info { font-size:1.4em;}
+	.title-wrapper .title { font-size:1.4em;}
+	.title-wrapper .subtitle { font-size:1em;} */
+}
+
+@media (orientation:portrait)
+{
+	/* .title-wrapper .welcome-info { font-size:1.85em;}
+	.title-wrapper .title { font-size:1.85em;}
+	.title-wrapper .subtitle { font-size:1.4em;} */ 
+}
+
+/* @media (orientation:landscape)
+{
+	.title-wrapper .welcome-info { font-size:150%; color:green;}
+	.title-wrapper .title { font-size:150%;}
+	.title-wrapper .subtitle { font-size:100%;}
+} */

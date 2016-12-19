@@ -1,0 +1,10 @@
+<div class="wrapper b">
+	<div class="wrap">
+		<div class="header"><img src="/images/logo_rev1.png" style="width:300px;" width="300"> <!-- Avoid using width attributes to define width. Use style or class/id instead. -->
+	  		<div class="tile">
+	      		<div class="white">${targetContest.startDateInMonth}</div>
+	      		<div class="white">${targetContest.startDateInDay}</div>
+	  		</div>
+		</div>
+	</div>
+</div>

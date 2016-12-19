@@ -1,0 +1,854 @@
+app.controller('userProjects', ['$scope', '$http', '$filter','$log', function($scope,$http,$filter,$log) {
+	$log.log('user projects main controller');
+	$scope.rowsPerPage=10;
+}]);
+
+app.controller('createBuyerProjectController', ['$scope', '$http', '$filter','$rootScope','$log', function($scope,$http,$filter,$rootScope,$log) {
+	$log.log('buyer create project controller');
+	$rootScope.tab={
+		'viewProjectsSubmissions':true
+	};
+}]);
+
+/*app.controller('editProjectBoardController',['$scope','$http','$filter','$rootScope','$routeParams','FormValidator','dialogs','$location','$route', function($scope,$http,$filter,$rootScope,$routeParams,validator,dialogs,$location,$route) {
+	console.log('edit project board controller');
+	$rootScope.tab={
+		'viewProjectsSubmissions':true
+	};
+	$scope.hasRemoved=true;
+	$scope.form={};
+	$scope.uploaderResult={};
+	//
+	$scope.boardId=$routeParams.boardId;
+	//load board data
+}]);*/
+
+app.controller('editProjectBoardController', ['$scope','$http','$filter','$rootScope','$routeParams','FormValidator','dialogs','$location','$log','BoardService','mode', function($scope,$http,$filter,$rootScope,$routeParams,validator,dialogs,$location,$log,boardService,mode) {
+	$log.log('edit project board controller: '+mode);
+	$rootScope.tab={
+		'viewProjectsSubmissions':true
+	};
+	//dialog options setup
+	var dialogOpt={
+		size: 'md'
+	}
+	//
+	$scope.hasRemoved=true;
+	$scope.form={};
+	$scope.uploaderResult={};
+	//if mode is edit, retrieve the board data
+	if(mode=='edit') {
+		var boardData = {};
+		$scope.isBoardSyncing=true;
+		boardService.getBoardDetail($routeParams.boardId, function(data, status) {
+			$scope.isBoardSyncing=false;
+			boardData=data;
+			//setup form data from boardData
+			convertBoardDataToForm(data);
+		});
+	}
+	else {
+		$scope.form.portfolioId=$routeParams.portfolioId; //get portfolio id from $routeParams
+	}
+	//
+	$scope.removeImg = function() {
+		$scope.hasRemoved=true;
+		$scope.uploaderResult={};
+		//clear the image data in the form
+		$scope.form.boardImageUrl=undefined;
+		$scope.form.boardImageType=undefined;
+		$scope.form.boardImageUrl_thumb=undefined;
+		$scope.form.boardImageUrl_file=undefined;
+		$scope.form.boardImageUrl_main=undefined;
+	},
+	$scope.saveBoard = function() {
+		boardHandler(0);
+	},
+	$scope.publishBoard = function() {
+		boardHandler(1);
+	},
+	$scope.clear = function(clearAll) {
+		//keep board name and description
+		if(clearAll) {
+			//keep portfolio id only
+			$scope.form={
+				portfolioId: $scope.form.portfolioId
+			};
+		}
+		else {
+			$scope.form={
+				boardName: $scope.form.boardName,
+				boardDescription: $scope.form.boardDescription,
+				portfolioId: $scope.form.portfolioId
+			};
+		}
+		$scope.hasRemoved=true;
+		$scope.uploaderResult={}; //remove upload image placeholder
+	};
+	
+	function convertBoardDataToForm(source) {
+		$scope.hasRemoved=false;
+		$scope.form.portfolioId=source.detail.portfolioId;
+		$scope.form.boardId=source.detail.boardId;
+		$scope.form.boardName=source.detail.name;
+		$scope.form.boardDescription=source.detail.description;
+		$scope.form.boardImageUrl=source.detail.boardImages[0].sourceFileURL;
+		$scope.form.boardImageType=source.detail.boardImages[0].fileType;
+		$scope.form.boardImageUrl_thumb=source.detail.boardImages[0].thumbnailUrl;
+		$scope.form.boardImageUrl_file=source.detail.boardImages[0].fileName;
+		$scope.form.boardImageUrl_main=source.detail.boardImages[0].mainImageUrl;
+		//fillin uploadResult
+		$scope.uploaderResult.upload_filename=$scope.form.boardImageUrl;
+		$scope.uploaderResult.upload_ext=$scope.form.boardImageType;
+		$scope.uploaderResult.upload_filename_100x100=$scope.form.boardImageUrl_thumb;
+		$scope.uploaderResult.upload_filename_400x400=$scope.form.boardImageUrl_file;
+		$scope.uploaderResult.upload_filename_original=$scope.form.boardImageUrl_main;
+		$scope.previewImg=$scope.form.boardImageUrl_file;
+	}
+	function boardHandler(publishToMp) {
+		//setup dialog message
+		var confirmDialogMsg='This board will NOT be published to the Project. Would you like to continue? If you would like your board to be visible in the Project, you must select "Save & Publish."'
+			,notifyDialogMsg='Save successfully'
+			,changeViewDialogMsg='Do you want to upload another sumbission?';
+		if(publishToMp==1) {
+			confirmDialogMsg='Clicking Ok will publish this board to the Project. Would you like to continue?';
+			notifyDialogMsg='Publish successfully';
+		}
+		
+		//attach data to form
+		$scope.form.boardImageUrl=$scope.uploaderResult.upload_filename;
+		$scope.form.boardImageType=$scope.uploaderResult.upload_ext;
+		$scope.form.boardImageUrl_thumb=$scope.uploaderResult.upload_filename_100x100;
+		$scope.form.boardImageUrl_file=$scope.uploaderResult.upload_filename_400x400;
+		$scope.form.boardImageUrl_main=$scope.uploaderResult.upload_filename_original;
+		$scope.form.publishToMp=publishToMp;
+		var validationResult=validator.projectBoardFormValidator($scope.form);
+		if(validationResult.status==0) {
+			var confirmDialog = dialogs.confirm('CONFIRMATION',confirmDialogMsg,dialogOpt);
+			confirmDialog.result.then(function(btn){
+				//Yes, then send request
+				//show progress dialog
+				var waitDialog = dialogs.wait('Please Wait',undefined,50,dialogOpt);
+				$http({method: 'POST', url: ajaxPaths['saveProjectBoardPath'],params: $scope.form})
+				.success(function(data, status, headers, config) {
+					//make progress 100% and complete.
+					$rootScope.$broadcast('dialogs.wait.progress',{'progress' : 100});
+					$rootScope.$broadcast('dialogs.wait.complete');
+					//check result
+					if(data.hasError==false) {
+						var notifyDialog = dialogs.notify('RESULT',notifyDialogMsg,dialogOpt);
+						notifyDialog.result.then(function(){
+							//redirect back to board viewer
+							confirmDialog = dialogs.confirm('CONFIRMATION',changeViewDialogMsg,dialogOpt);
+							confirmDialog.result.then(function(btn){
+								//clear the form but keep the board name and description
+								$scope.clear();
+							},function(btn) {
+								//NO, then change view
+								$location.path(ajaxPaths['viewProjectsPortfolioPath']+'/'+data.board.portfolioId);
+							});
+						});
+					}
+					else {
+						dialogs.error('Error','Service unavailable. Please try again. Thank you.',dialogOpt);
+					}
+			    })
+			    .error(function(data, status, headers, config) {
+			    	$rootScope.$broadcast('dialogs.wait.progress',{'progress' : 0});
+					$rootScope.$broadcast('dialogs.wait.complete');
+			    	dialogs.error('Error','Service unavailable. Please try again. Thank you.',dialogOpt);
+			    });
+			},angular.noop);
+		}
+		else {
+			dialogs.error('Error',validationResult.error.join("<br/>"),dialogOpt);
+		}
+	}
+}]);
+
+app.controller('viewProjectsBoardsController', ['$scope', '$http', '$filter','$rootScope','$routeParams','$log','dialogs','BoardService','focusTabHeader', function($scope,$http,$filter,$rootScope,$routeParams,$log,dialogs,boardService,focusTabHeader) {
+	$log.log('View Projects Boards Controller');
+	$rootScope.tab={};
+	if(focusTabHeader!=undefined) 
+		$rootScope.tab[focusTabHeader]=true;
+	else 
+		$rootScope.tab['viewProjectsSubmissions']=true;
+	//init
+	$scope.showPanel={};
+	$scope.loading={};
+	$scope.boardDetail={};
+	$scope.isSelected={};
+	//pagin
+	$scope.columnsPerRow=8;
+	$scope.currentPage=0;
+	$scope.totalPages=0;
+	$scope.rowsPerPage=10;
+	$scope.upperBound=0;
+	$scope.lowerBound=0;
+	
+	$scope.render = function() {
+		var upperBound=($scope.currentPage+1)*$scope.rowsPerPage,
+			lowerBound=$scope.currentPage*$scope.rowsPerPage;
+		if(upperBound>=$scope.items.length)
+			upperBound=$scope.items.length;
+		$scope.upperBound=upperBound;
+		$scope.lowerBound=lowerBound;
+		if($scope.filteredUsers==null)
+			$scope.displayData=$scope.items.slice(lowerBound,upperBound);
+		else
+			$scope.displayData=$scope.filteredData.slice(lowerBound,upperBound);
+	},
+	$scope.updateRows = function() {
+		$scope.totalPages=Math.floor($scope.items.length/($scope.rowsPerPage*$scope.columnsPerRow)); //update total pages
+		if($scope.items.length%($scope.rowsPerPage*$scope.columnsPerRow)==0)
+			$scope.totalPages-=1;
+		$scope.render();
+	},
+	$scope.nextPage = function() {
+		if($scope.currentPage + 1 > $scope.totalPages)
+			$scope.currentPage = 0;
+		else
+			$scope.currentPage += 1;
+		$scope.render();
+	},
+	$scope.prevPage = function() {
+		if($scope.currentPage -1 < 0)
+			$scope.currentPage = $scope.totalPages;
+		else
+			$scope.currentPage -= 1;
+		$scope.render();
+	},
+	$scope.injectData = function(data) {
+		$scope.items=data.boards;
+		$scope.hasError=data.hasError;
+		$scope.updateRows();
+	},
+	$scope.navigate = function(index) {
+		if(index!='' 
+			&& index!=undefined 
+			&& !isNaN(parseInt(index))
+			&& index < $scope.items.length
+			&& index > 0 ) {
+			$scope.currentPage=Math.floor(index/($scope.rowsPerPage*$scope.columnsPerRow));
+			if(index%$scope.rowsPerPage == 0)
+				$scope.currentPage--;
+			$scope.render();
+		}
+	},
+	$scope.navigateHandler = function($event) {
+		if($event == undefined || $event.keyCode == 13 ) {
+			$scope.navigate($scope.itemIndex);
+		}
+	},
+	$scope.showDetailInfo = function(index) {
+		return $scope.showPanel[Math.floor(index/$scope.columnsPerRow)];
+	},
+	$scope.closeDetail = function(index) {
+		//hide detail panel
+		if(index!=undefined)
+			$scope.showPanel[Math.floor(index/$scope.columnsPerRow)]='';
+		else
+			$scope.showPanel={}; //reset all
+		$scope.isSelected={}; //reset
+	},
+	$scope.showImageWindow=function(path) {
+		boardService.showImageWindow(path);
+	},
+	//Show board detail window
+	$scope.getDetail = function(obj,boardId,index) {
+		//load board detail
+		$scope.loading[index]='loading';
+		$scope.detailIndex=index;
+		$scope.isSelected={};
+		$http({method: 'GET', url: ajaxPaths['boardDetailPath']+"/"+boardId})
+		.success(function(data, status, headers, config) {
+			// this callback will be called asynchronously when the response is available
+			var groupIndex=Math.floor(index/$scope.columnsPerRow);
+			$scope.boardDetail = data;
+			$scope.showPanel={}; //reset all panel
+			$scope.showPanel[groupIndex]=true; //show detail panel
+			$scope.loading={}; //hide loading label	
+			$scope.isSelected[index]='selected'; //set selected index
+	    })
+	    .error(function(data, status, headers, config) {
+	    	// called asynchronously if an error occurs or server returns response with an error status.
+	    });
+	},
+	$scope.deleteBoard = function(boardId, index) {
+		var confirmDialog = dialogs.confirm('CONFIRMATION',"Do you want to delete this board?",{
+			size:'sm'
+		});
+		//show confirm dialog
+		confirmDialog.result.then(function(btn){
+			//get the delete target from the list
+			var targetIndex=-1;
+			for(var i in $scope.items) {
+				if($scope.items[i].boardId==boardId) {
+					targetIndex=i;
+				}
+			}
+			if(targetIndex!=-1)
+				$scope.items[targetIndex]['deleting']=true;
+			//To delete the board
+			$http({method: 'POST', url: ajaxPaths['deleteBoardPath'], params: { selectedItems:boardId}})
+			.success(function(data, status, headers, config) {
+				$scope.items.splice(targetIndex,1);
+				//if the detail info with this index is on, close the popup.
+				if($scope.isSelected[index]=='selected')
+					$scope.closeDetail(index);
+		    })
+		    .error(function(data, status, headers, config) {
+		    });
+		},angular.noop);
+	};
+	
+	//set up portfolioId in scope
+	$scope.portfolioId=$routeParams.portfolioId;
+	//load boards data
+	$scope.isLoading=true;
+	$http({method: 'GET', url: ajaxPaths['viewProjectBoardsDataPath'], params: { portfolioId:$routeParams.portfolioId}})
+	.success(function(data, status, headers, config) {
+		// this callback will be called asynchronously when the response is available
+		$scope.isLoading=false;
+		$scope.injectData(data);
+    })
+    .error(function(data, status, headers, config) {
+    	// called asynchronously if an error occurs or server returns response with an error status.
+    	$scope.isLoading=false;
+    });
+}]);
+
+app.controller('viewProjectsPortfolioController', ['$scope', '$http', '$filter','$rootScope','$log','BoardService', function($scope,$http,$filter,$rootScope,$log,boardService) {
+	$log.log('designer view projects controller');
+	$rootScope.tab={
+		'viewProjectsSubmissions':true
+	};
+	//setup portfolio editor access
+	$scope.access={
+		'delete':false
+	}
+	
+	//pagin
+	$scope.columnsPerRow=5;
+	$scope.currentPage=0;
+	$scope.totalPages=0;
+	$scope.rowsPerPage=10;
+	$scope.upperBound=0;
+	$scope.lowerBound=0;
+	
+	$scope.render = function() {
+		var upperBound=($scope.currentPage+1)*$scope.rowsPerPage*$scope.columnsPerRow,
+			lowerBound=$scope.currentPage*$scope.rowsPerPage*$scope.columnsPerRow;
+		if(upperBound>=$scope.contests.length)
+			upperBound=$scope.contests.length;
+		$scope.upperBound=upperBound;
+		$scope.lowerBound=lowerBound;
+		if($scope.filteredUsers==null)
+			$scope.displayData=$scope.contests.slice(lowerBound,upperBound);
+		else
+			$scope.displayData=$scope.filteredData.slice(lowerBound,upperBound);
+		//load boards data
+		for(var i=lowerBound;i<upperBound;i++) {
+			boardService.getContestBoards($scope.contests[i]);
+		}
+	},
+	$scope.updateRows = function() {
+		$scope.totalPages=Math.floor($scope.contests.length/($scope.rowsPerPage*$scope.columnsPerRow)); //update total pages
+		if($scope.contests.length%($scope.rowsPerPage*$scope.columnsPerRow)==0)
+			$scope.totalPages-=1;
+		$scope.render();
+	},
+	$scope.nextPage = function() {
+		if($scope.currentPage + 1 > $scope.totalPages)
+			$scope.currentPage = 0;
+		else
+			$scope.currentPage += 1;
+		$scope.render();
+	},
+	$scope.prevPage = function() {
+		if($scope.currentPage -1 < 0)
+			$scope.currentPage = $scope.totalPages;
+		else
+			$scope.currentPage -= 1;
+		$scope.render();
+	},
+	$scope.injectData = function(data) {
+		$scope.contests=data.contests;
+		$scope.hasError=data.hasError;
+		$scope.updateRows();
+	},
+	$scope.navigate = function(index) {
+		if(index!='' 
+			&& index!=undefined 
+			&& !isNaN(parseInt(index))
+			&& index < $scope.contests.length
+			&& index > 0 ) {
+			$scope.currentPage=Math.floor(index/($scope.rowsPerPage*$scope.columnsPerRow));
+			if(index%$scope.rowsPerPage == 0)
+				$scope.currentPage--;
+			$scope.render();
+		}
+	},
+	$scope.navigateHandler = function($event) {
+		if($event == undefined || $event.keyCode == 13 ) {
+			$scope.navigate($scope.itemIndex);
+		}
+	},
+	$scope.showBoards = function() {
+		$log.log('Show boards');
+	};
+	
+	//load project data
+	$scope.isLoading=true;
+	$http({method: 'GET', url: ajaxPaths['viewProjectsDataPath']})
+	.success(function(data, status, headers, config) {
+		// this callback will be called asynchronously when the response is available
+		$scope.isLoading=false;
+		$scope.injectData(data);
+    })
+    .error(function(data, status, headers, config) {
+    	// called asynchronously if an error occurs or server returns response with an error status.
+    	$scope.isLoading=false;
+    });
+}]);
+
+app.controller('viewDesignerProjectsController', ['$scope', '$http', '$filter','$rootScope','BoardService','$location', function($scope,$http,$filter,$rootScope,boardService,$location) {
+	console.log('designer view projects portfolio controller');
+	$rootScope.tab={
+		'viewProjects':true
+	};
+	//pagin
+	$scope.currentPage=0;
+	$scope.totalPages=0;
+	$scope.rowsPerPage=30;
+	$scope.upperBound=0;
+	$scope.lowerBound=0;
+	//data
+	$scope.filteredData=null;
+	//sort utility
+	$scope.sortOpt=[1,1,1,1,1,1,1,1,1,1];
+	$scope.sortingOpt={};
+	$scope.sortIcon={};
+	for(var id in $scope.sortOpt) {
+		$scope.sortIcon[id]='glyphicon-chevron-up';
+	}
+	
+	//
+	$scope.render = function() {
+		var upperBound=($scope.currentPage+1)*$scope.rowsPerPage,
+			lowerBound=$scope.currentPage*$scope.rowsPerPage;
+		if(upperBound>=$scope.contests.length)
+			upperBound=$scope.contests.length;
+		$scope.upperBound=upperBound;
+		$scope.lowerBound=lowerBound;
+		if($scope.filteredUsers==null)
+			$scope.displayData=$scope.contests.slice(lowerBound,upperBound);
+		else
+			$scope.displayData=$scope.filteredData.slice(lowerBound,upperBound);
+		//load boards data
+		for(var i=lowerBound;i<upperBound;i++) {
+			$scope.getContestBoards($scope.contests[i]);
+		}
+	},
+	$scope.updateRows = function() {
+		$scope.totalPages=Math.floor($scope.contests.length/$scope.rowsPerPage); //update total pages
+		if($scope.contests.length%$scope.rowsPerPage==0)
+			$scope.totalPages-=1;
+		$scope.render();
+	},
+	$scope.nextPage = function() {
+		if($scope.currentPage + 1 > $scope.totalPages)
+			$scope.currentPage = 0;
+		else
+			$scope.currentPage += 1;
+		$scope.render();
+	},
+	$scope.prevPage = function() {
+		if($scope.currentPage -1 < 0)
+			$scope.currentPage = $scope.totalPages;
+		else
+			$scope.currentPage -= 1;
+		$scope.render();
+	},
+	$scope.navigate = function(index) {
+		if(index!='' 
+			&& index!=undefined 
+			&& !isNaN(parseInt(index))
+			&& index < $scope.data.users.length
+			&& index > 0 ) {
+			$scope.currentPage=Math.floor(index/$scope.rowsPerPage);
+			if(index%$scope.rowsPerPage == 0)
+				$scope.currentPage--;
+			$scope.render();
+		}
+	},
+	$scope.navigateHandler = function($event) {
+		if($event == undefined || $event.keyCode == 13 ) {
+			$scope.navigate($scope.itemIndex);
+		}
+	},
+	$scope.injectData = function(data) {
+		$scope.contests=data.contests;
+		$scope.hasError=data.hasError;
+		$scope.updateRows();
+	},
+	$scope.getContestBoards = function(item) {
+		boardService.getContestBoards(item);
+	},
+	$scope.sort = function(option, order) {
+		var sortFactor=$scope.sortOpt[option];
+		if(order!=undefined)
+			sortFactor=order;
+		if($scope.loadCompleted) {
+			$scope.sortingOpt.option=0; //reset sorting option
+		}
+		else {
+			$scope.sortingOpt.option=option;
+			$scope.sortingOpt.order=sortFactor;
+		}
+		
+		//
+		switch(option) {
+		case 2: //type
+			$scope.contests.sort(function(a, b) {
+				if(a.contestType > b.contestType)
+					return -1*sortFactor;
+				else if(a.contestType === b.contestType)
+					return 0;
+				else
+					return 1*sortFactor;
+			});
+			break;
+		case 3: //title
+			$scope.contests.sort(function(a, b) {
+				if(a.originalData.contestPortfolioDomain.name > b.originalData.contestPortfolioDomain.name)
+					return -1*sortFactor;
+				else if(a.originalData.contestPortfolioDomain.name === b.originalData.contestPortfolioDomain.name)
+					return 0;
+				else
+					return 1*sortFactor;
+			});
+			break;
+		case 4: //season
+			$scope.contests.sort(function(a, b) {
+				if(a.seasonYear.season > b.seasonYear.season)
+					return -1*sortFactor;
+				else if(a.seasonYear.season === b.seasonYear.season)
+					return 0;
+				else
+					return 1*sortFactor;
+			});
+			break;
+		case 5: //doc
+			//sorting base on the numbers of uploaded docs
+			$scope.contests.sort(function(a, b) {
+				if(a.originalData.contestPortfolioDomain.portfolioImages.length > b.originalData.contestPortfolioDomain.portfolioImages.length)
+					return -1*sortFactor;
+				else if(a.originalData.contestPortfolioDomain.portfolioImages.length === b.originalData.contestPortfolioDomain.portfolioImages.length)
+					return 0;
+				else
+					return 1*sortFactor;
+			});
+			break;
+		case 6: //awards
+			$scope.contests.sort(function(a, b) {
+				if(a.originalData.numberOfWinners > b.originalData.numberOfWinners)
+					return -1*sortFactor;
+				else if(a.originalData.numberOfWinners === b.originalData.numberOfWinners)
+					return 0;
+				else
+					return 1*sortFactor;
+			});
+			break;
+		case 7: //submissions
+			if($scope.containUnloadBoardsInfo()) {
+				
+			}
+			$scope.contests.sort(function(a, b) {
+				if(a.boards > b.boards)
+					return -1*sortFactor;
+				else if(a.boards === b.boards)
+					return 0;
+				else
+					return 1*sortFactor;
+			});
+			break;
+		default:
+		case 8: //ends date
+			$scope.contests.sort(function(a, b) {
+				if(a.endDate > b.endDate)
+					return -1*sortFactor;
+				else if(a.endDate === b.endDate)
+					return 0;
+				else
+					return 1*sortFactor;
+			});
+			break;
+		}
+		//
+		$scope.render();
+		if(order==undefined)
+			$scope.sortOpt[option]=0-($scope.sortOpt[option]);
+		else
+			$scope.sortOpt[option]=0-order;
+		if($scope.sortOpt[option] < 0)
+			$scope.sortIcon[option]='glyphicon-chevron-down';
+		else
+			$scope.sortIcon[option]='glyphicon-chevron-up';
+	},
+	$scope.boardsView= function(portfolioId) {
+		//console.log('board view');
+		$location.path(ajaxPaths['viewProjectsPortfolioPath']+'/'+portfolioId);
+	};
+	
+	//load project data
+	$scope.isLoading=true;
+	//get projects data
+	$http({method: 'GET', url: ajaxPaths['viewProjectsDataPath']})
+	.success(function(data, status, headers, config) {
+		// this callback will be called asynchronously when the response is available
+		$scope.isLoading=false;
+		$scope.injectData(data);
+    })
+    .error(function(data, status, headers, config) {
+    	// called asynchronously if an error occurs or server returns response with an error status.
+    	$scope.isLoading=false;
+    });
+}]);
+
+app.controller('viewBuyerProjectsController', ['$scope', '$http', '$filter','$rootScope','BoardService','$location','$log','focusTabHeader', function($scope,$http,$filter,$rootScope, boardService, $location,$log,focusTabHeader) {
+	$log.log('buyer view projects controller');
+	$rootScope.tab={};
+	if(focusTabHeader!=undefined) 
+		$rootScope.tab[focusTabHeader]=true;
+	else 
+		$rootScope.tab['viewProjects']=true;
+	//pagin
+	$scope.currentPage=0;
+	$scope.totalPages=0;
+	$scope.rowsPerPage=30;
+	$scope.upperBound=0;
+	$scope.lowerBound=0;
+	//data
+	$scope.filteredData=null;
+	//sort utility
+	$scope.sortOpt=[1,1,1,1,1,1,1,1,1,1];
+	$scope.sortingOpt={};
+	$scope.sortIcon={};
+	for(var id in $scope.sortOpt) {
+		$scope.sortIcon[id]='glyphicon-chevron-up';
+	}
+	//link factory method.
+	$scope.showImageWindow = function(url) {
+		boardService.showImageWindow(url);
+	},
+	$scope.render = function() {
+		//console.log('render');
+		var upperBound=($scope.currentPage+1)*$scope.rowsPerPage,
+			lowerBound=$scope.currentPage*$scope.rowsPerPage;
+		if(upperBound>=$scope.contests.length)
+			upperBound=$scope.contests.length;
+		$scope.upperBound=upperBound;
+		$scope.lowerBound=lowerBound;
+		if($scope.filteredUsers==null)
+			$scope.displayData=$scope.contests.slice(lowerBound,upperBound);
+		else
+			$scope.displayData=$scope.filteredData.slice(lowerBound,upperBound);
+		//load boards data
+		for(var i=lowerBound;i<upperBound;i++) {
+			$scope.getContestBoards($scope.contests[i]);
+		}
+	},
+	$scope.updateRows = function() {
+		//console.log('update rows');
+		$scope.totalPages=Math.floor($scope.contests.length/$scope.rowsPerPage); //update total pages
+		if($scope.contests.length%$scope.rowsPerPage==0)
+			$scope.totalPages-=1;
+		$scope.render();
+	},
+	$scope.nextPage = function() {
+		if($scope.currentPage + 1 > $scope.totalPages)
+			$scope.currentPage = 0;
+		else
+			$scope.currentPage += 1;
+		$scope.render();
+	},
+	$scope.prevPage = function() {
+		if($scope.currentPage -1 < 0)
+			$scope.currentPage = $scope.totalPages;
+		else
+			$scope.currentPage -= 1;
+		$scope.render();
+	},
+	$scope.navigate = function(index) {
+		//console.log('nav');
+		if(index!='' 
+			&& index!=undefined 
+			&& !isNaN(parseInt(index))
+			&& index < $scope.data.users.length
+			&& index > 0 ) {
+			$scope.currentPage=Math.floor(index/$scope.rowsPerPage);
+			if(index%$scope.rowsPerPage == 0)
+				$scope.currentPage--;
+			$scope.render();
+		}
+	},
+	$scope.navigateHandler = function($event) {
+		if($event == undefined || $event.keyCode == 13 ) {
+			//console.log('nav handler');
+			$scope.navigate($scope.itemIndex);
+		}
+	},
+	$scope.injectData = function(data) {
+		$scope.contests=data.contests;
+		$scope.hasError=data.hasError;
+		$scope.updateRows();
+		//console.log(data);
+	},
+	$scope.sort = function(option, order) {
+		var sortFactor=$scope.sortOpt[option];
+		if(order!=undefined)
+			sortFactor=order;
+		if($scope.loadCompleted) {
+			$scope.sortingOpt.option=0; //reset sorting option
+		}
+		else {
+			$scope.sortingOpt.option=option;
+			$scope.sortingOpt.order=sortFactor;
+		}
+		
+		//
+		switch(option) {
+		case 1: //type
+			$scope.contests.sort(function(a, b) {
+				if(a.contestType > b.contestType)
+					return -1*sortFactor;
+				else if(a.contestType === b.contestType)
+					return 0;
+				else
+					return 1*sortFactor;
+			});
+			break;
+		case 2: //title
+			$scope.contests.sort(function(a, b) {
+				if(a.originalData.contestPortfolioDomain.name > b.originalData.contestPortfolioDomain.name)
+					return -1*sortFactor;
+				else if(a.originalData.contestPortfolioDomain.name === b.originalData.contestPortfolioDomain.name)
+					return 0;
+				else
+					return 1*sortFactor;
+			});
+			break;
+		case 3: //season
+			$scope.contests.sort(function(a, b) {
+				if(a.seasonYear.season > b.seasonYear.season)
+					return -1*sortFactor;
+				else if(a.seasonYear.season === b.seasonYear.season)
+					return 0;
+				else
+					return 1*sortFactor;
+			});
+			break;
+		case 4: //doc
+			//sorting base on the numbers of uploaded docs
+			$scope.contests.sort(function(a, b) {
+				if(a.originalData.contestPortfolioDomain.portfolioImages.length > b.originalData.contestPortfolioDomain.portfolioImages.length)
+					return -1*sortFactor;
+				else if(a.originalData.contestPortfolioDomain.portfolioImages.length === b.originalData.contestPortfolioDomain.portfolioImages.length)
+					return 0;
+				else
+					return 1*sortFactor;
+			});
+			break;
+		case 5: //status
+			$scope.contests.sort(function(a, b) {
+				if(a.contestStatus > b.contestStatus)
+					return -1*sortFactor;
+				else if(a.contestStatus === b.contestStatus)
+					return 0;
+				else
+					return 1*sortFactor;
+			});
+			break;
+		case 6: //awards
+			$scope.contests.sort(function(a, b) {
+				if(a.originalData.numberOfWinners > b.originalData.numberOfWinners)
+					return -1*sortFactor;
+				else if(a.originalData.numberOfWinners === b.originalData.numberOfWinners)
+					return 0;
+				else
+					return 1*sortFactor;
+			});
+			break;
+		case 7: //submissions
+			if($scope.containUnloadBoardsInfo()) {
+				
+			}
+			$scope.contests.sort(function(a, b) {
+				if(a.boards > b.boards)
+					return -1*sortFactor;
+				else if(a.boards === b.boards)
+					return 0;
+				else
+					return 1*sortFactor;
+			});
+			break;
+		default:
+		case 8: //ends date
+			$scope.contests.sort(function(a, b) {
+				if(a.endDate > b.endDate)
+					return -1*sortFactor;
+				else if(a.endDate === b.endDate)
+					return 0;
+				else
+					return 1*sortFactor;
+			});
+			break;
+		}
+		//
+		$scope.render();
+		if(order==undefined)
+			$scope.sortOpt[option]=0-($scope.sortOpt[option]);
+		else
+			$scope.sortOpt[option]=0-order;
+		if($scope.sortOpt[option] < 0)
+			$scope.sortIcon[option]='glyphicon-chevron-down';
+		else
+			$scope.sortIcon[option]='glyphicon-chevron-up';
+	},
+	$scope.getContestBoards = function(item) {
+		boardService.getContestBoards(item);
+	},
+	$scope.containUnloadBoardsInfo = function() {
+		for(var id in $scope.contests) {
+			if($scope.contests[id].boards == -1 || $scope.contests[id].boards == undefined)
+				return true;
+		}
+		return false;
+	},
+	$scope.boardsView= function(portfolioId) {
+		//console.log('board view');
+		$location.path(ajaxPaths['viewProjectsPortfolioPath']+'/'+portfolioId);
+	};
+	
+	$scope.isLoading=true;
+	//get projects data
+	$http({method: 'GET', url: ajaxPaths['viewProjectsDataPath']})
+	.success(function(data, status, headers, config) {
+		// this callback will be called asynchronously when the response is available
+		$scope.isLoading=false;
+		$scope.injectData(data);
+    })
+    .error(function(data, status, headers, config) {
+    	// called asynchronously if an error occurs or server returns response with an error status.
+    	$scope.isLoading=false;
+    });
+	
+}]);
+
+app.controller('manageBuyerProjectsController', ['$scope', '$http', '$filter','$rootScope', function($scope,$http,$filter,$rootScope) {
+	//console.log('buyer manage projects controller');
+	$rootScope.tab={
+		'manageProjects':true
+	};
+}]);

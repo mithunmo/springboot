@@ -1,0 +1,310 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*Global Setting ******************************************************************/
+body
+{
+	/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6e7e8', endColorstr='#ffffff',GradientType=0 );*/ /* IE6-8 */
+	/*-pie-background: linear-gradient(bottom, #e6e7e8 0%,#ffffff 30%,#ffffff 70%,#e6e7e8 100%);*/ /*ie 6-9 via PIE*/
+	behavior: url(/PIE.htc);
+}
+
+.ie7inline { display:inline;}
+
+.ui-tabs .ui-tabs-nav li a { position: absolute; top:0px; left:0px;} /*For IE 7 to set the position of <a>*/
+
+.button { display:inline;}
+
+.titleContent
+{
+	position:relative;
+}
+
+.loginPanel
+{
+	float:right;
+	clear:both;
+}
+
+.function
+{
+	position:absolute;
+	top:0px;
+	right:0px;
+}
+
+.information
+{
+ 	float:right;
+}
+
+/*Main Container======================================*/
+.container
+{
+	position:relative;
+}
+
+/*Shopping cart=========================================*/
+#cart_icon
+{
+	right:0px;
+}
+/*End of shopping cart==================================*/
+
+/*TABS==================================================*/
+.tab-content-function a { margin-right:10px; font-size:16px;}
+.tab-content-pagin { width:100%; background-color:#E6E7E8; font-size:20px; /* margin-top:5px; */ padding-bottom:5px; height:25px; float:right; text-align:center; border-top:5px solid #FFF;}
+
+/*prev and nexr control--------------------------*/
+.left_touchbar
+{
+	left:0px;
+}
+
+/*search result tab================================================================================*/
+/*Search Panel-------------------------------------------*/
+#sort{ float:right; margin-right:25px; color:#FFF; font-size:16px; margin-top:12px;}
+
+.sort .list{ width:150px;}
+/*End of search result=============================================================================*/
+
+/*Search Criteria Tab==============================================================================*/
+#search_options .second { width:24%;}
+#search_options .loadingPanel { position:absolute; display:none; left:0px;}
+#search_options .loadingOverlay { width:950px; height:500px;}
+/*End od search criteria tab=======================================================================*/
+
+/*Home Tab=========================================================================================*/
+#home .homeImage { position:absolute; top:0px;}
+.membershipDetail .row .textLeft { float:left;}
+#home_edit .membershipDetail .row .textLeft { width:100%;}
+#home_designer_edit .membershipDetail .row .textLeft { width:100%;}
+#edit_profile_designer { text-decoration: none;}
+#home_designer .threeForth { width:74%;}
+#home_designer_edit .second { width:24%;}
+/*End of home========================================================================================*/
+
+/*Messages tab=====================================================================================*/
+#messages .odd { width:100%; height:166px; border-bottom:11px solid #FFF; background-color: #E6E7E8; /* margin:5px 0px; height:80px; padding-bottom:2px; */}
+#messages .even { width:100%; height:166px; border-bottom:11px solid #FFF; background-color: #FFFFFF; /* margin:5px 0px; height:80px; padding-bottom:2px; */}
+#messages .message table {text-align:center;vertical-align:middle; table-layout:fixed;}
+#messages .message td {text-align:center}
+#messages .message .check{ width:10%; text-align:center; padding-top:25px;}
+#messages .message .pic { display:inline-block; width:150px; position:relative; top:20px;}
+#messages .message .pic img{ width:100px; height:100px; text-align:center;}
+#messages .message .pic .boardNameLabel { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight:bold; text-decoration: none;}
+#messages .message .detail .boardNameLabel { font-weight:bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-decoration: none;}
+#messages .message .sender .userNameLabel { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight:bold; text-decoration: none !important;}
+#messages .message .sender .messages_fromUserId { text-decoration: none;}
+#messages .message .detail .board { width:100%; display:inline-block; text-align:center; white-space: nowrap; overflow:hidden; text-overflow:ellipsis;}
+#messages .message .detail .context { clear: both; /* margin-left:50%; */ text-decoration: underline;}
+#messages .message .detail .message_function {margin-left:5%; margin-top:15px; width:95%;}
+#messages .message .time{ width:23%; height:100%; text-align:center; color:#000; font-weight:bold; text-transform: uppercase; /*padding-top:25px; */}
+#messages .message .time * { vertical-align: middle;}
+#messages .message .time i { height:100%; display: inline-block;}
+#messages .message .context { height:40px; /* white-space: nowrap; */ overflow:hidden; text-overflow:ellipsis;}
+#messagesEmptyPanel { display:block;}
+#messagesEmptyPanel .loadingOverlay { height:470px;}
+#messagesEmptyPanel .loadingSpinner span{ margin-top:60px;}
+/*Messages Tiles -----------------*/
+#messages .tilesView .Tiles-view { top:30px;}
+/*---scroll bar for messages------*/
+#messages_scrollbar .track 
+{ 
+	background-color: #FFF;
+	height: 100%; 
+	width:7px; 
+	position: relative; 
+	padding: 0px;
+}
+#messages_scrollbar .thumb 
+{ 
+	height: 20px; 
+	width: 7px; 
+	cursor: pointer; 
+	overflow: hidden; 
+	position: absolute; 
+	top: 0;
+	border-radius:10px;
+}
+/*End of messages tab==============================================================================*/
+
+
+/*Message Detail Tab===============================================================================*/
+#message_detail .msg_profile .detail{ clear:none;}
+#message_detail .message_content .post .context{ clear:both; margin-top:5px; margin-left:20px; width:750px; word-wrap:break-word;}
+#message_detail .message_content .post .viewarea{ width:750px; overflow: hidden; clear:both;}
+#message_detail .message_content .post .readMore{ /* margin-left:10px; */ clear:both;}
+#message_detail .message_content .post .hideContext{ clear:both;}
+#message_detail .message_content .reply{ background-color:#BCBEC0; width:94%; padding-left:6%; padding-top:1%; padding-bottom:1%; border-bottom: 3px solid #FFF;}
+#message_detail .message_content .reply .context{ /*clear:both;*/ width:750px; margin-top:5px; margin-left:20px; word-wrap:break-word;}
+#message_detail .message_content .reply .viewarea{ width:750px; overflow: hidden; clear:both;}
+#message_detail .message_content .reply .readMore{ margin-left:10px; clear:both;}
+#message_detail .message_content .reply .hideContext{ margin-left:10px; clear:both;}
+#sendMessage{ position:absolute; right:0px; margin-right:30px;}
+/*End of message_detail tab================================================================================*/
+
+/*Create Board tab=========================================================================================*/
+#save_create_board{ margin:0px auto; float:none; display:inline;}
+#publish_create_board{ margin:0px auto; float:none; display:inline;}
+#create_board_clear div { margin:0px auto; float:none; display:inline;}
+#cancel_create_board{ margin:0px auto; float:none; display:inline;}
+#back_to_portfolio { margin:0px auto; float:none; display:inline;}
+#back_to_boards { margin:0px auto; float:none; display:inline;}
+#current_exp_days { clear:none; color:#C30;}
+/*End of create board tab==================================================================================*/
+
+/*Create a portfolio tab===================================================================================*/
+#create_portfolio .buttons{ right:0px;}
+/*End of create a portfolio tab============================================================================*/
+
+/*Design Wall tab==========================================================================================*/
+#design_wall .wall_content .td1{ width:15%; text-align:center;}
+#design_wall .wall_content .td2{ width:5%; text-align:center;}
+#design_wall .wall_content .td3{ width:20%; text-align:center;}
+#design_wall .wall_content .td4{ width:15%; text-align:center;}
+#design_wall .wall_content .td5{ width:15%; text-align:center;}
+#design_wall .wall_content .td6{ width:15%; text-align:center;}
+#design_wall .wall_content .td7{ width:15%; text-align:center; padding:0px 10px;}
+#design_wall .wall_content .odd{ background-color:#E6E7E8;}
+#design_wall .wall_content .even{ background-color:#FFFFFF;}
+#designWallEmptyPanel .loadingOverlay { /* height:100%; */}
+/*---scroll bar for design wall------*/
+#design_wall_scrollbar .track 
+{ 
+	background-color:#FFF;
+	height: 100%; 
+	width:7px; 
+	position: relative; 
+	padding: 0px;
+}
+#design_wall_scrollbar .thumb 
+{ 
+	height: 20px; 
+	width: 7px; 
+	cursor: pointer; 
+	overflow: hidden; 
+	position: absolute; 
+	top: 0;
+	border-radius:10px;
+}
+/*Ends of design wall tab===================================================================================*/
+
+/*Activity tab==============================================================================================*/
+/*For both----------------------------------------*/
+#activity .ratingDetails .ratingTitle{ clear:none; margin-left:5px; margin-top:10px; margin-bottom:10px; width:100%; font-weight:bold; text-transform: uppercase;}
+#activity .ratingDetails .overall{ width:55%; margin-left:5px; margin-bottom:20px; clear:none; }
+#activity .ratingDetails .partial{ width:55%; margin-left:5px; clear:none; margin-bottom:10px;}
+/*For Company--------------------------------------*/
+#activity .act_company_table_header .td1 {width:10%} /*BoardImage*/
+#activity .act_company_table_header .td2 {width:20%} /*boardname*/
+#activity .act_company_table_header .td3 {width:20%} /*season*/
+#activity .act_company_table_header .td4 {width:20%} /*Designer*/
+#activity .act_company_table_header .td5 {width:10%} /*price*/
+#activity .act_company_table_header .td6 {width:20%} /*Date Viewed*/
+#activity .act_company_table .even {background: #BCBEC0; border-top:2px solid #fff;}
+#activity .act_company_table .odd {background: #E6E7E8; border-top:2px solid #fff;}
+#activity .act_company_table .td1 {width:10%} /*Board Name*/
+#activity .act_company_table .td2 {width:20%; overflow: hidden; white-space: nowrap;} /*Boardname*/
+#activity .act_company_table .td3 {width:20%} /*Season*/
+#activity .act_company_table .td4 {width:20%} /*Designer*/
+#activity .act_company_table .td5 {width:10%} /*Date Purchased*/
+#activity .act_company_table .td6 {width:20%} /*Date Paid*/
+/*For Designer-------------------------------------*/
+#activity .act_designer_table .table_header .td1 {width:10%} /*Board*/
+#activity .act_designer_table .table_header .td2 {width:20%} /*Board Name*/
+#activity .act_designer_table .table_header .td3 {width:20%} /*season*/
+#activity .act_designer_table .table_header .td4 {width:20%} /*portfolio*/
+#activity .act_designer_table .table_header .td5 {width:10%} /*views*/
+#activity .act_designer_table .table_header .td6 {width:20%} /*Price*/
+#activity .act_designer_table .even {background: #BCBEC0; border-top:2px solid #fff;}
+#activity .act_designer_table .odd {background: #E6E7E8; border-top:2px solid #fff;}
+#activity .act_designer_table .td1 {width:10%} /*Board*/
+#activity .act_designer_table .td2 {width:20%; overflow: hidden; white-space: nowrap;} /*Board Name*/
+#activity .act_designer_table .td3 {width:20%} /*season*/
+#activity .act_designer_table .td4 {width:20%; overflow: hidden; white-space: nowrap;} /*portfolio*/
+#activity .act_designer_table .td5 {width:10%} /*views*/
+#activity .act_designer_table .td6 {width:20%} /*Price*/
+/*---scroll bar for grid------*/
+#grid_scrollbar .track { background-color:#FFF; height: 100%; width:7px; position: relative; padding: 0px; }
+#grid_scrollbar .thumb { height: 20px; width: 7px; cursor: pointer; overflow: hidden; position: absolute; top: 0; border-radius:10px;}
+/*Ends of activity tab======================================================================================*/
+
+/*Manage Portfolio tab======================================================================================*/
+#manage_portfolio .portfolio table { border-spacing:0px; border-collapse:collapse; background-color: #FFF; table-layout:fixed;}
+#manage_portfolio .portfolio table td{ border: thin solid #BDCBD4; overflow:hidden;}
+#manage_portfolio .portfolio table td.emptyCell { height:98px;}
+#manage_portfolio .detail { width:100%; margin-top:10px;}
+/*End of manage portfolio tab==============================================================================*/
+
+/*Manage board tab=========================================================================================*/
+#manage_board .item{ display:inline-block; width:200px; /* height:45%; */ margin-right:10px; margin-left:10px; margin-bottom:5px; /* margin-top:10px; */ background-color:#FFF;}
+#manage_board .detail{ }
+/*End of manage board tab==================================================================================*/
+
+/*Check out============================================================================================*/
+#shopping_cart .checkout{ height:140px; border-top:thin dashed #bdcbd4; padding:5px 10px; text-align:right;}
+#shopping_cart .checkout .terms{ float:right; clear:none; /* margin-right:20px; */}
+#shopping_cart .security_info{ width:50%; float:left; text-align:center; font-weight:bold; height:50px; position:absolute; left:0px; top:0px;}
+#shopping_cart_checkout{ float:right; clear:none; margin-top:5px; position:absolute; right:10px; bottom:-10px;}
+/* #form_shoppingcart_checkout input { position:relative; top:65px;} */
+/*End of Check out=====================================================================================*/
+
+/*Account=====================================================================================*/
+#account_total {font-weight:bold; margin-top:14px; float:right; color:#FFF; margin-right:5px; text-transform: uppercase;}
+#account_scrollbar table tr {border-top:5px solid #FFF; border-bottom:5px solid #FFF;}
+#account .wall_content .td1{ width:15%;}
+#account .wall_content .td2{ width:15%;}
+#account .wall_content .td3{ width:15%; text-align:center}
+#account .wall_content .td4{ width:15%; text-align:center;}
+#account .wall_content .td5{ width:10%; text-align:center}
+#account .wall_content .td6{ width:15%; text-align:center}
+#account .wall_content .td7{ width:15%; text-align:center}
+#account .wall_content .odd{ background-color:#E6E7E8;}
+#account .wall_content .even{ background-color:#BCBEC0;}
+/*---scroll bar for skills info block------*/
+#account_scrollbar .track { background-color: #FFF; height: 100%; width:7px; position: relative; padding: 0px; }
+#account_scrollbar .thumb { height: 20px; width: 7px; cursor: pointer; overflow: hidden; position: absolute; top: 0; border-radius:10px; }
+/*End of account=====================================================================================*/
+
+/*bottom footer==========================================================*/
+#referralButton
+{
+	display:inline-block;
+	padding:0px;
+	float:right;
+	margin-right:0px;
+	margin-top:9px;
+	margin-bottom:9px;
+	width:138px;
+	height:43px;
+	background-image: url('/images/refer.png');
+}
+#referralButton:hover { background-image: url('/images/refer_hover.png'); margin-top:9px; margin-bottom:9px;}
+
+#feedbackButton{ float: left; padding:0px; width:138px; height:43px; background-image: url('/images/feedback.png'); margin-top:9px; margin-bottom:9px;}
+#feedbackButton:hover { background-image: url('/images/feedback_hover.png'); }
+
+.bottomNavigation
+{
+	clear:both;
+	width:inherit;
+	height:45px;
+	background-color: #00AEEF;
+	text-align:center;
+	font-size: 0em;
+	position:relative;
+}
+
+.bottomNavigation .pos-shift {display:inline-block; margin-left:0px; margin-top:10px;}
+
+.bottomNavigation .socialButtons
+{
+	position:absolute;
+	right:0px;
+	top:2px;
+}
+/*end of footer==========================================================*/
+
+/*Loading panel==========================================================*/
+.loadingPanel { position:absolute; display:none; left:0px;}

@@ -1,0 +1,1 @@
+<div class="row footer"><a href="/f4g/register/designer?v=nodetect">Full Site</a></div>

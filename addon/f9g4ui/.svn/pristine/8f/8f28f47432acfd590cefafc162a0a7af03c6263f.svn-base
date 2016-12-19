@@ -1,0 +1,216 @@
+package com.f9g4.web.Helper;
+
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.apache.commons.lang.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.select.Elements;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import com.f9g4.common.util.XMLGregorianCalendarConverter;
+
+public class KeywordXmlHelper {
+
+	private KeywordXmlHelper() {}
+	
+	public static ModelMap retrieveSubkeywordContentAsHashMap(String source)
+	{
+		ModelMap model=new ModelMap();
+		try
+		{
+			/*DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
+        	DocumentBuilder b = f.newDocumentBuilder();
+        	InputSource is = new InputSource(new StringReader(source));
+        	Document doc = b.parse(is);*/
+        	//check the keywords is xml
+        	org.jsoup.nodes.Document doc = Jsoup.parse(source);
+        	Elements root=doc.getElementsByTag("kw");
+        	if(root.size()>0)
+        	{
+	        	Elements skw1=doc.getElementsByTag("skw1");
+	        	String skw1Value=skw1.text();
+	        	Elements skw2=doc.getElementsByTag("skw2");
+	        	String skw2Value=skw2.text();
+	        	Elements skw3=doc.getElementsByTag("skw3");
+	        	String skw3Value=skw3.text();
+	        	Elements skw4=doc.getElementsByTag("skw4");
+	        	model.addAttribute("skw1", skw1.text());
+	        	model.addAttribute("skw2", skw2.text());
+	        	model.addAttribute("skw3", skw3.text());
+	        	model.addAttribute("skw4", skw4.text());
+        	}
+        	else
+        	{
+        		model.addAttribute("skw1", source);
+        	}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return model;
+	}
+	
+	public static ModelMap retrieveProductTypeContentAsHashMap(String source)
+	{
+		ModelMap model=new ModelMap();
+		//retrieve product type list
+    	String productTypeList=KeywordXmlHelper.retrieveProductTypeContent(source);
+    	String[] productTypeContainer=null;
+    	HashMap<String, String> productTypeHM=new HashMap<String, String>();
+    	if(productTypeList!=null)
+    	{
+    		 //Get content of the node
+    		productTypeContainer=StringUtils.split(productTypeList, ","); //Split the content into array
+    		//Convert string array to hashmap
+    		for(String item:productTypeContainer)
+    			productTypeHM.put(item, "true");
+    	}
+    	model.addAttribute("productTypeHM", productTypeHM);
+		return model;
+	}
+	
+	public static List<String> retrieveProductTypeContentAsList(String source)
+	{
+		//retrieve product type list
+    	String productTypeList=KeywordXmlHelper.retrieveProductTypeContent(source);
+    	String[] container=null;
+    	List<String> result=new ArrayList<String>();
+    	if(productTypeList!=null)
+    	{
+    		 //Get content of the node
+    		container=StringUtils.split(productTypeList, ","); //Split the content into array
+    		result.addAll(Arrays.asList(container));
+    	}
+		return result;
+	}
+	
+	public static ModelMap retrieveBoardCategoryLevelAsHashMap(int level, String source)
+	{
+		ModelMap model=new ModelMap();
+		//retrieve product type list
+    	String boardCategoryLevelList=KeywordXmlHelper.retrieveBoardCategoryLevelContent(level,source);
+    	String[] container=null;
+    	HashMap<String, String> containerHM=new HashMap<String, String>();
+    	if(boardCategoryLevelList!=null)
+    	{
+    		 //Get content of the node
+    		container=StringUtils.split(boardCategoryLevelList, ","); //Split the content into array
+    		//Convert string array to hashmap
+    		for(String item:container)
+    			containerHM.put(item, "true");
+    	}
+    	model.addAttribute("boardCategoryLevel"+level+"HM", containerHM);
+		return model;
+	}
+	
+	public static List<String> retrieveBoardCategoryLevelAslist(int level, String source)
+	{
+		//retrieve product type list
+    	String boardCategoryLevelList=KeywordXmlHelper.retrieveBoardCategoryLevelContent(level,source);
+    	String[] container=null;
+    	List<String> result = new ArrayList<String>();
+    	if(boardCategoryLevelList!=null)
+    	{
+    		 //Get content of the node
+    		container=StringUtils.split(boardCategoryLevelList, ","); //Split the content into array
+    		result.addAll(Arrays.asList(container));
+    	}
+		return result;
+	}
+	
+	public static String retrieveProductTypeContent(String source)
+	{
+		String result=null;
+		try
+		{
+			/*DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
+        	DocumentBuilder b = f.newDocumentBuilder();
+        	InputSource is = new InputSource(new StringReader(source));
+        	Document doc = b.parse(is);*/
+        	org.jsoup.nodes.Document doc = Jsoup.parse(source);
+        	//check the keywords is xml
+        	Elements root=doc.getElementsByTag("kw");
+        	if(root.size()>0)
+        	{
+        		//retrieve product type list
+	        	Elements productTypeNode=doc.getElementsByTag("ptl"); //Retrieve product type node from XML
+	        	if(productTypeNode.size()>0)
+	        	{
+	        		result=productTypeNode.text(); //Get content of the node
+	        	}
+        	}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static String retrieveBoardCategoryLevelContent(int level, String source)
+	{
+		String result=null;
+		try
+		{
+        	org.jsoup.nodes.Document doc = Jsoup.parse(source);
+        	//check the keywords is xml structure
+        	Elements root=doc.getElementsByTag("kw");
+        	if(root.size()>0)
+        	{
+        		//retrieve Board Category list by level
+	        	Elements boardCategoryLevelNode=doc.getElementsByTag("bcl"+level); //Retrieve product type node from XML
+	        	if(boardCategoryLevelNode.size()>0)
+	        	{
+	        		result=boardCategoryLevelNode.text(); //Get content of the node
+	        	}
+        	}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static String assignSubkeywords(String source, String subKeyword1,String subKeyword2,String subKeyword3,String subKeyword4)
+	{
+		org.jsoup.nodes.Document doc = Jsoup.parse(source);
+    	Elements root=doc.getElementsByTag("kw");
+    	if(root.size()>0)
+    	{
+        	Elements skw1=doc.getElementsByTag("skw1");
+        	skw1.html(subKeyword1);
+        	Elements skw2=doc.getElementsByTag("skw2");
+        	skw2.html(subKeyword2);
+        	Elements skw3=doc.getElementsByTag("skw3");
+        	skw3.html(subKeyword3);
+        	Elements skw4=doc.getElementsByTag("skw4");
+        	skw4.html(subKeyword4);
+        	return "<kw>"+root.html()+"</kw>";
+    	}
+    	else
+    	{
+    		return null;
+    	}
+	}
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:http="http://cxf.apache.org/transports/http/configuration"
+	xmlns:httpj="http://cxf.apache.org/transports/http-jetty/configuration"
+	xmlns:sec="http://cxf.apache.org/configuration/security" xmlns:cxf="http://cxf.apache.org/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd http://cxf.apache.org/transports/http-jetty/configuration http://cxf.apache.org/schemas/configuration/http-jetty.xsd http://cxf.apache.org/configuration/security http://cxf.apache.org/schemas/configuration/security.xsd http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
+	<bean name="contentConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" />
+
+
+
+	<!-- HTTP/S configuration for proxy & web clients ${content.services.helper.host} -->
+	<http:conduit name="*.http.conduit">
+		<http:client ConnectionTimeout="60000" ReceiveTimeout="30000" />
+	</http:conduit>
+	<bean id="ratingServiceInThrottleInterceptor" class="com.f9g4.common.ws.F4GThrottleINInterceptor">
+		<property name="throttleSupport" ref="ratingServiceThrottleSupport"></property>
+	</bean>
+	<bean id="ratingServiceOutThrottleInterceptor" class="com.f9g4.common.ws.F4GThrottleOUTInterceptor">
+		<property name="throttleSupport" ref="ratingServiceThrottleSupport"></property>
+	</bean>
+	<bean id="ratingServiceThrottleSupport" class="com.f9g4.common.ws.F4GThrottleSupport">
+		<property name="concurrencyLimit" value="30"></property>
+		<property name="servicename" value="ratingService"></property>
+	</bean>
+	<!-- We are adding the interceptors to the bus as we will have only one 
+		endpoint/service/bus. -->
+	<cxf:bus>
+		<cxf:inInterceptors>
+			<ref bean="ratingServiceInThrottleInterceptor" />
+		</cxf:inInterceptors>
+		<!-- <cxf:inFaultInterceptors> -->
+		<!-- Declare here if needed -->
+		<!-- </cxf:inFaultInterceptors> -->
+		<cxf:outInterceptors>
+			<ref bean="ratingServiceOutThrottleInterceptor" />
+		</cxf:outInterceptors>
+		<!--<cxf:outFaultInterceptors> -->
+		<!-- Declare here if needed -->
+		<!-- </cxf:outFaultInterceptors -->
+	</cxf:bus>
+</beans>
+

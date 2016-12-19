@@ -1,0 +1,848 @@
+package com.f9g4.webapp.controllers;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+
+import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.StringUtils;
+import org.jasypt.util.text.BasicTextEncryptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.f9g4.businessobjects.domain.AdAccepttermsDomain;
+import com.f9g4.businessobjects.domain.AdAddressDomain;
+import com.f9g4.businessobjects.domain.AdContactsDomain;
+import com.f9g4.businessobjects.domain.AdLookupValuesDomain;
+import com.f9g4.businessobjects.domain.AdUserEducationsDomain;
+import com.f9g4.businessobjects.domain.AdUserLanguagesDomain;
+import com.f9g4.businessobjects.domain.AdUserSkillsDomain;
+import com.f9g4.businessobjects.domain.AdUserSpecialitiesDomain;
+import com.f9g4.businessobjects.domain.AdUsersDomain;
+import com.f9g4.businessobjects.domain.StTermConditionDomain;
+import com.f9g4.businessobjects.domain.TrBoardDomain;
+import com.f9g4.businessobjects.domain.TrBoardImagesDomain;
+import com.f9g4.businessobjects.domain.TrNotificationQDomain;
+import com.f9g4.businessobjects.domain.TrReferralsDomain;
+import com.f9g4.businessobjects.services.AddNotificationQRequest;
+import com.f9g4.businessobjects.services.AddNotificationQResponse;
+import com.f9g4.businessobjects.services.CheckUsernameAvailabilityResponse;
+import com.f9g4.businessobjects.services.GetEmailTemplateByCodeResponse;
+import com.f9g4.businessobjects.services.GetReferralByAuthCodeResponse;
+import com.f9g4.businessobjects.services.GetSamplesByUserIdRequest;
+import com.f9g4.businessobjects.services.GetSamplesByUserIdResponse;
+import com.f9g4.businessobjects.services.GetTermsConditionsResponse;
+import com.f9g4.businessobjects.services.RegisterUserRequest;
+import com.f9g4.businessobjects.services.RegisterUserResponse;
+import com.f9g4.businessobjects.services.SubmitSamplesRequest;
+import com.f9g4.businessobjects.services.SubmitSamplesResponse;
+import com.f9g4.businessobjects.services.UpdateReferralRequest;
+import com.f9g4.businessobjects.services.UpdateReferralResponse;
+import com.f9g4.businessobjects.services.ValidateUserRequest;
+import com.f9g4.businessobjects.services.ViewUserResponse;
+import com.f9g4.common.errors.StatusCodesEnum;
+import com.f9g4.common.util.ActiveStatusEnum;
+import com.f9g4.common.util.Constants;
+import com.f9g4.common.util.F9G4Hashing;
+import com.f9g4.common.util.LanguageCodesEnum;
+import com.f9g4.common.util.LookupTypeEnum;
+import com.f9g4.common.util.LookupTypeValueEnum;
+import com.f9g4.common.util.XMLGregorianCalendarConverter;
+import com.f9g4.servicesdk.BoardServiceSDK;
+import com.f9g4.servicesdk.NotificationQServiceSDK;
+import com.f9g4.servicesdk.ReferralsServiceSDK;
+import com.f9g4.servicesdk.RegistrationServiceSDK;
+import com.f9g4.web.forms.Cart;
+import com.f9g4.web.forms.RegistrationForm;
+import com.f9g4.web.forms.SampleForm;
+import com.f9g4.web.utils.ErrorsCodeEnum;
+import com.f9g4.web.utils.ViewNames;
+import com.f9g4.web.utils.ViewPaths;
+import com.f9g4.web.validator.RegistrationFormValidator;
+
+@Controller
+@RequestMapping("/register")
+@SessionAttributes({"registrationForm", "statesList", "securityQestions1_List",
+	"securityQestions2_List", "languagesList", "skillsList", "timezoneOffset", "user", "cart", "isLoginFailed"})
+public class RegistrationController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
+	
+	@Autowired
+	private RegistrationServiceSDK registrationServiceSDK;
+	
+	@Autowired
+	private NotificationQServiceSDK notificationQServiceSDK;
+	
+	@Autowired
+	private ReferralsServiceSDK referralsServiceSDK;
+	
+	@Autowired
+	private BoardServiceSDK boardServiceSDK;
+
+	@Autowired
+	private RegistrationFormValidator formValidator;
+	 
+	@Autowired @Value("${footer_linkedin_url}")
+	private String footer_linkedin_url;
+		
+	@Autowired @Value("${footer_facebook_url}")
+	private String footer_facebook_url;
+	
+	@Autowired @Value("${footer_twitter_url}")
+	private String footer_twitter_url;
+		
+	@Autowired @Value("${footer_rssfeed_url}")
+	private String footer_rssfeed_url;
+	
+	@ModelAttribute("footer_urls") 
+	public ModelMap getFooterUrl()
+	{
+		ModelMap map=new ModelMap();
+		map.addAttribute("footer_linkedin_url", footer_linkedin_url);
+		map.addAttribute("footer_facebook_url", footer_facebook_url);
+		map.addAttribute("footer_twitter_url", footer_twitter_url);
+		map.addAttribute("footer_rssfeed_url", footer_rssfeed_url);
+		return map;
+	}
+	
+	@Autowired @Value("${f9g4.webapp.key}")
+	private String key;
+	
+	//School banner directory
+	@Autowired @Value("${fileStore_school_banner}")
+	private String schoolBannerDir;
+	
+	// Invoked initially to create the "form" attribute
+	// Once created the "form" attribute comes from the HTTP session (see @SessionAttributes)
+	@ModelAttribute("countriesList")
+	public List<AdLookupValuesDomain> getCountriesList()
+	{
+		return registrationServiceSDK.getLookupTypeValues(LookupTypeEnum.ISO_COUNTRY.getTypeName()).getLookupTypeValues();
+	}
+	
+	@ModelAttribute("statesList")
+	public List<AdLookupValuesDomain> getStatesList() 
+	{
+		return registrationServiceSDK.getLookupTypeValues(LookupTypeEnum.US_STATES.getTypeName()).getLookupTypeValues();
+	}
+	
+
+	@ModelAttribute("securityQestions1_List")
+	public List<AdLookupValuesDomain> getSecurityQestions1List() {		
+		return registrationServiceSDK.getLookupTypeValues(LookupTypeEnum.USER_SEC_QUESTION1.getTypeName()).getLookupTypeValues();
+	}
+
+	@ModelAttribute("securityQestions2_List")
+	public List<AdLookupValuesDomain> getSecurityQestions2List() {
+		return registrationServiceSDK.getLookupTypeValues(LookupTypeEnum.USER_SEC_QUESTION2.getTypeName()).getLookupTypeValues();
+	}
+
+	//Languages 
+	@ModelAttribute("languagesList")
+	public List<AdLookupValuesDomain> getLanguagesList() {
+		return registrationServiceSDK.getLookupTypeValues(LookupTypeEnum.ISO_LANGUAGES.getTypeName()).getLookupTypeValues();
+	}
+	
+	//Skills 
+	@ModelAttribute("skillsList")
+	public List<AdLookupValuesDomain> getSkillsList() {
+		return registrationServiceSDK.getLookupTypeValues(LookupTypeEnum.USER_SKILLS.getTypeName()).getLookupTypeValues();
+	}
+	
+	//education(schools)
+	@ModelAttribute("educationsList")
+	public List<AdLookupValuesDomain> getEducationsList() {
+		return registrationServiceSDK.getLookupTypeValues(LookupTypeEnum.EDUCATION.getTypeName()).getLookupTypeValues();
+	}
+	
+	//specialty
+	@ModelAttribute("specialtiesList")
+	public List<AdLookupValuesDomain> getSpecialtiesList() {
+		return registrationServiceSDK.getLookupTypeValues(LookupTypeEnum.AREA_OF_SPECIALTY.getTypeName()).getLookupTypeValues();
+	}
+
+	//cookie username 
+	@ModelAttribute("username")
+	public String getCookieUserName(@CookieValue(value="RememberMef4g",defaultValue="") String name)
+	{
+		if(!name.equals(""))
+			return name;
+		else
+			return "";
+	}
+	
+	//cookie remember checkbox
+	@ModelAttribute("rememberme")
+	public boolean getCookieRememberedCheckbox(@CookieValue(value="RememberMef4g",defaultValue="") String name)
+	{
+		if(!name.equals(""))
+			return true;
+		else
+			return false;
+	}
+	
+	@RequestMapping(value="company", method=RequestMethod.GET)
+	public String setupCompanyForm(@RequestParam(value="mode",required=false,defaultValue="normal") String mode, ModelMap model) {
+		
+		model.addAttribute("registrationForm", new RegistrationForm());
+		if(mode.equals("admin"))
+		{
+			model.addAttribute("adminMode", true);
+			//Create 10 chars temp password
+			String tempPassword = RandomStringUtils.random(10,true,true);
+			model.addAttribute("tempPassword", tempPassword);
+		}
+  		return "registration_company";
+	}
+	
+	
+	@RequestMapping(value={"designer/getstarted","designer"}, method=RequestMethod.GET)
+	public String setupDesignerForm(@RequestParam(value="auth_code",required=false,defaultValue="") String authCode, @RequestParam(value="v",required=false,defaultValue="nodetect") String browserMode, @RequestParam(value="s",required=false,defaultValue="") String schoolCode, ModelMap model) 
+	{
+		GetReferralByAuthCodeResponse response = new GetReferralByAuthCodeResponse();
+		RegistrationForm form = new RegistrationForm();
+		//logic to get school name and logo image.
+		model.addAttribute("schoolId","");
+		model.addAttribute("schoolName","");
+		model.addAttribute("schoolBannerFile", "");
+		if(!StringUtils.isBlank(schoolCode))
+		{
+			//Get school name
+			for(AdLookupValuesDomain item : getEducationsList())
+			{
+				if(item.getLookupCode().toUpperCase().equals(schoolCode.toUpperCase()))
+				{
+					//check the school banner file exists or not.
+					File schoolBannerFile=new File(this.schoolBannerDir+"/"+item.getLookupCode()+".gif");
+					if(schoolBannerFile.exists())
+						model.addAttribute("schoolBannerFile", schoolBannerFile.getName());
+					model.addAttribute("schoolId",item.getLookupValueId());
+					model.addAttribute("schoolName",item.getDescription());
+				}
+			}
+		}
+		
+		if(!authCode.isEmpty())
+		{
+			response = referralsServiceSDK.getReferralByAuthCode(authCode);
+			if(response.getStatus().getStatuscode().equals(StatusCodesEnum.STATUS_SUCCESS.getCode()))
+			{
+				Calendar now = Calendar.getInstance();
+				TrReferralsDomain referral = response.getReferral().get(0);
+				boolean hasError=false;
+				//compare exp date
+				if(referral.getSignedupUserid()!=0 && referral.getSignupOn()!=null) //It means this auth code has someone signed up.
+				{
+					//expired
+					model.addAttribute("hasError", true);
+					model.addAttribute("errorCode", ErrorsCodeEnum.REFERRAL_AUTH_CODE_USED.getCode());
+					model.addAttribute("errorDescription", ErrorsCodeEnum.REFERRAL_AUTH_CODE_USED.getDefaultMessage());
+					model.addAttribute("auth_code", "");
+				}
+				else if(now.compareTo(XMLGregorianCalendarConverter.convertXMLGregorianCalendarToCalendar(referral.getExpirationDate())) > 0)
+				{
+					//expired
+					model.addAttribute("hasError", true);
+					model.addAttribute("errorCode", ErrorsCodeEnum.RECORD_EXPIRED.getCode());
+					model.addAttribute("errorDescription", ErrorsCodeEnum.RECORD_EXPIRED.getDefaultMessage());
+					model.addAttribute("auth_code", "");
+				}
+				else
+				{
+					model.addAttribute("hasError", false);
+					form.setFirstName(referral.getFirstName());
+					form.setLastName(referral.getLastName());
+					form.setUserName(referral.getEmail());
+					model.addAttribute("auth_code", authCode);
+				}
+			}
+			else
+			{
+				model.addAttribute("hasError", true);
+				model.addAttribute("errorCode", ErrorsCodeEnum.REFERRAL_AUTH_CODE_INVALID.getCode());
+				model.addAttribute("errorDescription", ErrorsCodeEnum.REFERRAL_AUTH_CODE_INVALID.getDefaultMessage());
+				model.addAttribute("auth_code", "");
+			}
+		}
+		else
+			model.addAttribute("auth_code", "");
+		
+		//get terms id
+		GetTermsConditionsResponse request = registrationServiceSDK.getLatestTermsConditions(LookupTypeValueEnum.MEMEBER_TERM_TYPE_REGISTRATION_DESIGNER.getTypeCode() , LookupTypeValueEnum.USER_TYPE_DESIGNER.getTypeCode());
+		StTermConditionDomain stTermCondition = request.getTermCondition();
+		model.addAttribute("termsId", stTermCondition.getTermCondId());
+		
+		model.addAttribute("registrationForm", form);
+		if(browserMode.equals("nodetect"))
+			return "registration_designer";
+		else
+			return "mobile_registration_designer";
+	}
+
+	@RequestMapping(value={"designer/getstarted","designer"}, method=RequestMethod.POST)	
+	public @ResponseBody ModelMap processDesignerSubmit(RegistrationForm formBean, BindingResult result, @RequestParam(value="auth_code",required=false,defaultValue="") String authCode, @RequestParam(value="timezoneOffset") Integer timezoneOffset,Model model) {
+		
+		// Save timezone offset for displaying user local time
+		model.addAttribute("timezoneOffset", timezoneOffset/60);
+		//validate form..
+ 		formBean.setUserType(LookupTypeValueEnum.USER_TYPE_DESIGNER.getTypeCode());
+		CheckUsernameAvailabilityResponse chkresponse = registrationServiceSDK.checkUserNameAvailability(formBean.getUserName());
+		formValidator.SetRegistrationService(registrationServiceSDK);
+		formValidator.validate(formBean, result);
+			
+		logger.debug("Entry - processDesignerSubmit" );
+		logger.debug("Registration formBean " + formBean);
+		
+		ModelMap modelMap = new ModelMap();
+		if(result.hasErrors()){
+			logger.debug("hasErrors -  true" );
+			modelMap.put("hasError",true);
+			modelMap.put("errors", result.getAllErrors());
+		}else{
+			logger.debug("hasErrors -  false" );
+			modelMap.put("hasError",false);
+			//map form to AdUsersDomain
+			AdUsersDomain adUserDomain = new AdUsersDomain();
+			adUserDomain.setAboutYou(formBean.getAboutYou());
+			adUserDomain.setProfilename(Constants.PROFILE_NAME);
+			adUserDomain.setUseProfilename(Constants.USE_PROFILE_NAME);
+			adUserDomain.setActiveStatus(ActiveStatusEnum.ACTIVE.value());
+			adUserDomain.setCompanyname(formBean.getCompanyName());
+			adUserDomain.setCompanywebsite(formBean.getWebsite());
+			adUserDomain.setFirstname(formBean.getFirstName());
+			adUserDomain.setLastname(formBean.getLastName());
+			adUserDomain.setLogoimageurl(formBean.getLogoImageUrl());
+			adUserDomain.setPassword(F9G4Hashing.getHashValue(formBean.getPassword()));
+			adUserDomain.setSchoolawards(formBean.getSchools());
+			//Hash the security answer,and convert to all upper case
+			/*adUserDomain.setSecurityAnswer1(formBean.getSecurityQ1Value());
+			adUserDomain.setSecurityAnswer2(formBean.getSecurityQ2Value());*/
+			/*
+			BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+			textEncryptor.setPassword(this.key);
+			adUserDomain.setSecurityAnswer1(textEncryptor.encrypt(formBean.getSecurityQ1Value().toUpperCase()));
+			adUserDomain.setSecurityAnswer2(textEncryptor.encrypt(formBean.getSecurityQ2Value().toUpperCase()));
+			adUserDomain.setSecurityQuestion1(formBean.getSecurityQ1());
+			adUserDomain.setSecurityQuestion2(formBean.getSecurityQ2());
+			*/
+			adUserDomain.setUserName(formBean.getUserName());
+			adUserDomain.setLangCode(LanguageCodesEnum.EN_US.getLangCode());
+			adUserDomain.setUserType(LookupTypeValueEnum.USER_TYPE_DESIGNER.getTypeCode());
+			
+			//map address
+			//create a record to hold a space for editing.
+			List<AdAddressDomain> adAddressDomainsList = adUserDomain.getAddress();
+			AdAddressDomain adAddressDomain= new AdAddressDomain();
+			adAddressDomain.setActiveStatus(ActiveStatusEnum.ACTIVE.value());
+			adAddressDomain.setAddressLine1(formBean.getStreet1());
+			adAddressDomain.setAddressLine2(formBean.getStreet2());
+			adAddressDomain.setCity(formBean.getCity());
+			adAddressDomain.setState(""); //Empty string
+			adAddressDomain.setPostalcode(formBean.getZip());
+			adAddressDomain.setCountryId(formBean.getCountry());
+			adAddressDomain.setLangCode(LanguageCodesEnum.EN_US.getLangCode());
+			adAddressDomainsList.add(adAddressDomain);
+			
+			//map contacts
+			//TODO create a record to hold a space for editing.
+			List<AdContactsDomain> adContactsDomainsList =  adUserDomain.getContacts();
+			AdContactsDomain adContactsDomain = new AdContactsDomain();
+			adContactsDomain.setCellphone(formBean.getCell());
+			//adContactsDomain.setFax(formBean.getFax());
+			adContactsDomain.setLangCode(LanguageCodesEnum.EN_US.getLangCode());
+			//adContactsDomain.setWorkphone(formBean.getWorkPhone());
+			//adContactsDomain.setWorkext(formBean.getExt());
+			adContactsDomainsList.add(adContactsDomain);
+			
+			//map user languages
+			/*
+			List<AdUserLanguagesDomain> adUserLanguagesDomainsList = adUserDomain.getUserLangs();
+			int langs[] = formBean.getLangs();
+			for (int i : langs) {
+				AdUserLanguagesDomain adUserLanguagesDomain = new AdUserLanguagesDomain();
+				adUserLanguagesDomain.setActiveStatus(ActiveStatusEnum.ACTIVE.value());
+				adUserLanguagesDomain.setLangId(i);
+				adUserLanguagesDomainsList.add(adUserLanguagesDomain);
+			}
+			*/
+
+			//map user skills
+			/*
+			List<AdUserSkillsDomain> adUserSkillsDomainList =  adUserDomain.getUseSkills();
+			int skills[] = formBean.getSkills();
+			for (int i : skills) {
+				AdUserSkillsDomain adUserSkillsDomain = new AdUserSkillsDomain();
+				adUserSkillsDomain.setActiveStatus(ActiveStatusEnum.ACTIVE.value());
+				adUserSkillsDomain.setSkillId(i);
+				adUserSkillsDomainList.add(adUserSkillsDomain);
+			}
+			*/
+			
+			//education
+			//change to multi-select logic
+			List<AdUserEducationsDomain> adUserEducationsDomainListPointer = adUserDomain.getEducation();
+			adUserEducationsDomainListPointer.clear();
+			Integer educations[] = formBean.getEducation();
+			if(educations!=null)
+			{
+				for (Integer i : educations) {
+					if(i!=0 && i!=-1)
+					{
+						AdUserEducationsDomain adUserEducationsDomain = new AdUserEducationsDomain();
+						adUserEducationsDomain.setUserId(adUserDomain.getUserId());
+						adUserEducationsDomain.setEducationId(i);
+						adUserEducationsDomain.setActiveStatus(ActiveStatusEnum.ACTIVE.value());
+						adUserEducationsDomainListPointer.add(adUserEducationsDomain);
+					}
+				}
+			}
+			//Handle other value
+			if(formBean.getOtherEducation()!=null)
+			{
+				String otherEducations[] = formBean.getOtherEducation();
+				for(String temp : otherEducations) {
+					AdUserEducationsDomain adUserEducationsDomain = new AdUserEducationsDomain();
+					adUserEducationsDomain.setUserId(adUserDomain.getUserId());
+					adUserEducationsDomain.setEducationId(0);
+					adUserEducationsDomain.setOther(temp);
+					adUserEducationsDomain.setActiveStatus(ActiveStatusEnum.OTHERS.value());
+					adUserEducationsDomainListPointer.add(adUserEducationsDomain);
+				}
+			}
+			
+			//update specialty
+			List<AdUserSpecialitiesDomain> adUserSpecialtiesDomainListPointer = adUserDomain.getSpecialty();
+			adUserSpecialtiesDomainListPointer.clear();
+			Integer specialties[] = formBean.getSpecialty();
+			if(specialties!=null)
+			{
+				for (Integer i : specialties) {
+					if(i!=0 && i!=-1)
+					{
+						AdUserSpecialitiesDomain adUserSpecialtiesDomain = new AdUserSpecialitiesDomain();
+						adUserSpecialtiesDomain.setUserId(adUserDomain.getUserId());
+						adUserSpecialtiesDomain.setSpecialitiesId(i);
+						adUserSpecialtiesDomain.setActiveStatus(ActiveStatusEnum.ACTIVE.value());
+						adUserSpecialtiesDomainListPointer.add(adUserSpecialtiesDomain);
+					}
+				}
+			}
+			//Handle other value
+			if(formBean.getOtherSpecialty()!=null)
+			{
+				String otherSpecialties[] = formBean.getOtherSpecialty();
+				for(String temp : otherSpecialties) {
+					AdUserSpecialitiesDomain adUserSpecialtiesDomain = new AdUserSpecialitiesDomain();
+					adUserSpecialtiesDomain.setUserId(adUserDomain.getUserId());
+					adUserSpecialtiesDomain.setSpecialitiesId(0);
+					adUserSpecialtiesDomain.setOther(temp);
+					adUserSpecialtiesDomain.setActiveStatus(ActiveStatusEnum.OTHERS.value());
+					adUserSpecialtiesDomainListPointer.add(adUserSpecialtiesDomain);
+				}
+			}
+			
+			//how do you hear about us
+			adUserDomain.setHowDidYouHearAboutUs(formBean.getHowDidYouHearAboutUs());
+			
+			if(formBean.getAcceptedTermsId()!=0)
+			{
+				List<AdAccepttermsDomain> adAccepttermsDomains =  adUserDomain.getAcceptedTermsCondition();
+				AdAccepttermsDomain adAccepttermsDomain = new AdAccepttermsDomain();
+				try {
+					adAccepttermsDomain.setAcceptanceDate(XMLGregorianCalendarConverter.convertCalendarToXMLGregorianCalendar(Calendar.getInstance()));
+				} catch (DatatypeConfigurationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				adAccepttermsDomain.setTermConditionId(formBean.getAcceptedTermsId());
+				adAccepttermsDomains.add(adAccepttermsDomain);
+			}
+			else
+			{
+				modelMap.put("hasError",true);
+				result.rejectValue("acceptedTermsId", ErrorsCodeEnum.SERVICE_UNAVAILABLE.getCode(), null, ErrorsCodeEnum.SERVICE_UNAVAILABLE.getDefaultMessage());
+				modelMap.put("errors", result.getAllErrors());
+			}
+			
+			//setup admin rating
+			adUserDomain.setAdminRating(-1);
+			
+			RegisterUserRequest  request = new  RegisterUserRequest();
+			request.setUser(adUserDomain);
+			
+			RegisterUserResponse response = registrationServiceSDK.registerUser(request);
+			logger.debug("response" + response);
+			logger.debug("response.getStatus().getStatuscode()" + response);
+			logger.debug("response.getUser(); " + response.getUser());
+			if(response.getStatus().getStatuscode().equals(StatusCodesEnum.STATUS_SUCCESS.getCode())){
+				AdUsersDomain adUser = response.getUser();
+				modelMap.put("userId", adUser.getUserId());
+				//store user session object but do not allow user to login.
+				model.addAttribute("user", registrationServiceSDK.viewUser(adUser.getUserId()).getUser());
+				model.addAttribute("cart", new Cart());
+				model.addAttribute("isLoginFailed", true);
+				//Update the referral record if auth code is not empty
+				if(!authCode.isEmpty())
+				{
+					GetReferralByAuthCodeResponse referralResponse = new GetReferralByAuthCodeResponse();
+					referralResponse = referralsServiceSDK.getReferralByAuthCode(authCode);
+					if(referralResponse.getStatus().getStatuscode().equals(StatusCodesEnum.STATUS_SUCCESS.getCode()))
+					{
+						TrReferralsDomain referral = referralResponse.getReferral().get(0);
+						//Update referral data
+						UpdateReferralRequest updateRequest = new UpdateReferralRequest();
+						referral.setSignedupUserid(adUser.getUserId()); //TODO set signed up user id
+						try {
+							referral.setSignupOn(XMLGregorianCalendarConverter.convertCalendarToXMLGregorianCalendar(Calendar.getInstance())); //update sign up date
+						} catch (DatatypeConfigurationException e) {
+							e.printStackTrace();
+						}
+						updateRequest.setReferrals(referral);
+						UpdateReferralResponse updateReferralResponse = referralsServiceSDK.updateReferral(updateRequest);
+					}
+					else
+					{
+						//TODO can't find referral info using auth code
+					}
+				}
+			}else{
+				//TODO handle error scenarios..
+				modelMap.put("hasError",true);
+			}
+		}
+		return modelMap;
+	}
+	
+	@RequestMapping(value="company", method=RequestMethod.POST)	
+	public @ResponseBody ModelMap processCompanySubmit(RegistrationForm formBean, BindingResult result, Model model) throws DatatypeConfigurationException {
+		logger.debug("Entry - processCompanySubmit" );
+		logger.debug("Registration formBean " + formBean);
+		
+		formBean.setUserType(LookupTypeValueEnum.USER_TYPE_CUSTOMER.getTypeCode());
+		if(formBean.getIsTempPassword()==true)
+		{
+			//set default answer
+			formBean.setSecurityQ1Value("Temp");
+			formBean.setSecurityQ2Value("Temp");
+			//set default value for security question
+			formBean.setSecurityQ1(this.getSecurityQestions1List().get(0).getLookupValueId());
+			formBean.setSecurityQ2(this.getSecurityQestions2List().get(0).getLookupValueId());
+		}
+		formValidator.SetRegistrationService(registrationServiceSDK);
+		formValidator.validate(formBean, result);
+		
+		ModelMap modelMap = new ModelMap();
+		if(result.hasErrors()){
+			logger.debug("hasErrors -  true" );
+			modelMap.put("hasError",true);
+			modelMap.put("errors", result.getAllErrors());
+		}else{
+			logger.debug("hasErrors -  false" );
+			modelMap.put("hasError",false);
+			//map form to AdUsersDomain
+			AdUsersDomain adUserDomain = new AdUsersDomain();
+			adUserDomain.setAboutYou(formBean.getAboutYou());
+			adUserDomain.setActiveStatus(ActiveStatusEnum.INACTIVE.value());
+			adUserDomain.setCompanyname(formBean.getCompanyName());
+			adUserDomain.setCompanywebsite(formBean.getWebsite());
+			adUserDomain.setFirstname(formBean.getFirstName());
+			adUserDomain.setLastname(formBean.getLastName());
+			adUserDomain.setLogoimageurl(formBean.getLogoImageUrl());
+			adUserDomain.setPassword(F9G4Hashing.getHashValue(formBean.getPassword()));
+			adUserDomain.setSchoolawards(formBean.getSchools());
+			//Encrypt the security answer,and convert to all upper case
+			/*adUserDomain.setSecurityAnswer1(formBean.getSecurityQ1Value());
+			adUserDomain.setSecurityAnswer2(formBean.getSecurityQ2Value());*/
+			BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+			textEncryptor.setPassword(this.key);
+			adUserDomain.setSecurityAnswer1(textEncryptor.encrypt(formBean.getSecurityQ1Value().toUpperCase()));
+			adUserDomain.setSecurityAnswer2(textEncryptor.encrypt(formBean.getSecurityQ2Value().toUpperCase()));
+			adUserDomain.setSecurityQuestion1(formBean.getSecurityQ1());
+			adUserDomain.setSecurityQuestion2(formBean.getSecurityQ2());
+			adUserDomain.setUserName(formBean.getUserName());
+			adUserDomain.setLangCode(LanguageCodesEnum.EN_US.getLangCode());
+			adUserDomain.setUserType(LookupTypeValueEnum.USER_TYPE_CUSTOMER.getTypeCode());
+			//setup isTempPassword flag
+			if(formBean.getIsTempPassword())
+				adUserDomain.setIsTempPassword(1);
+			else
+				adUserDomain.setIsTempPassword(0);
+			
+			List<AdAddressDomain> adAddressDomainsList = adUserDomain.getAddress();
+			AdAddressDomain adAddressDomain= new AdAddressDomain();
+			adAddressDomain.setActiveStatus(ActiveStatusEnum.ACTIVE.value());
+			adAddressDomain.setAddressLine1(formBean.getStreet1());
+			adAddressDomain.setAddressLine2(formBean.getStreet2());
+			adAddressDomain.setCity(formBean.getCity());
+			adAddressDomain.setState(Integer.toString(formBean.getState()));
+			adAddressDomain.setPostalcode(formBean.getZip());
+			adAddressDomain.setCountryId(formBean.getCountry());
+			adAddressDomain.setLangCode(LanguageCodesEnum.EN_US.getLangCode());
+			adAddressDomainsList.add(adAddressDomain);
+			
+			//map contacts
+			List<AdContactsDomain> adContactsDomainsList =  adUserDomain.getContacts();
+			AdContactsDomain adContactsDomain = new AdContactsDomain();
+			adContactsDomain.setCellphone(formBean.getCell());
+			adContactsDomain.setFax(formBean.getFax());
+			adContactsDomain.setLangCode(LanguageCodesEnum.EN_US.getLangCode());
+			adContactsDomain.setWorkphone(formBean.getWorkPhone());
+			adContactsDomain.setWorkext(formBean.getExt());
+			adContactsDomainsList.add(adContactsDomain);
+			
+			//map user skills
+			List<AdUserLanguagesDomain> adUserLanguagesDomainsList = adUserDomain.getUserLangs();
+			int langs[] = formBean.getLangs();
+			for (int i : langs) {
+				AdUserLanguagesDomain adUserLanguagesDomain = new AdUserLanguagesDomain();
+				adUserLanguagesDomain.setActiveStatus(ActiveStatusEnum.ACTIVE.value());
+				adUserLanguagesDomain.setLangId(i);
+				adUserLanguagesDomainsList.add(adUserLanguagesDomain);
+			}
+			//terms 
+			List<AdAccepttermsDomain> adAccepttermsDomainsList = adUserDomain.getAcceptedTermsCondition();
+			
+			AdAccepttermsDomain adAccepttermsDomain = new AdAccepttermsDomain();
+			adAccepttermsDomain.setTermConditionId(formBean.getAcceptedTermsId());
+			//adAccepttermsDomain.setTermConditionId(value)
+			adAccepttermsDomain.setAcceptanceDate(XMLGregorianCalendarConverter.convertCalendarToXMLGregorianCalendar(Calendar.getInstance()));
+			//adAccepttermsDomain.setCreatedby(value);
+			//adAccepttermsDomain.setLastupdateby(value);
+			adAccepttermsDomainsList.add(adAccepttermsDomain);
+			
+			//map user skills
+			List<AdUserSkillsDomain> adUserSkillsDomainList =  adUserDomain.getUseSkills();
+			int skills[] = formBean.getSkills();
+			if(skills!=null)
+			{
+				for (int i : skills) {
+					AdUserSkillsDomain adUserSkillsDomain = new AdUserSkillsDomain();
+					adUserSkillsDomain.setActiveStatus(ActiveStatusEnum.ACTIVE.value());
+					adUserSkillsDomain.setSkillId(i);
+					adUserSkillsDomainList.add(adUserSkillsDomain);
+				}
+			}
+			
+			//setup admin rating
+			adUserDomain.setAdminRating(-1);
+			
+			RegisterUserRequest  request = new  RegisterUserRequest();
+			request.setUser(adUserDomain);
+			
+			RegisterUserResponse response = registrationServiceSDK.registerUser(request); 
+			if(response.getStatus().getStatuscode().equals(StatusCodesEnum.STATUS_SUCCESS.getCode())){
+				AdUsersDomain adUser = response.getUser();		
+				modelMap.put("userId", adUser.getUserId());
+				//Send temp password email to user
+				if(formBean.getIsTempPassword()==true)
+				{
+					GetEmailTemplateByCodeResponse template = notificationQServiceSDK.getEmailTemplateByCode(Constants.TEMPLATE_CODE_TEMP_PASSWORD);
+					AddNotificationQRequest addNotificationQRequest = new AddNotificationQRequest();
+					TrNotificationQDomain domain=new TrNotificationQDomain();
+					domain.setFromEmail("support@fashionforglobe.com");
+					domain.setFromUserId(2); //System user
+					domain.setToEmail(adUser.getUserName());
+					domain.setToUserId(adUser.getUserId());
+					domain.setSubject(template.getSubject());
+					String body=template.getBody();
+					body=body.replace("$2", adUser.getFirstname()+" "+adUser.getLastname());
+					body=body.replace("$3", formBean.getPassword());
+					domain.setBodyText(body); //TODO send plain password to user
+					domain.setEmailStatusId(LookupTypeValueEnum.EMAIL_STATUS_ID_READY_TO_SEND.getTypeId());
+					addNotificationQRequest.setNotificationQ(domain);
+					AddNotificationQResponse addNotificationQResponse = notificationQServiceSDK.addNotificationQ(addNotificationQRequest);
+				}
+			}else{
+				logger.debug("hasErrors -  true" );
+				modelMap.put("hasError",true);
+				modelMap.put("errors", result.getAllErrors());
+			}
+
+		}
+		return modelMap;
+	}
+	
+	@RequestMapping(value="terms", method=RequestMethod.GET)
+	public String getLatestTerms(Model model) {
+		//need get latest terms and conditions..
+		//GetTermsConditionsResponse response = registrationServiceSDK.getTermsConditions(termsId);
+		//TODO remove hardcoding.....
+		//registrationServiceSDK.getLatestTermsConditions(termsType, userType);
+		model.addAttribute("termsId", 1);
+		model.addAttribute("terms", new String("Latest terms and Conditons Latest terms and Conditons Latest terms and Conditons"));
+  		return "terms";
+	}
+	
+	@RequestMapping(value="samples", method=RequestMethod.GET)
+	public String viewSamples(@RequestParam(value="userId") Integer userId, Model model) {
+		//show sample board submission view.
+		boolean hasError = false;
+		//check the user is existed in our system.
+		ViewUserResponse response = registrationServiceSDK.viewUser(userId);
+		if(response.getStatus().getStatuscode().equals(StatusCodesEnum.STATUS_SUCCESS.getCode()))
+		{
+			AdUsersDomain user = response.getUser();
+			//check the user type and reg status is designer and reg status 431
+			if(user.getUserType().equals(LookupTypeValueEnum.USER_TYPE_DESIGNER.getTypeCode()) && user.getRegisterStatusCode().equals(LookupTypeValueEnum.REG_STATUS_COMPLETED_FORM.getTypeCode()))
+			{
+				//Retrieve the samples that the user already submitted.
+				GetSamplesByUserIdRequest request = new GetSamplesByUserIdRequest();
+				//Add user id
+				request.getUserId().add(userId);
+				GetSamplesByUserIdResponse samplesResponse = boardServiceSDK.getSamplesByUserId(request);
+				if(samplesResponse.getStatus().getStatuscode().equals(StatusCodesEnum.STATUS_SUCCESS.getCode()))
+				{
+					//prepare samples
+					HashMap<Integer,TrBoardDomain> samples=new HashMap<Integer,TrBoardDomain>();
+					for(TrBoardDomain item : samplesResponse.getSamples())
+					{
+						//get index
+						String temp = item.getName().replace("Sample ", "");
+						temp = temp.replace("Example ", "");
+						samples.put(Integer.parseInt(temp), item);
+					}
+					model.addAttribute("samples", samples);
+				}
+				else
+				{
+					hasError = true;
+					model.addAttribute("error", ErrorsCodeEnum.SAMPLES_SAMPLE_NOT_EXISTS);
+				}
+				
+			}
+			else if(user.getUserType().equals(LookupTypeValueEnum.USER_TYPE_DESIGNER.getTypeCode()) && user.getRegisterStatusCode().equals(LookupTypeValueEnum.SAMPLES_SUBMIT_COMPLETED.getTypeCode()))
+			{
+				hasError = true;
+				model.addAttribute("error", ErrorsCodeEnum.SAMPLES_ALREADY_SUBMIT);
+			}
+			else
+			{
+				hasError = true;
+				model.addAttribute("error", ErrorsCodeEnum.SAMPLES_USER_NOT_EXISTS);
+			}
+		}
+		else
+		{
+			hasError = true;
+			model.addAttribute("error", ErrorsCodeEnum.SAMPLES_USER_NOT_EXISTS);
+		}
+		model.addAttribute("hasError", hasError);
+	
+		return ViewNames.SAMPLES_SUBMISSION;
+	}
+	
+	@RequestMapping(value="samples", method=RequestMethod.POST)
+	public @ResponseBody ModelMap submitSamples(@RequestParam(value="userId") Integer userId, SampleForm form, @RequestParam(value="timezoneOffset",required=false) Integer timezoneOffset, Model model) {
+		//submit the samples.
+		//if timezoneOffset is not in the session. Update it from POST value
+		if(!model.containsAttribute("timezoneOffset"))
+			model.addAttribute("timezoneOffset", 0);
+		ModelMap map = new ModelMap();
+		boolean hasError = false;
+		//prepare the samples that needs to save.
+		SubmitSamplesRequest request = new SubmitSamplesRequest();
+		List<TrBoardDomain> samples = request.getSamples();
+		request.setUserId(userId);
+		for(int i=0;i<form.getBoardId().length;i++)
+		{
+			//check the value is empty or not.
+			if(form.getFilename()[i].replaceAll(" ", "").length()>0 
+				&& form.getFilename_ext()[i].replaceAll(" ", "").length()>0 
+				&& form.getFilename_400()[i].replaceAll(" ", "").length()>0 
+				&& form.getFilename_100()[i].replaceAll(" ", "").length()>0 
+				&& form.getFilename_original()[i].replaceAll(" ", "").length()>0)
+			{
+				TrBoardDomain sample = new TrBoardDomain();
+				//set the board id 0 if the board id in the form is null.
+				if(form.getBoardId()[i]==null)
+					sample.setBoardId(0);
+				else
+					sample.setBoardId(form.getBoardId()[i]);
+				//set sample name and description
+				sample.setName("Example "+(i+1));
+				sample.setDescription("");
+				//update the image url
+				List<TrBoardImagesDomain> sampleImage = sample.getBoardImages();
+				TrBoardImagesDomain image = new TrBoardImagesDomain();
+				image.setFileName(form.getFilename_400()[i].replaceAll(" ", ""));
+				image.setFileType(form.getFilename_ext()[i].replaceAll(" ", ""));
+				image.setMainImageUrl(form.getFilename_original()[i].replaceAll(" ", ""));
+				image.setSourceFileURL(form.getFilename()[i].replaceAll(" ", ""));
+				image.setThumbnailUrl(form.getFilename_100()[i].replaceAll(" ", ""));
+				image.setCreatedby(2);
+				image.setLastupdateby(2);
+				sampleImage.add(image);
+				samples.add(sample);
+			}
+		}
+		SubmitSamplesResponse response = boardServiceSDK.submitSamples(request);
+		//return the submit status, hasError, samplesCount,
+		if(response.getStatus().getStatuscode().equals(StatusCodesEnum.STATUS_SUCCESS.getCode()))
+		{
+			map.addAttribute("samplesSubmitted", response.getSamplesCount());
+			map.addAttribute("userId", userId);
+			//check user session object is there, or we could not allow user to login directly
+			if(model.containsAttribute("user"))
+			{
+				//allow user to login by setting up the isLoginFailed to false
+				model.addAttribute("isLoginFailed", false);
+				map.addAttribute("redirectUrl", ViewPaths.CONSOLE_HOME); //to user console
+			}
+			else
+			{
+				model.addAttribute("isLoginFailed", true);
+				map.addAttribute("redirectUrl", "//"); //to homepage
+			}
+			//check the user expiration date
+			AdUsersDomain user = response.getUser();
+			Calendar now = Calendar.getInstance();
+			Calendar expirationDate = XMLGregorianCalendarConverter.convertXMLGregorianCalendarToCalendar(user.getUserMembership().get(0).getExperiationDate());
+			if(now.after(expirationDate))
+				map.addAttribute("membershipExpired", true);
+			else
+				map.addAttribute("membershipExpired", false);
+		}
+		else
+		{
+			hasError = true;
+			map.addAttribute("error", ErrorsCodeEnum.SAMPLES_SUBMIT_ERROR);
+		}
+		map.addAttribute("hasError", hasError);
+  		return map;
+	}
+	
+	@RequestMapping(value="usernamecheck", method=RequestMethod.GET)
+	public @ResponseBody ModelMap checkUsername(@RequestParam("username") String username, ModelMap model) {
+		ModelMap map = new ModelMap();
+		CheckUsernameAvailabilityResponse response = registrationServiceSDK.checkUserNameAvailability(username);
+		map.addAttribute("isAvailable", response.isIsAvailable());
+		return map;
+	}
+	
+	@RequestMapping(value="success", method=RequestMethod.GET)
+	public String showRegistrationResult(ModelMap model) 
+	{	
+  		return "mobile_registration_result";
+	}
+
+}

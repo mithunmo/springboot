@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://services.businessobjects.f9g4.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cp="http://services.businessobjects.f9g4.com" xmlns:f9g4="http://common.businessobjects.f9g4.com" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+xmlns:annox="http://annox.dev.java.net"
+ xmlns:Q1="http://domain.businessobjects.f9g4.com" targetNamespace="http://services.businessobjects.f9g4.com" attributeFormDefault="unqualified" jaxb:version="2.1">
+
+	<xsd:import namespace="http://common.businessobjects.f9g4.com" schemaLocation="f9g4Common.xsd"/>
+	<xsd:import namespace="http://domain.businessobjects.f9g4.com" schemaLocation="f9g4schema.xsd"/>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='AddBoardRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="AddBoardRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='AddBoardResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="AddBoardResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateBoardRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateBoardRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateBoardResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateBoardResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateBoardByAdminRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateBoardByAdminRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateBoardByAdminResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateBoardByAdminResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+ 		
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetBoardByIdRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetBoardByIdRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetBoardByIdResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetBoardByIdResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+ 	
+ 		
+ 			<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetBoardsByPortfolioRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetBoardsByPortfolioRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetBoardsByPortfolioResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetBoardsByPortfolioResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetBoardsByPMRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetBoardsByPMRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetBoardsByPMResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetBoardsByPMResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='AddBoardApprovalRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="AddBoardApprovalRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='AddBoardApprovalResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="AddBoardApprovalResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='ResubmitSamplesRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="ResubmitSamplesRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='ResubmitSamplesResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="ResubmitSamplesResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='SubmitSamplesRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="SubmitSamplesRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='SubmitSamplesResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="SubmitSamplesResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetAllSamplesResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetAllSamplesResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetSamplesByUserIdRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetSamplesByUserIdRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetSamplesByUserIdResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetSamplesByUserIdResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+ 	
+	<xsd:complexType name="AddBoardRequest">
+		<xsd:sequence>
+			<xsd:element name="Board" type="Q1:trBoardDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AddBoardResponse">
+		<xsd:sequence>
+			<xsd:element name="board" type="Q1:trBoardDomain"></xsd:element>
+			<!-- 			<xsd:element name="status" type="f9g4:Status"></xsd:element> -->
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="UpdateBoardRequest">
+		<xsd:sequence>
+			<xsd:element name="Board" type="Q1:trBoardDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateBoardResponse">
+		<xsd:sequence>
+			<xsd:element name="board" type="Q1:trBoardDomain"></xsd:element>
+			<!-- 			<xsd:element name="status" type="f9g4:Status"></xsd:element> -->
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="UpdateBoardByAdminRequest">
+		<xsd:sequence>
+			<xsd:element name="oldBoard" type="Q1:trBoardDomain"></xsd:element>
+			<xsd:element name="newBoard" type="Q1:trBoardDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateBoardByAdminResponse">
+		<xsd:sequence>
+			<xsd:element name="board" type="Q1:trBoardDomain"></xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="GetBoardByIdRequest">
+		<xsd:sequence>
+			<xsd:element name="boardid" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+
+	<xsd:complexType name="GetBoardByIdResponse">
+		<xsd:sequence>
+			<xsd:element name="board" type="Q1:trBoardDomain"></xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="GetBoardsByPortfolioRequest">
+		<xsd:sequence>
+			<xsd:element name="portfolioid" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="GetBoardsByPortfolioResponse">
+		<xsd:sequence>
+			<xsd:element name="boards" type="Q1:trBoardDomain"
+				maxOccurs="unbounded" minOccurs="0">
+			</xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="GetBoardsByPMRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xsd:int"></xsd:element>
+			<xsd:element name="publishToMP" type="xsd:int" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			<xsd:element name="portfolioTypes" type="xsd:int" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="GetBoardsByPMResponse">
+		<xsd:sequence>
+			<xsd:element name="boards" type="Q1:trBoardDomain"
+				maxOccurs="unbounded" minOccurs="0">
+			</xsd:element>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="DeleteBoardByIdResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- GetRecentlyViewedBoards operation -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetRecentlyViewedBoardsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetRecentlyViewedBoardsResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="GetRecentlyViewedBoardsResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+			<xsd:element name="boards" type="Q1:trBoardDomain"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="boardsViewedByDate" type="BoardsViewed"
+				minOccurs="0" maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element name="grid" type="TrActivityDomain" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Rating">
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:decimal"></xsd:element>
+			<xsd:element name="numberOfRatings" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="BoardsViewed">
+		<xsd:sequence>
+			<xsd:element name="dateViewed" type="xsd:date"></xsd:element>
+			<xsd:element name="numberOfBoards" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!--  createBoardImage operation -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreateBoardImageRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreateBoardImageRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CreateBoardImageResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CreateBoardImageResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:complexType name="CreateBoardImageRequest">
+		<xsd:sequence>
+			<xsd:element name="trBoardImagesDomain" type="Q1:trBoardImagesDomain" minOccurs="1" maxOccurs="1" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CreateBoardImageResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!--  searchBoards operation -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='SearchBoardsRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="SearchBoardsRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='SearchBoardsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="SearchBoardsResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="SearchBoardsRequest">
+		<xsd:sequence>
+			<xsd:element name="designerName" type="xsd:string"
+				minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="ratingOption" type="xsd:int"
+				minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="countryIds" type="xsd:int" minOccurs="0"
+				maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element name="skillIds" type="xsd:int" minOccurs="0"
+				maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element name="languageIds" type="xsd:int" minOccurs="0"
+				maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element name="schoolAwards" type="xsd:string"
+				minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<!-- Add keywords field -C -->
+			<xsd:element name="keywords" type="xsd:string" minOccurs="0"
+				maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="division" type="xsd:int" minOccurs="0"
+				maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="category" type="xsd:int" minOccurs="0"
+				maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="product" type="xsd:string" minOccurs="0"
+				maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="productType" type="xsd:string"
+				minOccurs="0" maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element name="seasonYearIds" type="xsd:int"
+				minOccurs="0" maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element name="saleTypeIds" type="xsd:int" minOccurs="0"
+				maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element name="priceOption" type="xsd:int" minOccurs="0"
+				maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="userId" type="xsd:int"></xsd:element>
+
+			<xsd:element name="isPortfolioSearch" type="xsd:boolean"></xsd:element>
+			<xs:element name="portfoliosearchstartdate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="portfoliosearchenddate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xsd:element name="expertiseIds" type="xsd:int" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			<xsd:element name="specialtyIds" type="xsd:int" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			<xsd:element name="educationIds" type="xsd:int" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			<xsd:element name="minPrice" type="xsd:decimal"></xsd:element>
+			<xsd:element name="maxPrice" type="xsd:decimal"></xsd:element>
+			<xsd:element name="minAdminRating" type="xsd:int"></xsd:element>
+			<xsd:element name="maxAdminRating" type="xsd:int"></xsd:element>
+			<xsd:element name="minBuyerRating" type="xsd:int"></xsd:element>
+			<xsd:element name="maxBuyerRating" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="SearchBoardsResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="trBoardSearchDomains" type="Q1:trBoardSearchDomain" minOccurs="0" maxOccurs="unbounded" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='SearchExampleBoardsRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="SearchExampleBoardsRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='SearchExampleBoardsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="SearchExampleBoardsResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="SearchExampleBoardsRequest">
+		<xsd:sequence>
+			<xsd:element name="designerName" type="xsd:string"
+				minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="ratingOption" type="xsd:int"
+				minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="countryIds" type="xsd:int" minOccurs="0"
+				maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element name="skillIds" type="xsd:int" minOccurs="0"
+				maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element name="languageIds" type="xsd:int" minOccurs="0"
+				maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element name="schoolAwards" type="xsd:string"
+				minOccurs="0" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="userId" type="xsd:int"></xsd:element>
+
+			<xsd:element name="isPortfolioSearch" type="xsd:boolean"></xsd:element>
+			<xs:element name="portfoliosearchstartdate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="portfoliosearchenddate">
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:minInclusive value="1000-01-01T00:00:00"/>
+						<xs:maxInclusive value="9999-12-31T23:59:59"/>
+						<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}T\p{Nd}{2}:\p{Nd}{2}:\p{Nd}{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xsd:element name="expertiseIds" type="xsd:int" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			<xsd:element name="specialtyIds" type="xsd:int" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			<xsd:element name="educationIds" type="xsd:int" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			<xsd:element name="minAdminRating" type="xsd:int"></xsd:element>
+			<xsd:element name="maxAdminRating" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SearchExampleBoardsResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="trBoardSearchDomains" type="Q1:trBoardSearchDomain" minOccurs="0" maxOccurs="unbounded" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	
+	<!--  DrawerInfo operation -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='DrawerInfoResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="DrawerInfoResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>	
+	<xsd:complexType name="DrawerInfoResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="yourMessages" type="yourMessages" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="stats" type="stats" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="averagRating" type="xsd:double" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<xsd:element name="recentActivity" type="Q1:trBoardSearchDomain" minOccurs="0" maxOccurs="unbounded" ></xsd:element>
+			<xsd:element name="mayWeSuggest" type="Q1:trBoardSearchDomain" minOccurs="0" maxOccurs="unbounded" ></xsd:element>			
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="yourMessages">
+		<xsd:sequence>
+			<xsd:element name="alerts" type="xsd:long"> </xsd:element>
+			<xsd:element name="latestAlertsTS" type="xsd:dateTime"> </xsd:element>
+			<xsd:element name="messages" type="xsd:long"> </xsd:element>
+			<xsd:element name="latestMessagesTS" type="xsd:dateTime"> </xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="stats">
+		<xsd:sequence>
+			<xsd:element name="boardsPurchasedCount" type="xsd:int"></xsd:element>
+			<xsd:element name="boardsPurchasedTotal" type="xsd:double"> </xsd:element>
+			<xsd:element name="boardsViewedToday" type="xsd:int"></xsd:element>
+			<xsd:element name="boardsViewedWeek" type="xsd:int"></xsd:element>
+			<xsd:element name="boardsViewedMonth" type="xsd:int"></xsd:element>			
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ratings">
+		<xsd:sequence>
+			<xsd:element name="overallRating" type="Rating"></xsd:element>
+			<xsd:element name="qualityRating" type="Rating"></xsd:element>
+			<xsd:element name="priceRating" type="Rating"></xsd:element>
+			<xsd:element name="reliabilityRating" type="Rating"></xsd:element>
+			<xsd:element name="customizationRating" type="Rating"></xsd:element>
+			<xsd:element name="averageRating" type="Rating"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- validate Cart -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='ValidateBoardsRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="ValidateBoardsRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='ValidateBoardsResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="ValidateBoardsResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:complexType name="boardSet">
+		<xsd:sequence>
+			<xsd:element name="boardIds" type="xsd:int"></xsd:element>
+			<xsd:element name="lastUpdateDate" type="xsd:dateTime"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ValidateBoardsRequest">
+		<xsd:sequence>
+			<xsd:element name="boards" type="boardSet" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+			<xsd:element name="userId" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ValidateBoardsResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status" />	
+			<xsd:element name="invalidBoardIds" type="xsd:int" minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element name="inconsistentBoardIds" type="xsd:int" minOccurs="1" maxOccurs="unbounded" />		
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- UpdateBoardStatus -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateBoardStatusRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateBoardStatusRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdateBoardStatusResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdateBoardStatusResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:complexType name="UpdateBoardStatusRequest">
+		<xsd:sequence>
+			<xsd:element name="boards" type="Q1:trBoardDomain" minOccurs="1" maxOccurs="unbounded" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateBoardStatusResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status" />		
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdatePublishBoardStatusRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdatePublishBoardStatusRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='UpdatePublishBoardStatusResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="UpdatePublishBoardStatusResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="UpdatePublishBoardStatusRequest">
+		<xsd:sequence>
+			<xsd:element name="boards" type="Q1:trBoardDomain" minOccurs="1" maxOccurs="unbounded" ></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdatePublishBoardStatusResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status" />		
+		</xsd:sequence>
+	</xsd:complexType>
+	
+
+	<xsd:complexType name="TrActivityDomain">
+		<xsd:sequence>
+			<xsd:element name="clickId" type="xsd:int"></xsd:element>
+			<xsd:element name="boardImageUrl" type="xsd:string"></xsd:element>
+			<xsd:element name="boardId" type="xsd:int"></xsd:element>
+			<xsd:element name="boardName" type="xsd:string"></xsd:element>
+			<xsd:element name="board" type="Q1:trBoardDomain"></xsd:element>
+			<xsd:element name="season" type="xsd:string"></xsd:element>
+			<xsd:element name="price" type="xsd:string"></xsd:element>
+			<xsd:element name="designerId" type="xsd:int"></xsd:element>
+			<xsd:element name="designerName" type="xsd:string"></xsd:element>
+			<xsd:element name="dateViewed" type="xsd:date"></xsd:element>
+			<xsd:element name="portfolioname" type="xsd:string"></xsd:element>
+			<xsd:element name="noofhits" type="xsd:int"></xsd:element>
+			<xsd:element name="profilename" type="xsd:string"></xsd:element>
+			<xsd:element name="useProfilename" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetBoardsSuggestionRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetBoardsSuggestionRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetBoardsSuggestionResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetBoardsSuggestionResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="GetBoardsSuggestionRequest">
+		<xsd:sequence>
+			<xsd:element name="numberOfBoards" type="xsd:int"></xsd:element>
+			<xsd:element name="memPricingOptionId" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GetBoardsSuggestionResponse">
+		<xsd:sequence>
+			<xsd:element name="boards" type="Q1:trBoardSearchDomain" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="AddBoardApprovalRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xs:int"></xsd:element>
+			<xsd:element name="boardId" type="xs:int"></xsd:element>
+			<xsd:element name="instance" type="Q1:trBoardApprovalDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="AddBoardApprovalResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ResubmitSamplesRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xs:int"></xsd:element>
+			<xsd:element name="boardId" type="xs:int"></xsd:element>
+			<xsd:element name="instance" type="Q1:trBoardApprovalDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ResubmitSamplesResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="SubmitSamplesRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xs:int"></xsd:element>
+			<xsd:element name="samples" type="Q1:trBoardDomain" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="SubmitSamplesResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+			<xsd:element name="samplesCount" type="xs:int"></xsd:element>
+			<xsd:element name="user" type="Q1:adUsersDomain"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="GetAllSamplesResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+			<xsd:element name="samples" type="Q1:trBoardDomain" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="GetSamplesByUserIdRequest">
+		<xsd:sequence>
+			<xsd:element name="userId" type="xs:int" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="GetSamplesByUserIdResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"></xsd:element>
+			<xsd:element name="samples" type="Q1:trBoardDomain" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

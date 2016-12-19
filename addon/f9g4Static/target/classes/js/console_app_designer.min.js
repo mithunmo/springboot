@@ -1,0 +1,1 @@
+var app=angular.module("consoleApp","ngAnimate adminFilters rzModule multi-select ui.bootstrap ngModal ngRoute dialogs.main".split(" ")).config(["$locationProvider",function(a){a.html5Mode(!0)}]);app.controller("appController",["$scope","$rootScope","$log",function(a,b){b.shoppingCart={}}]);

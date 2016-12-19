@@ -1,0 +1,156 @@
+@charset "utf-8";
+/* CSS Document */
+/*side bar=================================================================================================*/
+.sidebar
+{
+	position:fixed;
+	top:170px;
+	right:0px;
+	width:50px;
+	height:65%;
+	/* background:#bdcbd4; */
+	overflow:hidden;
+	z-index:501;
+	box-shadow: 5px 5px 5px #888888;
+	/* border-top: thin solid #bdcbd4; */
+	background: #D1D3D4;
+	font-family:Calibri, 'Arial Bold', Arial;
+	font-weight:bold;
+}
+
+.sidebar .left
+{
+	display:inline-block;
+	position:relative;
+	vertical-align:top;
+	width:50px;
+	height:100%;
+	cursor:pointer;
+	font-size:0px;
+	background:#00AEEF;
+	float: left;
+} 
+
+.sidebar .left .arrow { float:left; height:100%; width: 13px; background-color: #231F20; font-size: 0px; text-align: center;}
+.sidebar .left .arrow * { vertical-align: middle;}
+.sidebar .left .arrow i { height:100%; display: inline-block;}
+.sidebar .left .dashboard-text { display: inline-block; height:100%; width: 34px; font-size:0px; text-align: center;}
+.sidebar .left .dashboard-text * { vertical-align:middle;}
+.sidebar .left .dashboard-text i { height:35%; display:inline-block;}
+/* .sidebar .left .dashboard-text span {  font-family:Arial Bold; -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg); display:block;} */
+.sidebar .left.selected { background-color: #EEE;}
+.sidebar .left.selected .dashboard-text span { color: #FFF;}
+/* .sidebar .left .text
+{
+	width:5px;
+	height:78%;
+	margin-top:10px;
+	padding-top:30px;
+	padding-left:15px;
+	word-wrap:break-word;
+	font-size:14px;
+} */
+#arrowUp 
+{
+	padding-top:30px;
+	padding-left:18px;
+}
+#arrowDown
+{
+	padding-left:18px;
+}
+.leftArrow
+{
+	margin-left:10px;
+	width:20px;
+	height:40px;
+}
+
+.rightArrow
+{
+	margin-left:10px;
+	width:20px;
+	height:40px;
+	transform:rotate(180deg);
+	-ms-transform:rotate(180deg); /* IE 9 */
+	-moz-transform:rotate(180deg); /* Firefox */
+	-webkit-transform:rotate(180deg); /* Safari and Chrome */
+	-o-transform:rotate(180deg); /* Opera */
+}
+.sidebar .content
+{
+	display:inline-block;
+	width:300px;
+	height:99%;
+	/* background-color:#FFF; */
+}
+/* #Messages a{color:#C30;} */
+.sidebar .content .sidebar-loading { background: url('/images/spinner.gif') no-repeat center; width:100%; height:100%;}
+.block
+{
+	background-color:#00AEEF;
+	padding-left:10px;
+	padding-top:5px;
+	padding-bottom:5px;
+	font-weight:bold;
+	margin-top: 10px;
+}
+
+.block img { width: auto; height: 17px;}
+
+.blockContent
+{
+	padding-left:10px;
+	padding-top:5px;
+	padding-bottom:0px;
+	width:300px;
+}
+
+.blockContent .board{ display:inline-block; margin-right:2px;}
+
+.sidebar .label
+{
+	display:inline-block;
+	width:90px;
+	vertical-align:middle;
+}
+
+.sidebar_raty{ display:inline-block;}
+.noti
+{
+	/* color:#C30; */
+	display:inline-block;
+	margin-left:40px;
+	margin-right:60px;
+	float:right;
+}
+
+.statsList{ margin-left:25px;}
+.actList{}
+.actList a { /* color: blue; */}
+.actList span { width:150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block;}
+.rateList{margin-left:25px;  /*border-bottom:thin solid #bdcbd4;*/}
+
+.amount
+{
+	margin-right:60px;
+	float: right;
+}
+
+.amount .credit-unit { width:16px; height:auto; vertical-align:middle;}
+
+#boardSuggestion { min-height: 130px;}
+#boardSuggestion img{ width:55px; height:55px; border:2px solid #000;}
+#sidebar_avg_rating { display:inline-block; margin-right: 5px;}
+/*---scroll bar for side bar------*/
+#sidebar_scrollbar { width: 100%; height:99%; clear: both; margin: 0px; position: relative;}
+#sidebar_scrollbar .viewport { width: 100%; height:100%; overflow: hidden; position: absolute; }
+#sidebar_scrollbar .overview { width: 100%; list-style: none; position: absolute; left: 0; top: 0; }
+#sidebar_scrollbar .thumb .end,
+#sidebar_scrollbar .thumb { background-color: #000; opacity:0.5; /* IE 8 */ -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE 5-7 */ filter: alpha(opacity=50); /* Netscape */ -moz-opacity: 0.5; /* Safari 1.x */ -khtml-opacity: 0.5;}
+#sidebar_scrollbar .scrollbar { /* display:none; */ position: relative; float: right; width: 4%; z-index:1;}
+#sidebar_scrollbar .track { background-color: #FFF; height: 100%; width:0px; position: relative;}
+#sidebar_scrollbar .thumb { height: 20px; width: 8px; cursor: pointer; overflow: hidden; position: absolute; top: 0; border-radius:10px; }
+#sidebar_scrollbar .thumb .end { overflow: hidden; height: 5px; width: 13px; z-index:-1; border-radius:10px;}
+#sidebar_scrollbar .disable { display: none;}
+/*end of side bar==========================================================================================*/

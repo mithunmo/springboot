@@ -1,0 +1,35 @@
+fileStore=C\:\\root\\uploads\\
+fileStore_400=C\:\\root\\400x400\\
+fileStore_100=C\:\\root\\100x100\\
+fileStore_bigimage=C\:\\root\\bigimage\\
+fileStore_ai=C\:\\root\\ai\\
+fileStore_files=C\:\\root\\files\\
+contentStore=
+baseURL=/f9g4ui/
+fullURL=/webapp-1.0.0-BUILD-SNAPSHOT
+downloadStore=
+errorURL=
+plmsplitterlocation=c\:\\plmsplitter\\PLMSplitter.exe
+ghostscriptlocation=c\:\\gs\\gs9.07\\bin\\gswin64.exe
+plmsplitterparameters= DPI=150 ALL=TRUE LAYER=OFF THUMBNAIL=400*400,100*100
+plmsplitterparameterswithwatermark= WATERMARK=TRUE DPI=150 ALL=TRUE LAYER=OFF THUMBNAIL=400*400,100*100
+return_url=http://50.63.173.150/f4g/pay/return
+cancel_url=http://50.63.173.150/f4g/pay/cancel
+payment_listener_url=http://50.63.173.150/f4g/payment_listener
+paypalIPNUrl=https://www.sandbox.paypal.com/cgi-bin/webscr
+payment_membership_listener_url=http://50.63.173.150/f4g/membershipPaylistener
+membership_return_url=http://50.63.173.150/f4g/membership/pay/return
+membership_cancel_url=http://50.63.173.150/f4g/membership/pay/cancel
+paypal_single_transaction_limit=10000
+service_url=http://localhost:8080/f4gservices/
+footer_linkedin_url=http://www.linkedin.com/
+footer_facebook_url=http://www.facebook.com/
+footer_twitter_url=http://www.twitter.com/
+footer_rssfeed_url=javascript:void(0);
+paypalredirecturl=https://www.sandbox.paypal.com/webscr?cmd=_ap-payment
+minimun_board_price=50
+maximun_board_price=10000
+f9g4.webapp.administrator=2,11
+f9g4.webapp.key=closeup12sun
+#instant notification duration (in milliseconds)
+f9g4.webapp.sse.duration=120000

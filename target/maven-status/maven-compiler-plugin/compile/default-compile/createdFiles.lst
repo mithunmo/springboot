@@ -1,0 +1,14 @@
+hello/configuration/SecurityConfiguration.class
+hello/Application.class
+hello/domain/Person.class
+hello/repositories/PersonRepository.class
+hello/domain/Greeting.class
+hello/bootstrap/ProductLoader.class
+hello/controllers/GreetingController.class
+hello/services/ProductService.class
+hello/domain/Product.class
+hello/controllers/ProductController.class
+hello/repositories/ProductRepository.class
+hello/configuration/WebConfiguration.class
+hello/controllers/IndexController.class
+hello/services/ProductServiceImpl.class

@@ -1,0 +1,65 @@
+package com.f9g4.web.utils;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import com.f9g4.businessobjects.domain.StSeasonYearDomain;
+import com.f9g4.businessobjects.domain.TrPortfolioContestDomain;
+import com.f9g4.web.forms.ContestBean;
+import com.f9g4.web.forms.ContestBeanBasic;
+
+public class DomainToFormConverter {
+	
+	public List<ContestBean> convertDomainToForm(List<TrPortfolioContestDomain> source, HashMap<Integer, StSeasonYearDomain> seasonYearHM, Integer timezoneOffset)
+	{
+		List<ContestBean> beans=new ArrayList<ContestBean>();
+		for(TrPortfolioContestDomain item : source)
+		{
+			ContestBean bean = new ContestBean();
+			bean=this.convertDomainToForm(item, seasonYearHM, timezoneOffset);
+			beans.add(bean);
+		}
+		return beans;
+	}
+	
+	public ContestBean convertDomainToForm(TrPortfolioContestDomain source, HashMap<Integer, StSeasonYearDomain> seasonYearHM, Integer timezoneOffset)
+	{
+		ContestBean bean = new ContestBean();
+		bean.setOriginalData(source);
+		//normalize data
+		this.normalizeData(source);
+		Date startDate = TimeConvertUtil.convertXMLDateToLocalTime(source.getStartDate(), timezoneOffset);
+		Date endDate = TimeConvertUtil.convertXMLDateToLocalTime(source.getEndDate(), timezoneOffset);
+		bean.setStartDate(startDate); //convert to local time
+		bean.setEndDate(endDate); //convert to local time
+		bean.setSeasonYear(seasonYearHM.get(source.getContestPortfolioDomain().getSeasonYearId()));
+		return bean;
+	}
+	
+	public List<ContestBeanBasic> convertDomainToBasicForm(List<TrPortfolioContestDomain> source, HashMap<Integer, StSeasonYearDomain> seasonYearHM, Integer timezoneOffset)
+	{
+		List<ContestBeanBasic> beans=new ArrayList<ContestBeanBasic>();
+		for(TrPortfolioContestDomain item : source)
+		{
+			ContestBeanBasic bean = new ContestBeanBasic();
+			bean.setPortfolioId(item.getPortfolioId());
+			bean.setContestId(item.getContestId());
+			bean.setProjectType(item.getProjectType());
+			bean.setTitle(item.getContestPortfolioDomain().getName());
+			beans.add(bean);
+		}
+		return beans;
+	}
+	
+	private void normalizeData(TrPortfolioContestDomain source)
+	{
+		source.setAssociatedBrandsHangWith(source.getAssociatedBrandsHangWith().replace("{{DEFAULT}}", ""));
+		source.setAssociatedBrandsInfluence(source.getAssociatedBrandsInfluence().replace("{{DEFAULT}}", ""));
+		source.setDeliverable(source.getDeliverable().replace("{{DEFAULT}}", ""));
+		source.setIntroduction(source.getIntroduction().replace("{{DEFAULT}}", ""));
+		source.setOtherInformation(source.getOtherInformation().replace("{{DEFAULT}}", ""));
+		source.getContestPortfolioDomain().setName(source.getContestPortfolioDomain().getName().replace("{{DEFAULT}}", ""));
+		source.getContestPortfolioDomain().setDescription(source.getContestPortfolioDomain().getDescription().replace("{{DEFAULT}}", ""));
+	}
+}

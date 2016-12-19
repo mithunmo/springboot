@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://services.businessobjects.f9g4.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cp="http://services.businessobjects.f9g4.com" xmlns:f9g4="http://common.businessobjects.f9g4.com" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	xmlns:annox="http://annox.dev.java.net"
+ 	xmlns:Q1="http://domain.businessobjects.f9g4.com" 
+ 	targetNamespace="http://services.businessobjects.f9g4.com" attributeFormDefault="unqualified" jaxb:version="2.1">
+ 	
+	<xsd:import namespace="http://common.businessobjects.f9g4.com" schemaLocation="f9g4Common.xsd"/>
+	<xsd:import namespace="http://domain.businessobjects.f9g4.com" schemaLocation="f9g4schema.xsd"/>
+	
+	<xsd:complexType name="OrderItem">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+			<xsd:element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+			<xsd:element name="quantity" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
+			<xs:element name="price">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="15"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minExclusive value="-10000000000000"/>
+						<xs:maxExclusive value="10000000000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xsd:sequence>	
+	</xsd:complexType>
+
+	<!--  GetPaymentInfo operation -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetPaymentInfoResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetPaymentInfoResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="GetPaymentInfoResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<!-- these properties used for paypal CSR -->
+			<xsd:element name="ack" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="correlationId" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="timestamp" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="build" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>	
+			<!-- payStatus is mapped to main status  -->
+			<xsd:element name="payStatus" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>		
+			<!-- if status is pending populate this -->
+			<xsd:element name="pendingReason" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="transactionId" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="transactionStatus" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="senderTransactionId" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="senderTransactionStatus" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="memo" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>					
+			<xsd:element name="senderEmail" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+						
+			<xsd:element name="actionType" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="cancelUrl" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="returnUrl" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="currencyCode" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="feesPayer" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>			
+			<xsd:element name="trackingId" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+				
+		
+<!-- 			<xsd:element name="payerID" type="xsd:string" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<xsd:element name="orderItem" type="cp:OrderItem" minOccurs="1" maxOccurs="unbounded" ></xsd:element>
+ -->		
+ 		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!--  SetupPayment operation -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='SetupPaymentRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="SetupPaymentRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='SetupPaymentResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="SetupPaymentResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="SetupPaymentRequest">
+		<xsd:sequence>
+			<xsd:element name="returnUrl" type="xsd:string" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<xsd:element name="cancelUrl" type="xsd:string" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<xsd:element name="ipnUrl" type="xsd:string" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<xsd:element name="orderItem" type="cp:OrderItem" minOccurs="1" maxOccurs="unbounded" ></xsd:element>			
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SetupPaymentResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="paymentToken" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<!-- these properties used for paypal CSR -->
+			<xsd:element name="ack" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="correlationId" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="timestamp" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="build" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!--  CompletePayment operation -->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CompletePaymentRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CompletePaymentRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='CompletePaymentResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="CompletePaymentResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="CompletePaymentRequest">
+		<xsd:sequence>
+			<xsd:element name="paymentToken" type="xsd:string" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<xsd:element name="payerID" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="orderItem" type="cp:OrderItem" minOccurs="1" maxOccurs="unbounded" ></xsd:element>			
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CompletePaymentResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+			<xsd:element name="payerID" type="xsd:string" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<xsd:element name="transactionID" type="xsd:string" minOccurs="1" maxOccurs="1" ></xsd:element>
+			<!-- these properties used for paypal CSR -->
+			<xsd:element name="ack" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="correlationId" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="timestamp" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>
+			<xsd:element name="build" type="xsd:string" minOccurs="0" maxOccurs="1" ></xsd:element>	
+		</xsd:sequence>
+	</xsd:complexType>
+			
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='GetReceiverEmail']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="GetReceiverEmail"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="GetReceiverEmail">
+		<xsd:sequence>
+			<xsd:element name="receiverEmail" type="xsd:string"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='LogPaypalTransactionRequest']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="LogPaypalTransactionRequest"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:bindings node="/xs:schema/xs:complexType[@name='LogPaypalTransactionResponse']">
+				<annox:annotate>
+					<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="LogPaypalTransactionResponse"/>
+				</annox:annotate>
+			</jaxb:bindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="LogPaypalTransactionRequest">
+		<xsd:sequence>
+			<xsd:element name="trPaypalMessageDomain"
+				type="Q1:trPaypalAdaptiveMessage">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LogPaypalTransactionResponse">
+		<xsd:sequence>
+			<xsd:element name="status" type="f9g4:Status"/>
+					
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+</xsd:schema>

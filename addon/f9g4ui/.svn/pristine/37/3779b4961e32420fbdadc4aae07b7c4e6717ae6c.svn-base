@@ -1,0 +1,4 @@
+<%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<tiles:insertAttribute name="upper_sub_comp"></tiles:insertAttribute>
+<tiles:insertAttribute name="main_comp"></tiles:insertAttribute>
+<tiles:insertAttribute name="lower_sub_comp"></tiles:insertAttribute>

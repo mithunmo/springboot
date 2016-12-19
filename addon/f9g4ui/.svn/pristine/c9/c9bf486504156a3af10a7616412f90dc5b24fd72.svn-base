@@ -1,0 +1,461 @@
+@charset "utf-8";
+/* CSS Document */
+/*POPUP Ver 1.0 06/13/2012
+@charset "utf-8";
+/* CSS Document */
+/*Viewer========================================*/
+#dialog
+{
+	z-index:-1;
+}
+
+.popupContent
+{
+	display:none;
+	height:100%;
+	overflow:hidden;
+}
+
+.dialogLeftPanel
+{
+	clear:left;
+	display:inline-block;
+	overflow:hidden;
+	width:59%;
+}
+
+.dialogPic
+{
+	top:0px;
+	display:block;
+	width:99%;
+	height:300px;
+	border:thin solid #000;
+	overflow:hidden;
+}
+
+.dialogDetailLeft
+{
+	margin-top:10px;
+	display:block;
+	width:99%;
+	height:200px;
+	border:thin solid #000;
+	overflow:hidden;
+}
+
+.dialogDetailRight
+{
+	top:0px;
+	display:inline-block;
+	float:right;
+	width:38%;
+	padding:1%;
+	border:thin solid #666;
+	border-radius:25px;
+	overflow:hidden;
+}
+
+.prevItem
+{
+	display:inline-block;
+	width:10%;
+	height:100%;
+	z-index:2;
+}
+
+.nextItem
+{
+	float:right;
+	display:inline-block;
+	width:10%;
+	height:100%;
+	z-index:2;
+}
+/*End of viewer=======================================================================*/
+
+
+/*=====================POPUP===========================================================*/
+.overlay /*Gray cover*/
+{
+	position:fixed;
+	background-color:#666;
+	opacity:0.7;
+	z-index:10;
+	display:none;
+	width:100%;
+	height:100%;
+	top:0px;
+	left:0px;
+}
+
+.popup .notification
+{
+	clear:both;
+	display:none;
+	width:200px;
+	color:#F00;
+}
+/*basic component--------------------------------------*/
+.popup .orangeText{ color:#C30;}
+.popup .fortyPercent {width:39%;}
+.popup .sixtyPercent {width:59%;}
+.popup input[type=text] {width:90%;}
+.popup textarea {width:95%; resize:none;}
+.popup .row { width:100%; clear:both; padding-bottom:10px;}
+.popup .column { display:inline-block;}
+
+
+
+
+/*button layout----------------------------------------*/
+.popup .buttonPanel
+{
+	position:absolute;
+	clear:left;
+	margin-top:5px;
+	margin-bottom:5px;
+	top:190px;
+}
+.popup .button
+{
+	display:inline-block;
+	margin-top:8px;
+	background-color:#0457A0;
+	color:#FFF;
+	border-radius:10px;
+	font-size:14px;
+	padding:5px 20px;
+	cursor:pointer;
+	float:none;
+}
+
+.popup .orangeButton{ background-color:#C30;}
+
+/*for from dropdown------------*/
+.popup .dropdown
+{
+	width:254px;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+
+.popupContainer
+{
+	display:none;
+	position:absolute;
+	z-index:11;
+}
+
+.popup
+{
+	font-family:Arial, Helvetica, sans-serif;
+	/*overflow:hidden;*/
+	width:443px;
+	min-height:200px;
+	/*max-height:439px;*/
+	background-color:#FFF;
+	border-radius:10px;
+	/*shadow*/
+	box-shadow:10px 10px 10px #666666;
+}
+
+.popup .header
+{
+	display:block;
+	width:90%;
+	height:33px;
+	font-size:18px;
+	background-color:#bdcbd4;
+	padding-top:15px;
+	padding-left:5%;
+	padding-right:5%;
+	color:#330066;
+	overflow:hidden;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	font-family: 'Arial Narrow', sans-serif;
+	z-index:-1;
+}
+
+.popup .header .close
+{
+	display:inline-block;
+	float:right;
+	/*padding-right:10px;*/
+	font-size:14px;
+	cursor:pointer;
+}
+
+.popup .header .error_close
+{
+	display:inline-block;
+	float:right;
+	/*padding-right:10px;*/
+	font-size:14px;
+	cursor:pointer;
+}
+
+.popup .content
+{
+	display:block;
+	/*overflow:hidden;*/
+	padding:10px;
+}
+
+/*Terms panel=======================================================*/
+#terms{ /*height:440px;*/}
+.popup .terms
+{
+	font-size:14px;
+	margin:20px;
+	/*height:370px;*/
+}
+#agree{ color:#660;}
+#decline{ color:#F00;}
+#terms_ok{ width:40px; margin-left:180px; margin-bottom:10px;}
+.popup .confirmation
+{
+	background-color:#bdcbd4;
+	text-align:center;
+	width:385px;
+	height:30px;
+}
+/*scrollbar for terms panel---------------------------*/
+#termScrollbar 
+{
+	width: 403px; 
+	height:300px;
+	clear: both; 
+	margin: 0px;
+}
+#termScrollbar .viewport 
+{ 
+	width: 385px; 
+	height: 300px; 
+	overflow: hidden; 
+	position: relative;
+}
+#termScrollbar .overview 
+{ 
+	list-style: none; 
+	position: absolute; 
+	left: 0; 
+	top: 0;
+	padding-left:10px;
+}
+#termScrollbar .thumb .end,
+#termScrollbar .thumb 
+{
+	background-color: #919295;
+	opacity:0.5;
+}
+#termScrollbar .scrollbar
+{ 
+	position: relative; 
+	float: right; 
+	width: 15px;
+}
+#termScrollbar .track 
+{ 
+	background-color: #FFF; 
+	height: 100%; 
+	width:10px; 
+	position: relative; 
+	padding: 0 1px;
+}
+#termScrollbar .thumb 
+{ 
+	height: 20px; 
+	width: 8px; 
+	cursor: pointer; 
+	overflow: hidden; 
+	position: absolute; 
+	top: 0;
+	border-radius:10px;
+}
+#termScrollbar .thumb .end 
+{ 
+	overflow: hidden; 
+	height: 5px; 
+	width: 13px;
+	z-index:-1;
+	border-radius:10px;
+}
+#termScrollbar .disable
+{ 
+	display: none; 
+}
+/*===Ends of terms panel================================================*/
+
+
+/*Verification panel======================================================*/
+.popup .verification
+{
+	font-size:12px;
+	margin-top:20px;
+	margin-left:75px;
+	margin-bottom:20px;
+	height:160px;
+}
+.verification .pic
+{
+	width:260px;
+	height:50px;
+	border:thin solid #000;
+	margin-bottom:10px;
+}
+#code
+{
+	width:260px;
+}
+/*ENds of Verification panel======================================================*/
+
+/*forget panel============================================================*/
+.forgetPanel
+{
+	font-size:12px;
+	margin:10px;
+	display:none;
+	height:180px;
+}
+
+#session_forget{ display:block;}
+
+#session_security{	display:none;}
+
+#session_success{	display:none;}
+
+#session_fail{	display:none;}
+/*Ends of forget panel===========================================================================*/
+
+/*Thank you panel================================================================================*/
+#thanks{padding-top:15px;padding-left:20px;padding-right:20px;padding-bottom:30px}
+/*Ends of Thank you panel=========================================================================*/
+
+/*Error popup======================================================================================*/
+#error{ padding-top:15px;padding-left:20px;padding-right:20px;padding-bottom:30px;color:#F00}
+#error_button_ok{ width:40px; margin-left:160px;}
+/*End od Error popup===============================================================================*/
+
+/*Membership popup=================================================================================*/
+#membership{width:450px;}
+#popup_membership
+{
+	/*height:400px;*/
+	font-weight:bold;
+	padding-top:10px;
+	padding-left:30px;
+	padding-right:30px;
+	padding-bottom:10px;
+}
+#memTitle{font-size:14px;}
+#return{width:40px; margin-left:80%}
+#pay{ width:40px; margin-left:80%;}
+#paypal_description{padding-top:10px;}
+#membership_return{ width:40px; margin-left:80%;}
+#cancel_membership_title
+{ 
+	border-top: thin solid #bdcbd4; 
+	border-bottom: thin solid #bdcbd4; 
+	font-size:14px; 
+	vertical-align:middle; 
+	padding:5px 0px;
+	margin-top:30px;
+}
+/*end of membership popup==============================================================================*/
+
+/*referral popup=======================================================================================*/
+#referral{/*height:320px;*/}
+#popup_referral{padding:10px; /*height:270px;*/}
+#popup_referral table{ width:420px; border:0; font-size:12px;}
+#referral_buttons{ padding-left:45%;}
+
+/*end of referral popup================================================================================*/
+
+/*Added to cart========================================================================================*/
+#added_to_cart{}
+#popup_added_to_cart{ height:410px;}
+#popup_added_to_cart .functions{ width:100%; text-align:right;}
+#popup_added_to_cart .functions a{ color:#C30;}
+#popup_added_to_cart .cart{ border-top: thin solid #bdcbd4; border-bottom: thin solid #bdcbd4; margin-top:5px; margin-bottom:5px; height:350px; overflow-x:hidden; overflow-y:scroll;}
+#popup_added_to_cart .cart .item{ clear:both;width:100%; padding-top:5px; padding-bottom:5px;}
+#popup_added_to_cart .cart .item .pic{ width:100px; margin-right:5px; height:100px; display:inline-block; float:left; border:thin solid #bdcbd4;}
+#popup_added_to_cart .cart .item .description{ width:40%; display:inline-block; float:left;}
+#popup_added_to_cart .cart .item .description .board_info{ width:100%;}
+#popup_added_to_cart .cart .item .description .designer_info{ width:100%;}
+#popup_added_to_cart .cart .item .price{ width:30%; display:inline-block; float:left; text-align:right;}
+#popup_added_to_cart .subtotal{ width:94%; text-align:right; font-size:14px; font-weight:bold; margin-bottom:10px;}
+#popup_added_to_cart .subtotal .price{ width:105px; display:inline-block; }
+#popup_added_to_cart .subtotal .info{ font-size:10px; font-style:italic;}
+
+/*End of added to cart=================================================================================*/
+
+/*Board detail=========================================================================================*/
+#board_detail{ width:900px;}
+#popup_board_detail{ width:100%; height:450px; padding:0px;}
+#popup_board_detail .leftArea{ width:50%; height:100%; border-right:thin solid #bdcbd4; float:left;}
+#popup_board_detail .leftArea .pic{ margin-top:20px; margin-left:20px; width:400px; height:400px; border:thin solid #bdcbd4; font-size:0px; text-align:center;}
+#popup_board_detail .leftArea .pic *{ vertical-align:middle;}
+#popup_board_detail .leftArea .pic i{ height:100%; display:inline-block;}
+#popup_board_detail .leftArea .pic .picCenter{ width:100%;height:100%;}
+#popup_board_detail .rightArea{ width:47%; float:left; padding:1% 1%; height:95%; overflow:auto;}
+#popup_board_detail .rightArea .info{ width:99%; padding-top:10px; padding-bottom:5px; border-bottom:thin solid #bdcbd4; font-size:14px; font-weight:bold;}
+#popup_board_detail .rightArea .detail{ width:99%; height:140px; padding-top:5px; padding-bottom:5px; border-bottom: thin solid #bdcbd4; font-weight:bold;}
+#popup_board_detail .rightArea .detail a{ float:right; color:#C30;}
+#popup_board_detail .rightArea .detail table{ margin-top:5px; font-size:12px;}
+#popup_board_detail .rightArea .detail .grayBackground{ background-color:#bdcbd4;}
+#popup_board_detail .rightArea .detail .border{ border:thin solid #666;}
+#popup_board_detail .rightArea .detail input{ width:80%;}
+#popup_board_detail .rightArea .comment{ margin:3% 5%; background-color:#bdcbd4; padding-bottom:5px;}
+#popup_board_detail .rightArea .comment .icon{ float:left; margin-top:10px; margin-left:10px; display:inline-block; width:40px; height:40px; /*border:thin solid #000;*/ font-size:0px; text-align:center}
+#popup_board_detail .rightArea .comment .icon *{ vertical-align:middle;}
+#popup_board_detail .rightArea .comment .icon i{ height:100%; display:inline-block;}
+#popup_board_detail .rightArea .comment .input{ display:inline-block; margin-left:10px; margin-top:10px; font-weight:bold; width:260px;}
+#popup_board_detail .rightArea .comment textarea{ width:100%;}
+#popup_board_detail .rightArea .suggestion{ width:100%; border-top:thin solid #bdcbd4; padding-top:5px; font-weight:bold;}
+#popup_board_detail .rightArea .list{ width:100%; margin-top:5px;}
+#popup_board_detail .rightArea .list .item{ width:80px; height:80px; margin-right:5px; border:thin solid #bdcbd4; display:inline-block;}
+/*End of board detail==================================================================================*/
+
+/*Referral manage======================================================================================*/
+#referral_manage{ width:880px;}
+#popup_referral_manage{ height:300px;}
+#popup_referral_manage table{ font-size:12px;}
+#popup_referral_manage .referral_header{ width:100%; border-bottom:thin solid #bdcbd4;}
+#popup_referral_manage .referral_table_header { font-weight:bold;}
+#popup_referral_manage .table{ width:100%; height:280px; overflow:auto;}
+#popup_referral_manage td:nth-child(1) {width:10%;}
+#popup_referral_manage td:nth-child(2) {width:10%;}
+#popup_referral_manage td:nth-child(3) {width:10%;}
+#popup_referral_manage td:nth-child(4) {width:25%;}
+#popup_referral_manage td:nth-child(5) {width:10%;}
+#popup_referral_manage td:nth-child(6) {width:10%;}
+#popup_referral_manage td:nth-child(7) {width:15%;}
+#popup_referral_manage tr:nth-child(odd){ background-color:#FFF;}
+#popup_referral_manage tr:nth-child(even){ background-color:#bdcbd4;}
+/*End of referral manage===============================================================================*/
+
+/*Save search criteria=================================================================================*/
+#popup_search_criteria { height:50px; padding-left:30px; padding-top:30px;}
+#save_search_criteria { margin-left: 65%;}
+/*End if search criteria===============================================================================*/
+
+/*close popup button----------------------------------*/
+.popup .close
+{
+	display:inline-block;
+	/*float:right;*/
+	/*padding-right:10px;*/
+	font-size:14px;
+	cursor:pointer;
+}
+
+.popup .error_close
+{
+	display:inline-block;
+	/*float:right;*/
+	/*padding-right:10px;*/
+	font-size:14px;
+	cursor:pointer;
+}

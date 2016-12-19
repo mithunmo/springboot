@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+    <defaultCache eternal="true" maxElementsInMemory="100" overflowToDisk="false" />
+    <cache name="aduserlookupvalues" maxElementsInMemory="2000" eternal="true" overflowToDisk="false" timeToLiveSeconds="86400" />
+    <cache name="findAdLookupValuesByLookupType" maxElementsInMemory="2000" eternal="true" overflowToDisk="false" timeToLiveSeconds="86400" />
+    <cache name="findAdLookupValuesByLookupCode" maxElementsInMemory="2000" eternal="true" overflowToDisk="false" timeToLiveSeconds="86400"  />
+    <cache name="findAllAdLookupValuess" maxElementsInMemory="2000" eternal="true" overflowToDisk="false" timeToLiveSeconds="86400" />
+   
+   
+   
+</ehcache>

@@ -1,0 +1,6 @@
+<%@ page import="com.f9g4.web.utils.ViewPaths"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<div class="cbuttons rt npad">
+	<!-- <a class="cbutton pad large" href="javascript:void(0);">New collection</a> -->
+	<a class="cbutton pad large" ng-class="{'disabled':false}" ng-href="${pageContext.request.contextPath}<%=ViewPaths.USER_PROJECTS_CREATE_BOARD%>/{{portfolioId}}/{{contestId}}" tooltip-placement="bottom" tooltip="">New Submission</a>
+</div>

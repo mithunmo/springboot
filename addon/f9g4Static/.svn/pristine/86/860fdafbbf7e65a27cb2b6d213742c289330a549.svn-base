@@ -1,0 +1,591 @@
+/* CSS Document */
+body
+{
+	margin:0px;
+}
+
+img { border-style: none;} /* to remove the blue border around the image link.*/
+
+a { text-decoration: underline;}
+
+.body
+{
+	margin-left:auto;
+	margin-right:auto;
+	font-family:Arial, Helvetica, sans-serif;
+	width:980px;
+	/*height:750px;*/
+	/*border-left:thin solid #999;*/
+	/*border-right:thin solid #999;*/
+	color:#330066;
+}
+
+.body div
+{
+	float:left;
+	display:block;
+}
+.banner
+{
+	position:absolute;
+	top:0px;
+	width:100%;
+	height:33px;
+	background-color:#bdcbd4;
+	z-index:-1;
+}
+.up
+{
+	padding-top:5px;
+	top:0px;
+	width:960px;
+	height:31px;
+	font-style:italic;
+	font-size:16px;
+	color:#330066;
+	text-align:right;
+	padding-right:20px;
+	/*border:thin solid #000;*/
+}
+
+.left
+{
+	clear:left;
+	display:inline-block;
+	top:31px;
+	width:11px;
+	/*height:800px;*/
+	/*border:thin solid #000;*/
+}
+
+.middle
+{
+	display:inline-block;
+	top:31px;
+	width:960px;
+	height:670px;
+}
+
+/*panel for about_us, work_with_us,contact_us,and privacy_policy*/
+#singlePanel
+{
+	width:960px;
+	height:600px;
+	margin-top:20px;
+}
+
+#panelheader
+{
+	width:960px;
+	height:28px;
+}
+
+#panelContent
+{
+	width:960px;
+	height:550px;
+	
+}
+
+.right
+{
+	display:inline-block;
+	width:5px;
+	/*height:800px;*/
+	float:right;
+}
+
+.mainbox
+{
+	width:950px;
+	height:450px;
+	background-image:url(/images/SS_Main-Img.gif);
+}
+
+.mainbox .logo
+{
+	width:211px;
+	height:126px;
+	margin-top:10px;
+	/*border:thin solid #000;
+	border-radius:10px;*/
+	background-image:url(/images/Small-Logo.gif);
+}
+
+.mainbox .loginPanel
+{
+	margin-top:10px;
+	float:right;
+	width:220px;
+	height:240px;
+	overflow:hidden;
+	font-size:11px;
+	color:#330066;
+	padding-right:20px;
+	font-weight:bold;
+	/*border:thin solid #000;*/
+}
+
+.loginPanel .loginLabel { font-style: italic; font-size: 12px;}
+.loginPanel .userinfo
+{
+}
+
+.loginPanel .remember
+{
+	clear:both;
+	margin-top:10px;
+}
+
+.loginPanel .forgetCheck
+{
+	claer:both;
+	margin-top:5px;
+	margin-left:21px;
+}
+
+.loginPanel .submit
+{
+	clear:both;
+	margin-top:8px;
+	width:auto;
+	background-color:#0457A0;
+	color:#FFF;
+	border-radius:10px;
+	float:right;
+	font-size:14px;
+	font-weight:normal;
+	padding:5px 20px;
+	cursor:pointer;
+	box-shadow:5px 5px 5px #333;
+}
+
+.loginPanel a
+{
+	font-weight:bold;
+}
+
+.curve
+{
+	border-radius:8px;
+	width:200px;
+	height:20px;
+	color:#CCC;
+}
+
+.textField
+{
+	border-radius:8px;
+	width:200px;
+	height:20px;
+}
+
+.space
+{
+	width:950px;
+	height:30px;
+	/*border:thin solid #000;*/
+}
+
+/*bottom panl---------------------------------*/
+.bottomPanel
+{
+	width:960px;
+	height:183px;	
+}
+
+.singlePanel
+{
+	display:inline-block;
+	width:310px;
+	height:183px;
+	border:1px solid #330066;
+	border-radius:20px;
+	overflow:hidden;
+}
+
+.middleSinglePanel
+{
+	display:inline-block;
+	width:310px;
+	height:183px;
+	margin-left:10px;
+	margin-right:10px;
+	border:1px solid #330066;
+	border-radius:20px;
+	overflow:hidden;
+}
+
+.panelheader
+{
+	width:300px;
+	height:28px;
+	font-size:21px;
+	text-shadow: 3px 3px 3px #333333;
+	color:#FFF;
+	background-color:#bdcbd4;
+	overflow:hidden;
+	padding-left:10px;
+	padding-top:3px;
+	border-top-left-radius:20px;
+	border-top-right-radius:20px;
+}
+
+.panelContent
+{
+	width:300px;
+	height:150px;
+	font-size:12px;
+}
+
+.socialButtons
+{
+	display:inline-block;
+	float:right;
+	margin-top:3px;
+	margin-right:15px;
+}
+
+.socialButtons img
+{
+	margin-right:0px;
+}
+
+.down
+{
+	margin-top:15px;
+	width:960px;
+	height:60px;
+	text-align:center;
+	/*border:thin solid #000;*/
+}
+
+.down .navi
+{
+	width:inherit;
+	border-top: thin solid #bdcbd4;
+	border-bottom:thin solid #bdcbd4;
+	margin-top:10px;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-align:center;
+}
+
+.down .navi a
+{
+	margin-left:5px;
+	font-weight:bold;
+	text-decoration:none;
+	color:#006;
+	font-size:12px;
+}
+
+.down .copyright
+{
+	width:950px;
+	clear:both;
+	color:#333;
+	font-size:10px;
+}
+
+#debug
+{
+	position:fixed;
+	display:none;
+	top:0;
+	left:0;
+	z-index:20;
+	width:200px;
+	height:200px;
+	background-color:#FFF;
+	border:thin solid #000;
+	overflow:scroll;
+}
+
+/*CSS for placeholder---------------------*/
+.placeholder { color: #aaa; }
+
+/*==============Footer Page============================*/
+#enlargeSinglePanel { width:960px; height:640px; margin-top:20px;}
+#enlargePanelHeader { width:960px; height:40px; text-align: center; font-size: 30px;}
+#enlargePanelContent { width:960px; }
+/*scrollbar for footer page*/
+#scrollbarFooter
+{
+	width: 960px; 
+	clear: both; 
+	margin: 0px;
+}
+
+.entity
+{
+}
+
+#scrollbarFooter .viewport 
+{ 
+	width: 940px; 
+	height: 590px; 
+	overflow: hidden; 
+	position: relative;
+}
+#scrollbarFooter .overview 
+{ 
+	list-style: none; 
+	position: absolute; 
+	left: 0; 
+	top: 0;
+	padding-left:20px;
+	text-align: justify;
+}
+#scrollbarFooter .thumb .end,
+#scrollbarFooter .thumb 
+{
+	background-color: #919295;
+	opacity:0.5;
+}
+#scrollbarFooter .scrollbar 
+{ 
+	position: relative; 
+	float: right; 
+	width: 15px;
+	/*z-index:-1;*/
+}
+#scrollbarFooter .track 
+{ 
+	background-color: #FFF; 
+	height: 100%; 
+	width:0px; 
+	position: relative; 
+	padding: 0 1px;
+}
+#scrollbarFooter .thumb 
+{ 
+	height: 20px; 
+	width: 8px; 
+	cursor: pointer; 
+	overflow: hidden; 
+	position: absolute; 
+	top: 0;
+	border-radius:10px;
+}
+#scrollbarFooter .thumb .end 
+{ 
+	overflow: hidden; 
+	height: 5px; 
+	width: 13px;
+	border-radius:10px;
+}
+#scrollbarFooter .disable
+{ 
+	display: none; 
+}
+
+
+/*==============SCROLBAR===============================*/
+/*scroll bar 1---------------------*/
+#scrollbar1 
+{
+	width: 310px; 
+	clear: both; 
+	margin: 0px;
+}
+
+.entity
+{
+}
+
+#scrollbar1 .viewport 
+{ 
+	width: 285px; 
+	height: 149px; 
+	overflow: hidden; 
+	position: relative;
+}
+#scrollbar1 .overview 
+{ 
+	list-style: none; 
+	position: absolute; 
+	left: 0; 
+	top: 0;
+	padding-left:10px;
+}
+#scrollbar1 .thumb .end,
+#scrollbar1 .thumb 
+{
+	background-color: #919295;
+	opacity:0.5;
+}
+#scrollbar1 .scrollbar 
+{ 
+	/* display:none; */
+	position: relative; 
+	float: right; 
+	width: 15px;
+	/*z-index:-1;*/
+}
+#scrollbar1 .track 
+{ 
+	background-color: #FFF; 
+	height: 100%; 
+	width:0px; 
+	position: relative; 
+	padding: 0 1px;
+}
+#scrollbar1 .thumb 
+{ 
+	height: 20px; 
+	width: 8px; 
+	cursor: pointer; 
+	overflow: hidden; 
+	position: absolute; 
+	top: 0;
+	border-radius:10px;
+}
+#scrollbar1 .thumb .end 
+{ 
+	overflow: hidden; 
+	height: 5px; 
+	width: 13px;
+	border-radius:10px;
+}
+#scrollbar1 .disable
+{ 
+	display: none; 
+}
+
+/*scroll bar 2---------------------------------*/
+#scrollbar2
+{
+	width: 310px; 
+	clear: both; 
+	margin: 0px;
+}
+#scrollbar2 .viewport 
+{ 
+	width: 285px; 
+	height: 149px; 
+	overflow: hidden; 
+	position: relative;
+}
+#scrollbar2 .overview 
+{ 
+	list-style: none; 
+	position: absolute; 
+	left: 0; 
+	top: 0;
+	padding-left:10px;
+}
+#scrollbar2 .thumb .end,
+#scrollbar2 .thumb 
+{
+	background-color: #919295;
+	opacity:0.5;
+}
+#scrollbar2 .scrollbar 
+{ 
+	/* display:none; */
+	position: relative; 
+	float: right; 
+	width: 15px;
+	/*z-index:-1;*/
+}
+#scrollbar2 .track 
+{ 
+	background-color: #FFF; 
+	height: 100%; 
+	width:0px; 
+	position: relative; 
+	padding: 0 1px;
+}
+#scrollbar2 .thumb 
+{ 
+	height: 20px; 
+	width: 8px; 
+	cursor: pointer; 
+	overflow: hidden; 
+	position: absolute; 
+	top: 0;
+	border-radius:10px;
+}
+#scrollbar2 .thumb .end 
+{ 
+	overflow: hidden; 
+	height: 5px; 
+	width: 13px;
+	z-index:-1;
+	border-radius:10px;
+}
+#scrollbar2 .disable
+{ 
+	display: none; 
+}
+
+
+/*scroll bar 3------------------------------*/
+#scrollbar3 
+{
+	width: 310px; 
+	clear: both; 
+	margin: 0px;
+}
+#scrollbar3 .viewport 
+{ 
+	width: 285px; 
+	height: 149px; 
+	overflow: hidden; 
+	position: relative;
+}
+#scrollbar3 .overview 
+{ 
+	list-style: none; 
+	position: absolute; 
+	left: 0; 
+	top: 0;
+	padding-left:10px;
+}
+#scrollbar3 .thumb .end,
+#scrollbar3 .thumb 
+{
+	background-color: #919295;
+	opacity:0.5;
+}
+#scrollbar3 .scrollbar 
+{ 
+	/* display:none; */
+	position: relative; 
+	float: right; 
+	width: 15px;
+	/*z-index:-1;*/
+}
+#scrollbar3 .track 
+{ 
+	background-color: #FFF; 
+	height: 100%; 
+	width:0px; 
+	position: relative; 
+	padding: 0 1px;
+}
+#scrollbar3 .thumb 
+{ 
+	height: 20px; 
+	width: 8px; 
+	cursor: pointer; 
+	overflow: hidden; 
+	position: absolute; 
+	top: 0;
+	border-radius:10px;
+}
+#scrollbar3 .thumb .end 
+{ 
+	overflow: hidden; 
+	height: 5px; 
+	width: 13px;
+	z-index:-1;
+	border-radius:10px;
+}
+#scrollbar3 .disable
+{ 
+	display: none; 
+}
+
+

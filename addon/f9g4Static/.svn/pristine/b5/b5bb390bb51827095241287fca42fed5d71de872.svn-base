@@ -1,0 +1,51 @@
+//route table for designer
+app.config(['$routeProvider', function($routeProvider) {
+	//route table place here
+	var contextPath='/f4g';
+	$routeProvider
+		.when(ajaxPaths['viewProjectsPath'], {
+			templateUrl: ajaxPaths['viewProjectsContentPath'],
+			controller: 'viewDesignerProjectsController'
+		})
+		.when(ajaxPaths['viewProjectsPortfolioPath'], {
+			templateUrl: ajaxPaths['viewProjectsPortfolioContentPath'],
+			controller: 'viewProjectsPortfolioController'
+		})
+		.when(ajaxPaths['viewProjectsPortfolioPath']+"/:portfolioId", {
+			templateUrl: ajaxPaths['viewProjectBoardsContentPath'],
+			controller: 'viewProjectsBoardsController',
+			resolve: {
+				focusTabHeader: function() {
+					return undefined;
+				}
+			}
+		})
+		.when(ajaxPaths['createProjectBoardPath'], {
+			templateUrl: function(urlAttr) {
+				return ajaxPaths['createProjectBoardContentPath'];
+			},
+			controller: 'createProjectBoardController'
+		})
+		.when(ajaxPaths['createProjectBoardPath']+"/:portfolioId", {
+			templateUrl: function(urlAttr) {
+				return ajaxPaths['createProjectBoardContentPath']+'/'+urlAttr.portfolioId;
+			},
+			controller: 'editProjectBoardController',
+			resolve: {
+				mode: function() {
+					return 'create';
+				}
+			}
+		})
+		.when(ajaxPaths['editProjectBoardPath']+"/:boardId", {
+			templateUrl: function(urlAttr) {
+				return ajaxPaths['editProjectBoardContentPath']+'/'+urlAttr.boardId;
+			},
+			controller: 'editProjectBoardController',
+			resolve: {
+				mode: function() {
+					return 'edit';
+				}
+			}
+		});
+}]);

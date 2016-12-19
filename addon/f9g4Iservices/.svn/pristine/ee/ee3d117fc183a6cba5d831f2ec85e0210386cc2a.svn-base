@@ -1,0 +1,148 @@
+	package com.f9g4.services.rest;
+
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import com.f9g4.businessobjects.services.AddBoardApprovalRequest;
+import com.f9g4.businessobjects.services.AddBoardApprovalResponse;
+import com.f9g4.businessobjects.services.AddBoardRequest;
+import com.f9g4.businessobjects.services.AddBoardResponse;
+import com.f9g4.businessobjects.services.CreateBoardImageRequest;
+import com.f9g4.businessobjects.services.CreateBoardImageResponse;
+import com.f9g4.businessobjects.services.DeleteBoardByIdResponse;
+import com.f9g4.businessobjects.services.DrawerInfoResponse;
+import com.f9g4.businessobjects.services.GetAllSamplesResponse;
+import com.f9g4.businessobjects.services.GetBoardByIdResponse;
+import com.f9g4.businessobjects.services.GetBoardsByPMRequest;
+import com.f9g4.businessobjects.services.GetBoardsByPMResponse;
+import com.f9g4.businessobjects.services.GetBoardsByPortfolioResponse;
+import com.f9g4.businessobjects.services.GetBoardsSuggestionRequest;
+import com.f9g4.businessobjects.services.GetBoardsSuggestionResponse;
+import com.f9g4.businessobjects.services.GetContestBoardsResponse;
+import com.f9g4.businessobjects.services.GetRecentlyViewedBoardsResponse;
+import com.f9g4.businessobjects.services.GetSamplesByUserIdRequest;
+import com.f9g4.businessobjects.services.GetSamplesByUserIdResponse;
+import com.f9g4.businessobjects.services.ResubmitSamplesRequest;
+import com.f9g4.businessobjects.services.ResubmitSamplesResponse;
+import com.f9g4.businessobjects.services.ReturnSubmissionsRequest;
+import com.f9g4.businessobjects.services.ReturnSubmissionsResponse;
+import com.f9g4.businessobjects.services.SearchBoardsRequest;
+import com.f9g4.businessobjects.services.SearchBoardsResponse;
+import com.f9g4.businessobjects.services.SearchExampleBoardsRequest;
+import com.f9g4.businessobjects.services.SearchExampleBoardsResponse;
+import com.f9g4.businessobjects.services.SubmitSamplesRequest;
+import com.f9g4.businessobjects.services.SubmitSamplesResponse;
+import com.f9g4.businessobjects.services.UpdateBoardByAdminRequest;
+import com.f9g4.businessobjects.services.UpdateBoardByAdminResponse;
+import com.f9g4.businessobjects.services.UpdateBoardRequest;
+import com.f9g4.businessobjects.services.UpdateBoardResponse;
+import com.f9g4.businessobjects.services.UpdateBoardStatusRequest;
+import com.f9g4.businessobjects.services.UpdateBoardStatusResponse;
+import com.f9g4.businessobjects.services.UpdatePublishBoardStatusRequest;
+import com.f9g4.businessobjects.services.UpdatePublishBoardStatusResponse;
+import com.f9g4.businessobjects.services.ValidateBoardsRequest;
+import com.f9g4.businessobjects.services.ValidateBoardsResponse;
+
+
+@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+public interface IBoardService {
+	
+	@PUT
+	@Path("/board/")
+	public AddBoardResponse addBoards(AddBoardRequest request);
+	
+	@GET
+	@Path("/board/{boardid}")
+	public GetBoardByIdResponse getBoardbyId(@PathParam("boardid") int boardid);
+	
+	@POST
+	@Path("/board")
+	public UpdateBoardResponse updateBoard(UpdateBoardRequest request);
+	
+	@GET
+	@Path("/board/contest/{portfolioid}/{userid}")
+	public GetContestBoardsResponse getContestBoards(@PathParam("portfolioid") int portfolioid, @PathParam("userid") int userid);
+
+	@GET
+	@Path("/board/portfolio/{portfolioid}")
+	//Because of Typo, it was not returning the Board details, changed typo @PathParam("portfolio") to @PathParam("portfolioid") -C,G
+	public GetBoardsByPortfolioResponse getBoardsbyPortfolioId(@PathParam("portfolioid") int portfolioid);
+	
+	@DELETE
+	@Path("/board/{boardid}")
+	public DeleteBoardByIdResponse deleteBoardById(@PathParam("boardid") int boardid);
+	
+	@GET
+	@Path("/user/boards/{id}/days/{days}/userType/{userType}")	
+	public GetRecentlyViewedBoardsResponse getRecentlyViewedBoards(@PathParam("id") int userId, @PathParam("days") int numberOfdays,@PathParam("userType") String userType);
+
+	@PUT
+	@Path("/board/image")
+	public CreateBoardImageResponse createBoardImage(CreateBoardImageRequest request);
+
+	@POST
+	@Path("/board/search")
+	public SearchBoardsResponse searchBoards(SearchBoardsRequest request);
+	
+	@GET
+	@Path("/board/drawer/{userId}")
+	public DrawerInfoResponse drawerInfo(@PathParam("userId") Integer userId );
+
+	@POST
+	@Path("/board/validate")
+	public ValidateBoardsResponse validateBoards(ValidateBoardsRequest request);
+
+	@POST
+	@Path("/board/status")
+	public UpdateBoardStatusResponse updateBoardStatus(UpdateBoardStatusRequest request);
+	
+	@POST
+	@Path("/board/publishStatus")
+	public UpdatePublishBoardStatusResponse updatePublishBoardStatus(UpdatePublishBoardStatusRequest request);
+	
+	@POST
+	@Path("/board/suggestion")
+	public GetBoardsSuggestionResponse getBoardsSuggestion(GetBoardsSuggestionRequest request);
+	
+	@PUT
+	@Path("/board/getBoardsByPM")
+	public GetBoardsByPMResponse fetchBoardsByPMStatus(GetBoardsByPMRequest request);
+	
+	@POST
+	@Path("/board/addBoardApproval")
+	public AddBoardApprovalResponse addBoardApproval(AddBoardApprovalRequest request);
+	
+	@POST
+	@Path("/board/admin")
+	public UpdateBoardByAdminResponse updateBoardByAdmin(UpdateBoardByAdminRequest request);
+	
+	@POST
+	@Path("/board/samples/resubmit")
+	public ResubmitSamplesResponse resubmitSamples(ResubmitSamplesRequest request);
+	
+	@POST
+	@Path("/board/samples/submit")
+	public SubmitSamplesResponse submitSamples(SubmitSamplesRequest request);
+	
+	@GET
+	@Path("/board/samples/all")
+	public GetAllSamplesResponse getAllSamples();
+	
+	@POST
+	@Path("/board/samples")
+	public GetSamplesByUserIdResponse getSamplesByUserId(GetSamplesByUserIdRequest request);
+
+	@POST
+	@Path("/board/examplesearch")	
+	public SearchExampleBoardsResponse searchExampleBoards(
+			SearchExampleBoardsRequest request);
+	@POST
+	@Path("/board/submissions/return")
+	public ReturnSubmissionsResponse returnSubmissions(ReturnSubmissionsRequest request);
+}

@@ -1,0 +1,169 @@
+package com.f9g4.common.bo;
+
+import java.math.BigDecimal;
+import java.util.Calendar;
+
+import com.f9g4.common.util.LookupTypeValueEnum;
+
+public class DesignWall {
+	
+	private BigDecimal salePrice;
+	private String userName;
+	private BigDecimal boardPrice;
+	private BigDecimal totalPrice;
+	private Calendar sellerPayDate;
+	private int paymentStatusId;
+	//Pravin added this to get the Designer name for the product
+	private String firstName;
+	private String lastName;
+	private String originalName;
+	private String thumbnailName;
+	private String fileName;
+	private String fileType;
+	private String name;
+	private Integer boardId;
+	
+	public DesignWall(String userName, BigDecimal salePrice, BigDecimal boardPrice,BigDecimal totalPrice, String name, Integer boardId,
+			Calendar sellerPayDate, int paymentStatusId,String firstName, String lastName,String originalName,String thumbNailName, String fileType, String fileName) {
+		super();
+		this.salePrice = salePrice;
+		this.userName = userName;
+		this.boardPrice = boardPrice;
+		this.totalPrice = totalPrice;
+		this.sellerPayDate = sellerPayDate;
+		this.paymentStatusId = paymentStatusId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.originalName = originalName;
+		this.thumbnailName = thumbNailName;
+		this.fileType = fileType;
+		this.name = name;
+		this.boardId = boardId;
+		this.fileName=fileName;
+	}
+	
+	public BigDecimal getSalePrice() {
+		return salePrice;
+	}
+
+	public void setSalePrice(BigDecimal salePrice) {
+		this.salePrice = salePrice;
+	}
+
+	public BigDecimal getBoardPrice() {
+		return boardPrice;
+	}
+
+	public void setBoardPrice(BigDecimal boardPrice) {
+		this.boardPrice = boardPrice;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public Integer getBoardId() {
+		return boardId;
+	}
+
+	public void setBoardId(Integer boardId) {
+		this.boardId = boardId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
+	public String getOriginalName() {	
+			return originalName;
+	}
+
+	public void setOriginalName(String originalName) {
+		this.originalName = originalName;
+	}
+
+	public String getThumbnailName() {
+		return thumbnailName;
+	}
+
+	public void setThumbnailName(String thumbnailName) {
+		this.thumbnailName = thumbnailName;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public Calendar getSellerPayDate() {
+		return sellerPayDate;
+	}
+
+	public void setSellerPayDate(Calendar sellerPayDate) {
+		this.sellerPayDate = sellerPayDate;
+	}
+
+	public int getPaymentStatusId() {
+		return paymentStatusId;
+	}
+
+	public void setPaymentStatusId(int paymentStatusId) {
+		this.paymentStatusId = paymentStatusId;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	@Override
+	public String toString() {
+		return "DesignWall [salePrice=" + salePrice + ", userName=" + userName
+				+ ", boardPrice=" + boardPrice + ", totalPrice=" + totalPrice
+				+ ", sellerPayDate=" + sellerPayDate + ", paymentStatusId="
+				+ paymentStatusId + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", originalName=" + originalName
+				+ ", thumbnailName=" + thumbnailName + ", fileName=" + fileName
+				+ ", fileType=" + fileType + ", name=" + name + ", boardId="
+				+ boardId + "]";
+	}
+	
+}

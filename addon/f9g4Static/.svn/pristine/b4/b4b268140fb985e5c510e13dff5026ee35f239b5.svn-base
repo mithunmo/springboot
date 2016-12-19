@@ -1,0 +1,1147 @@
+//splashscreen.js 06/07/2012
+//All required function are defined outside the $(document).ready event
+//All objects event listened are defined in the $(document).ready event
+
+////initialization
+var basicConfig = { 
+	"debugMode":false, //set to true to enable debug panel
+	"writeLogToConsole":false,
+	"disableRightClick":false,
+	"browserChecking":false,
+	"mainboxSlideDuration":5000,
+	"quotesSlideDuration":15000
+};
+var usernameValue="Please enter your valid email for your username"; //text value for the username textfield on the login panel
+var passwordValue="Please enter your password"; //text value for the password textfield on the login panel
+var popupPosTop=$(window).height()/2; //get the width of window
+var popupPosLeft=$(window).width()/2; //get the height of window
+var isOpened=false; //flag to determine is there any popup window show up on the screen
+var layoutTemplate = {
+	"loadingPopup":'<span style="color:blue;">Please wait....<span><br /><img src="/images/spinner_small.gif" style="margin-top:30px;"/>'
+};
+//Get timezone offset without DST
+Date.prototype.getTimezoneOffsetNoDST = function() {
+	var m = 12,
+	d = new Date(null, m, 1),
+	tzo = d.getTimezoneOffset();
+
+	while (--m) {
+		d.setUTCMonth(m);
+		if (tzo != d.getTimezoneOffset()) {
+			return Math.max(tzo, d.getTimezoneOffset());
+		}
+	}
+	// Probably shouldn't get here.
+	return d.getTimezoneOffset();
+}
+//bind the disabled button event
+$(document).on("click",".button",function(e) {
+	if($(this).attr('disabled')=="disabled" || $(this).attr('disabled')=="true" || $(this).attr('button-disabled')=="true") {
+		logging("disable button event hooked!");
+		e.stopImmediatePropagation(); //stop event bubble up to the document level.
+	}
+});
+//When document loading finish, it will initaite the program below
+$(document).ready(function()
+{
+	//retrieve cookie value
+	var cookieVal=getCookie('RememberMef4g');
+	if(cookieVal!='') {
+		$('#username').val(cookieVal);
+		$('#remember').attr('checked','checked');
+	}
+	else {
+		$('#remember').removeAttr('checked');
+	}
+	
+	$('#free_trial').fadeIn(1500); //show patent pending text
+	
+	//browser checking
+	browserChecking();
+		
+	//init place holder plugin if the browser doesn't support placeholder attribute
+	$("input").placeholder();
+	
+	//init image rotator plug-in
+	$('#mainbox-image-rotator').nivoSlider({
+        effect: 'fade', // Specify sets like: 'fold,fade,sliceDown'
+        slices: 30, // For slice animations
+        boxCols: 8, // For box animations
+        boxRows: 4, // For box animations
+        animSpeed: 2000, // Slide transition speed
+        pauseTime: basicConfig.mainboxSlideDuration, // How long each slide will show
+        startSlide: 0, // Set starting Slide (0 index)
+        directionNav: false, // Next & Prev navigation
+        controlNav: false, // 1,2,3... navigation
+        controlNavThumbs: false, // Use thumbnails for Control Nav
+        pauseOnHover: false, // Stop animation while hovering
+        manualAdvance: false, // Force manual transitions
+        prevText: 'Prev', // Prev directionNav text
+        nextText: 'Next', // Next directionNav text
+        randomStart: false // Start on a random slide
+    });
+	
+	//init quote rotator plug-in
+	/*$('#mainbox-quote-rotator').nivoSlider({
+        effect: 'sliceDown', // Specify sets like: 'fold,fade,sliceDown'
+        slices: 10, // For slice animations
+        boxCols: 8, // For box animations
+        boxRows: 4, // For box animations
+        animSpeed: 3000, // Slide transition speed
+        pauseTime: basicConfig.quotesSlideDuration, // How long each slide will show
+        startSlide: 0, // Set starting Slide (0 index)
+        directionNav: false, // Next & Prev navigation
+        controlNav: false, // 1,2,3... navigation
+        controlNavThumbs: false, // Use thumbnails for Control Nav
+        pauseOnHover: false, // Stop animation while hovering
+        manualAdvance: false, // Force manual transitions
+        prevText: 'Prev', // Prev directionNav text
+        nextText: 'Next', // Next directionNav text
+        randomStart: true // Start on a random slide
+    });*/
+	
+	//scrollbar====================================================
+	//$("#scrollbar1").tinyscrollbar(); //initialize scrollbar
+	//$("#scrollbar2").tinyscrollbar();
+	//$("#scrollbar3").tinyscrollbar();
+	//$("#scrollbarFooter").tinyscrollbar();
+	
+	//disable mouse right click==================================================
+	if(basicConfig.disableRightClick)
+	{
+		$(document).bind("contextmenu",function(e)
+		{
+			return false;
+		});
+	}
+	//bottom panel scrollbar listener------------------------------------------
+	/*$(".entity").mouseenter(function(e)
+	{
+		//logging(e.currentTarget.id);
+		if ( $.browser.msie && $.browser.version == "8.0") //show the overlay when loading
+		{
+			$("#"+e.currentTarget.id+"_entity").css('filter', 'alpha(opacity=70)');
+		}
+		$("#"+e.currentTarget.id+"_entity").fadeIn(); //show the specific scroll bar
+		
+	});
+	$(".entity").mouseleave(function(e)
+	{
+		//logging(e.currentTarget.id);
+		$("#"+e.currentTarget.id+"_entity").fadeOut(); //show the specific scroll bar
+	});*/
+		
+	//submit button on login panel button event====================================
+	$("#submit").click(function()
+	{	
+		//if browser chacking is not passed, do not allow user to login.
+		if(browserChecking())
+		{
+			if(checkUserInput()==true)	//check user input
+			{
+				doLogin();
+			}
+		}
+	});
+	//forget link event to open popup
+	$("#link_forget").click(function()
+	{		
+		buildPopup({
+			"url":forgotPwdUrl
+		});	//load page using ajax
+	});
+	
+	//disallow user to enter space in password field
+	$(document).on("keydown",'input[type=password]',function(e) {
+		if(e.which==32)
+			return false;
+	});
+	
+	//keyboard event
+	$(document).on("keydown","#username, #password, #remember",function(e)
+	{
+		//when user press enter key
+		if(e.which==13)
+		{
+			//if browser chacking is not passed, do not allow user to login.
+			if(browserChecking())
+			{
+				if(checkUserInput()==true)	//check user input
+				{
+					doLogin();
+				}
+			}	
+		}
+	});
+	
+	//event handler for checking agree or decline radio button on terms panel=============
+	//if the value change on agree radio button
+	$(document).on("change","#terms_agree",function(e)
+	{
+		logging($("#terms_agree").attr("checked"));
+		//enable the button
+		$("#terms_ok").css({
+			"background-color":"#0457A0",
+			"cursor":"pointer"
+		});
+	});
+	//if the value change on decline radio button
+	$(document).on("change","#terms_decline",function(e)
+	{
+		isAgree=false;
+		logging($("#terms_decline").attr("checked"));
+		//enable the button 
+		$("#terms_ok").css({
+			"background-color":"#0457A0",
+			"cursor":"pointer"
+		});
+	});
+
+	$(document).on('click','#gotoSecurity',function(e) {
+		loadSecurityPanel();
+	});
+	
+	$(document).on('click','#gotoResult',function(e) {
+		submitSequrityQuestions();
+	});
+	
+	$(document).on('click','#resetPwd',function(e) {
+		//resetPassword
+		resetPassword();
+	});
+	
+	$(document).on('click','#terms_ok',function(e) {
+		//check the raio button value to decide the functionality of the button
+		if($("#terms_agree").attr("checked")=="checked") //if user check agree, then go to verification panel
+		{
+			subimtTermAndConditions();
+		}
+		else if($("#terms_decline").attr("checked")=="checked") //if user decline the term, then close the panel
+		{
+			closePopup();
+		}
+	});
+	
+	$(document).on('click','#terms_ok_login',function(e) {
+		logging("vbf");
+		logging($("#terms_lg").action);
+		if($("#terms_agree_login").attr("checked")=="checked")
+			$("#terms_lg").submit();
+		else
+			closePopup();
+	});
+	
+	//To close forgot password popup.
+	$(document).on('click','#close',function(e) {
+		closePopup();
+	});
+	
+	//enter key event on forget password popup
+	$(document).on("keydown","#email",function(e)
+	{
+		//when user press enter key
+		if(e.which==13)
+		{
+			loadSecurityPanel();
+		}
+	});
+	$(document).on("keydown","#q1_ans",function(e)
+	{
+		//when user press enter key
+		if(e.which==13)
+		{
+			submitSequrityQuestions();
+		}
+	});
+	$(document).on("keydown","#q2_ans",function(e)
+	{
+		//when user press enter key
+		if(e.which==13)
+		{
+			submitSequrityQuestions();
+		}
+	});
+	$(document).on("keydown","#confirmPwd",function(e)
+	{
+		//when user press enter key
+		if(e.which==13)
+		{
+			resetPassword();
+		}
+	});
+	$(document).on("keydown","#close",function(e)
+	{
+		//when user press enter key
+		if(e.which==13)
+		{
+			logging("close");
+			closePopup();
+		}	
+	});
+	
+	//close pupup handler--------------------------------
+	$(document).on("click",".close",function() //if user hit the X button on the popup panel, then close the popup.
+	{
+		closePopup();
+	});
+	
+	//resize event
+	$(window).resize(function()
+	{
+		popupPosTop=$(window).height()/2; //get the width of window
+		popupPosLeft=$(window).width()/2; //get the height of window
+		logging("resize");
+		logging("currentWidth/2="+popupPosTop);
+		logging("currentHeight/2="+popupPosLeft);
+		if(isOpened==true) //if there is any popup shows up on the window, then we realocate the position of the popup
+		{
+			var popupWidth=$(".popup .header").width(); //get the width of the popup window	
+			//set position
+			$("#popupContainer").css(
+			{
+				top:(popupPosTop/2)*0.9,
+				left:popupPosLeft-popupWidth/2
+			});
+		}
+	});
+	
+	//password complexity validation event
+	$(document).on("keyup",'#newPwd',function()
+	{
+		$('#result').html(checkStrength($('#newPwd').val()));
+	});
+	
+	$(document).on("keyup",'#resetPassword',function()
+	{
+		$('#setupSeqPasswordFormPanel #result').html(checkStrength($('#resetPassword').val(),'#setupSeqPasswordFormPanel #result'));
+	});
+	
+	//close error popup event handler
+	$(document).on("close_error","body",function()
+	{
+		logging("Receive error close information");
+		//clear the password field
+		$("#password").val("");
+	});
+	
+	//Show login panel
+	$(document).on("click","#showLogin",function(e) {
+		$("#loginPanel").css("display","block");
+		//retrieve cookie value
+		var cookieVal=getCookie('RememberMef4g');
+		if(cookieVal!='') {
+			$('#username').val(cookieVal);
+			$('#remember').attr('checked','checked');
+		}
+		else {
+			$('#remember').removeAttr('checked');
+		}
+		setFocus();
+	});
+	
+	setFocus();
+	
+	//close login panel
+	$(document).on("click","#loginPanel .overlay",function(e) {
+		$("#loginPanel").css("display","none");
+	});
+	$(document).on("click","#closeLoginPanel a",function(e) {
+		$("#loginPanel").css("display","none");
+	});
+	
+	//show invitation only popup
+	$(document).on("click",".invitationOnly",function(e) {
+		buildPopup({
+			'url':invitationFormPath
+		});
+	});
+	
+	//
+	$(document).on("click","#submitSeqPassword",function() {
+		submitSeqPasswordForm();
+	});
+	quotesRotate($('.mainbox-quote')); //start quote area item rotation animation
+	
+	//contact info popup
+	$(document).on('click','#showContactInfo',function() {
+		buildPopupMsg({
+			"content": '<img src="/images/splash/contact_info.png"/>',
+			"title": "CONTACT INFO",
+			"showOk": true,
+			"closeByOverlay": true,
+			"effect":true
+		});
+	});
+});
+
+function quotesRotate(target) {
+	var currentTargetId = 0,
+		itemLength=target.children('.mainbox-quote-item').length,
+		items=target.children('.mainbox-quote-item'),
+		intervalID = window.setInterval(function() {
+			$(items[currentTargetId]).fadeOut(1000,function() {
+				$(items[currentTargetId]).fadeIn(1000);
+			});
+			currentTargetId=(currentTargetId+1)%itemLength;
+		}, 15000);
+	//initialization
+	items.css('display','none');
+	$(items[0]).css('display','block');
+}
+
+//set focus on username or password field
+function setFocus()
+{
+	//focus on username field
+	setTimeout(function () 
+	{
+		if($('#username').val()!='')
+			$('#password').focus();
+		else
+			$('#username').focus();
+	}, 100);
+	if($('#username').val()!='')
+	{
+		$("#password").focus(function(){
+			// Select input field contents
+			this.select();
+		});
+	}
+	else
+	{
+		$("#username").focus(function(){
+			// Select input field contents
+			this.select();
+		});
+	}
+}
+
+//Load subpanelof forget password 
+function loadSecurityPanel()
+{
+	//check user input of email text field
+	if($("#email").val()=="")
+	{
+		$("#nofify_email").html("Please enter your email"); //update the text on the notification div
+		$("#nofify_email").fadeIn(); //show the notification
+	}
+	else if($("#email").val().search(" ")!=-1)
+	{
+		$("#nofify_email").html("It's not an invalid email format"); //update the text on the notification div
+		$("#nofify_email").fadeIn(); //show the notification
+	}
+	else
+	{
+		loadSecurityQuestionsData();
+	}
+}
+
+//check user input on login panel----------------------------------------------
+function checkUserInput()
+{
+	var isCorrect=true;
+	//if the input is blank, default value, or contains any space, regard it as a invalid input
+	if($("#username").val()=="" || $("#username").val()==usernameValue || $("#username").val().search(" ")!=-1)
+	{
+		buildPopupMsg({
+			"content":usernameValue,
+			"title":"Username can not be empty",
+			"onShow": function () {
+				setTimeout(function () {
+					$('#error_button_ok').focus();
+				}, 100);
+			}
+		});
+		isCorrect=false;
+	}
+	else if($("#password").val()=="" || $("#password").val()==passwordValue)
+	{
+		buildPopupMsg({
+			"content":passwordValue,
+			"title":"Password can not be empty",
+			"onShow": function () {
+				setTimeout(function () {
+					$('#error_button_ok').focus();
+				}, 100);
+			}
+		});
+		isCorrect=false;
+	}
+	else if ($("#password").val().search(/\s/g)!=-1) {
+		buildPopupMsg({
+			"content":'Please check that there are no spaces in your password',
+			"title":"No spaces in password",
+			"onShow": function () {
+				setTimeout(function () {
+					$('#error_button_ok').focus();
+				}, 100);
+			}
+		});
+		isCorrect=false;
+	}
+	return isCorrect;
+}
+
+
+function submitSequrityQuestions(){
+	var address = $('#forgotPwd').attr("action"); 
+	logging("SUBMIT SEQ Q=>"+address);
+	$.ajax({
+		url: address,
+		type: "POST",
+		data:$('#forgotPwd').serialize(),  
+		beforeSend: function()
+		{
+			logging("loading "+address);
+		},
+		error: function(xhr,status,error)
+		{
+			logging(this.url+" is "+error); //if there is arrow, close the overlay
+			$("#overlay").fadeOut("fast"); //show the overlay when loading
+		},
+		success: function(result)
+		{
+			logging("loading "+this.url+"complete");
+			if(result.hasError == true)
+			{
+				$("#notify_questions").html("Security answers entered do not match. Please try again."); //update the text on the notification div
+				$("#notify_questions").fadeIn();
+			}
+			else
+			{
+				$("#session_security").fadeOut(function()
+				{
+					//$("#session_reset_password").html(result);
+					$("#session_reset_password").fadeIn(function()
+					{
+						//focus on username field
+						setTimeout(function () 
+						{
+							$('#newPwd').focus();
+						}, 100);
+						$("#newPwd").focus(function(){
+							// Select input field contents
+							this.select();
+						});
+					}); //show up the next session
+				});
+			}
+		}
+	});
+}
+
+function resetPassword(){
+	var address = $('#reset_password').attr("action");
+	//check reset passowrd input
+	var errors=new Array();
+	$('#label_new_pwd').removeAttr('style');
+	$('#label_confirm_pwd').removeAttr('style');
+	errors = CheckforNull('#newPwd',errors,'#label_new_pwd','New Password can not be empty.');
+	errors = CheckforContainSpace('#newPwd',errors,'#label_new_pwd','Please check that there are no spaces in New Password.');
+	errors = CheckforNull('#confirmPwd',errors,'#label_confirm_pwd','Confirm Password can not be empty.');
+	errors = CheckforContainSpace('#confirmPwd',errors,'#label_confirm_pwd','Please check that there are no spaces in Confirm Password.');
+	if(errors.length > 0) {
+		$('#notify_passw_mismatch').css('color','#000000').show().html(errors.join('<br />'));
+	}
+	else {
+		$('#notify_passw_mismatch').removeAttr('style').html('');
+		$.ajax({
+			url: address,
+			type: "POST",
+			data:$('#reset_password').serialize(),
+			beforeSend: function()
+			{
+				logging("loading "+address);
+			},
+			error: function(xhr,status,error)
+			{
+				logging(this.url+" is "+error); //if there is arrow, close the overlay
+				$("#overlay").fadeOut("fast"); //show the overlay when loading
+			},
+			success: function(result)
+			{
+				logging("loading "+this.url+"complete");
+				if(result.hasError == false){
+					$("#session_reset_password").fadeOut(function(){
+						$("#reset_success").fadeIn(function()
+						{
+							//set focus on the button
+							setTimeout(function () 
+							{
+								$('#close').focus();
+							}, 100);
+						}); //show up the next session
+						$('#loginPanel #password').val(''); //remove the old password value in login panel
+					});	
+				}else{
+						$("#notify_passw_mismatch").html("Your passwords do not match. Please try again.");  //show up the next session
+						$("#notify_passw_mismatch").fadeIn();
+				}
+			}
+		});
+	}
+}
+
+function loadSecurityQuestionsData(){
+	var address = securityQuestionsUrl + "?userName=" + $("#email").val(); 
+	$.ajax({
+		url: address,
+		beforeSend: function()
+		{
+			logging("loading "+address);
+			//$("#overlay").fadeIn("fast"); //show the overlay when loading
+		},
+		error: function(xhr,status,error)
+		{
+			logging(this.url+" is "+error); //if there is arrow, close the overlay
+			$("#overlay").fadeOut("fast"); //show the overlay when loading
+		},
+		success: function(result)
+		{
+			logging("loading "+this.url+"complete");
+			var items = [];
+			if(result)
+			{
+				logging("result.hasError ->"+result.hasError);
+				if(result.hasError===true)
+				{
+					if(result.noSeqSettings) {
+						$("#session_forget").fadeOut(function() {
+							$('#reset_temp_password_failed').fadeIn();
+						});
+					}
+					else {
+						$("#nofify_email").html("Email address entered is invalid. Please try again."); //update the text on the notification div
+						$("#nofify_email").fadeIn();
+					}
+				}
+				else
+				{
+					if(result.noSeqSettings) {
+						$("#session_forget").fadeOut(function() {
+							$('#reset_temp_password').fadeIn();
+						});
+					}
+					else {
+						$("#q1_id").attr("value",result.Q1Id);
+						$("#q1_val").attr("value",result.Q1val);
+						$("#q2_id").attr("value",result.Q2Id);
+						$("#q2_val").attr("value",result.Q2val);
+						
+						$("#session_forget").fadeOut(function()
+						{	
+							$("#session_security").fadeIn(function()
+							{
+								//focus on q1_ans field
+								setTimeout(function () 
+								{
+									$('#q1_ans').focus();
+								}, 100);
+								$("#q1_ans").focus(function(){
+								    // Select input field contents
+								    this.select();
+								});
+							}); //show up the next session
+						});
+					}
+				}
+			}
+			//hide the current session and shows the next session		  
+		}
+	});
+}
+
+function doLogin(){
+	var loginFrom = $('#form_login');
+	var address = loginFrom.attr("action"); 
+	logging(loginFrom.serialize());
+	//Get timezone offset
+	var timezoneOffset = new Date();
+	//ajax method
+	$.ajax({
+		url:address,
+		type: "POST",
+		data:loginFrom.serialize()+"&timezoneOffset="+timezoneOffset.getTimezoneOffset(),
+		//
+		beforeSend: function()
+		{
+			buildPopupMsg({
+				"content": '<span style="color:blue;">Please wait, we will log you in....<span><br /><img src="/images/spinner_small.gif" style="margin-top:30px;"/>',
+				"title": "Please Wait",
+				"showOk": false,
+				"closeByOverlay": false,
+				"effect":false
+			});
+			/*logging("loading "+address);
+			if ( $.browser.msie && ($.browser.version == "8.0" || $.browser.version == "7.0")) //show the overlay when loading
+			{
+				$('#overlay').css('filter', 'alpha(opacity=70)');
+			}
+			$("#overlay").fadeIn("fast");*/
+		},
+		error: function(xhr,status,error)
+		{
+			logging(this.url+" is "+error); //if there is arrow, close the overlay
+			$("#overlay").fadeOut("fast"); //show the overlay when loading
+		},
+		success: function(result)
+		{
+			logging("loading "+this.url+"complete");
+			if(result.hasError==undefined) {
+				$("#overlay").fadeOut(); //show the overlay when loading
+				buildPopupMsg({
+					"title":"Information <span style=\"#C30\">!</span>",
+					"content":"Sorry, our service is not available.<br />Please try again. Thank you.",
+					"showOk":true
+				});
+			}
+			else {
+				if(result && result.hasError ){
+					//TODO how to show errors...
+					//$("#overlay").fadeOut("fast"); 
+					var errorInfo = new Array();
+					for(var i=0; i<result.errors.length ; i++){
+						if(result.errors[i].code=='validateUser.auth.failed')
+							$('#loginPanel #password').val(''); //remove the old password value in login panel
+						errorInfo.push(result.errors[i].defaultMessage);
+					}
+					//$("#popupContainer").html(errorInfo.join("<br/>"));
+					$("#overlay").fadeOut(); //show the overlay when loading
+					buildPopupMsg({
+						"title":"Information <span style=\"#C30\">!</span>",
+						"content":errorInfo.join("<br/>"),
+						"showOk":true
+					});
+				}
+				else
+				{
+					var redirectTimer;
+					//var contextRoot='/'+location.pathname.split('/')[1]; //get context root
+					if(result.termsExpired === true && result.membershipExpired === true)
+					{
+						//Gotta Desgin an alternate flow ! So that both con be done
+						logging("Do nothing");
+					}
+					
+					if(result.needSetupSeqPassword === true) {
+						_gaq.push(['_trackEvent', 'login', 'setup security settings', 'setup security settings']); //push record to google analytics
+						closePopupMsg();
+						buildPopup({
+							'url':setupSeqPasswordPath
+						});
+					}
+					else if(result.needSetupSeq === true) {
+						closePopupMsg();
+						buildPopup({
+							'url':setupSeqPasswordPath+'?setupSeq=true&setupPwd=false'
+						});
+					}
+					else if(result.needSamples === true) {
+						_gaq.push(['_set','hitCallback',function() {
+							clearTimeout(redirectTimer);
+							location.assign(submitSamplesPath+"?userId="+result.userId); //redirect to the samples page
+						}]);
+						_gaq.push(['_trackEvent', 'login', 'examples required', 'examples required']); //push record to google analytics
+						//redirect to the samples page.
+						redirectTimer=setTimeout(function() {
+							location.assign(submitSamplesPath+"?userId="+result.userId); //redirect to the samples page
+						},1000);
+						//location.assign(submitSamplesPath+"?userId="+result.userId);
+					}
+					else if(result.termsExpired === true ) {
+						_gaq.push(['_trackEvent', 'login', 'terms and conditions expired', 'terms and conditions expired']); //push record to google analytics
+						closePopupMsg();
+						displayTermAndConditions(result.termsId);
+					}
+					else if(result.membershipExpired === true )
+					{
+						_gaq.push(['_set','hitCallback',function() {
+							clearTimeout(redirectTimer);
+							location.assign(updateMembershipPath+"?userId="+result.userId);
+						}]);
+						_gaq.push(['_trackEvent', 'login', 'membership expired', 'membership expired']); //push record to google analytics
+						//redirect
+						redirectTimer=setTimeout(function() {
+							location.assign(updateMembershipPath+"?userId="+result.userId);
+						},1000);
+					}
+					else 
+					{
+						_gaq.push(['_set','hitCallback',function() {
+							clearTimeout(redirectTimer);
+							$(location).attr('href',redirectUrl);
+						}]);
+						_gaq.push(['_trackEvent', 'login', 'login to user console', 'login to user console']); //push record to google analytics
+						//save hashed login id in the sessionStorage
+						//sessionStorage.LI=result.loginId;
+						//sessionStorage.LUUI=result.loginUUId;
+						var redirectUrl = consoleHomeUrl;
+						//redirect
+						redirectTimer=setTimeout(function() {
+							$(location).attr('href',redirectUrl);
+						},1000);
+					}
+				}
+			}		
+		}
+	});	
+}
+
+function submitSeqPasswordForm()
+{
+	//user input checking
+	var errors = new Array();//reset css
+	$('#label_resetPassword').removeAttr('style');
+	$('#label_confirmPassword').removeAttr('style');
+	$('#label_ans_q1').removeAttr('style');
+	$('#label_ans_q2').removeAttr('style');
+	if($('#form_ans_q1').length > 0)
+		errors = CheckforNull("#form_ans_q1",errors,"#label_ans_q1","Please enter answer for Security Question 1");
+	if($('#form_ans_q2').length > 0)
+		errors = CheckforNull("#form_ans_q2",errors,"#label_ans_q2","Please enter answer for Security Question 2");
+	if($('#resetPassword').length > 0) {
+		 errors = CheckforNull("#resetPassword",errors,"#label_resetPassword","Please enter New Password");
+		 errors = CheckforContainSpace("#resetPassword",errors,"#label_resetPassword","Please check that there are no spaces in New Password");
+	}
+	if($('#confirmPassword').length > 0) {
+		errors = CheckforNull("#confirmPassword" ,errors,"#label_confirmPassword" ,"Please enter Confirm Password");
+		errors = CheckforContainSpace("#confirmPassword" ,errors,"#label_confirmPassword" ,"Please check that there are no spaces in Confirm Password");
+	}
+    
+	if(errors.length>0)
+	{
+		var errorInfo = new Array();
+		for(var i=0; i<errors.length ; i++){
+			errorInfo.push(errors[i]);
+		}
+		buildPopupMsg({
+			"title":"Information <span style=\"#C30\">!</span>",
+			"content":"Please enter data in the mandatory fields as highlighted in the screen and also displayed in the list:<br/>"+errorInfo.join("<br/>"),
+			"showOk":true
+		});
+	}	
+	else
+	{
+		$.ajax({
+			url:$("#seqPasswordForm").attr("action"),
+			type:"POST",
+			data:$("#seqPasswordForm").serialize(),
+			beforeSend: function() {
+				buildPopupMsg({
+					"content": '<span style="color:blue;">Please wait...<span><br /><img src="/images/spinner_small.gif" style="margin-top:30px;"/>',
+					"title": "Please Wait",
+					"showOk": false,
+					"closeByOverlay": false,
+					"effect":false
+				});
+			},
+			success: function (result) {
+				if(result.hasError){
+					var errorInfo = new Array();
+					for(var i=0; i<result.errors.length ; i++)
+					{
+						errorInfo.push(result.errors[i].defaultMessage);
+						//helight area
+						logging("Error field=>"+result.errors[i].field);
+					}
+					//hightlight error fields
+					//highlightErrorFields(result);
+					$("#overlay").fadeOut("fast"); //show the overlay when loading
+					buildPopupMsg({
+						"content":errorInfo.join("<br/>"),
+						"showOk":true
+					});
+				}
+				else {
+					var content;
+					if(result.setupPwd || result.setupPwd==undefined) {
+						content='Password updated successfully.<br /> Please use the new password to login. Thank you.';
+						$('#loginPanel #password').val(''); //remove the old password value in login panel
+					}
+					else {
+						content='Your security setting eastblished successfully.<br /> Thank you.';
+					}
+					buildPopupMsg({
+						"content": '<span style="color:blue;">'+content+'<span>',
+						"title": "Update successfully",
+						"showOk": true,
+						"closeByOverlay": true,
+						"effect":true,
+						"onOk":function () {
+							closePopup("#popupContainer","#overlay");
+							closePopupMsg();
+						}
+					});
+				}
+			},
+			error: function() {
+				buildPopupMsg({
+					"content":"Our service is not available, please submit again. Thanks.",
+					"showOk":true
+				});
+			}
+		});
+	}
+}
+
+function displayTermAndConditions (termsId) {
+	//ajax method
+	var address =  termsUrl + "?termId=" + termsId;
+	$.ajax({
+		url:address,
+		type: "GET",
+		//
+		beforeSend: function()
+		{
+			logging("loading "+address);
+			if ( $.browser.msie && ($.browser.version == "8.0" || $.browser.version == "7.0")) //show the overlay when loading
+			{
+				$('#overlay').css('filter', 'alpha(opacity=70)');
+			}
+			$("#overlay").fadeIn("fast");
+		},
+		error: function(xhr,status,error)
+		{
+			logging(this.url+" is "+error); //if there is arrow, close the overlay
+			$("#overlay").fadeOut("fast"); //show the overlay when loading
+		},
+		success: function(result)
+		{
+			logging("loading "+this.url+"complete");			
+			if(!(result && result.hasError)){
+				//No error, show terms and conditioins popup..
+				$("#popupContainer").html(result); //set the result to the popupContainer
+				$("#terms_ok").css({
+					"background-color":"#333",
+					"cursor":"default"
+				});
+				showPopup({},function() {
+					$("#termScrollbar").tinyscrollbar();
+					$(".anchor").each(function(index) {
+						$(".rightArea .block:nth-child("+(index+1)+")").animate({top:$(this).position().top});
+					});
+				});
+			}
+			else
+			{
+				//error..
+				//TODO .. if some error while loading t and c what should we do???
+				//thinking of redirect to console home..
+				$(location).attr('href',consoleHomeUrl);
+			}
+		}
+	});	
+}
+
+function subimtTermAndConditions(){
+
+	var loginFrom = $('#terms_form');
+	var address = loginFrom.attr("action"); 
+
+	$.ajax({
+		url:address,
+		type: "POST",
+		data:loginFrom.serialize(),
+		//
+		beforeSend: function()
+		{
+			logging("loading "+address);
+			if ( $.browser.msie && ($.browser.version == "8.0" || $.browser.version == "7.0")) //show the overlay when loading
+			{
+				$('#overlay').css('filter', 'alpha(opacity=70)');
+			}
+			$("#overlay").fadeIn("fast");
+		},
+		error: function(xhr,status,error)
+		{
+			logging(this.url+" is "+error); //if there is arrow, close the overlay
+			$("#overlay").fadeOut("fast"); //show the overlay when loading
+		},
+		success: function(result)
+		{
+			logging("loading "+this.url+"complete");
+			if(!(result && result.hasError)){
+				//no error
+				//loadPopup("verification.html");	//load verification page --TODO
+				$(location).attr('href',consoleHomeUrl);
+			}else{
+				//has errors... submitting terms
+				$(location).attr('href',consoleHomeUrl);
+			}
+		}
+	});	
+}
+
+function checkStrength(password,label)
+{
+	if(label==undefined)
+		label='#result';
+	if(password==undefined)
+		password=document.getElementById("#form_password").val;
+	//initial strength
+    var strength = 0;
+    var requirements=new Array();
+    requirements[0]=false; //length
+    requirements[1]=false; //Contain capital
+    requirements[2]=false; //Contain number
+    requirements[3]=false; //Contain special character
+    
+	
+    //if the password length is less than 6, return message.
+    if (password.length < 8) 
+    { 
+		$(label).removeClass();
+		$(label).addClass('short');
+		requirements[0]=false;
+		return 'Password should be at least 8 characters long';
+	}
+    
+    //length is ok, lets continue.
+	
+	//if length is 8 characters or more, increase strength value
+	if (password.length > 7)
+	{
+		requirements[0]=true;
+		strength += 1;
+	}
+	
+	//if password contains both lower and uppercase characters, increase strength value
+	if (password.match(/([A-Z])/))
+	//if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/))
+	{
+		requirements[1]=true;
+		strength += 1;
+	}
+	
+	//if it has numbers and characters, increase strength value
+	if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/))
+	{
+		requirements[2]=true;
+		strength += 1;
+	}
+	
+	//if it has one special character, increase strength value
+    if (password.match(/([!,%,&,@,#,$,^,*,?,_,~,-])/)) 
+    {
+    	requirements[3]=true;
+    	strength += 1;
+    }
+	
+	//if it has two special characters, increase strength value
+    if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~,-].*[!,%,&,@,#,$,^,*,?,_,~,-])/)) 
+    {
+    	requirements[3]=true;
+    	strength += 1;
+    }
+	
+	//now we have calculated strength value, we can return messages
+	
+	//if value is less than 2
+	if (strength < 4 ) 
+	{
+		var result="";
+		$(label).removeClass();
+		$(label).addClass('weak');
+		if(!requirements[1])
+			result+=" 1 capital.";
+		else if(!requirements[2])
+			result+=" 1 number";
+		else if(!requirements[3])
+			result+=" 1 special character";
+		if(result!="")
+			return "Weak. Should contain "+result;
+		else
+			return "Weak.";		
+	} 
+	else if (strength == 4 ) 
+	{
+		$(label).removeClass();
+		$(label).addClass('good');
+		return 'Good';		
+	} 
+	else 
+	{
+		$(label).removeClass();
+		$(label).addClass('strong');
+		return 'Strong';
+	}
+}
+
+function browserChecking()
+{
+	var isPassedBrowserChecking=true;
+	if(basicConfig.browserChecking)
+	{
+		/* detect usage of IE Developer Tools using different Mode for Browser and Document */
+		var browserCheckingMsg="";
+		//detect IE version
+		if($.browser.msie) 
+		{
+			var browserVersion = $.browser.version.slice(0,$.browser.version.indexOf("."));
+			var documentVersion = document.documentMode;
+			logging("document mode=>"+documentVersion);
+			if(browserVersion != documentVersion) 
+			{
+				browserCheckingMsg="ERROR:\nBrowser Mode and Document Mode do not match!\n\nBrowser Mode: IE"+ browserVersion +".0\nDocument Mode: IE"+ documentVersion +".0";
+				buildPopupMsg({
+					"content":browserCheckingMsg,
+					"showOk":true,
+					"title":"Browser Checking Warning",
+					"showOverlay":true
+				});
+				isPassedBrowserChecking=false;
+			}
+			else if(browserVersion<=7)
+			{
+				browserCheckingMsg="We detect your browser is IE "+ browserVersion +" or lower. We support IE 8 and above. Thank you.";
+				buildPopupMsg({
+					"content":browserCheckingMsg,
+					"showOk":true,
+					"title":"Browser Checking Warning",
+					"showOverlay":true
+				});
+				isPassedBrowserChecking=false;
+			}
+			else if(documentVersion<=7)
+			{
+				browserCheckingMsg="We detect the document mode of your browser is IE "+ browserVersion +" or lower. We support the document mode of IE 8 and above. Thank you.";
+				buildPopupMsg({
+					"content":browserCheckingMsg,
+					"showOk":true,
+					"title":"Browser Checking Warning",
+					"showOverlay":true
+				});
+				isPassedBrowserChecking=false;
+			}
+		}
+	}
+	return isPassedBrowserChecking;
+}
+
+function getCookie(cname) {
+	var name = cname + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0; i<ca.length; i++)  {
+		var c = $.trim(ca[i]);
+		if (c.indexOf(name)==0) 
+			return c.substring(name.length,c.length).replace(/"/g,'');
+	}
+	return "";
+}
+
+//debug function, continue to record the data
+function logging(data,color)
+{
+	if(color==undefined)
+		color="#000";
+	if(basicConfig.debugMode)
+	{
+		$("#debug").css("display","block");
+		if(data==undefined || data=="")
+			$("#debug").append("Undefined or blank <br />");
+		$("#debug").append('<span style="color:'+color+'">'+data+'</span><br />');
+		if(basicConfig.writeLogToConsole)
+			console.log(data);
+		$("#debug").scrollTop($("#debug")[0].scrollHeight);
+	}
+}

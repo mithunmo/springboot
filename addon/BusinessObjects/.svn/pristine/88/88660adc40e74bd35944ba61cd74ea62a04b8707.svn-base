@@ -1,0 +1,120 @@
+<xsd:schema 
+xmlns="http://common.businessobjects.f9g4.com" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+xmlns:f9g4="http://common.businessobjects.f9g4.com" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" targetNamespace="http://common.businessobjects.f9g4.com" elementFormDefault="qualified" attributeFormDefault="unqualified" jaxb:version="2.1">
+	<xsd:simpleType name="ContentType">
+		<xsd:annotation>
+			<xsd:documentation>This element defines the content type that an request could set
+		    	Its an enum and could take the below provided values
+				</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="application/xml"/>
+			<xsd:enumeration value="application/pdf"/>
+			<xsd:enumeration value="application/json"/>
+			<xsd:enumeration value="application/java"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="AbstractCTRequest">
+		<xsd:sequence>
+			<xsd:element name="header" type="f9g4:Header"/>
+			<xsd:element name="sortCriteria" type="f9g4:SortCriteria" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+							sort criteria
+						</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="filterCriteria" type="f9g4:FilterCriteria" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						   Filter condition documentation
+						</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="pageRequest" type="f9g4:PaginationRequest" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AbstractCTResponse">
+		<xsd:sequence>
+			<xsd:element name="header" type="f9g4:Header"/>
+			<xsd:element name="pageResponse" type="f9g4:PaginationResponse" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PaginationRequest">
+		<xsd:sequence>
+			<xsd:element name="itemsPerPage" type="xsd:int"/>
+			<xsd:element name="page" type="xsd:int"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PaginationResponse">
+		<xsd:sequence>
+			<xsd:element name="totalNumberOfItems" type="xsd:int"/>
+			<xsd:element name="startIndex" type="xsd:int"/>
+			<xsd:element name="endIndex" type="xsd:int"/>
+			<xsd:element name="totalNumberOfPages" type="xsd:int"/>
+			<xsd:element name="totalItemsOnPage" type="xsd:int"/>
+			<xsd:element name="currentPageNumber" type="xsd:int"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Header">
+		<xsd:sequence>
+			<xsd:element name="contentType" type="ContentType"/>
+			<xsd:element name="applicationName" type="xsd:string"/>
+			<xsd:element name="corelationId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="activeMemberId" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SortCriteria">
+		<xsd:sequence>
+			<xsd:element name="criterion" type="SortCriterion" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SortCriterion">
+		<xsd:sequence>
+			<xsd:element name="key" type="xsd:string"/>
+			<xsd:element name="direction" type="SortDirection"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="SortDirection">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ASCENDING"/>
+			<xsd:enumeration value="DESCENDING"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="FilterCriteria">
+		<xsd:sequence>
+			<xsd:element name="filterCriterion" type="FilterCriterion" maxOccurs="unbounded"/>
+			<xsd:element name="logicalOperator" type="LogicalOperators"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FilterCriterion">
+		<xsd:sequence>
+			<xsd:element name="filterKey" type="xsd:string"/>
+			<xsd:element name="operator" type="Operators"/>
+			<xsd:choice>
+				<xsd:element name="filterValue" type="xsd:string"/>
+				<xsd:element name="filterValueList" type="xsd:string" maxOccurs="unbounded"/>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="Operators">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="EQUALS"/>
+			<xsd:enumeration value="NOT_EQUALS"/>
+			<xsd:enumeration value="CONTAINS"/>
+			<xsd:enumeration value="IN"/>
+			<xsd:enumeration value="NOT_IN"/>
+			<xsd:enumeration value="GREATER_THAN"/>
+			<xsd:enumeration value="LESS_THAN"/>
+			<xsd:enumeration value="GREATER_THAN_AND_EQUAL_TO"/>
+			<xsd:enumeration value="LESS_THAN_AND_EQUAL_TO"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="LogicalOperators">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="AND"/>
+			<xsd:enumeration value="OR"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>
